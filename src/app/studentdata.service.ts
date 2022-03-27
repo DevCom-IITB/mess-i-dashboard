@@ -32,15 +32,11 @@ export class StudentdataService {
     })
   }
 
-  getMonthlydata(roll:string,year:string,month:string){
+  async getMonthlydata(roll:string,year:string,month:string){
     let url = this.baseurl.concat("/get-meal-info/",roll,'/',year,'/',month);
-    return this.http.get(url,
-    {
-      headers:{
-      'x-access-token':this.auth.getToken()
-      },
-      responseType: 'blob'
-    }).subscribe()
+    return this.http.get(url,{headers:{
+      'x-access-token':this.auth.getToken(),    
+    }}).toPromise();
   }
 
 }

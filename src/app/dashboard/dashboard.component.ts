@@ -11,15 +11,10 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   title = 'mess-i-dashboard';
-
   studentData:any;
-  // {
-  //   roll:"200020065",
-  //   name:"K Adithya Krishna",
-  //   hostel:"Hostel 9",
-  //   room:"189",
-  //   active:false
-  // };
+  studentHistory:any;
+  date = new Date();
+
 
   ngOnInit(): void {
     
@@ -34,16 +29,16 @@ export class DashboardComponent implements OnInit {
 
   async submit(search: any){
     this.studentData = await this.service.getStudentData(search.form.value.roll)
-    console.log(this.studentData);
+    this.studentData = []
   }
 
-  getMonthData(data: any){
+  async getMonthData(data: any){
     
     if (data.form.value.year&&data.form.value.month) {
-      this.service.getMonthlydata(this.studentData.roll,data.form.value.year,data.form.value.month);
+      this.studentHistory = []
+      this.studentHistory = await this.service.getMonthlydata(this.studentData.roll,data.form.value.year,data.form.value.month);
+      console.log(this.studentHistory)
     }else{
-      console.log(data.form.value.year)
-      console.log(data.form.value.month)
     }
   }
   toggl(){
