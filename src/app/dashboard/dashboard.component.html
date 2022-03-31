@@ -310,29 +310,30 @@
     
     <h3>Student data </h3>
     <div class="d-flex flex-row">
-      <!-- <img src="'http://localhost:5000/api/get_image/'+{{studentData.roll}}"/> -->
-      <table class="table table-striped">
+      <img style="max-width: 40%" [src]="studentImage" alt="Place image title" *ngIf="!isImageLoading">
+
+      <table class="table table-striped m-2">
         <tr>
-            <td><h6>Roll no</h6></td>
-            <td>{{studentData.roll}}</td>
+            <td><h5>Roll no</h5></td>
+            <td class="fs-4">{{studentData.roll}}</td>
         </tr>
         <tr>
-            <td><h6>Name</h6></td>
-            <td>{{studentData.name}}</td>
+            <td><h5>Name</h5></td>
+            <td class="fs-4">{{studentData.name}}</td>
         </tr>
         <tr>
-            <td><h6>Hostel, Room</h6></td>
-            <td>Hostel {{studentData.hostel}},{{studentData.room}}</td>
+            <td><h5>Hostel, Room</h5></td>
+            <td class="fs-4">Hostel {{studentData.hostel}},{{studentData.room}}</td>
         </tr>
       </table>
 
     </div>
     
-    <div *ngIf="studentData.allowed" class="d-flex flex-row">
+    <div *ngIf="studentData.allowed" class="d-flex flex-row mt-3">
         <h2 class="d-flex flex-row">Status: <span style="color: green;" class="px-1">Activated</span></h2>
         <button type="button" class="w-100 btn btn-danger mx-2" (click)="toggl()">Deactivate</button>
     </div>
-    <div *ngIf="!studentData.allowed" class="d-flex flex-row">
+    <div *ngIf="!studentData.allowed" class="d-flex flex-row mt-3">
         <h2 class="d-flex flex-row">Status: <span style="color: red ;" class="px-1">Deactivated</span></h2>
         <button type="button" class="w-100 btn btn-primary mx-2 " (click)="toggl()">Activate</button>
     </div>

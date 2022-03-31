@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,16 @@ export class StudentdataService {
       'x-access-token':this.auth.getToken(),    
     }}).toPromise();
   }
+
+  getImage(roll:string): Observable<Blob>{
+    let url = this.baseurl.concat("/get_image/",roll);
+    return this.http.get(url, { 
+      responseType: 'blob',
+      headers:{
+        'x-access-token':this.auth.getToken(),    
+      } 
+    });
+  }
+
 
 }

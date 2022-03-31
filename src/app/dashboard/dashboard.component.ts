@@ -15,7 +15,9 @@ export class DashboardComponent implements OnInit {
   studentHistory:any;
   date = new Date();
   noOfDays:any;
-  headers = ['Breakfast','Lunch','Snacks','Dinner','Milk','Egg']
+  headers = ['Breakfast','Lunch','Snacks','Dinner','Milk','Egg'];
+  studentImage:any;
+  isImageLoading:any;
 
   ngOnInit(): void {
     
@@ -41,6 +43,7 @@ export class DashboardComponent implements OnInit {
   async submit(search: any){
     this.studentData = await this.service.getStudentData(search.form.value.roll)
     this.studentHistory = []
+    this.getImageFromService()
   }
 
   async getMonthData(data: any){
@@ -64,5 +67,26 @@ export class DashboardComponent implements OnInit {
       this.studentData.allowed = !this.studentData.allowed
     }
   }
+  getImageFromService() {
+    this.isImageLoading = true;
+    this.service.getImage(this.studentData.roll).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
+  }
+  createImageFromBlob(image: Blob) {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+         this.studentImage = reader.result;
+      }, false);
+   
+      if (image) {
+         reader.readAsDataURL(image);
+      }
+   }
+
 
 }
