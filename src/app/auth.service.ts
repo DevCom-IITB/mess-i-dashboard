@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  logged_in = true;
-  token="07e14557-d7d2-4bb0-95cf-f4f02284a8a1";
+  logged_in = false;
+  token="";
   url = "http://localhost:5000/api/auth"
   constructor(private http:HttpClient, private router:Router) { }
 
@@ -15,7 +16,7 @@ export class AuthService {
     return this.http.get(this.url,{params:{code:code}}).subscribe((res:any) => {
       this.token = res.token;
       this.logged_in = true;
-      this.router.navigate(['']);
+      this.router.navigate(['overview']);
     })
   }
   logoutUser(){

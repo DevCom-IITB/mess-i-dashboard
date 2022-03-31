@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -7,11 +8,14 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  loggedIn:boolean;
-  constructor(private auth:AuthService){
-    this.loggedIn = auth.isLoggedIn();
+  constructor(public auth:AuthService,private router:Router){
   }
   logout(){
     this.auth.logoutUser();
+    this.router.navigate(['login'])
+  }
+  login(){
+    console.log("hi")
+    this.router.navigate(['login'])
   }
 }

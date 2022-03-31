@@ -13,10 +13,17 @@ export class StudentdataService {
 
   async getStudentData(roll:string){
     let url = this.baseurl.concat("/get-student-info/",roll);
-    console.log(url)
-    return this.http.get(url,{headers:{
-      'x-access-token':this.auth.getToken(),    
-    }}).toPromise();
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{headers:{
+        'x-access-token':this.auth.getToken(),    
+      }}).subscribe((res:any)=>{
+        resolve(res)
+      },(e)=>{
+        console.log(e)
+        reject(e.error)
+      })
+    });
+    
   }
 
   togglActive(roll:string){

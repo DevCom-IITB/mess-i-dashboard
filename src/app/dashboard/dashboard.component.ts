@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   headers = ['Breakfast','Lunch','Snacks','Dinner','Milk','Egg'];
   studentImage:any;
   isImageLoading:any;
+  totalMeals:any;
+  errMsg = "";
 
   ngOnInit(): void {
     
@@ -28,22 +30,42 @@ export class DashboardComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    this.totalMeals = {};
+    for(let i=0;i<this.headers.length;i++){
+      this.totalMeals[this.headers[i]] = 0;
+    }
   }
 
   cleanData(history:any){
+    
+    
     console.log(history)
     for(let j=0;j<this.noOfDays.length;j++){
       if(!(this.noOfDays[j] in history)){
         history[this.noOfDays[j]] = {}
       }
+      let data = history[this.noOfDays[j]] 
+      for(let i=0;i<this.headers.length;i++){
+        if(data[this.headers[i]]){
+          this.totalMeals[this.headers[i]] += 1;
+        }
+      }
+
     }
     return history;
     
   }
   async submit(search: any){
-    this.studentData = await this.service.getStudentData(search.form.value.roll)
-    this.studentHistory = []
-    this.getImageFromService()
+    this.service.getStudentData(search.form.value.roll).then((res)=>{
+        this.studentData = res;
+        this.studentHistory = []
+        this.getImageFromService()
+        
+    }).catch((res)=>{
+      this.errMsg = res
+    })
+    
+    
   }
 
   async getMonthData(data: any){

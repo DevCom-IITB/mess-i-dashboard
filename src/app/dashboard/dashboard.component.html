@@ -305,7 +305,9 @@
       </div>
     </form>
   </div>
-
+  <div class="container" *ngIf="!studentData">
+    <h3>{{errMsg}}</h3>
+  </div>
   <div class="container" *ngIf="studentData">
     
     <h3>Student data </h3>
@@ -377,6 +379,9 @@
         </div>
         
       </td> 
+    </tr>
+    <tr>
+      <th>Total</th> <th *ngFor="let meal of headers">{{totalMeals[meal]}}</th> 
     </tr>
   </table>
 </div>
