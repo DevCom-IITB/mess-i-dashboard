@@ -294,7 +294,7 @@
         visibility: hidden;
       }
     }
-  </style>
+</style>
   
   <div class="search p-3">
     <form #search="ngForm" (ngSubmit)="submit(search)"  class="form-inline">
@@ -307,8 +307,11 @@
   </div>
 
   <div class="container" *ngIf="studentData">
+    
     <h3>Student data </h3>
-    <table class="table table-striped">
+    <div class="d-flex flex-row">
+      <!-- <img src="'http://localhost:5000/api/get_image/'+{{studentData.roll}}"/> -->
+      <table class="table table-striped">
         <tr>
             <td><h6>Roll no</h6></td>
             <td>{{studentData.roll}}</td>
@@ -321,12 +324,17 @@
             <td><h6>Hostel, Room</h6></td>
             <td>Hostel {{studentData.hostel}},{{studentData.room}}</td>
         </tr>
-    </table>
-    <div *ngIf="studentData.allowed">
-        <button type="button" class="w-100 btn btn-danger btn-lg" (click)="toggl()">Deactivate</button>
+      </table>
+
     </div>
-    <div *ngIf="!studentData.allowed">
-        <button type="button" class="w-100 btn btn-primary btn-lg" (click)="toggl()">Activate</button>
+    
+    <div *ngIf="studentData.allowed" class="d-flex flex-row">
+        <h2 class="d-flex flex-row">Status: <span style="color: green;" class="px-1">Activated</span></h2>
+        <button type="button" class="w-100 btn btn-danger mx-2" (click)="toggl()">Deactivate</button>
+    </div>
+    <div *ngIf="!studentData.allowed" class="d-flex flex-row">
+        <h2 class="d-flex flex-row">Status: <span style="color: red ;" class="px-1">Deactivated</span></h2>
+        <button type="button" class="w-100 btn btn-primary mx-2 " (click)="toggl()">Activate</button>
     </div>
   
     <h3 class="mt-3">Get mess data </h3>
@@ -353,12 +361,21 @@
       </div>
     </form>
 
-  <table class="table table-striped" *ngIf="studentHistory">
+  <table class="table table-bordered" *ngIf="studentHistory">
     <tr>
-      <th>Date</th> <th>Time</th> <th>Meal</th>
+      <th>Date</th> <th *ngFor="let meal of headers">{{meal}}</th> 
     </tr>
-    <tr *ngFor="let entry of studentHistory">
-      <td>{{entry.day}}</td><td>{{entry.time}}</td> <td>{{entry.meal}}</td>
+    <tr *ngFor="let day of noOfDays">
+      <td>{{day}}</td>
+      <td *ngFor="let meal of headers">
+        <div *ngIf="studentHistory[day][meal]" style="background-color: greenyellow;">
+          {{studentHistory[day][meal]}}
+        </div>
+        <div *ngIf="!studentHistory[day][meal]" style="background-color: tomato;">
+          -
+        </div>
+        
+      </td> 
     </tr>
   </table>
 </div>

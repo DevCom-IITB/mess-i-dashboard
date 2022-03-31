@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn()){
-      this.router.navigate([''])
+      this.router.navigate(['student'])
     }
     this.route.queryParams
       .subscribe(params => {

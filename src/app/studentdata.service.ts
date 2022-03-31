@@ -39,4 +39,11 @@ export class StudentdataService {
     }}).toPromise();
   }
 
+  async getMonthlyMessdata(year:string,month:string){
+    let url = this.baseurl.concat("/get-meal-info/",year,'/',month);
+    return this.http.get(url,{headers:{
+      'x-access-token':this.auth.getToken(),    
+    }}).toPromise();
+  }
+
 }
