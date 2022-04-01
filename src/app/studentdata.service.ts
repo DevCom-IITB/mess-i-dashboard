@@ -32,26 +32,44 @@ export class StudentdataService {
       'x-access-token':this.auth.getToken()
     }}).subscribe((res:any)=>{
       console.log(res.status)
-      if(res.status==200){
-        return true
-      }else{
-        return false
-      }
+      return true
+    },(e)=>{
+      return false
     })
   }
 
   async getMonthlydata(roll:string,year:string,month:string){
     let url = this.baseurl.concat("/get-meal-info/",roll,'/',year,'/',month);
-    return this.http.get(url,{headers:{
-      'x-access-token':this.auth.getToken(),    
-    }}).toPromise();
+    return new Promise((resolve, reject) => {
+      this.http.get(url,
+        {
+          headers:{
+            'x-access-token':this.auth.getToken(),    
+          }
+        }
+      ).subscribe((res)=> {
+          resolve(res);
+      },
+      (e)=>{
+          reject({})
+      })
+  });
   }
 
   async getMonthlyMessdata(year:string,month:string){
     let url = this.baseurl.concat("/get-meal-info/",year,'/',month);
-    return this.http.get(url,{headers:{
-      'x-access-token':this.auth.getToken(),    
-    }}).toPromise();
+    return new Promise((resolve,reject)=>
+    {
+      this.http.get(url,{headers:{
+        'x-access-token':this.auth.getToken(),    
+      }}).subscribe((res)=>{
+        resolve(res);
+      },(e)=>{
+        reject({});
+      })
+    }
+    )
+    
   }
 
   getImage(roll:string): Observable<Blob>{

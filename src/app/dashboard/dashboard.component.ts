@@ -58,7 +58,8 @@ export class DashboardComponent implements OnInit {
   async submit(search: any){
     this.service.getStudentData(search.form.value.roll).then((res)=>{
         this.studentData = res;
-        this.studentHistory = []
+        this.studentHistory = null
+        this.studentImage = null 
         this.getImageFromService()
         
     }).catch((res)=>{
@@ -78,6 +79,8 @@ export class DashboardComponent implements OnInit {
         // console.log(res);
         this.studentHistory = this.cleanData(history);
         // console.log(history)
+      }).catch((res)=>{
+        this.studentHistory = this.cleanData({})
       });
     }else{
     }
