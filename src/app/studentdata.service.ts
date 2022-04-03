@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentdataService {
 
-  baseurl = "http://localhost:5000/api";
+  baseurl = environment.backendURL+"/api";
   constructor(private http:HttpClient, private auth:AuthService ) { }
 
   async getStudentData(roll:string){

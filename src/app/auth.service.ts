@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   logged_in = false;
-    token ="";
-  url = "http://localhost:5000/api/dash/auth"
+  token="";
+  url = environment.backendURL+'/api/auth';
   constructor(private http:HttpClient, private router:Router) { }
 
   loginUser(code:string){

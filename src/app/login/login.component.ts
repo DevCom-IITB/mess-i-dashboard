@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
         console.log(params.code);
       }
     );
-    this.loginHref = `https://gymkhana.iitb.ac.in/profiles/oauth/authorize/?client_id=1dE3mAQY7EvCjw5IdHgoNtbutjgZy14CyIsWKRK8&response_type=code&scope=basic profile program ldap&redirect_uri=http://localhost:4200/login`;
+    this.loginHref = `https://gymkhana.iitb.ac.in/profiles/oauth/authorize/?client_id=${environment.clientID}&response_type=code&scope=basic profile program ldap&redirect_uri=${environment.redirectURL}`;
     
   }
 
