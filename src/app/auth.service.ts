@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  logged_in = true;
-  token="07e14557-d7d2-4bb0-95cf-f4f02284a8a1";
-  url = "http://localhost:5000/api/auth"
+  logged_in = false;
+    token ="";
+  url = "http://localhost:5000/api/dash/auth"
   constructor(private http:HttpClient, private router:Router) { }
 
   loginUser(code:string){

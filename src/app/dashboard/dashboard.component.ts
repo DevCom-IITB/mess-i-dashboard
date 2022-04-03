@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
         
     }).catch((res)=>{
       this.errMsg = res
+      this.studentData = null
     })
     
     
