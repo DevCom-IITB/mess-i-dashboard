@@ -10,7 +10,7 @@ import { environment } from './../environments/environment';
 export class AuthService {
   logged_in = false;
   token="";
-  url = environment.backendURL+'/api/auth';
+  url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { }
 
   loginUser(code:string){
