@@ -7,14 +7,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { OverviewComponent } from './overview/overview.component'
+import { OverviewComponent } from './overview/overview.component';
+import { StudentsComponent } from './students/students.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    OverviewComponent
+    OverviewComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
