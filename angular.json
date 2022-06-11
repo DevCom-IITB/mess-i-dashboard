@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "mess-i-dashboard"
+  "defaultProject": "mess-i-dashboard",
+  "cli": {
+    "analytics": "7e36cfb9-4410-4cae-a4e6-68e4b8c8cae6"
+  }
 }
