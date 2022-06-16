@@ -1,0 +1,64 @@
+
+<!-- <table>
+    <tr>
+        <th>Student Pic</th>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Hostel</th>
+        <th>Room</th>
+
+    </tr>
+</table> -->
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Pic</th>
+        <th scope="col">Roll Number</th> 
+        <th scope="col">Name</th>
+        <!--<th scope="col">mess_allowed</th> -->
+        <th scope="col">Room</th>
+        <th scope="col">Hostel</th>
+        <th scope="col">Mess Allowed Status</th>
+      </tr>
+
+      <tr *ngFor="let stud of studentInfoList">
+        <td> <img style="max-width: 40%" [src]="studentImageMap.get(stud[0])" alt="Place image title" > </td>
+        <td>{{stud[0]}}</td>
+        <td>{{stud[1].fullname}}</td>
+       <!-- <td>{{stud[1].mess_allowed}}</td> -->
+        <td>{{stud[1].room}}</td>
+        <td>{{stud[1].hostel}}</td>
+        <td><div *ngIf="stud[1].mess_allowed" class="d-flex flex-row mt-3">
+          <h2 class="d-flex flex-row">Status: <span style="color: green;" class="px-1">Activated</span></h2>
+          <button type="button" class="w-100 btn btn-danger mx-2" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">Deactivate</button>
+      </div>
+      <div *ngIf="!stud[1].mess_allowed" class="d-flex flex-row mt-3">
+          <h2 class="d-flex flex-row">Status: <span style="color: red ;" class="px-1">Deactivated</span></h2>
+          <button type="button" class="w-100 btn btn-primary mx-2 " id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">Activate</button>
+      </div>
+      </td>
+        <!-- <td><button>Activate/Deactivate</button></td> -->
+      </tr>
+    <button class="btn btn-primary" (click)="getList(false)" >Next Page</button>
+  </thead>
+    <tbody>
+      <!-- <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr> -->
+    </tbody>
+  </table>
