@@ -3,7 +3,7 @@ import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
-
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-student-list',
@@ -13,10 +13,13 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 export class StudentListComponent implements OnInit {
 
   studentImageMap = new Map();
-  studentInfoList :any;
+  //studentInfoList_array = [];
+  studentInfoList : any;
   temp : any;
   errMsg = "";
   isImageLoading:any;
+
+  justAfterScrolling = true;
   
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -26,8 +29,10 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     //ithis.checkFucn();
-    this.getList(true);
+    this.justAfterScrolling = true;
+    this.getList("new");
     console.log(this.studentInfoList);
+
 
   }
 
@@ -35,10 +40,18 @@ async getList(tempNext : any){
     
     this.service.getStudentList(tempNext).then((res)=>{
         this.temp = res;
-        this.studentInfoList = Object.entries(this.temp);
-        //console.log(this.studentInfoList);
+        
+        if(tempNext == "new"){
+          this.studentInfoList = ( Object.entries(this.temp)); //added an append
+          console.log(this.studentInfoList);
+        }
+        else{
+          this.studentInfoList = this.studentInfoList.concat( Object.entries(this.temp));
+          console.log(Object.entries(this.temp));
+        }
         //console.log(res); 
         this.makeImageList();
+        
         //console.log(this.studentImageMap);
     }).catch((res)=>{
       this.errMsg = res
@@ -104,7 +117,30 @@ async createImageFromBlob(image: Blob,roll:any) {
     }
   }
 
+
   
+
+  multiple_scroll(){
+    this.justAfterScrolling = true;
+    console.log("multiplescroll")
+  }
+
+
+  
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    
+  if (((window.innerHeight + window.scrollY ) >= document.body.offsetHeight) && this.justAfterScrolling) {
+        // you're at the bottom of the page
+        this.getList("old");
+        console.log("we reach bottom")
+        this.justAfterScrolling = false; 
+
+        setTimeout(()=>{ this.multiple_scroll(); },500);
+
+
+    }
+}  
 }
 
 
