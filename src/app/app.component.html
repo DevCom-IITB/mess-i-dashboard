@@ -14,6 +14,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/overview" >Mess History</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/rebate" >Rebate</a>
+        </li>
       </ul>
       <button class="btn btn-danger" type="submit" (click)="logout()" *ngIf="auth.isLoggedIn()">Logout</button>
       <button class="btn btn-primary" type="submit" (click)="login()" *ngIf="!auth.isLoggedIn()">Log In</button>
