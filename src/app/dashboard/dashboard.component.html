@@ -370,14 +370,19 @@
     </tr>
     <tr *ngFor="let day of noOfDays">
       <td>{{day}}</td>
-      <td *ngFor="let meal of headers">
-        <div *ngIf="studentHistory[day][meal]" style="background-color: greenyellow;">
-          {{studentHistory[day][meal]}}
+      <td *ngFor="let meal of headers" >
+        <div *ngIf="studentHistory[day]==='Rebate'" style="background-color: lightblue;"></div>
+        <div *ngIf="studentHistory[day]!=='Rebate'" >
+          <div *ngIf="studentHistory[day][meal]" style="background-color: greenyellow;">
+            {{studentHistory[day][meal]}}
+          </div>
+          <div *ngIf="!studentHistory[day][meal]" style="background-color: tomato;">
+            -
+          </div>
+          <!-- <div *ngIf="studentHistory[day][meal]=rebate" style="background-color: lightblue;">
+            rebate
+          </div> -->
         </div>
-        <div *ngIf="!studentHistory[day][meal]" style="background-color: tomato;">
-          -
-        </div>
-        
       </td> 
     </tr>
     <tr>

@@ -37,9 +37,6 @@ export class DashboardComponent implements OnInit {
   }
 
   cleanData(history:any){
-    
-    
-    console.log(history)
     for(let j=0;j<this.noOfDays.length;j++){
       if(!(this.noOfDays[j] in history)){
         history[this.noOfDays[j]] = {}
@@ -50,7 +47,7 @@ export class DashboardComponent implements OnInit {
           this.totalMeals[this.headers[i]] += 1;
         }
       }
-
+      
     }
     return history;
     
@@ -67,19 +64,16 @@ export class DashboardComponent implements OnInit {
       this.studentData = null
     })
     
-    
   }
 
+
   async getMonthData(data: any){
-    
     if (data.form.value.year&&data.form.value.month) {
       let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
       this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
       this.service.getMonthlydata(this.studentData.roll,data.form.value.year,data.form.value.month).then((res)=>{
         let history = res;
-        // console.log(res);
         this.studentHistory = this.cleanData(history);
-        // console.log(history)
       }).catch((res)=>{
         this.studentHistory = this.cleanData({})
       });
@@ -90,7 +84,6 @@ export class DashboardComponent implements OnInit {
 
 
   toggl(){
-    console.log("click")
     let res = this.service.togglActive(this.studentData.roll)
     if (res){
       this.studentData.allowed = !this.studentData.allowed
