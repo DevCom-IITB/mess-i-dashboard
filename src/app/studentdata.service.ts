@@ -16,10 +16,12 @@ export class StudentdataService {
   
   async getStudentData(roll:string){
     let url = this.baseurl.concat("/get-student-info/",roll);
+    console.log(url);
     return new Promise((resolve, reject) => {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),    
       }}).subscribe((res:any)=>{
+        console.log(res)
         resolve(res)
       },(e)=>{
         console.log(e)
@@ -94,6 +96,21 @@ export class StudentdataService {
     )
     
   }
+
+  async getStudentList(nextOrNot : string){
+    let url = this.baseurl.concat("/get_batch_students/",nextOrNot);
+    return new Promise((resolve,reject)=>
+    {
+      this.http.get(url,{headers:{
+        'x-access-token':this.auth.getToken(),    
+      }}).subscribe((res)=>{
+        resolve(res);
+      },(e)=>{
+        reject({});
+      })
+    }
+    )
+  } 
 
   getImage(roll:string): Observable<Blob>{
     let url = this.baseurl.concat("/get_image/",roll);

@@ -80,6 +80,9 @@ export class DashboardComponent implements OnInit {
     }else{
     }
   }
+
+
+
   toggl(){
     let res = this.service.togglActive(this.studentData.roll)
     if (res){

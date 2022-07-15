@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OverviewComponent } from './overview/overview.component';
 import { StudentsComponent } from './students/students.component';
+import { StudentListComponent } from './student-list/student-list.component'
 import { RebateComponent } from './rebate/rebate.component'
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RebateComponent } from './rebate/rebate.component'
     DashboardComponent,
     OverviewComponent,
     StudentsComponent,
+    StudentListComponent
     RebateComponent
   ],
   imports: [
