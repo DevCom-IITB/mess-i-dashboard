@@ -8,21 +8,23 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  logged_in = false;
-  token:any;
+  logged_in = true;
+  token="4be4bba3-f2a8-4969-9c73-815c7be03489";
+  access_level = "student";
   url = environment.backendURL+'/api/auth';
   constructor(private http:HttpClient, private router:Router) { 
-    this.token = sessionStorage.getItem("mess-i-token");
-    if(this.token!=null){
-      this.logged_in = true;
-    }
+    //this.token = sessionStorage.getItem("mess-i-token");
+    
+    this.logged_in = true;
   }
 
   loginUser(code:string){
     return this.http.get(this.url,{params:{code:code}}).subscribe((res:any) => {
       this.token = res.token;
+      this.access_level = res.access_level;
       this.logged_in = true;
       sessionStorage.setItem("mess-i-token",res.token);
+      sessionStorage.setItem("access_level",res.access_level);
       this.router.navigate(['overview']);
     })
   }
@@ -33,8 +35,17 @@ export class AuthService {
   isLoggedIn(){
     return this.logged_in;
   }
+  isStaff(){
+    return this.access_level=="staff";
+  }
+  isStudent(){
+    return this.access_level=="student";
+  }
   getToken(){
     return this.token;
+  }
+  getaccesslevel(){
+    return this.access_level;
   }
 
 }
