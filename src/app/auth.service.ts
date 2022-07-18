@@ -8,14 +8,16 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  logged_in = true;
-  token="4be4bba3-f2a8-4969-9c73-815c7be03489";
-  access_level = "student";
+  logged_in = false;
+  token:any;
+  access_level:any;
   url = environment.backendURL+'/api/auth';
   constructor(private http:HttpClient, private router:Router) { 
-    //this.token = sessionStorage.getItem("mess-i-token");
-    
-    this.logged_in = true;
+    this.token = sessionStorage.getItem("mess-i-token");
+    this.access_level = sessionStorage.getItem("access_level");
+    if(this.token!=null){
+      this.logged_in = true;
+    }
   }
 
   loginUser(code:string){
