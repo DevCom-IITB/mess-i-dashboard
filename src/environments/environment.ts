@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendURL:"http://localhost:5000",
+  backendURL:"https://eeb3-103-21-125-81.in.ngrok.io",
   redirectURL:"http://localhost:4200/login",
   clientID:"1dE3mAQY7EvCjw5IdHgoNtbutjgZy14CyIsWKRK8"
 };
