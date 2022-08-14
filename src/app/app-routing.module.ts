@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'overview',component:OverviewComponent},
   {path:'student-list',component:StudentsComponent},
 
-  {path:'list',component:StudentListComponent}
+  {path:'list',component:StudentListComponent},
   {path:'rebate',component:RebateComponent}
 ];
 

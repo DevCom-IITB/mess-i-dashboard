@@ -37,10 +37,10 @@ export class StudentListComponent implements OnInit {
   }
 
 async getList(tempNext : any){
-    
+
     this.service.getStudentList(tempNext).then((res)=>{
+      
         this.temp = res;
-        
         if(tempNext == "new"){
           this.studentInfoList = ( Object.entries(this.temp)); //added an append
           console.log(this.studentInfoList);

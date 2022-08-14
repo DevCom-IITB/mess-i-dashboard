@@ -19,7 +19,7 @@ import { RebateComponent } from './rebate/rebate.component'
     DashboardComponent,
     OverviewComponent,
     StudentsComponent,
-    StudentListComponent
+    StudentListComponent,
     RebateComponent
   ],
   imports: [

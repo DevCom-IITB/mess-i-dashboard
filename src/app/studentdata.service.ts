@@ -31,7 +31,7 @@ export class StudentdataService {
     
   }
 
-  async setStudentRebate(startDate:string,endDate:string){
+  async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
     var token=await this.auth.getToken()
     console.log(token)
     let headers = new HttpHeaders({
@@ -39,7 +39,7 @@ export class StudentdataService {
       
     });
       let options = { headers: headers ,responseType:'text' as 'json'};
-    let url = this.baseurl.concat("/add-rebate/",startDate,'/',endDate);
+    let url = this.baseurl.concat("/add-rebate/",rollnumber,'/',startDate,'/',endDate);
     return new Promise((resolve, reject) => {
       this.http.post(url,null,options).subscribe((res:any)=>{
         resolve(res)
@@ -81,8 +81,8 @@ export class StudentdataService {
   });
   }
 
-  async getMonthlyMessdata(year:string,month:string){
-    let url = this.baseurl.concat("/get-meal-info/",year,'/',month);
+  async getMonthlyMessdata(hostel:string,year:string,month:string){
+    let url = this.baseurl.concat("/get-meal-info/",hostel,'/',year,'/',month);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
@@ -98,7 +98,7 @@ export class StudentdataService {
   }
 
   async getStudentList(nextOrNot : string){
-    let url = this.baseurl.concat("/get_batch_students/",nextOrNot);
+    let url = this.baseurl.concat("/get-batch-students/",nextOrNot);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
@@ -113,7 +113,7 @@ export class StudentdataService {
   } 
 
   getImage(roll:string): Observable<Blob>{
-    let url = this.baseurl.concat("/get_image/",roll);
+    let url = this.baseurl.concat("/get-image/",roll);
     return this.http.get(url, { 
       responseType: 'blob',
       headers:{
