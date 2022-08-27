@@ -8,8 +8,8 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  logged_in = true;//testing 
-  token:any; //testing
+  logged_in = false;
+  token:any;
   url = environment.backendURL+'/api/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
