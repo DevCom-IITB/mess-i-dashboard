@@ -12,12 +12,36 @@ export class StudentdataService {
   baseurl = environment.backendURL+"/api";
   constructor(private http:HttpClient, private auth:AuthService ) { }
 
+  
+  
   async getStudentData(roll:string){
     let url = this.baseurl.concat("/get-student-info/",roll);
+    console.log(url);
     return new Promise((resolve, reject) => {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),    
       }}).subscribe((res:any)=>{
+        console.log(res)
+        resolve(res)
+      },(e)=>{
+        console.log(e)
+        reject(e.error)
+      })
+    });
+    
+  }
+
+  async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
+    var token=await this.auth.getToken()
+    console.log(token)
+    let headers = new HttpHeaders({
+      'x-access-token':token,
+      
+    });
+      let options = { headers: headers ,responseType:'text' as 'json'};
+    let url = this.baseurl.concat("/add-rebate/",rollnumber,'/',startDate,'/',endDate);
+    return new Promise((resolve, reject) => {
+      this.http.post(url,null,options).subscribe((res:any)=>{
         resolve(res)
       },(e)=>{
         console.log(e)
@@ -57,8 +81,8 @@ export class StudentdataService {
   });
   }
 
-  async getMonthlyMessdata(year:string,month:string){
-    let url = this.baseurl.concat("/get-meal-info/",year,'/',month);
+  async getMonthlyMessdata(hostel:string,year:string,month:string){
+    let url = this.baseurl.concat("/get-mess-info/",hostel,'/',year,'/',month);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
@@ -73,8 +97,23 @@ export class StudentdataService {
     
   }
 
+  async getStudentList(nextOrNot : string){
+    let url = this.baseurl.concat("/get-batch-students/",nextOrNot);
+    return new Promise((resolve,reject)=>
+    {
+      this.http.get(url,{headers:{
+        'x-access-token':this.auth.getToken(),    
+      }}).subscribe((res)=>{
+        resolve(res);
+      },(e)=>{
+        reject({});
+      })
+    }
+    )
+  } 
+
   getImage(roll:string): Observable<Blob>{
-    let url = this.baseurl.concat("/get_image/",roll);
+    let url = this.baseurl.concat("/get-image/",roll);
     return this.http.get(url, { 
       responseType: 'blob',
       headers:{

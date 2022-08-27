@@ -54,7 +54,7 @@ export class OverviewComponent implements OnInit {
     if (data.form.value.year&&data.form.value.month) {
       let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
       this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
-      this.service.getMonthlyMessdata(data.form.value.year,data.form.value.month).then((res)=>
+      this.service.getMonthlyMessdata(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>
       {
         let history = res;
         // console.log(res);

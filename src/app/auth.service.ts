@@ -10,7 +10,7 @@ import { environment } from './../environments/environment';
 export class AuthService {
   logged_in = false;
   token:any;
-  url = environment.backendURL+'/api/auth';
+  url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
     if(this.token!=null){
@@ -28,7 +28,7 @@ export class AuthService {
   }
   logoutUser(){
     this.token="";
-    this.logged_in=false;
+    this.logged_in=false; 
   }
   isLoggedIn(){
     return this.logged_in;

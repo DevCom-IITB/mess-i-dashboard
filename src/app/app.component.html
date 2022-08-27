@@ -8,11 +8,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li>
+          <a class="nav-link" routerLink="/list">Student List</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/student" >Student History</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/overview" >Mess History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/rebate" >Rebate</a>
         </li>
       </ul>
       <button class="btn btn-danger" type="submit" (click)="logout()" *ngIf="auth.isLoggedIn()">Logout</button>
