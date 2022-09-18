@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-
+  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   studentImageMap = new Map();
   //studentInfoList_array = [];
   studentInfoList : any;
@@ -31,10 +32,10 @@ export class StudentListComponent implements OnInit {
     //ithis.checkFucn();
     this.justAfterScrolling = true;
     this.getList("new");
-    console.log(this.studentInfoList);
-
-
+    this.updateNav.emit();
+    // console.log(this.updateNav)
   }
+   
 
 async getList(tempNext : any){
 
@@ -43,11 +44,9 @@ async getList(tempNext : any){
         this.temp = res;
         if(tempNext == "new"){
           this.studentInfoList = ( Object.entries(this.temp)); //added an append
-          console.log(this.studentInfoList);
         }
         else{
           this.studentInfoList = this.studentInfoList.concat( Object.entries(this.temp));
-          console.log(Object.entries(this.temp));
         }
         //console.log(res); 
         this.makeImageList();

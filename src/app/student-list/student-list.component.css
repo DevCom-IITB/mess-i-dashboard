@@ -1,0 +1,18 @@
+
+.active_circle {
+    width: 1em;
+    margin-top: 0.3em;
+    padding: 0%;
+    height: 1em;
+    background: green;
+    border-radius: 50%
+  }
+  
+
+.rounded_borders{
+  border-radius: 50000px;
+}
+
+.zero_padding{
+
+}
