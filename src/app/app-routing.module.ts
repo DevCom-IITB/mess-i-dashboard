@@ -8,8 +8,10 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { RebateComponent } from './rebate/rebate.component';
 
 import { StudentsComponent } from './students/students.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  {path:'home',component:HomeComponent},
   {path:'student',component:DashboardComponent},
   {path:'login',component:LoginComponent},
   {path:'overview',component:OverviewComponent},
