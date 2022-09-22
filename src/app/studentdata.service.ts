@@ -64,7 +64,7 @@ export class StudentdataService {
   }
 
   async getMonthlydata(roll:string,year:string,month:string){
-    let url = this.baseurl.concat("/get-meal-info/",roll,'/',year,'/',month);
+    let url = this.baseurl.concat("/get-student-meal/",roll,'/',year,'/',month);
     return new Promise((resolve, reject) => {
       this.http.get(url,
         {
@@ -82,7 +82,7 @@ export class StudentdataService {
   }
 
   async getMonthlyMessdata(hostel:string,year:string,month:string){
-    let url = this.baseurl.concat("/get-mess-info/",hostel,'/',year,'/',month);
+    let url = this.baseurl.concat("/get-mess-data/",hostel,'/',year,'/',month);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
