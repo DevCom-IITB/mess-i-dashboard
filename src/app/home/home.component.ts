@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.pending_rebates.push({
       student:{
         id: "210051128",
-        name: "Rahu Ketu",
+        name: "Rahul Kumari",
       } as Student,
       recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
       rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),

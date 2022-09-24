@@ -16,7 +16,7 @@ export class AppComponent {
   ngOnInit(): void {
   }
   constructor(public auth:AuthService,private router:Router){
-    this.urlToNavId.set("/student","nav_home")
+    this.urlToNavId.set("/home","nav_home")
     this.urlToNavId.set("/list","nav_student_list")
     this.urlToNavId.set("/rebate","nav_rebate")
   }
