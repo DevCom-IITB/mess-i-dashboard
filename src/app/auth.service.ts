@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,7 +19,13 @@ export class AuthService {
   }
 
   loginUser(code:string){
-    return this.http.get(this.url,{params:{code:code}}).subscribe((res:any) => {
+    let parameters = new HttpParams();
+    parameters = parameters.append('code',code);
+    let header_node = {
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
+      params: parameters
+    };
+    return this.http.get(this.url,header_node).subscribe((res:any) => {
       this.token = res.token;
       this.logged_in = true;
       sessionStorage.setItem("mess-i-token",res.token);

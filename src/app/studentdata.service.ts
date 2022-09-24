@@ -19,7 +19,8 @@ export class StudentdataService {
     console.log(url);
     return new Promise((resolve, reject) => {
       this.http.get(url,{headers:{
-        'x-access-token':this.auth.getToken(),    
+        'x-access-token':this.auth.getToken(),   
+        'rejectUnauthorized':'false' 
       }}).subscribe((res:any)=>{
         console.log(res)
         resolve(res)
@@ -36,6 +37,7 @@ export class StudentdataService {
     console.log(token)
     let headers = new HttpHeaders({
       'x-access-token':token,
+      'rejectUnauthorized':'false' 
       
     });
       let options = { headers: headers ,responseType:'text' as 'json'};
@@ -54,7 +56,8 @@ export class StudentdataService {
   togglActive(roll:string){
     let url = this.baseurl.concat("/toggle-mess-allowed/",roll);
     return this.http.get(url,{headers:{
-      'x-access-token':this.auth.getToken()
+      'x-access-token':this.auth.getToken(),
+      'rejectUnauthorized':'false' 
     }}).subscribe((res:any)=>{
       console.log(res.status)
       return true
@@ -70,6 +73,7 @@ export class StudentdataService {
         {
           headers:{
             'x-access-token':this.auth.getToken(),    
+            'rejectUnauthorized':'false' 
           }
         }
       ).subscribe((res)=> {
@@ -86,7 +90,8 @@ export class StudentdataService {
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
-        'x-access-token':this.auth.getToken(),    
+        'x-access-token':this.auth.getToken(),  
+        'rejectUnauthorized':'false'   
       }}).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -103,6 +108,7 @@ export class StudentdataService {
     {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),    
+        'rejectUnauthorized':'false' 
       }}).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -118,6 +124,7 @@ export class StudentdataService {
       responseType: 'blob',
       headers:{
         'x-access-token':this.auth.getToken(),    
+        'rejectUnauthorized':'false' 
       } 
     });
   }
