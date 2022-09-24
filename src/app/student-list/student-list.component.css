@@ -13,6 +13,30 @@
   border-radius: 50000px;
 }
 
-.zero_padding{
 
+#column-headers{
+  color: #ffc42b;
+  font-weight: 500;
+}
+
+#stud-table{
+  border-top: 2px #ffc42b solid;
+}
+
+#student-list-footer{
+  color: #ffc42b;
+}
+
+#num-rows-selector{
+  margin-right: 12px;
+}
+
+.page-navigator-btn{
+  border-radius: 0.4rem;
+  border-color: #ffc42b;
+  border: 1px solid;
+  text-align: center;
+
+  height: 1.5rem;
+  width: 1.5rem;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
@@ -11,9 +11,14 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-   ngOnInit(): void {
+  urlToNavId = new Map();
+  currTab : any; 
+  ngOnInit(): void {
   }
   constructor(public auth:AuthService,private router:Router){
+    this.urlToNavId.set("/student","nav_home")
+    this.urlToNavId.set("/list","nav_student_list")
+    this.urlToNavId.set("/rebate","nav_rebate")
   }
 
   logout(){
@@ -26,9 +31,21 @@ export class AppComponent {
     this.router.navigate(['login'])
   }
   
-  updateNav(tabName:any) {
-    console.log(tabName)
-    console.log("confirm")
+  updateNav() {
+    this.currTab = document.getElementById(this.urlToNavId.get(this.router.url))
+    this.urlToNavId.forEach(element => {
+      console.log(element)
+      if(element == this.urlToNavId.get(this.router.url)){
+        console.log("active link")
+        document.getElementById(element)?.classList.remove("nav-items-style")
+        document.getElementById(element)?.classList.add("nav-items-style-active")
+      }
+      else{
+        document.getElementById(element)?.classList.remove("nav-items-style-active")
+        document.getElementById(element)?.classList.add("nav-items-style")
+      }
+    });
+  
   }
 }
 

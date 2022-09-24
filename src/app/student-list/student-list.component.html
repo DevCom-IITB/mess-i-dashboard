@@ -1,28 +1,24 @@
-<table class="table">
+<div class="student-list-component-container">
+  <table class="table">
     <thead>
-      <tr>
-        <th scope="col">Pic</th>
-        <th scope="col">Roll Number</th> 
-        <th scope="col">Name</th>
-        <th scope="col">Room</th>
-        <th scope="col">Hostel</th>
-        <th scope="col">Mess Allowed Status</th>
+      <tr id="column-headers">
+        <th scope="col">ROLL NO.</th> 
+        <th scope="col">NAME</th>
+        <th scope="col">ROOM NO.</th>
+        <th scope="col">HOSTEL</th>
+        <th scope="col">CARD STATUS</th>
       </tr>
 
-      <!-- <button class="btn btn-primary" (click)="getList(false)" >Next Page</button> -->
     </thead>
-    <tbody>
-      <tr *ngFor="let stud of studentInfoList">
-        <td> <img style="max-width: 40%" [src]="studentImageMap.get(stud[0])" alt="Place image title" > </td>
+    <tbody id="stud-table">
+      <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
+      <tr role="button" *ngFor="let stud of studentInfoList">
         <td>{{stud[0]}}</td>
         <td>{{stud[1].fullname}}</td>
-       <!-- <td>{{stud[1].mess_allowed}}</td> -->
         <td>{{stud[1].room}}</td>
         <td>{{stud[1].hostel}}</td>
         <td>
-            <!-- <div *ngIf="stud[1].mess_allowed" class="d-flex flex-row mt-3"> -->
             <div *ngIf="stud[1].mess_allowed">
-              <!-- <div class="d-flex flex-row"><span style="color: green;" class="px-1">Activated</span></div> -->
               <button type="button" class="btn btn-outline-dark rounded_borders py-0" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
                 <div class="container px-1 py-0">
                   <div class="row">
@@ -34,12 +30,31 @@
                 </div>
               </button>
             </div>
-            <!-- <div *ngIf="!stud[1].mess_allowed" class="d-flex flex-row mt-3"> -->
             <div *ngIf="!stud[1].mess_allowed">
-              <!-- <div class="d-flex flex-row"><span style="color: red ;" class="px-1">Deactivated</span></div> -->
               <button type="button" class="btn btn-outline-light" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">Inactive</button>
             </div>
       </td>
       </tr>
     </tbody>
   </table>
+
+  <div id="student-list-footer" class="row">
+    <div class="col-lg-3">
+      <p>{{startEntry}}-{{endEntry}} of {{totalEntry}}</p>
+    </div>
+    <div class="col-lg-9">
+      <div style="float:right">
+        <div id="num-rows-selector" class="inblock-el">
+          <p class="inblock-el">Rows per page: 9</p>
+        </div>
+        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="prevEntries()">
+          <i class="bi bi-caret-left"></i>
+        </div>
+        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="nextEntries()">
+          <i class="bi bi-caret-right"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
