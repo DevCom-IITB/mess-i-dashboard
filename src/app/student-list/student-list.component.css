@@ -1,12 +1,43 @@
 
-.active_circle {
+.active-circle {
     width: 1em;
     margin-top: 0.3em;
     padding: 0%;
     height: 1em;
-    background: green;
+    background: #7CDD6C;
     border-radius: 50%
   }
+.inactive-circle {
+  width: 1em;
+  margin-top: 0.3em;
+  padding: 0%;
+  height: 1em;
+  background: #A8A8A8;
+  border-radius: 50%
+}
+
+.active-button{
+  border-radius: 0.5rem;
+  border-style: solid;
+  border-width: 0.04rem;
+  border-color: #ffc42b;
+  
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: transparent;
+}
+
+.inactive-button{
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: transparent;
+  color: #A8A8A8;
+
+  border-style: solid;
+  border-width: 0.09rem;
+  border-color: #A8A8A8;
+}
   
 
 .rounded_borders{

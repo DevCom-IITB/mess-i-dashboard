@@ -19,19 +19,28 @@
         <td>{{stud[1].hostel}}</td>
         <td>
             <div *ngIf="stud[1].mess_allowed">
-              <button type="button" class="btn btn-outline-dark rounded_borders py-0" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
+              <button type="button" class="active-button" id="{{stud[1].roll}}"  (click)="toggl(stud[1].roll)">
                 <div class="container px-1 py-0">
                   <div class="row">
                 <div class="col px-0 align-items-center ">
-                  <div class="align-self-center active_circle"></div>
+                  <div class="align-self-center active-circle"></div>
                 </div>
-                <div class="col px-1 py-0">Activate</div>
+                <div class="col px-1 py-0">Active</div>
                   </div>
                 </div>
               </button>
             </div>
             <div *ngIf="!stud[1].mess_allowed">
-              <button type="button" class="btn btn-outline-light" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">Inactive</button>
+              <button type="button" class="inactive-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
+                <div class="container px-1 py-0">
+                  <div class="row">
+                <div class="col px-0 align-items-center ">
+                  <div class="align-self-center inactive-circle"></div>
+                </div>
+                <div class="col px-1 py-0">Inactive</div>
+                  </div>
+                </div>
+              </button>
             </div>
       </td>
       </tr>
