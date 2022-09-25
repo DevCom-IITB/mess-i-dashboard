@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
+import { RebateRequest, Student } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,39 @@ export class StudentdataService {
       })
     });
     
+  }
+
+  async getStudentRebates(){
+    let url = this.baseurl.concat("/get-rebates/");
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{
+        headers:{
+          'x-access-token': this.auth.getToken(),
+        }
+      }).subscribe((res)=>{
+        let true_res:RebateRequest[] = [];
+        for (const [roll,roll_data] of Object.entries(res)){
+          if(!roll_data.hasOwnProperty('rebates')) continue;
+          roll_data.rebates.forEach((element: string[]) => {
+            if(element.length != 0){
+              true_res.push({
+                student:{
+                  id: roll,
+                  name: roll_data.fullname
+                } as Student,
+                recieve_date: new Date(Date.UTC(0,0,1)),
+                rebate_duration_start: new Date(Date.parse(element[0])),
+                rebate_duration_end: new Date(Date.parse(element[1]))
+              } as RebateRequest);
+            }
+          });
+        }
+        resolve(true_res);
+      }, 
+      (e)=>{
+        reject({});
+      });
+    });
   }
 
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { RebateRequest, Student } from '../interfaces';
+import { StudentdataService } from '../studentdata.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +14,30 @@ export class HomeComponent implements OnInit {
   public user_name: string = "H9 Hall Manager";
   public pending_rebates: RebateRequest[] = new Array();
 
-  constructor() { 
+  constructor(private data_service:StudentdataService, private auth_service: AuthService, private router: Router) { 
   }
 
   ngOnInit(): void {
+    this.initialise();
     this.dummyInitialise();
+    if(!this.auth_service.isLoggedIn()){
+      this.router.navigate(['login'])
+    }
   }
+
+  async initialise(){
+    this.data_service.getStudentRebates().then((res)=>{
+      this.populateRebates(res);
+    }).catch((e)=>{
+      //FIXME: Remove the console log, maybe log somewhere else
+      console.log(e);
+    })
+  }
+
+  populateRebates(response: any): void{
+    console.log(response);
+    this.pending_rebates = response;
+  } 
 
   dummyInitialise(): void{
     this.pending_rebates.push({

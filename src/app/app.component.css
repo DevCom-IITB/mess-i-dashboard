@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #fff4d8;
+}
 .box-style{
     background-color: rgb(45, 45, 43);
     box-shadow: 10px 0px 20px rgb(45, 45, 43);
