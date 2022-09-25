@@ -9,6 +9,7 @@ import { RebateComponent } from './rebate/rebate.component';
 
 import { StudentsComponent } from './students/students.component';
 import { HomeComponent } from './home/home.component';
+import { StudentcardComponent } from './studentcard/studentcard.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'student-list',component:StudentsComponent},
 
   {path:'list',component:StudentListComponent},
-  {path:'rebate',component:RebateComponent}
+  {path:'rebate',component:RebateComponent},
+  {path:'studentcard',component:StudentcardComponent}
 ];
 
 @NgModule({
