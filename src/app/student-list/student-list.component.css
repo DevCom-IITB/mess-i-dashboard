@@ -71,3 +71,8 @@
   height: 1.5rem;
   width: 1.5rem;
 }
+
+.student-list-table-container{
+  padding-left: 25px;
+  padding-right: 25px;
+}

@@ -27,16 +27,13 @@ export class AppComponent {
   }
 
   login(){
-    console.log("hi")
     this.router.navigate(['login'])
   }
   
   updateNav() {
     this.currTab = document.getElementById(this.urlToNavId.get(this.router.url))
     this.urlToNavId.forEach(element => {
-      console.log(element)
       if(element == this.urlToNavId.get(this.router.url)){
-        console.log("active link")
         document.getElementById(element)?.classList.remove("nav-items-style")
         document.getElementById(element)?.classList.add("nav-items-style-active")
       }

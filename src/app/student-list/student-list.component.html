@@ -1,8 +1,8 @@
-<div class="student-list-component-container">
+<div class="student-list-table-container">
   <table class="table">
     <thead>
       <tr id="column-headers">
-        <th scope="col">ROLL NO.</th> 
+        <th scope="col">ROLL NO.</th>
         <th scope="col">NAME</th>
         <th scope="col">ROOM NO.</th>
         <th scope="col">HOSTEL</th>
@@ -12,20 +12,21 @@
     </thead>
     <tbody id="stud-table">
       <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
-      <tr role="button" *ngFor="let stud of studentInfoList">
-        <td>{{stud[0]}}</td>
-        <td>{{stud[1].fullname}}</td>
-        <td>{{stud[1].room}}</td>
-        <td>{{stud[1].hostel}}</td>
-        <td>
+      <ng-container *ngFor="let stud of studentInfoList">
+        <tr role="button" (click)="displayStudData(stud[0])">
+          <td>{{stud[0]}}</td>
+          <td>{{stud[1].fullname}}</td>
+          <td>{{stud[1].room}}</td>
+          <td>{{stud[1].hostel}}</td>
+          <td>
             <div *ngIf="stud[1].mess_allowed">
-              <button type="button" class="active-button" id="{{stud[1].roll}}"  (click)="toggl(stud[1].roll)">
+              <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
                 <div class="container px-1 py-0">
                   <div class="row">
-                <div class="col px-0 align-items-center ">
-                  <div class="align-self-center active-circle"></div>
-                </div>
-                <div class="col px-1 py-0">Active</div>
+                    <div class="col px-0 align-items-center ">
+                      <div class="align-self-center active-circle"></div>
+                    </div>
+                    <div class="col px-1 py-0">Active</div>
                   </div>
                 </div>
               </button>
@@ -34,22 +35,23 @@
               <button type="button" class="inactive-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
                 <div class="container px-1 py-0">
                   <div class="row">
-                <div class="col px-0 align-items-center ">
-                  <div class="align-self-center inactive-circle"></div>
-                </div>
-                <div class="col px-1 py-0">Inactive</div>
+                    <div class="col px-0 align-items-center ">
+                      <div class="align-self-center inactive-circle"></div>
+                    </div>
+                    <div class="col px-1 py-0">Inactive</div>
                   </div>
                 </div>
               </button>
             </div>
-      </td>
-      </tr>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 
   <div id="student-list-footer" class="row">
     <div class="col-lg-3">
-      <p>{{startEntry}}-{{endEntry}} of {{totalEntry}}</p>
+      <p>{{entryNumber}}-{{entryNumber+entriesPerPage}} of {{totalEntry}}</p>
     </div>
     <div class="col-lg-9">
       <div style="float:right">

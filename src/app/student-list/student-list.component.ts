@@ -19,10 +19,9 @@ export class StudentListComponent implements OnInit {
   temp : any;
   errMsg = "";
   // isImageLoading:any;
-  startEntry = 1;
   entriesPerPage = 20;
   totalEntry = 105;
-  endEntry = Math.min(this.entriesPerPage,this.totalEntry);
+  entryNumber = 1;
   justAfterScrolling = true;
   
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
@@ -33,14 +32,14 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.justAfterScrolling = true;
-    this.getList("new");
+    this.getList(this.entryNumber);
     this.updateNav.emit();
   }
    
 
-  async getList(tempNext : any){
+  async getList(startIndex : any){
 
-      this.service.getStudentList(tempNext).then((res)=>{
+      this.service.getStudentList(startIndex).then((res)=>{
         
           this.temp = res;
           console.log(this.temp)
@@ -69,19 +68,17 @@ export class StudentListComponent implements OnInit {
 
   async nextEntries(){ //add an argument of pageNumber and pass to to the api to get the corresponding list of students
     //update the page number and the studInfoList 
-    if (this.endEntry  < this.totalEntry) {
       // this.startEntry += this.entriesPerPage; 
       // this.endEntry += Math.min(this.entriesPerPage, this.totalEntry - this.endEntry);
-      this.getList("next"); 
-    }
+    this.entryNumber += this.entriesPerPage;
+    this.getList(this.entryNumber); 
   }
 
   async prevEntries(){
-    if (this.startEntry > 0) {
       // this.endEntry -= this.entriesPerPage; 
       // this.startEntry -= Math.min(this.startEntry, this.entriesPerPage);
-      this.getList("new");
-    }
+    this.entryNumber -= this.entriesPerPage;
+    this.getList(this.entryNumber);
   }
 
   displayStudData(rollNum:any) {

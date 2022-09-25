@@ -97,8 +97,8 @@ export class StudentdataService {
     
   }
 
-  async getStudentList(nextOrNot : string){
-    let url = this.baseurl.concat("/get-batch-students/",nextOrNot);
+  async getStudentList(startEntry: any){
+    let url = this.baseurl.concat("/get-batch-students/",startEntry);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{

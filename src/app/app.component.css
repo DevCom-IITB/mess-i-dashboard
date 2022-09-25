@@ -37,7 +37,8 @@
 }
 
 #router-outlet{
-    margin-left: 22vw;
-    width: 75vw;
-    padding-left: 2rem;
+    margin-left: 20vw;
+    margin-right: 0px;
+    width: 80vw;
+    padding-left: 0rem;
 }
