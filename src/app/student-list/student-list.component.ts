@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
+import { Student } from '../interfaces';
 
 @Component({
   selector: 'app-student-list',
@@ -20,7 +21,7 @@ export class StudentListComponent implements OnInit {
   errMsg = "";
   // isImageLoading:any;
   entriesPerPage = 20;
-  totalEntry = 105;
+  totalEntry = 500;
   entryNumber = 1;
   justAfterScrolling = true;
   
@@ -42,7 +43,7 @@ export class StudentListComponent implements OnInit {
       this.service.getStudentList(startIndex).then((res)=>{
         
           this.temp = res;
-          console.log(this.temp)
+          // console.log(this.temp)
           this.studentInfoList = Object.entries(this.temp);
       }).catch((res)=>{
         this.errMsg = res
@@ -81,8 +82,17 @@ export class StudentListComponent implements OnInit {
     this.getList(this.entryNumber);
   }
 
-  displayStudData(rollNum:any) {
-    console.log(rollNum)  
+  displayStudData(indexOfStudent:any) {
+    // console.log(this.studentInfoList[indexOfStudent]);
+    var temp_student = {
+      id: this.studentInfoList[indexOfStudent][0],
+      name: this.studentInfoList[indexOfStudent][1].fullname,
+      hostel: this.studentInfoList[indexOfStudent][1].hostel,
+      room: this.studentInfoList[indexOfStudent][1].room,
+      card_status: this.studentInfoList[indexOfStudent][1].mess_allowed
+    } as Student;
+    this.service.put_student_in_cache(temp_student);
+    this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
   }
 
 

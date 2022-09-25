@@ -4,16 +4,25 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import { RebateRequest, Student } from './interfaces';
+import { ChangeStreamReshardCollectionDocument } from 'mongodb';
+import { StudentcardComponent } from './studentcard/studentcard.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentdataService {
 
+  public studentCache= new Map<string,Student>();
   baseurl = environment.backendURL+"/api";
   constructor(private http:HttpClient, private auth:AuthService ) { }
 
-  
+  put_student_in_cache(student: Student){
+    if (this.studentCache.size > 100) {
+      this.studentCache.clear;
+    }
+    this.studentCache.set(student.id,student);
+    console.log(this.studentCache)
+  }
   
   async getStudentData(roll:string){
     let url = this.baseurl.concat("/get-student-info/",roll);

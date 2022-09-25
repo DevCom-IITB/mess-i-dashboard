@@ -1,3 +1,6 @@
+<div id="student-list-heading">
+  Students' List
+</div>
 <div class="student-list-table-container">
   <table class="table">
     <thead>
@@ -12,12 +15,12 @@
     </thead>
     <tbody id="stud-table">
       <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
-      <ng-container *ngFor="let stud of studentInfoList">
-        <tr role="button" (click)="displayStudData(stud[0])">
+      <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
+        <tr role="button" (click)="displayStudData(indexOfelemnet)">
           <td>{{stud[0]}}</td>
           <td>{{stud[1].fullname}}</td>
-          <td>{{stud[1].room}}</td>
           <td>{{stud[1].hostel}}</td>
+          <td>{{stud[1].room}}</td>
           <td>
             <div *ngIf="stud[1].mess_allowed">
               <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
@@ -56,7 +59,7 @@
     <div class="col-lg-9">
       <div style="float:right">
         <div id="num-rows-selector" class="inblock-el">
-          <p class="inblock-el">Rows per page: 9</p>
+          <p class="inblock-el">Rows per page: {{entriesPerPage}}</p>
         </div>
         <div class="clickable inblock-el page-navigator-btn" role="button" (click)="prevEntries()">
           <i class="bi bi-caret-left"></i>
