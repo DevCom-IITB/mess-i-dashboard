@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
+import { Student } from '../interfaces';
 
 @Component({
   selector: 'app-student-list',
@@ -11,14 +13,16 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-
-  studentImageMap = new Map();
+  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  // studentImageMap = new Map();
   //studentInfoList_array = [];
   studentInfoList : any;
   temp : any;
   errMsg = "";
-  isImageLoading:any;
-
+  // isImageLoading:any;
+  entriesPerPage = 20;
+  totalEntry = 500;
+  entryNumber = 1;
   justAfterScrolling = true;
   
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
@@ -28,60 +32,68 @@ export class StudentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //ithis.checkFucn();
     this.justAfterScrolling = true;
-    this.getList("new");
-    console.log(this.studentInfoList);
-
-
+    this.getList(this.entryNumber);
+    this.updateNav.emit();
   }
+   
 
-async getList(tempNext : any){
+  async getList(startIndex : any){
 
-    this.service.getStudentList(tempNext).then((res)=>{
-      
-        this.temp = res;
-        if(tempNext == "new"){
-          this.studentInfoList = ( Object.entries(this.temp)); //added an append
-          console.log(this.studentInfoList);
-        }
-        else{
-          this.studentInfoList = this.studentInfoList.concat( Object.entries(this.temp));
-          console.log(Object.entries(this.temp));
-        }
-        //console.log(res); 
-        this.makeImageList();
+      this.service.getStudentList(startIndex).then((res)=>{
         
-        //console.log(this.studentImageMap);
-    }).catch((res)=>{
-      this.errMsg = res
-    })
-  }
+          this.temp = res;
+          // console.log(this.temp)
+          this.studentInfoList = Object.entries(this.temp);
+      }).catch((res)=>{
+        this.errMsg = res
+      })
+    }
 
-//async checkFucn(){
-//  console.log("i was called")
-//}
-
- toggl(currStudRoll:any){
-   console.log("click")
-   let res = this.service.togglActive(currStudRoll)
-   if (res){
-     this.changeMessStatus(currStudRoll);
-   }
-  }
-
-async changeMessStatus(rollNumber:any){
-
-  for (let index = 0; index < this.studentInfoList.length; index++) {
-    if (this.studentInfoList[index][0] == rollNumber) {
-      this.studentInfoList[index][1].mess_allowed = !this.studentInfoList[index][1].mess_allowed;
-      //console.log(rollNumber);
-      //console.log("changed mess status");
-
+  toggl(currStudRoll:any){
+    console.log("click")
+    let res = this.service.togglActive(currStudRoll)
+    if (res){
+      this.changeMessStatus(currStudRoll);
     }
   }
-}
 
+  async changeMessStatus(rollNumber:any){
+
+    for (let index = 0; index < this.studentInfoList.length; index++) {
+      if (this.studentInfoList[index][0] == rollNumber) {
+        this.studentInfoList[index][1].mess_allowed = !this.studentInfoList[index][1].mess_allowed;
+      }
+    }
+  }
+
+  async nextEntries(){ //add an argument of pageNumber and pass to to the api to get the corresponding list of students
+    //update the page number and the studInfoList 
+      // this.startEntry += this.entriesPerPage; 
+      // this.endEntry += Math.min(this.entriesPerPage, this.totalEntry - this.endEntry);
+    this.entryNumber += this.entriesPerPage;
+    this.getList(this.entryNumber); 
+  }
+
+  async prevEntries(){
+      // this.endEntry -= this.entriesPerPage; 
+      // this.startEntry -= Math.min(this.startEntry, this.entriesPerPage);
+    this.entryNumber -= this.entriesPerPage;
+    this.getList(this.entryNumber);
+  }
+
+  displayStudData(indexOfStudent:any) {
+    // console.log(this.studentInfoList[indexOfStudent]);
+    var temp_student = {
+      id: this.studentInfoList[indexOfStudent][0],
+      name: this.studentInfoList[indexOfStudent][1].fullname,
+      hostel: this.studentInfoList[indexOfStudent][1].hostel,
+      room: this.studentInfoList[indexOfStudent][1].room,
+      card_status: this.studentInfoList[indexOfStudent][1].mess_allowed
+    } as Student;
+    this.service.put_student_in_cache(temp_student);
+    this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
+  }
 
 
 
@@ -89,58 +101,58 @@ async changeMessStatus(rollNumber:any){
 
 //this function pushes the list of images for the corresponding students in the list studentImage
 //it is called every time a get request is made to get the list of students.
-async makeImageList(){
-  for(let stud of this.studentInfoList){
-    //console.log(stud);
-    this.getImageFromService(stud[0]);
-  }  
-}
+// async makeImageList(){
+//   for(let stud of this.studentInfoList){
+//     //console.log(stud);
+//     this.getImageFromService(stud[0]);
+//   }  
+// }
 
-async getImageFromService(roll: any) {
-  this.isImageLoading = true;
-  this.service.getImage(roll).subscribe(data => {
-    this.createImageFromBlob(data,roll);
-    this.isImageLoading = false;
-  }, error => {
-    this.isImageLoading = false;
-    console.log(error);
-  });
-}
-async createImageFromBlob(image: Blob,roll:any) {
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.studentImageMap.set(roll,reader.result);//push the image in an array the time of initial get req
-    }, false);
+// async getImageFromService(roll: any) {
+//   this.isImageLoading = true;
+//   this.service.getImage(roll).subscribe(data => {
+//     this.createImageFromBlob(data,roll);
+//     this.isImageLoading = false;
+//   }, error => {
+//     this.isImageLoading = false;
+//     console.log(error);
+//   });
+// }
+// async createImageFromBlob(image: Blob,roll:any) {
+//     let reader = new FileReader();
+//     reader.addEventListener("load", () => {
+//       this.studentImageMap.set(roll,reader.result);//push the image in an array the time of initial get req
+//     }, false);
   
-    if (image) {
-        reader.readAsDataURL(image);
-    }
-  }
+//     if (image) {
+//         reader.readAsDataURL(image);
+//     }
+//   }
+
+
+//scrolling handler  
+
+  // multiple_scroll(){
+  //   this.justAfterScrolling = true;
+  //   console.log("multiplescroll")
+  // }
 
 
   
+  // @HostListener("window:scroll", [])
+  // onScroll(): void {
+   
+  // if (((window.innerHeight + window.scrollY ) >= document.body.offsetHeight) && this.justAfterScrolling) {
+  //       // you're at the bottom of the page
+  //       // this.getList("old");
+  //       console.log("we reach bottom")
+  //       this.justAfterScrolling = false; 
 
-  multiple_scroll(){
-    this.justAfterScrolling = true;
-    console.log("multiplescroll")
-  }
-
-
-  
-  @HostListener("window:scroll", [])
-  onScroll(): void {
-    
-  if (((window.innerHeight + window.scrollY ) >= document.body.offsetHeight) && this.justAfterScrolling) {
-        // you're at the bottom of the page
-        this.getList("old");
-        console.log("we reach bottom")
-        this.justAfterScrolling = false; 
-
-        setTimeout(()=>{ this.multiple_scroll(); },500);
+  //       setTimeout(()=>{ this.multiple_scroll(); },500);
 
 
-    }
-}  
+  //   }
+  // }  
 }
 
 

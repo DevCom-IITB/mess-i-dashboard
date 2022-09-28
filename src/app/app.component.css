@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #fff4d8;
+}
+.box-style{
+    background-color:#28282B;
+    /* box-shadow: 10px 0px 20px rgb(45, 45, 43); */
+    box-shadow: 0px 0px 20px 4px #28282B;
+    /* display: flex;
+    flex-direction: column;
+    flex-grow: 1; */
+}
+
+.nav-items-style{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+.nav-items-style-active{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    color: #ffc42b;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.nav-items-style-loginButton{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 0%;
+    margin-top: 100%;
+    color: white;
+}
+
+#navbar-fixed{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* position: fixed; */
+    height: 100vh;
+    z-index: 0;
+    flex: 1;
+}
+
+#router-outlet{
+    height:100%;
+    overflow-y: scroll;
+    /* margin-left: 20vw;
+    margin-right: 0px;
+    width: 80vw;
+    padding-left: 0rem; */
+    flex: 4;
+}
+
+/* #parent-container-nav-routerout{
+    display: inline-flex;
+
+} */
+#main-container-nav-routerout{
+    display: flex ;
+    height:100vh;
+    /* position:fixed; */
+} 
