@@ -1,0 +1,23 @@
+body{
+    background: #fffcf4;
+    height: 100%;
+}
+#main-container{
+    padding: 36px;
+}
+
+.rebate-card-wrapper{
+    display: inline-block;
+    margin: 12px;
+    margin-left: 0px;
+    overflow: visible;
+}
+
+#pending-rebates-container{
+    margin-top: 24px;
+}
+
+#pd-rebate-cards-hscroll{
+    border-top: 3px solid #ffc42b;
+    overflow-x: scroll;
+}

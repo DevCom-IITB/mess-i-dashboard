@@ -21,10 +21,8 @@ export class DashboardComponent implements OnInit {
   totalMeals:any;
   errMsg = "";
 
-  ngOnInit(): void {
-    
-    
-  }
+   ngOnInit(): void {
+   }
 
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){

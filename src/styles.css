@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+#app-root{
+    /* display: flex;
+    flex-direction: column;
+    flex-grow: 1; */
+   height: 100% !important; 
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.inblock-el{
+    display:inline-block;
+}
