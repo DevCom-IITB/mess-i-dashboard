@@ -1,12 +1,32 @@
-<div id="main-container-nav-routerout" class="">
+<!-- <div id="main-container-nav-routerout" class="">
 
     <div id="navbar-fixed" class="box-style">
-      <div class="h-100 row row-cols-1">
+      <div class="row row-cols-1">
+        <img class="col" src="/assets/mess-i-logo.png">
         <a id="nav_home" class="col nav-link nav-items-style" routerLink="/home" >HOME</a>
         <a id="nav_student_list" class="col nav-link nav-items-style" routerLink="/list">STUDENTS' LIST</a>
         <a id="nav_rebate" class="col nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
-        <a class="col nav-link nav-items-style-loginButton " (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
-        <a class="col nav-link nav-items-style-loginButton " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
+        <a class="col align-self-bottom nav-link nav-items-style-loginButton " (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
+        <a class="col align-self-bottom nav-link nav-items-style-loginButton " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
+      </div>
+    </div>
+
+    <div id="router-outlet">
+      <router-outlet (activate)="updateNav()"></router-outlet>
+    </div>
+
+</div> -->
+
+<div id="main-container-nav-routerout" class="">
+
+    <div id="navbar-fixed" class="box-style">
+      <div class="d-flex flex-column">
+        <img class="" src="/assets/mess-i-logo.png">
+        <a id="nav_home" class="nav-link nav-items-style" routerLink="/home" >HOME</a>
+        <a id="nav_student_list" class="nav-link nav-items-style" routerLink="/list">STUDENTS' LIST</a>
+        <a id="nav_rebate" class="nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
+        <a class="nav-link nav-items-style-loginButton " (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
+        <a class="nav-link nav-items-style-loginButton " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
       </div>
     </div>
 

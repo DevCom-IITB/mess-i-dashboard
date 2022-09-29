@@ -21,7 +21,7 @@ export class StudentdataService {
       this.studentCache.clear;
     }
     this.studentCache.set(student.id,student);
-    console.log(this.studentCache)
+    // console.log(this.studentCache)
   }
   
   async getStudentData(roll:string){
