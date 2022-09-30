@@ -7,7 +7,6 @@ import { OverviewComponent } from './overview/overview.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { RebateComponent } from './rebate/rebate.component';
 
-import { StudentsComponent } from './students/students.component';
 import { HomeComponent } from './home/home.component';
 import { StudentcardComponent } from './studentcard/studentcard.component';
 
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path:'student',component:DashboardComponent},
   {path:'login',component:LoginComponent},
   {path:'overview',component:OverviewComponent},
-  {path:'student-list',component:StudentsComponent},
 
   {path:'list',component:StudentListComponent},
   {path:'rebate',component:RebateComponent},
