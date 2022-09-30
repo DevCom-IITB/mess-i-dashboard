@@ -2,7 +2,7 @@ body{
     background: #fffcf4;
     height: 100%;
 }
-#main-container{
+.main-container{
     padding: 36px;
 }
 
@@ -13,11 +13,11 @@ body{
     overflow: visible;
 }
 
-#pending-rebates-container{
+.pending-rebates-container{
     margin-top: 24px;
 }
 
-#pd-rebate-cards-hscroll{
+.pd-rebate-cards-hscroll{
     border-top: 3px solid #ffc42b;
     overflow-x: scroll;
 }
