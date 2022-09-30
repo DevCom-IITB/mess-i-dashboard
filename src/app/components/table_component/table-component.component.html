@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+        <tr id="column-headers">
+            <ng-container *ngFor="let header of data.headers">
+                <th scope="col">{{header}}</th>
+            </ng-container>
+        </tr>
+
+    </thead>
+    <tbody id="stud-table">
+        <ng-container *ngFor="let row of data.body">
+        <tr>
+        <ng-container *ngFor="let col of row">
+            <td>{{col}}</td>
+        </ng-container>
+        </tr>
+        </ng-container>
+        <tr *ngIf="data.footer">
+            <ng-container *ngFor="let col of data.footer">
+                <th>{{col}}</th>
+            </ng-container>
+        </tr>
+        
+    </tbody>
+</table>

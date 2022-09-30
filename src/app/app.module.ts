@@ -12,7 +12,8 @@ import { StudentListComponent } from './student-list/student-list.component'
 import { RebateComponent } from './rebate/rebate.component';
 import { HomeComponent } from './home/home.component';
 import { PdRebateCardComponent } from './home/pd-rebate-card/pd-rebate-card.component';
-import { StudentcardComponent } from './studentcard/studentcard.component'
+import { StudentcardComponent } from './studentcard/studentcard.component';
+import { TableComponentComponent } from './components/table_component/table-component.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { StudentcardComponent } from './studentcard/studentcard.component'
     RebateComponent,
     HomeComponent,
     PdRebateCardComponent,
-    StudentcardComponent
+    StudentcardComponent,
+    TableComponentComponent
   ],
   imports: [
     BrowserModule,
