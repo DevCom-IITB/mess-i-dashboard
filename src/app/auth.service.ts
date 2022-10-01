@@ -13,7 +13,7 @@ export class AuthService {
   url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
-    this.token = "9487b82d-84b6-4d3b-a922-bd8ca955b03e";
+    // this.token = "83c29c32-ebbc-435c-80db-ceec8fd5af8e";
     if(this.token!=null){
       this.logged_in = true;
     }

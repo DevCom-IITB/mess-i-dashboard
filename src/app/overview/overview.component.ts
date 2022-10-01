@@ -30,8 +30,6 @@ export class OverviewComponent implements OnInit {
   }
 
   cleanData(history:any){
-    
-    
     console.log(history)
     for(let j=0;j<this.noOfDays.length;j++){
       if(!(this.noOfDays[j] in history)){

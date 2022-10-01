@@ -12,6 +12,10 @@ export class StudentcardComponent implements OnInit {
   rollNumber: any;
   student : any;
   student_data : any;
+  mess_data:any;
+  noOfDays:any;
+  date = new Date();
+  headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
 
   constructor(private route: ActivatedRoute, private service: StudentdataService) {
    }
@@ -45,6 +49,52 @@ export class StudentcardComponent implements OnInit {
     }).catch((res)=>{
       console.log(res)
     })
+    }
+  }
+
+
+  cleanData(history:any){
+    let body = [];
+    let foot = [0,0,0,0,0,0,0];
+    for(let j=0;j<this.noOfDays.length;j++){
+      if(!(this.noOfDays[j] in history)){
+        body.push([this.noOfDays[j],'-','-','-','-','-','-','-'])
+      }else{
+        let day = [this.noOfDays[j]];
+        for(let k=1;k<this.headers.length;k++){
+          if(this.headers[k] in history[this.noOfDays[j]]){
+            day.push('-');
+          }else{
+            day.push(history[this.noOfDays[j]][this.headers[k]]);
+            foot[k-1]+=1;
+          }
+        }
+        body.push(day);
+      }
+    }
+    let footer = ["Total"];
+    for(let i in foot){
+      footer.push(i.toString());
+    }
+    let res = {headers:this.headers,body:body,footer:footer}
+    console.log(res);
+    return res;
+    
+  }
+
+  async getMonthData(data:any){
+    if (data.form.value.year&&data.form.value.month) {
+      let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
+      this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
+      this.service.getMonthlydata(this.rollNumber,data.form.value.year,data.form.value.month).then((res)=>
+      {
+        let history = res;
+        this.mess_data = this.cleanData(history);
+        console.log(this.mess_data)
+      }).catch((res)=>{
+        console.log(res)
+        this.mess_data = this.cleanData({})
+      });
     }
   }
 
