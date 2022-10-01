@@ -2,6 +2,14 @@
   Students' List
 </div>
 <div class="student-list-table-container">
+  <div id="search-main-area">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <i class="bi bi-search"></i>
+        </div>
+        <input type="text" class="form-control" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
+    </div>
+  </div>
   <table class="table">
     <thead>
       <tr id="column-headers">

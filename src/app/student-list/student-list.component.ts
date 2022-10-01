@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
 import { Student } from '../interfaces';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-student-list',
@@ -20,10 +22,12 @@ export class StudentListComponent implements OnInit {
   temp : any;
   errMsg = "";
   // isImageLoading:any;
-  entriesPerPage = 20;
-  totalEntry = 500;
+  entriesPerPage = 9;
+  searchText = "";
+  totalEntry = 105;
   entryNumber = 1;
   justAfterScrolling = true;
+  subject = new Subject();
   
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -35,12 +39,21 @@ export class StudentListComponent implements OnInit {
     this.justAfterScrolling = true;
     this.getList(this.entryNumber);
     this.updateNav.emit();
+    this.subject.pipe(debounceTime(1000)).subscribe((val)=>{
+      this.getList(1);
+    });
   }
-   
+  
+  search(evt:any){
+    const phrase = evt.target.value;
+    this.searchText = phrase;
+    this.subject.next(phrase);
+
+  }
 
   async getList(startIndex : any){
 
-      this.service.getStudentList(startIndex).then((res)=>{
+      this.service.getStudentList(startIndex,this.searchText,this.entriesPerPage).then((res)=>{
         
           this.temp = res;
           // console.log(this.temp)

@@ -17,34 +17,8 @@
                 <p id="studrollno">{{student.id}}</p>
                 <p>Hostel {{student.hostel}}, {{student.room}} </p>
             </div>
-        </div>  
-        <span style="color:rgb(249, 212, 28);font-size:1.3rem;font-weight:500" >
-            Status of the card:
-            <button id="activation" type="button" class="btn btn-outline-dark rounded_borders py-0" >
-            <div>Activated</div>
-            </button>
-        </span>
-    </div>
-  </div>
-  </div>
-</div>
-  <style>
-  
-    .rollnohostel{
-        margin-top:1rem;
-        display:flex;
-        flex-direction: row;
-    }
+        </div>
+        <app-table-component [data]="datatable"></app-table-component>
 
-    #studentcard {
-        max-width:50vw;
-        display: flex;
-        flex-direction: row;
-        background-color: white;
-        padding-left: 0px;
-        margin-right: 10px;
-    }
-    #rollandhostel{
-        color:gray;
-    }
-  </style>
+    </div>
+</div>

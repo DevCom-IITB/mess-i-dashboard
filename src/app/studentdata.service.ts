@@ -145,14 +145,20 @@ export class StudentdataService {
     
   }
 
-  async getStudentList(startEntry: any){
+  async getStudentList(startEntry: any,searchText:string,perPage:number){
     let url = this.baseurl.concat("/get-batch-students/",startEntry);
     return new Promise((resolve,reject)=>
     {
-      this.http.get(url,{headers:{
-        'x-access-token':this.auth.getToken(),    
-        'rejectUnauthorized':'false' 
-      }}).subscribe((res)=>{
+      this.http.get(url,{
+        headers:{
+          'x-access-token':this.auth.getToken(),    
+          'rejectUnauthorized':'false' 
+        },
+        params:{
+          'search':searchText,
+          'show':perPage.toString()
+        }
+      }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
         reject({});

@@ -5,11 +5,11 @@
     </head>
 
     <body>
-        <div id="main-container">
+        <div id="main-container" class="main-container">
             <h1>Hello, {{ user_name }}!</h1>
-            <div id="pending-rebates-container">
+            <div id="pending-rebates-container" class="pending-rebates-container">
                 <h2>Pending Rebates</h2>
-                <div id="pd-rebate-cards-hscroll">
+                <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll">
                     <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
                         <app-pd-rebate-card [rebate_request]="reb_req"></app-pd-rebate-card>
                     </div>
