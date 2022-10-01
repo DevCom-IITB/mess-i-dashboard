@@ -16,11 +16,11 @@
     <tbody id="stud-table">
       <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
       <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
-        <tr role="button" (click)="displayStudData(indexOfelemnet)">
-          <td>{{stud[0]}}</td>
-          <td>{{stud[1].fullname}}</td>
-          <td>{{stud[1].hostel}}</td>
-          <td>{{stud[1].room}}</td>
+        <tr>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[0]}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].fullname}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
           <td>
             <div *ngIf="stud[1].mess_allowed">
               <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
