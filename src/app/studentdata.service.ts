@@ -165,6 +165,26 @@ export class StudentdataService {
     }
     )
   } 
+  
+  async getDevices(){
+    let url = this.baseurl.concat("/devices");
+    return new Promise((resolve,reject)=>
+    {
+      this.http.get(url,{
+        headers:{
+          'x-access-token':this.auth.getToken(),    
+          'rejectUnauthorized':'false' 
+        },
+        params:{
+        }
+      }).subscribe((res)=>{
+        resolve(res);
+      },(e)=>{
+        reject({});
+      })
+    }
+    )
+  } 
 
   getImage(roll:string): Observable<Blob>{
     let url = this.baseurl.concat("/get-image/",roll);

@@ -17,15 +17,10 @@
             </div>
 
             <div id="search-container">
-                <h2>Search</h2>
-                <div id="search-main-area">
-                    <div id="search-box" class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <button type="button" class="btn"><i class="bi bi-search"></i></button>
-                        </div>
-                        <input id="search-query-input" type="text" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                </div>
+                <h2>Devices</h2>
+                <ng-container *ngFor="let device of devices">
+                    <app-devices [device]="device"></app-devices>
+                </ng-container>
             </div>
         </div>
 

@@ -13,7 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { PdRebateCardComponent } from './home/pd-rebate-card/pd-rebate-card.component';
 import { StudentcardComponent } from './studentcard/studentcard.component';
 import { InputFieldComponent } from './utils/input-field/input-field.component'
-import { TableComponentComponent } from './components/table_component/table-component.component'
+import { TableComponentComponent } from './components/table_component/table-component.component';
+import { DevicesComponent } from './home/devices/devices.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TableComponentComponent } from './components/table_component/table-comp
     PdRebateCardComponent,
     StudentcardComponent,
     InputFieldComponent,
-    TableComponentComponent
+    TableComponentComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,

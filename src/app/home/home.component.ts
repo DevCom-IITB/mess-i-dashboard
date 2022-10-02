@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   public user_name: string = "H9 Hall Manager";
   public pending_rebates: RebateRequest[] = new Array();
+  devices:any;
 
   constructor(private data_service:StudentdataService, private auth_service: AuthService, private router: Router) { 
   }
@@ -31,7 +32,14 @@ export class HomeComponent implements OnInit {
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
-    })
+    });
+    
+    this.data_service.getDevices().then((res)=>{
+      this.devices = res;
+      console.log(this.devices);
+    }).catch((e)=>{
+      console.log(e);
+    });
   }
 
   populateRebates(response: any): void{
