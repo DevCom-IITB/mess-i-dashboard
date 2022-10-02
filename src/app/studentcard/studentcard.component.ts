@@ -63,18 +63,18 @@ export class StudentcardComponent implements OnInit {
         let day = [this.noOfDays[j]];
         for(let k=1;k<this.headers.length;k++){
           if(this.headers[k] in history[this.noOfDays[j]]){
-            day.push('-');
-          }else{
             day.push(history[this.noOfDays[j]][this.headers[k]]);
-            foot[k-1]+=1;
+            foot[k-1]+=1;  
+          }else{
+            day.push('-');
           }
         }
         body.push(day);
       }
     }
     let footer = ["Total"];
-    for(let i in foot){
-      footer.push(i.toString());
+    for(let i=0;i<foot.length;i++){
+      footer.push(foot[i].toString());
     }
     let res = {headers:this.headers,body:body,footer:footer}
     console.log(res);

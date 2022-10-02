@@ -25,25 +25,5 @@
         <button type="submit" class="btn btn-primary">Get</button>
       </div>
     </form>
-
-  <table class="table table-bordered" *ngIf="messHistory">
-    <tr>
-      <th>Date</th> <th *ngFor="let meal of headers">{{meal}}</th> 
-    </tr>
-    <tr *ngFor="let day of noOfDays">
-      <td>{{day}}</td>
-      <td *ngFor="let meal of headers">
-        <div *ngIf="messHistory[day][meal]" style="background-color: greenyellow;">
-          {{messHistory[day][meal]}}
-        </div>
-        <div *ngIf="!messHistory[day][meal]" style="background-color: tomato;">
-          -
-        </div>
-        
-      </td> 
-    </tr>
-    <tr>
-      <th>Total</th> <th *ngFor="let meal of headers">{{totalMeals[meal]}}</th> 
-    </tr>
-  </table>
+    <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>
 </div>
