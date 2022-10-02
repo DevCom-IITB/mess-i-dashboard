@@ -10,10 +10,13 @@ import { environment } from './../environments/environment';
 export class AuthService {
   logged_in = false;
   token:any;
+  is_admin:String;
   url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
-    // this.token = "83c29c32-ebbc-435c-80db-ceec8fd5af8e";
+    this.is_admin = sessionStorage.getItem("mess-i-admin")??"";
+    this.is_admin = "staff"
+    this.token = "8e020f89-6083-4a2f-8aec-d4e42d457dde";
     if(this.token!=null){
       this.logged_in = true;
     }
@@ -29,7 +32,9 @@ export class AuthService {
     return this.http.get(this.url,header_node).subscribe((res:any) => {
       this.token = res.token;
       this.logged_in = true;
+      this.is_admin = res.access_level;
       sessionStorage.setItem("mess-i-token",res.token);
+      sessionStorage.setItem("mess-i-admin",res.is_admin);
       this.router.navigate(['overview']);
     })
   }
@@ -39,6 +44,10 @@ export class AuthService {
   }
   isLoggedIn(){
     return this.logged_in;
+  }
+  isAdmin(){
+    if(this.is_admin==="staff") return true;
+    else return false;
   }
   getToken(){
     return this.token;

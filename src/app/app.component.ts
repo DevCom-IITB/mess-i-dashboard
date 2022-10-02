@@ -19,6 +19,7 @@ export class AppComponent {
     this.urlToNavId.set("/home","nav_home")
     this.urlToNavId.set("/list","nav_student_list")
     this.urlToNavId.set("/rebate","nav_rebate")
+    this.urlToNavId.set("/overview","nav_overview")
   }
 
   logout(){

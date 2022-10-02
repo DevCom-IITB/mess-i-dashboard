@@ -22,10 +22,10 @@
     <div id="navbar-fixed" class="box-style">
       <div class="d-flex flex-column">
         <img class="" src="/assets/mess-i-logo.png">
-        <a id="nav_home" class="nav-link nav-items-style" routerLink="/home" >HOME</a>
-        <a id="nav_student_list" class="nav-link nav-items-style" routerLink="/list">STUDENTS' LIST</a>
+        <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/home" >HOME</a>
+        <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/list">STUDENTS' LIST</a>
         <a id="nav_rebate" class="nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
-        <a id="nav_rebate" class="nav-link nav-items-style" routerLink="/overview" >MESS STATS</a>
+        <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/overview" >MESS STATS</a>
         <a class="nav-link nav-items-style-loginButton " (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
         <a class="nav-link nav-items-style-loginButton " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
       </div>
