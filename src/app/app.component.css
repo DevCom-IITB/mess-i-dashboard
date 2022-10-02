@@ -12,21 +12,39 @@ body{
     flex-grow: 1; */
 }
 
+
 .nav-items-style{
     font-family: "Oxygen", Arial, Helvetica, sans-serif;
     font-weight: 400;
-    font-size: 26px;
+    font-size: 2vw;
     text-align: center;
     /* margin-top: 10px; */
     /* margin-bottom: 0px; */
     color: white;
     
 }
+.nav-items-style-login{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 250;
+    font-size: 2vw;
+    text-align: center;
+    margin-bottom: 15%;
+    margin-top: 20%;
+    /* margin-top: 10px; */
+    /* margin-bottom: 0px; */
+    color: white;
+    
+}
+.nav-items-style-login:hover{
+    /* color: #ffc42b; */
+    font-weight: 350px;
+    /* font-size: 1rem; */
+}
 
 .nav-items-style-active{
     font-family: "Oxygen", Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 2vw;
     text-align: center;
     color: #ffc42b;
     /* margin-top: 10px; */
@@ -35,9 +53,11 @@ body{
 
 .nav-items-style-loginButton{
     font-family: "Oxygen", Arial, Helvetica, sans-serif;
-    font-weight: 400;
+    font-weight: 350px;
     font-size: 26px;
     text-align: center;
+    padding-bottom: 5%;
+    margin-bottom: 20%;
     /* margin-bottom: 0%; */
     margin-top: 60%;
     /* align-self: end; */
