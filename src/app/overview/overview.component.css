@@ -1,0 +1,27 @@
+form{
+    margin-top: 3vw;
+  
+}
+input.form-control{
+    margin-left: 2vh;
+    margin-right: 2vh;
+    border-color: goldenrod;
+    border-width: 2px;
+    background-color:
+    #FFF8E8;
+}
+.form-group{
+    margin-left: 3vh;
+    margin-right: 5vh;
+    border-color: goldenrod;
+    border-width: 2px;
+    
+}
+
+select.form-select{
+    margin-left: 2vh;
+    margin-right: 2vh;
+    border-color: goldenrod;
+    border-width: 2px;
+    background-color: #FFF8E8;
+}

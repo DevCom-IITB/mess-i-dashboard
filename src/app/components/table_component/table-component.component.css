@@ -79,4 +79,8 @@
 
 .csv-btn{
   float: right;
+  /* background-color: none; */
+  border: none;
+  background-color: inherit;
+  color: goldenrod;
 }
