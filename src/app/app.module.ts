@@ -14,7 +14,8 @@ import { PdRebateCardComponent } from './home/pd-rebate-card/pd-rebate-card.comp
 import { StudentcardComponent } from './studentcard/studentcard.component';
 import { InputFieldComponent } from './utils/input-field/input-field.component'
 import { TableComponentComponent } from './components/table_component/table-component.component';
-import { DevicesComponent } from './home/devices/devices.component'
+import { DevicesComponent } from './home/devices/devices.component';
+import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DevicesComponent } from './home/devices/devices.component'
     StudentcardComponent,
     InputFieldComponent,
     TableComponentComponent,
-    DevicesComponent
+    DevicesComponent,
+    RebateCardComponent
   ],
   imports: [
     BrowserModule,

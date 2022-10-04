@@ -1,4 +1,4 @@
-<div class="main-container">
+<!-- <div class="main-container">
     <span class="page-title">REBATE APPLICATION</span>
     <br>
     <span id="form-instructions"><i>Please fill all the information correctly.</i></span>
@@ -18,6 +18,17 @@
         </div>
         <div id="to-date-container">
             <app-input-field label="Till"></app-input-field>
+        </div>
+    </div>
+</div> -->
+
+<div class="main-container">
+    <div id="pending-rebates-container" class="pending-rebates-container">
+        <h2>Rebates</h2>
+        <div id="rebate-cards-hscroll" class="rebate-cards-hscroll">
+            <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
+                <app-rebate-card [rebate_request]="reb_req"></app-rebate-card>
+            </div>
         </div>
     </div>
 </div>
