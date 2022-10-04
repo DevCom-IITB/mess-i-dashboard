@@ -9,3 +9,22 @@
     
     margin: auto;
 }
+
+.image{
+    width: 20%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    font-size: larger;
+    margin-top: 0 !important;
+    background-color: rgb(252, 226, 80);
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+a:hover{
+    background-color:gold ;
+}
