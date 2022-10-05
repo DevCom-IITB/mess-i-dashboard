@@ -1,13 +1,18 @@
 <div class="pd-rebate-card-container">
     <span class="small-italics">Recieved on {{ p_request_recieved }}</span>
     <div id="stud-details-container">
-        <span>{{ rebate_request.student.id }}</span>
+        <span>{{ rebate_request.roll }}</span>
         <br>
-        <span>{{ rebate_request.student.name }}</span>
+        <!-- <span>{{ rebate_request.student.name }}</span> -->
     </div>
     <div id="rebate-duration-container">
         <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span><br>
         <span class="small-italics">Both dates are inclusive</span>
+    </div>
+
+    
+    <div id="rebate-reason-container" class="row">
+        <span>Reason: {{ p_rebate_reason }}</span>
     </div>
     <button id="review-rebate-btn" class="btn btn-light">
         Review
