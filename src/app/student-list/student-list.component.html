@@ -5,10 +5,16 @@
   <div id="search-main-area">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <i class="bi bi-search"></i>
+          <form class="nosubmit">
+            <input class="nosubmit" type="search" placeholder="Search your roll number">
+          </form>
+            <!-- <i class="icon-search"></i>
+            <input type="text" class="form-control" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)"> -->
         </div>
-        <input type="text" class="form-control" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
+        
+        <!-- <input type="text" class="form-control" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)"> -->
     </div>
+    
   </div>
   <table class="table">
     <thead>
