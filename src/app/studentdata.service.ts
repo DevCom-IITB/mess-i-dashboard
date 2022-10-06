@@ -42,7 +42,7 @@ export class StudentdataService {
   }
 
   async getStudentRebates(){
-    let url = this.baseurl.concat("/get-rebates/");
+    let url = this.baseurl.concat("/rebates");
     return new Promise((resolve, reject) => {
       this.http.get(url,{
         headers:{
