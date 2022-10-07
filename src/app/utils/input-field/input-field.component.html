@@ -1,6 +1,7 @@
 <div class="input-field-wrapper" [ngStyle]="{'background-color': bgColor}">
     <span class="input-field-label" [ngStyle]="{'background-color': bgColor}">{{ label }}</span>
     <div class="input-field-container" [ngStyle]="{'background-color': bgColor}">
-        <input class="input-field" type="text" [ngStyle]="{'background-color': bgColor}">
+        <input class="input-field" *ngIf="!calender" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
+        <input class="input-field" *ngIf="calender" type="date" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
     </div>
 </div>

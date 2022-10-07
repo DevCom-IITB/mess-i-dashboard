@@ -96,6 +96,30 @@ export class StudentdataService {
     });
   }
 
+  async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string){
+    var formData: any = new FormData()
+    var token=await this.auth.getToken()
+    let headers = new HttpHeaders({
+      'x-access-token':token,
+      'rejectUnauthorized':'false'
+    });
+    formData.append("roll",rollNumber);
+    formData.append("reason",reason);
+    formData.append("start",startDate);
+    formData.append("end",endDate);
+
+    let options = { headers: headers, responseType:'text' as 'json'};
+    let url = this.baseurl.concat("/rebate/random-string");
+    return new Promise((resolve,reject) => {
+      this.http.post(url,formData,options).subscribe((res:any) =>{
+        resolve(res);
+      },(e)=>{
+        console.log(e);
+        reject(e);
+      })
+    })
+  }
+
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
     var token=await this.auth.getToken()
     console.log(token)

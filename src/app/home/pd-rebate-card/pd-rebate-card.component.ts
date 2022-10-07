@@ -42,7 +42,7 @@ export class PdRebateCardComponent implements OnInit {
 
   readableDateFromString(inp: string, separator: string = '-'): string{
     let all = inp.split(separator);
-    return `${all[0]} ${this.numToMonth[parseInt(all[1])]} ${all[2]}`;
+    return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
 
 }
