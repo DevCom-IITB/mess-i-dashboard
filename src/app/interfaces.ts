@@ -8,9 +8,17 @@ export interface Student{
 
 export interface RebateRequest{
     student: Student,
-    recieve_date: Date,
-    rebate_duration_start: Date,
-    rebate_duration_end: Date,
+    roll: string,
+    start: string,
+    end: string,
+    request_date: string,
+    reason: string,
+}
+
+export interface RebateCategorised{
+    accepted_rebate: RebateRequest[],
+    pending_rebate: RebateRequest[],
+    rejected_rebate: RebateRequest[]
 }
 
 export interface StudentData{
