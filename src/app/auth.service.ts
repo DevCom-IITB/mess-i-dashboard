@@ -10,11 +10,16 @@ import { environment } from './../environments/environment';
 export class AuthService {
   logged_in = false;
   token:any;
-  access_level:any;
-  url = environment.backendURL+'/api/auth';
+  is_admin:String;
+  roll_no:string;
+  url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
-    this.access_level = sessionStorage.getItem("access_level");
+    this.is_admin = sessionStorage.getItem("mess-i-admin")??"";
+    this.is_admin = "staff"
+    this.token = "8e020f89-6083-4a2f-8aec-d4e42d457dde";
+    this.roll_no = "";
+
     if(this.token!=null){
       this.logged_in = true;
     }
@@ -29,12 +34,11 @@ export class AuthService {
     };
     return this.http.get(this.url,header_node).subscribe((res:any) => {
       this.token = res.token;
-      this.access_level = res.access_level;
       this.logged_in = true;
       this.is_admin = res.access_level;
       this.roll_no = res.roll;
       sessionStorage.setItem("mess-i-token",res.token);
-      sessionStorage.setItem("access_level",res.access_level);
+      sessionStorage.setItem("mess-i-admin",res.is_admin);
       this.router.navigate(['overview']);
     })
   }
@@ -45,17 +49,15 @@ export class AuthService {
   isLoggedIn(){
     return this.logged_in;
   }
-  isStaff(){
-    return this.access_level=="staff";
-  }
-  isStudent(){
-    return this.access_level=="student";
+  isAdmin(){
+    if(this.is_admin==="staff") return true;
+    else return false;
   }
   getToken(){
     return this.token;
   }
-  getaccesslevel(){
-    return this.access_level;
+  getRoll(){
+    return this.roll_no;
   }
 
 }
