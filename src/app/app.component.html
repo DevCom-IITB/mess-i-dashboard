@@ -1,27 +1,18 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-       Insta Mess Dashboard
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngIf= "auth.isStaff()"  >
-          <a class="nav-link" routerLink="/student" >Student History</a>
-        </li>
-        <li class="nav-item" *ngIf= "auth.isStaff()" >
-          <a class="nav-link" routerLink="/overview" >Mess History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/rebate" >Rebate</a>
-        </li>
-      </ul>
-      <button class="btn btn-danger" type="submit" (click)="logout()" *ngIf="auth.isLoggedIn()">Logout</button>
-      <button class="btn btn-primary" type="submit" (click)="login()" *ngIf="!auth.isLoggedIn()">Log In</button>
+<div id="main-container-nav-routerout" class="">
+    <div id="navbar-fixed" class="box-style">
+      <div class="d-flex flex-column">
+        <img class="" src="/assets/mess-i-logo.png">
+        <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/home" >HOME</a>
+        <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/list">STUDENTS' LIST</a>
+        <a id="nav_rebate" class="nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
+        <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/overview" >MESS STATS</a>
+        <a class="nav-link nav-items-style-login" (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
+        <a class="nav-link nav-items-style-login " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
+      </div>
     </div>
-    
-  </div>
-</nav>
-<router-outlet></router-outlet>
+
+    <div id="router-outlet">
+      <router-outlet (activate)="updateNav()"></router-outlet>
+    </div>
+
+</div>

@@ -1,0 +1,84 @@
+<div id="student-list-heading">
+  Students' List
+</div>
+<div class="student-list-table-container">
+  <div id="search-main-area">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <form class="nosubmit">
+            <input type="search" class="form-control nosubmit" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
+          </form>
+        </div>
+    </div>
+    
+  </div>
+  <table class="table">
+    <thead>
+      <tr id="column-headers">
+        <th scope="col">ROLL NO.</th>
+        <th scope="col">NAME</th>
+        <th scope="col">ROOM NO.</th>
+        <th scope="col">HOSTEL</th>
+        <th scope="col">CARD STATUS</th>
+      </tr>
+
+    </thead>
+    <tbody id="stud-table">
+      <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
+      <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
+        <tr>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[0]}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].fullname}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
+          <td>
+            <div *ngIf="stud[1].mess_allowed">
+              <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
+                <div class="container px-1 py-0">
+                  <div class="row">
+                    <div class="col px-0 align-items-center ">
+                      <div class="align-self-center active-circle"></div>
+                    </div>
+                    <div class="col px-1 py-0">Active</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            <div *ngIf="!stud[1].mess_allowed">
+              <button type="button" class="inactive-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
+                <div class="container px-1 py-0">
+                  <div class="row">
+                    <div class="col px-0 align-items-center ">
+                      <div class="align-self-center inactive-circle"></div>
+                    </div>
+                    <div class="col px-1 py-0">Inactive</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <div id="student-list-footer" class="row">
+    <div class="col-lg-3">
+      <p>{{entryNumber}}-{{entryNumber+entriesPerPage}} of {{totalEntry}}</p>
+    </div>
+    <div class="col-lg-9">
+      <div style="float:right">
+        <div id="num-rows-selector" class="inblock-el">
+          <p class="inblock-el">Rows per page: {{entriesPerPage}}</p>
+        </div>
+        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="prevEntries()">
+          <i class="bi bi-caret-left"></i>
+        </div>
+        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="nextEntries()">
+          <i class="bi bi-caret-right"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

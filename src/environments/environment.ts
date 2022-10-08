@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendURL:"http://localhost:5000",
+  backendURL:"http://127.0.0.1:5000",
   redirectURL:"http://localhost:4200/login",
   clientID:"1dE3mAQY7EvCjw5IdHgoNtbutjgZy14CyIsWKRK8"
 };

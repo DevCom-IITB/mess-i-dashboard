@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
+
+import { StudentListComponent } from './student-list/student-list.component';
 import { RebateComponent } from './rebate/rebate.component';
-import { StudentsComponent } from './students/students.component';
+
+import { HomeComponent } from './home/home.component';
+import { StudentcardComponent } from './studentcard/studentcard.component';
+import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component';
 
 const routes: Routes = [
-  {path:'student',component:DashboardComponent},
+  {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'overview',component:OverviewComponent},
-  {path:'student-list',component:StudentsComponent},
-  {path:'rebate',component:RebateComponent}
+
+  {path:'list',component:StudentListComponent},
+  {path:'rebate',component:RebateComponent},
+  {path:'studentcard',component:StudentcardComponent},
+  {path: 'applyrebate',component:RebateFormComponent}
 ];
 
 @NgModule({

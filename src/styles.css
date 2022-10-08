@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+@font-face {
+    font-family: "Oxygen";
+    src: local("Oxygen"), url('assets/fonts/Oxygen-Regular.ttf') format("truetype");
+}
+@font-face {
+    font-family: "Lato";
+    src: local("Lato"), url('assets/fonts/Lato-Thin.ttf') format("truetype");
+}
+/* body{
+    width: 100%;
+} */
+#app-root{
+    /* display: flex;
+    flex-direction: column;
+    flex-grow: 1; */
+   height: 100% !important; 
+   /* width: 100% !important; */
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.inblock-el{
+    display:inline-block;
+}

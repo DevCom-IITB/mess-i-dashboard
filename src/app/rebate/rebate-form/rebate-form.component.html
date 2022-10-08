@@ -1,0 +1,24 @@
+<div class="main-container">
+    <span class="page-title">REBATE APPLICATION</span>
+    <br>
+    <span id="form-instructions"><i>Please fill all the information correctly.</i></span>
+
+    <div id="form-container">
+        <div id="rebate-reason-container">
+            <app-input-field label="Reason for rebate" [inputModel]="reason" (inputModelChange)="handleReasonChange($event)"></app-input-field>
+        </div>
+        <div id="hostel-container">
+            <app-input-field label="Hostel" [inputModel]="hostel" (inputModelChange)="handleHostelChange($event)"></app-input-field>
+        </div>
+        <div id="roomno-container">
+            <app-input-field label="Room No." [inputModel]="roomNo" (inputModelChange)="handleRoomChange($event)"></app-input-field>
+        </div>
+        <div id="from-date-container">
+            <app-input-field label="From" [calender]="true" [inputModel]="rebateStart" (inputModelChange)="handleRebateStartChange($event)"></app-input-field>
+        </div>
+        <div id="to-date-container">
+            <app-input-field label="Till" [calender]="true" [inputModel]="rebateEnd" (inputModelChange)="handleRebateEndChange($event)"></app-input-field>
+        </div>
+    </div>
+    <button (click)="submitRebate()">SUBMIT</button>
+</div>

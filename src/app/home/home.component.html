@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+
+    <body>
+        <div id="main-container" class="main-container">
+            <h1>Hello, {{ user_name }}!</h1>
+            <div id="pending-rebates-container" class="pending-rebates-container">
+                <h2>Pending Rebates</h2>
+                <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll">
+                    <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
+                        <app-pd-rebate-card [rebate_request]="reb_req"></app-pd-rebate-card>
+                    </div>
+                </div>
+            </div>
+
+            <div id="search-container">
+                <h2>Devices</h2>
+                <ng-container *ngFor="let device of devices">
+                    <app-devices [device]="device"></app-devices>
+                </ng-container>
+            </div>
+        </div>
+
+    </body>
+</html>

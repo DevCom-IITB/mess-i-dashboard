@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,10 +21,18 @@ export class AuthService {
   }
 
   loginUser(code:string){
-    return this.http.get(this.url,{params:{code:code}}).subscribe((res:any) => {
+    let parameters = new HttpParams();
+    parameters = parameters.append('code',code);
+    let header_node = {
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
+      params: parameters
+    };
+    return this.http.get(this.url,header_node).subscribe((res:any) => {
       this.token = res.token;
       this.access_level = res.access_level;
       this.logged_in = true;
+      this.is_admin = res.access_level;
+      this.roll_no = res.roll;
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("access_level",res.access_level);
       this.router.navigate(['overview']);
@@ -32,7 +40,7 @@ export class AuthService {
   }
   logoutUser(){
     this.token="";
-    this.logged_in=false;
+    this.logged_in=false; 
   }
   isLoggedIn(){
     return this.logged_in;

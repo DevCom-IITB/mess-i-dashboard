@@ -1,0 +1,23 @@
+.device-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 20px 0 ;
+}
+.device-data{
+    display: flex;
+    flex-direction: column;
+}
+.device-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+img{
+    width: 10%;
+    height: auto;
+}
+p{
+    padding-right:15px;
+}

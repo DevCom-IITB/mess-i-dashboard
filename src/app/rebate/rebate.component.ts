@@ -28,7 +28,7 @@ export class RebateComponent implements OnInit {
   }
 
   async submitRebate(search: any){
-    this.service.setStudentRebate(search.form.value.startDate,search.form.value.endDate).then((res)=>{
+    this.service.setStudentRebate(search.form.value.rollnumber,search.form.value.startDate,search.form.value.endDate).then((res)=>{
       alert("Rebate successfully added")
       
   }).catch((res)=>{

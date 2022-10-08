@@ -1,7 +1,10 @@
 <div class="container">
-    <h5 class="mt-4 mb-2">Select month and year</h5>
+    <h3 class="mt-4 mb-2">Mess stats</h3>
     <form #data="ngForm" (ngSubmit)="getMonthMessData(data)" class="form-inline">
       <div class="input-group mb-3">
+        <div class="form-group">
+          <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel>
+        </div>
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
           <option value="1">Jan</option>
           <option value="2">Feb</option>
@@ -19,28 +22,8 @@
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
           <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
-        <button type="submit" class="btn btn-primary">Get</button>
+        <button type="submit" class="btn btn-primary">GET</button>
       </div>
     </form>
-
-  <table class="table table-bordered" *ngIf="messHistory">
-    <tr>
-      <th>Date</th> <th *ngFor="let meal of headers">{{meal}}</th> 
-    </tr>
-    <tr *ngFor="let day of noOfDays">
-      <td>{{day}}</td>
-      <td *ngFor="let meal of headers">
-        <div *ngIf="messHistory[day][meal]" style="background-color: greenyellow;">
-          {{messHistory[day][meal]}}
-        </div>
-        <div *ngIf="!messHistory[day][meal]" style="background-color: tomato;">
-          -
-        </div>
-        
-      </td> 
-    </tr>
-    <tr>
-      <th>Total</th> <th *ngFor="let meal of headers">{{totalMeals[meal]}}</th> 
-    </tr>
-  </table>
+    <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>
 </div>
