@@ -20,5 +20,6 @@
             <app-input-field label="Till" [calender]="true" [inputModel]="rebateEnd" (inputModelChange)="handleRebateEndChange($event)"></app-input-field>
         </div>
     </div>
-    <button (click)="submitRebate()">SUBMIT</button>
+    <button *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button>
+    <button *ngIf="isUpdateRequest"(click)="updateRebateData()">UPDATE</button>
 </div>

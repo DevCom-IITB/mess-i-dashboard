@@ -16,7 +16,8 @@ import { InputFieldComponent } from './utils/input-field/input-field.component'
 import { TableComponentComponent } from './components/table_component/table-component.component';
 import { DevicesComponent } from './home/devices/devices.component';
 import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component';
-import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component'
+import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component';
+import { StuRebCardComponent } from './rebate/stu-reb-card/stu-reb-card.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component'
     TableComponentComponent,
     DevicesComponent,
     RebateFormComponent,
-    RebateCardComponent
+    RebateCardComponent,
+    StuRebCardComponent
   ],
   imports: [
     BrowserModule,

@@ -96,6 +96,26 @@ export class StudentdataService {
     });
   }
 
+  async getAllRebates(){
+    let url = this.baseurl.concat("/rebates");
+
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{
+        headers:{
+          'x-access-token': this.auth.getToken(),
+        }
+      }).subscribe((res)=>{
+        let true_res: RebateRequest[] = [];
+
+        let temp_res = res as RebateCategorised;
+        resolve(temp_res);
+      },
+      (e)=>{
+        reject({});
+      });
+    });
+  }
+
   async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string){
     var formData: any = new FormData()
     var token=await this.auth.getToken()
@@ -118,6 +138,93 @@ export class StudentdataService {
         reject(e);
       })
     })
+  }
+
+  async updateRebate(rollNo:string,id:string,reason:string,newStartDate: string, newEndDate: string){
+    let url = this.baseurl.concat(`/rebate/${id}`);
+    var formData: any = new FormData()
+    var token=await this.auth.getToken()
+    let headers = new HttpHeaders({
+      'x-access-token':token,
+      'rejectUnauthorized':'false'
+    });
+    formData.append("roll",rollNo);
+    formData.append("reason",reason);
+    formData.append("start",newStartDate);
+    formData.append("end",newEndDate);
+    let options = { headers: headers};
+    return new Promise((resolve,reject) => {
+      this.http.put(url,formData,options).subscribe((res:any) =>{
+        resolve(res);
+      },(e) => {
+        reject(e);
+        console.log(e);
+      })
+    })
+  }
+
+  async deleteRebate(rollNumber: string,id: string){
+    var token = await this.auth.getToken();
+    let headers = new HttpHeaders({
+      'x-access-token': token,
+      'rejectUnauthorized': 'false'
+    })
+    let url = this.baseurl.concat(`/rebate/${id}`);
+    var formData: any = new FormData();
+    formData.append("roll",rollNumber);
+    let options = {headers: headers,body:formData};
+    return new Promise((resolve,reject) =>{
+      this.http.delete(url,options).subscribe((res:any)=>{
+        resolve(res);
+      },(e)=>{
+        reject(e);
+        console.log(e);
+      })
+    })
+  }
+
+  async acceptRebate(rebateID: string){
+    let rollNo = this.auth.getRoll();
+    let token = this.auth.getToken();
+    let headers = new HttpHeaders({
+      'x-access-token': token,
+      'rejectUnauthoized':'false'
+    });
+    let options = {headers:headers};
+    let url = this.baseurl.concat("/rebate-action/accept");
+    var formData = new FormData();
+    formData.append("roll",rollNo);
+    formData.append("id", rebateID);
+    return new Promise((resolve,reject) =>{
+      this.http.put(url,formData,options).subscribe((res: any) =>{
+        resolve(res);
+      },(e) => {
+        reject(e);
+        console.log(e);
+      })
+    });
+  }
+
+  async rejectRebate(rebateID: string){
+    let rollNo = this.auth.getRoll();
+    let token = this.auth.getToken();
+    let headers = new HttpHeaders({
+      'x-access-token': token,
+      'rejectUnauthoized':'false'
+    });
+    let options = {headers:headers};
+    let url = this.baseurl.concat("/rebate-action/reject");
+    var formData = new FormData();
+    formData.append("roll",rollNo);
+    formData.append("id", rebateID);
+    return new Promise((resolve,reject) =>{
+      this.http.put(url,formData,options).subscribe((res: any) =>{
+        resolve(res);
+      },(e) => {
+        reject(e);
+        console.log(e);
+      })
+    });
   }
 
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){

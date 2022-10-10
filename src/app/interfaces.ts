@@ -13,6 +13,7 @@ export interface RebateRequest{
     end: string,
     request_date: string,
     reason: string,
+    id: string
 }
 
 export interface RebateCategorised{

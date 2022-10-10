@@ -13,10 +13,10 @@
         <span>Reason: {{ p_rebate_reason }}</span>
     </div>
     <div class="review-rebate-actions">
-        <button id="review-rebate-btn" class="btn btn-light">
+        <button id="review-rebate-btn" class="btn btn-light" (click)="acceptRebate()">
             Accept
         </button>
-        <button id="review-rebate-btn" class="btn btn-light">
+        <button id="review-rebate-btn" class="btn btn-light" (click)="rejectRebate()">
             Reject
         </button>
     </div>

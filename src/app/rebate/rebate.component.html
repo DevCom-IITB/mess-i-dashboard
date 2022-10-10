@@ -2,7 +2,7 @@
     <span class="page-title">REBATE SECTION</span>
     <br>
     <a routerLink="/applyrebate"><button>APPLY FOR NEW</button></a>
-    <app-rebate-card></app-rebate-card>
+    <!-- <app-rebate-card></app-rebate-card> -->
     <!-- <span id="form-instructions"><i>Please fill all the information correctly.</i></span>
 
     <div id="form-container">
@@ -22,4 +22,11 @@
             <app-input-field label="Till"></app-input-field>
         </div>
     </div> -->
+    <div *ngFor="let p_rebate of pending_rebates">
+        <app-stu-reb-card [rebate_request]="p_rebate" [isApproved]=false></app-stu-reb-card>
+    </div>
+
+    <div *ngFor="let a_rebate of accepted_rebates">
+        <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=true></app-stu-reb-card>
+    </div>
 </div>

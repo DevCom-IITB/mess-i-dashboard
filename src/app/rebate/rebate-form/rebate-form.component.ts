@@ -15,10 +15,20 @@ export class RebateFormComponent implements OnInit {
   rebateStart: string = '';
   rebateEnd: string = '';
   roll_no: string = '';
+  isUpdateRequest: boolean = false;
+  rebateID: string = '';
 
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
+    }
+    let current_state = this.router.getCurrentNavigation()?.extras.state;
+    if(current_state != undefined){
+      this.reason = current_state?.reason;
+      this.rebateStart = this.resolveDateFormat(current_state?.startDate);
+      this.rebateEnd = this.resolveDateFormat(current_state?.endDate);
+      this.isUpdateRequest = current_state?.isUpdate;
+      this.rebateID = current_state?.id;
     }
   }
 
@@ -34,6 +44,18 @@ export class RebateFormComponent implements OnInit {
     alert("Rebate was not added!!")
   })
 }
+
+  async updateRebateData(){
+    this.roll_no = this.auth.roll_no;
+    let rebate_id = this.generateRebateID(this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.roll_no);
+    this.service.updateRebate(this.roll_no,this.rebateID,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
+      alert("Rebate successfully updated");
+    }).catch((e)=>{
+      alert("Error occured while updating the rebate");
+      console.log(e);
+    })
+  }
+
   handleReasonChange(event: any){
     this.reason = event;
   }
@@ -54,6 +76,10 @@ export class RebateFormComponent implements OnInit {
     let dateArr = date.split('-');
     let correctedDate = dateArr[2]+'-'+dateArr[1]+'-'+dateArr[0];
     return correctedDate;
+  }
+
+  generateRebateID(startDate: string,endDate: string, rollNo: string){
+    return rollNo+'_'+startDate+'_'+endDate;
   }
 
 }
