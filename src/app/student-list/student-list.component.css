@@ -111,5 +111,10 @@ input.nosubmit{
   background-color: #FFF4D8;
   /* width: 100%; */
   
-  
+}
+.table{
+  margin-left: 4vh;
+}
+.row{
+  margin-left: 4vh;
 }
