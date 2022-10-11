@@ -11,14 +11,16 @@ export class AuthService {
   logged_in = false;
   token:any;
   is_admin:String;
-  roll_no:string;
+  roll_no:any;
   url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
+    // this.roll_no = sessionStorage.getItem("mess-i-roll");
+    this.roll_no = sessionStorage.getItem("mess-i-roll");
     this.is_admin = sessionStorage.getItem("mess-i-admin")??"";
-    this.is_admin = "staff"
-    this.token = "8e020f89-6083-4a2f-8aec-d4e42d457dde";
-    this.roll_no = "";
+    this.is_admin = "staff";
+    // this.token = "8e020f89-6083-4a2f-8aec-d4e42d457dde";
+    // this.roll_no = "";
 
     if(this.token!=null){
       this.logged_in = true;
@@ -39,6 +41,7 @@ export class AuthService {
       this.roll_no = res.roll;
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("mess-i-admin",res.is_admin);
+      sessionStorage.setItem("mess-i-roll",res.roll);
       this.router.navigate(['overview']);
     })
   }
@@ -50,8 +53,9 @@ export class AuthService {
     return this.logged_in;
   }
   isAdmin(){
-    if(this.is_admin==="staff") return true;
-    else return false;
+    // if(this.is_admin==="staff") return true;
+    // else return false;
+    return this.is_admin=="staff";
   }
   getToken(){
     return this.token;

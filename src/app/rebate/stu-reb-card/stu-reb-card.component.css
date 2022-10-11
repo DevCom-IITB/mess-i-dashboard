@@ -45,3 +45,12 @@
     border-color: white;
     margin-left: -12px;
 }
+
+#rebate-status-indicator{
+    float: right;
+    height: 2rem;
+    width: 7.5rem;
+    border-radius: 03.0rem;
+    font-size:1.3rem;
+    text-align:center;
+}

@@ -48,14 +48,15 @@ export class StuRebCardComponent implements OnInit {
   }
   updateRebateData(rebateReason: string, startDate: string, endDate: string){
     let rebate_id : string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    // console.log(`Passing start: ${this.rebate_request.start} and end: ${this.rebate_request.end}`);
     let navigationExtras: NavigationExtras = {
       state: {
         id:this.rebate_request.id,
-        reason:rebateReason,
-        hostel:"",
-        roomNo:"",
-        startDate: startDate,
-        endDate: endDate,
+        reason:this.rebate_request.reason,
+        // hostel:"",
+        // roomNo:"",
+        startDate: this.rebate_request.start,
+        endDate: this.rebate_request.end,
         isUpdate: true
       }
     };

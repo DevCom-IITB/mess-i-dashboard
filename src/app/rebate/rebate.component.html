@@ -1,12 +1,12 @@
 <div class="main-container">
     <span class="page-title">REBATE SECTION</span>
     <br>
-    <a routerLink="/applyrebate"><button>APPLY FOR NEW</button></a>
-    <div *ngFor="let p_rebate of pending_rebates">
+    <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
+    <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
         <app-stu-reb-card [rebate_request]="p_rebate" [isApproved]=false></app-stu-reb-card>
     </div>
 
-    <div *ngFor="let a_rebate of accepted_rebates">
+    <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
         <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=true></app-stu-reb-card>
     </div>
 </div>

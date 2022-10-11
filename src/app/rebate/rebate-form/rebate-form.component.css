@@ -23,19 +23,26 @@
     grid-row: 1;
     grid-column: 1/5;
 }
-#hostel-container{
+/* #hostel-container{
     grid-row: 2;
     grid-column: 1/2;
 }
 #roomno-container{
     grid-row: 2;
     grid-column: 2/3;
-}
+} */
 #from-date-container{
-    grid-row: 3;
+    grid-row: 2;
     grid-column: 1/2;
 }
 #to-date-container{
-    grid-row: 3;
+    grid-row: 2;
     grid-column: 2/3;
+}
+#confirm-btn{
+    /* color: #ffc42b; */
+    color: black;
+    background-color: #ffc42b;
+    border-color: #ffc42b;
+    margin: 24px 0px;
 }

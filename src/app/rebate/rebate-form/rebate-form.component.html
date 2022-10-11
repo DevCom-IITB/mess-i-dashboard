@@ -7,12 +7,12 @@
         <div id="rebate-reason-container">
             <app-input-field label="Reason for rebate" [inputModel]="reason" (inputModelChange)="handleReasonChange($event)"></app-input-field>
         </div>
-        <div id="hostel-container">
+        <!-- <div id="hostel-container">
             <app-input-field label="Hostel" [inputModel]="hostel" (inputModelChange)="handleHostelChange($event)"></app-input-field>
         </div>
         <div id="roomno-container">
             <app-input-field label="Room No." [inputModel]="roomNo" (inputModelChange)="handleRoomChange($event)"></app-input-field>
-        </div>
+        </div> -->
         <div id="from-date-container">
             <app-input-field label="From" [calender]="true" [inputModel]="rebateStart" (inputModelChange)="handleRebateStartChange($event)"></app-input-field>
         </div>
@@ -20,6 +20,6 @@
             <app-input-field label="Till" [calender]="true" [inputModel]="rebateEnd" (inputModelChange)="handleRebateEndChange($event)"></app-input-field>
         </div>
     </div>
-    <button *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button>
-    <button *ngIf="isUpdateRequest"(click)="updateRebateData()">UPDATE</button>
+    <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button>
+    <button id="confirm-btn" class="btn btn-primary" *ngIf="isUpdateRequest"(click)="updateRebateData()">UPDATE</button>
 </div>
