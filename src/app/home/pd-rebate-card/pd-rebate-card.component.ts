@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 
@@ -10,6 +10,7 @@ import { StudentdataService } from 'src/app/studentdata.service';
 export class PdRebateCardComponent implements OnInit {
 
   @Input() public rebate_request: RebateRequest;
+  @Output() public updateList = new EventEmitter<any>();
 
   public p_request_recieved: string;
   public p_rebate_start: string;
@@ -25,7 +26,6 @@ export class PdRebateCardComponent implements OnInit {
     // this.p_request_recieved = `${rr.toLocaleDateString()}, ${rr.toTimeString().slice(0,8)}`;
     // this.p_rebate_start = this.readableDate(this.rebate_request.start);
     // this.p_rebate_end = this.readableDate(this.rebate_request.end);
-
     this.p_request_recieved = `${rr.toLocaleDateString()}, ${rr.toTimeString().slice(0,8)}`;
     this.p_rebate_start = this.readableDateFromString(this.rebate_request.start);
     this.p_rebate_end = this.readableDateFromString(this.rebate_request.end);
@@ -40,6 +40,7 @@ export class PdRebateCardComponent implements OnInit {
   acceptRebate(){
     this.data_service.acceptRebate(this.rebate_request.id).then(
       (res) => {
+        this.updateList.emit(this.rebate_request.id);
         console.log(res);
       }
     ).catch(
@@ -53,6 +54,7 @@ export class PdRebateCardComponent implements OnInit {
   rejectRebate(){
     this.data_service.rejectRebate(this.rebate_request.id).then(
       (res) => {
+        this.updateList.emit(this.rebate_request.id);
         console.log(res);
       }
     ).catch(

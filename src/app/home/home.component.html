@@ -11,7 +11,7 @@
                 <h2>Pending Rebates</h2>
                 <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll">
                     <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
-                        <app-pd-rebate-card [rebate_request]="reb_req"></app-pd-rebate-card>
+                        <app-pd-rebate-card [rebate_request]="reb_req" (updateList)="updateList($event)"></app-pd-rebate-card>
                     </div>
                 </div>
             </div>

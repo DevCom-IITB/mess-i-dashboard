@@ -42,6 +42,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  updateList(rebateID: any){
+    this.pending_rebates = this.pending_rebates.filter((reb) =>{
+      console.log(reb.id);
+      return reb.id != rebateID;
+    })
+  }
+
   populateRebates(response: any): void{
     console.log(response);
     this.pending_rebates = response;

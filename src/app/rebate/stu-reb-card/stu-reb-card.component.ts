@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
@@ -18,6 +18,7 @@ export class StuRebCardComponent implements OnInit {
   public p_rebate_reason: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   @Input() public isApproved: boolean = false;
+  @Output() public updateList = new EventEmitter();
   constructor(private data_service:StudentdataService, private auth_service:AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -65,6 +66,7 @@ export class StuRebCardComponent implements OnInit {
   deleteRebate(){
     this.data_service.deleteRebate(this.auth_service.getRoll(),this.rebate_request.id).then((res)=>{
       alert("Rebate is deleted")
+      this.updateList.emit(this.rebate_request.id);
     }).catch((e)=>{
       alert("Error occured while deleting the rebate");
       console.log(e);

@@ -37,6 +37,12 @@ export class RebateComponent implements OnInit {
     });
   }
 
+  updateList(rebateID: any){
+    this.pending_rebates = this.pending_rebates.filter((reb) =>{
+      console.log(reb.id);
+      return reb.id != rebateID;
+    })
+  }
 
   populateRebates(response: any): void{
     this.pending_rebates = response.pending_rebate;

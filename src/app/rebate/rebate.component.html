@@ -3,10 +3,10 @@
     <br>
     <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
     <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
-        <app-stu-reb-card [rebate_request]="p_rebate" [isApproved]=false></app-stu-reb-card>
+        <app-stu-reb-card [rebate_request]="p_rebate" [isApproved]=false (updateList)="updateList($event)"></app-stu-reb-card>
     </div>
 
     <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
-        <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=true></app-stu-reb-card>
+        <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=true (updateList)="updateList($event)"></app-stu-reb-card>
     </div>
 </div>
