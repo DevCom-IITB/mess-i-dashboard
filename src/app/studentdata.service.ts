@@ -10,7 +10,6 @@ import { StudentcardComponent } from './studentcard/studentcard.component';
   providedIn: 'root'
 })
 export class StudentdataService {
-
   public studentCache= new Map<string,Student>();
   baseurl = environment.backendURL+"/api";
   constructor(private http:HttpClient, private auth:AuthService ) { }
@@ -211,7 +210,6 @@ export class StudentdataService {
     }
     )
   } 
-  
   async getDevices(){
     let url = this.baseurl.concat("/devices");
     return new Promise((resolve,reject)=>
