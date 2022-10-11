@@ -2,26 +2,6 @@
     <span class="page-title">REBATE SECTION</span>
     <br>
     <a routerLink="/applyrebate"><button>APPLY FOR NEW</button></a>
-    <!-- <app-rebate-card></app-rebate-card> -->
-    <!-- <span id="form-instructions"><i>Please fill all the information correctly.</i></span>
-
-    <div id="form-container">
-        <div id="rebate-reason-container">
-            <app-input-field label="Reason for rebate"></app-input-field>
-        </div>
-        <div id="hostel-container">
-            <app-input-field label="Hostel"></app-input-field>
-        </div>
-        <div id="roomno-container">
-            <app-input-field label="Room No."></app-input-field>
-        </div>
-        <div id="from-date-container">
-            <app-input-field label="From"></app-input-field>
-        </div>
-        <div id="to-date-container">
-            <app-input-field label="Till"></app-input-field>
-        </div>
-    </div> -->
     <div *ngFor="let p_rebate of pending_rebates">
         <app-stu-reb-card [rebate_request]="p_rebate" [isApproved]=false></app-stu-reb-card>
     </div>

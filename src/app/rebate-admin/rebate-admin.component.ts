@@ -4,15 +4,13 @@ import { AuthService } from '../auth.service';
 import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 
-
 @Component({
-  selector: 'app-rebate',
-  templateUrl: './rebate.component.html',
-  styleUrls: ['./rebate.component.css']
+  selector: 'app-rebate-admin',
+  templateUrl: './rebate-admin.component.html',
+  styleUrls: ['./rebate-admin.component.css']
 })
-export class RebateComponent implements OnInit {
+export class RebateAdminComponent implements OnInit {
 
-  studentData: any;
   pending_rebates: RebateRequest[] = new Array();
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
@@ -21,7 +19,7 @@ export class RebateComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
-  }
+   }
 
   ngOnInit(): void {
     this.initialise();

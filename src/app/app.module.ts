@@ -18,6 +18,7 @@ import { DevicesComponent } from './home/devices/devices.component';
 import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component';
 import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component';
 import { StuRebCardComponent } from './rebate/stu-reb-card/stu-reb-card.component';
+import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { StuRebCardComponent } from './rebate/stu-reb-card/stu-reb-card.componen
     DevicesComponent,
     RebateFormComponent,
     RebateCardComponent,
-    StuRebCardComponent
+    StuRebCardComponent,
+    RebateAdminComponent
   ],
   imports: [
     BrowserModule,
