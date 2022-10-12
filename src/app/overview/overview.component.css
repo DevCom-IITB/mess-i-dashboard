@@ -5,7 +5,7 @@ form{
 input.form-control{
     margin-left: 2vh;
     margin-right: 2vh;
-    border-color: goldenrod;
+    border-color: #FFC42B;
     border-width: 2px;
     background-color:
     #FFF8E8;
@@ -13,7 +13,7 @@ input.form-control{
 .form-group{
     margin-left: 3vh;
     margin-right: 5vh;
-    border-color: goldenrod;
+    border-color: #FFC42B;
     border-width: 2px;
     
 }
@@ -21,7 +21,10 @@ input.form-control{
 select.form-select{
     margin-left: 2vh;
     margin-right: 2vh;
-    border-color: goldenrod;
+    border-color: #FFC42B;
     border-width: 2px;
     background-color: #FFF8E8;
+}
+button{
+    background-color: #FFC42B;
 }

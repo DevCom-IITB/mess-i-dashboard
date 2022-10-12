@@ -16,3 +16,49 @@
 #rollandhostel{
     color:gray;
 }
+/* .form-inline{
+    margin-top: 15vh;
+} */
+.toggle {
+  position : relative ;
+  display : inline-block;
+  width : 102px;
+  height : 20px;
+  background-color: none;
+  border-radius: 30px;
+  border: 2px solid gray;
+}
+.toggle:after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgb(186, 179, 179);
+  top: 1px;
+  left: 1px;
+  transition:  all 0.5s;
+}
+.checkbox:checked + .toggle::after {
+  left : 80px;
+}
+.checkbox:checked + .toggle {
+  background-color: green;
+}
+.checkbox {
+  display : none;
+}
+
+#card {
+  width: 199px;
+  height: 199px;
+  background-color: aqua;
+}
+p.tgl{
+  color: #FFC42B ;
+}
+
+/* On mouse-over, add a deeper shadow */
+/* .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}    */
