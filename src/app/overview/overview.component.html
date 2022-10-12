@@ -1,5 +1,5 @@
 <div class="container">
-    <h3 class="mt-4 mb-2">Mess stats</h3>
+    <h1>Mess stats</h1>
     <form #data="ngForm" (ngSubmit)="getMonthMessData(data)" class="form-inline">
       <div class="input-group mb-3">
         <div class="form-group">
@@ -22,7 +22,7 @@
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
           <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
-        <button type="submit" class="btn btn-primary">GET</button>
+        <button type="submit" >GET</button>
       </div>
     </form>
     <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>

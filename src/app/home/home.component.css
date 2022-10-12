@@ -1,5 +1,7 @@
 .main-container{
-    padding: 36px;
+    padding: 4%;
+    background-color:#FFFCF4 ;
+    min-height: 100%;
 }
 
 .rebate-card-wrapper{
@@ -10,12 +12,14 @@
 }
 
 .pending-rebates-container{
-    margin-top: 24px;
+    margin-top: 0px;
 }
 
 .pd-rebate-cards-hscroll{
     border-top: 3px solid #ffc42b;
     overflow-x: scroll;
+    overflow-y: hidden;
+    white-space:nowrap;
 }
 
 #search-container{
