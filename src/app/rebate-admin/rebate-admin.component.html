@@ -1,5 +1,5 @@
 <div class="main-container">
-    <span class="page-title">REBATE SECTION</span>
+    <span class="page-title">Rebates</span>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pending</button>
@@ -13,18 +13,18 @@
     </ul>
     <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div *ngFor="let p_rebate of pending_rebates">
+        <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
             <app-pd-rebate-card [rebate_request]="p_rebate"></app-pd-rebate-card>
         </div>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <div *ngFor="let a_rebate of accepted_rebates">
-            <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=true></app-stu-reb-card>
+        <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
+            <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted"></app-stu-reb-card>
         </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div *ngFor="let a_rebate of rejected_rebates">
-            <app-stu-reb-card [rebate_request]="a_rebate" [isApproved]=false></app-stu-reb-card>
+        <div class="rebate-card-container" *ngFor="let a_rebate of rejected_rebates">
+            <app-stu-reb-card [rebate_request]="a_rebate" approval_state="rejected"></app-stu-reb-card>
         </div>
     </div>
     </div>

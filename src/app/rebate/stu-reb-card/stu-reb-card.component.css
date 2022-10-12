@@ -39,7 +39,7 @@
     font-style: italic;
 }
 
-#review-rebate-btn{
+.rebate-action-btn{
     color: #ffc24b;
     background-color: white;
     border-color: white;
@@ -47,10 +47,33 @@
 }
 
 #rebate-status-indicator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     float: right;
-    height: 2rem;
-    width: 7.5rem;
-    border-radius: 03.0rem;
+
+    height: 2.3rem;
+    width: 8rem;
+
+    border-radius: 12px;
+    
+    vertical-align: middle;
+    text-align: center;
+    
     font-size:1.3rem;
-    text-align:center;
+    font-weight: 400;
+}
+
+#rebate-reason-container{
+    overflow-x: scroll;
+}
+
+#rebate-action-container{
+    margin: 0.5rem 0rem;
+}
+#rebate-action-container button{
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
 }

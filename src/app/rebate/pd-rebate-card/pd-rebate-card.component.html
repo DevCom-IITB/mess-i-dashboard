@@ -10,13 +10,13 @@
         <span class="small-italics">Both dates are inclusive</span>
     </div>
     <div id="rebate-reason-container" class="row">
-        <span>Reason: {{ p_rebate_reason }}</span>
+        <span><b>Reason</b>: {{ p_rebate_reason }}</span>
     </div>
-    <div class="review-rebate-actions">
-        <button id="review-rebate-btn" class="btn btn-light" (click)="acceptRebate()">
+    <div id="rebate-action-container" class="review-rebate-actions">
+        <button class="btn btn-light rebate-action-btn" (click)="acceptRebate()">
             Accept
         </button>
-        <button id="review-rebate-btn" class="btn btn-light" (click)="rejectRebate()">
+        <button class="btn btn-light rebate-action-btn" (click)="rejectRebate()">
             Reject
         </button>
     </div>

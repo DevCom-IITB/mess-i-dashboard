@@ -26,9 +26,25 @@
     font-style: italic;
 }
 
+.rebate-action-btn{
+    color: #ffc24b;
+    background-color: white;
+    border-color: white;
+    margin-left: -12px;
+}
+
 #review-rebate-btn{
     color: #ffc24b;
     background-color: white;
     border-color: white;
     margin-left: -12px;
+}
+
+#rebate-action-container{
+    margin: 0.5rem 0rem;
+}
+#rebate-action-container button{
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
 }

@@ -10,7 +10,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { StudentListComponent } from './student-list/student-list.component'
 import { RebateComponent } from './rebate/rebate.component';
 import { HomeComponent } from './home/home.component';
-import { PdRebateCardComponent } from './home/pd-rebate-card/pd-rebate-card.component';
+import { PdRebateCardComponent } from './rebate/pd-rebate-card/pd-rebate-card.component';
 import { StudentcardComponent } from './studentcard/studentcard.component';
 import { InputFieldComponent } from './utils/input-field/input-field.component'
 import { TableComponentComponent } from './components/table_component/table-component.component';
