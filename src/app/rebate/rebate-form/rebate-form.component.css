@@ -41,8 +41,16 @@
 }
 #confirm-btn{
     /* color: #ffc42b; */
-    color: black;
-    background-color: #ffc42b;
-    border-color: #ffc42b;
+    
+    background-color: #ffc659;
+    border-color: #ffc659;
+    border-radius: 120rem;
+    
+    padding-right: 24px;
+    padding-left: 24px;
+
+    height: max-content;
     margin: 24px 0px;
+
+    font-weight: bold;
 }

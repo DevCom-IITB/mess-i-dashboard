@@ -30,11 +30,12 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_start = this.readableDateFromString(this.rebate_request.start);
     this.p_rebate_end = this.readableDateFromString(this.rebate_request.end);
     this.p_rebate_reason = "";
-    this.rebate_request.reason.split(' ').forEach((el)=>{
-      if(this.p_rebate_reason.length > 20) return;
-      this.p_rebate_reason += el+" ";
-    });
-    this.p_rebate_reason = this.p_rebate_reason + (this.rebate_request.reason.length > this.p_rebate_reason.length ? " ..." : "") ;
+    // this.rebate_request.reason.split(' ').forEach((el)=>{
+    //   if(this.p_rebate_reason.length > 20) return;
+    //   this.p_rebate_reason += el+" ";
+    // });
+    // this.p_rebate_reason = this.p_rebate_reason + (this.rebate_request.reason.length > this.p_rebate_reason.length ? " ..." : "") ;
+    this.p_rebate_reason = this.rebate_request.reason;
   }
 
   acceptRebate(){

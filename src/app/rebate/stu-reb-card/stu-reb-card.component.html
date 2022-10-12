@@ -10,22 +10,23 @@
     
     <div id="stud-details-container">
         <span>{{ rebate_request.roll }}</span>
-        <span *ngIf="!isApproved" id="rebate-status-indicator" style="background-color: #FFF4D8; color: #FFDA7C;">Pending</span>
-        <span *ngIf="isApproved" id="rebate-status-indicator" style="background-color: #E9FFD8; color: #649F34;">Pending</span>
+        <span *ngIf="approval_state=='pending'" id="rebate-status-indicator" style="background-color: #FFF4D8; color: #ffc42b;">Pending</span>
+        <span *ngIf="approval_state=='accepted'" id="rebate-status-indicator" style="background-color: #E9FFD8; color: #649F34;">Accepted</span>
+        <span *ngIf="approval_state=='rejected'" id="rebate-status-indicator" style="background-color: #fcc7c3; color: #b73229;">Rejected</span>
     </div>
 
     <div id="rebate-duration-container">
         <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span><br>
         <span class="small-italics">Both dates are inclusive</span>
     </div>
-    <div>
-        Reason for Rebate: {{p_rebate_reason}}
+    <div id="rebate-reason-container">
+        <b>Reason:</b> {{p_rebate_reason}}
     </div>
-    <div  *ngIf="!isApproved" style="display:flex;" >
-        <button id="review-rebate-btn" class="btn btn-light" (click)="updateRebateData(p_rebate_reason,p_rebate_start,p_rebate_end)">
+    <div id="rebate-action-container" *ngIf="approval_state=='pending'" style="display:flex;" >
+        <button class="btn btn-light rebate-action-btn" (click)="updateRebateData(p_rebate_reason,p_rebate_start,p_rebate_end)">
             Make Amendments
         </button>
-        <button id="review-rebate-btn" class="btn btn-light" (click)="deleteRebate()">
+        <button class="btn btn-light rebate-action-btn" (click)="deleteRebate()">
             Cancel your rebate
         </button>
     </div>

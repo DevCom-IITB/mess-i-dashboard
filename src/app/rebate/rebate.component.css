@@ -1,7 +1,15 @@
 .main-container{
-    height:100%;
-    padding: 5rem 3rem;
+    min-height: 100vh;
+    height:max-content;
+    /* padding: 5rem 3rem; */
+    padding: 4%;
+
+    background-color: #fffcf4;
 }
+#header-container{
+    height: max-content;
+}
+
 .page-title{
     font-size: 3rem;
 }
@@ -12,5 +20,14 @@
 #new-request-btn{
     background-color: #ffc659;
     border-color: #ffc659;
-    color: black;
+    border-radius: 120rem;
+
+    padding-right: 24px;
+    padding-left: 24px;
+
+    float:right;    
+    height: max-content;
+    margin: auto 0px;
+
+    font-weight: bold;
 }

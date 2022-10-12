@@ -22,7 +22,7 @@ export class RebateComponent implements OnInit {
       this.router.navigate(['login'])
     }
   }
-
+  
   ngOnInit(): void {
     this.initialise();
   }

@@ -1,6 +1,10 @@
 .main-container{
-    height:100%;
-    padding: 5rem 3rem;
+    min-height: 100vh;
+    height: max-content;
+    /* padding: 5rem 3rem; */
+    padding: 4%;
+
+    background-color: #fffcf4;
 }
 .page-title{
     font-size: 3rem;
@@ -10,7 +14,10 @@
     color: gray;
     font-weight: 200;
 }
-
+.rebate-card-container{
+    margin-bottom: 24px;
+}
+/* 
 #form-container{
     display: grid;
     gap: 12px;
@@ -38,4 +45,4 @@
 #to-date-container{
     grid-row: 3;
     grid-column: 2/3;
-}
+} */

@@ -17,7 +17,8 @@ export class StuRebCardComponent implements OnInit {
   public p_rebate_end: string;
   public p_rebate_reason: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  @Input() public isApproved: boolean = false;
+  // @Input() public isApproved: boolean = false;
+  @Input() public approval_state: string = "pending";
   @Output() public updateList = new EventEmitter();
   constructor(private data_service:StudentdataService, private auth_service:AuthService, private router: Router) { }
 
@@ -29,11 +30,14 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_start = this.readableDateFromString(this.rebate_request.start);
     this.p_rebate_end = this.readableDateFromString(this.rebate_request.end);
     this.p_rebate_reason = "";
-    this.rebate_request.reason.split(' ').forEach((el)=>{
-      if(this.p_rebate_reason.length > 20) return;
-      this.p_rebate_reason += el+" ";
-    });
-    this.p_rebate_reason = this.p_rebate_reason + (this.rebate_request.reason.length > this.p_rebate_reason.length ? " ..." : "") ;
+    // this.rebate_request.reason.split(' ').forEach((el)=>{
+    //   if(this.p_rebate_reason.length > 20) return;
+    //   this.p_rebate_reason += el+" ";
+    // });
+    // this.p_rebate_reason = this.p_rebate_reason + (this.rebate_request.reason.length > this.p_rebate_reason.length ? " ..." : "") ;
+    this.p_rebate_reason = this.rebate_request.reason;
+  
+    // this.approval_state = "rejected";
   }
 
   readableDate(inp: Date): string{
