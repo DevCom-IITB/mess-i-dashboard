@@ -18,7 +18,6 @@ export class AuthService {
   url = environment.backendURL+'/api/dash/auth';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
-    // this.roll_no = sessionStorage.getItem("mess-i-roll");
     this.roll_no = sessionStorage.getItem("mess-i-roll");
     this.is_admin = JSON.parse(sessionStorage.getItem("mess-i-admin") ?? "false");
     this.is_staff = JSON.parse(sessionStorage.getItem("mess-i-staff") ?? "false");
@@ -55,7 +54,7 @@ export class AuthService {
       sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
       sessionStorage.setItem("mess-i-student",res.is_student.toString());
 
-      this.router.navigate(['overview']);
+      this.router.navigate(['home']);
     })
   }
   logoutUser(){
@@ -63,6 +62,8 @@ export class AuthService {
     this.logged_in=false; 
   }
   isLoggedIn(){
+    console.log(this.isStaff());
+    console.log(this.isAdmin());
     return this.logged_in;
   }
   
@@ -71,7 +72,7 @@ export class AuthService {
   }
   
   isStaff(){
-    return this.is_admin || this.isRebate || this.is_staff;
+    return (this.is_admin || this.is_rebate || this.is_staff);
   }
 
   isStudent(){
@@ -79,7 +80,7 @@ export class AuthService {
   }
   
   isRebate(){
-    return this.is_admin || this.isRebate;
+    return (this.is_admin || this.is_rebate);
   }
 
   getToken(){
