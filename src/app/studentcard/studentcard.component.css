@@ -54,7 +54,7 @@
 .img-fluid {
   width: 190px;
   height: 190px;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 p.tgl{
   color: #FFC42B ;
