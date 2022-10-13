@@ -26,5 +26,14 @@ select.form-select{
     background-color: #FFF8E8;
 }
 button{
+    background-color: black;
+}
+button:hover{
     background-color: #FFC42B;
+}
+h3{
+    font-family: "Oxygen",Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-left: 4vh;
 }
