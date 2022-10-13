@@ -58,17 +58,22 @@ export class StudentListComponent implements OnInit {
           this.temp = res;
           // console.log(this.temp)
           this.studentInfoList = Object.entries(this.temp);
+          console.log(this.studentInfoList)
       }).catch((res)=>{
         this.errMsg = res
       })
     }
 
-  toggl(currStudRoll:any){
-    console.log("click")
-    let res = this.service.togglActive(currStudRoll)
-    if (res){
-      this.changeMessStatus(currStudRoll);
-    }
+  async toggl(currStudRoll:any){
+    this.service.togglActive(currStudRoll).then((res)=>{
+      if (res){
+        this.changeMessStatus(currStudRoll);
+      }
+    }).catch((res)=>{
+      console.log(res);
+    });
+
+    
   }
 
   async changeMessStatus(rollNumber:any){
@@ -84,6 +89,7 @@ export class StudentListComponent implements OnInit {
     //update the page number and the studInfoList 
       // this.startEntry += this.entriesPerPage; 
       // this.endEntry += Math.min(this.entriesPerPage, this.totalEntry - this.endEntry);
+    // if(this.entryNumber+this.entriesPerPage>this.totalEntry) return;
     this.entryNumber += this.entriesPerPage;
     this.getList(this.entryNumber); 
   }
@@ -91,6 +97,7 @@ export class StudentListComponent implements OnInit {
   async prevEntries(){
       // this.endEntry -= this.entriesPerPage; 
       // this.startEntry -= Math.min(this.startEntry, this.entriesPerPage);
+    if(this.entryNumber==1) return;
     this.entryNumber -= this.entriesPerPage;
     this.getList(this.entryNumber);
   }

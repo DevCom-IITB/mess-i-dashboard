@@ -15,6 +15,8 @@ export class StudentcardComponent implements OnInit {
   mess_data:any;
   noOfDays:any;
   date = new Date();
+  studentImage:any;
+  isImageLoading:any;
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
 
   constructor(private route: ActivatedRoute, private service: StudentdataService) {
@@ -26,11 +28,10 @@ export class StudentcardComponent implements OnInit {
   }
 
   async fetch_student(rollNum: any){
+    this.getImageFromService();
     if(this.service.studentCache.has(rollNum)){
       this.student = this.service.studentCache.get(this.rollNumber);
-    }
-
-    else{
+    }else{
       //make an api call if data not present in the this.studentCache    
       this.service.getStudentData(this.rollNumber).then((res)=>{
         this.student_data = res;
@@ -41,7 +42,6 @@ export class StudentcardComponent implements OnInit {
         room: this.student_data.room,
         card_status: this.student_data.allowed
       } as Student;
-      console.log(temp_student)
 
       this.service.put_student_in_cache(temp_student);     
       this.student = this.service.studentCache.get(this.rollNumber);
@@ -96,6 +96,39 @@ export class StudentcardComponent implements OnInit {
         this.mess_data = this.cleanData({})
       });
     }
+  }
+
+  async toggl(){
+    this.service.togglActive(this.rollNumber).then((res)=>{
+      if (res){
+        this.student.allowed  = ! this.student.allowed;
+      }
+    }).catch((res)=>{
+      console.log(res);
+    });
+
+    
+  }
+
+  getImageFromService() {
+    this.isImageLoading = true;
+    this.service.getImage(this.rollNumber).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
+  }
+  createImageFromBlob(image: Blob) {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+         this.studentImage = reader.result;
+      }, false);
+   
+      if (image) {
+         reader.readAsDataURL(image);
+      }
   }
 
 

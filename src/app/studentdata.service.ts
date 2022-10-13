@@ -247,17 +247,24 @@ export class StudentdataService {
     
   }
 
-  togglActive(roll:string){
+  async togglActive(roll:string){
     let url = this.baseurl.concat("/toggle-mess-allowed/",roll);
-    return this.http.get(url,{headers:{
-      'x-access-token':this.auth.getToken(),
-      'rejectUnauthorized':'false' 
-    }}).subscribe((res:any)=>{
-      console.log(res.status)
-      return true
-    },(e)=>{
-      return false
+    return new Promise((resolve,reject)=>{
+      this.http.get(url,{headers:{
+        'x-access-token':this.auth.getToken(),
+        'rejectUnauthorized':'false' 
+      }}).subscribe((res:any)=>{
+        if(res.status===200){
+          resolve(true);
+        }else{
+          reject(false);
+        }
+      },(e)=>{
+        if(e.status===200) resolve(true);
+        else reject(e);
+      })
     })
+    
   }
 
   async getMonthlydata(roll:string,year:string,month:string){
@@ -338,6 +345,7 @@ export class StudentdataService {
   } 
 
   getImage(roll:string): Observable<Blob>{
+    console.log("hi");
     let url = this.baseurl.concat("/get-image/",roll);
     return this.http.get(url, { 
       responseType: 'blob',

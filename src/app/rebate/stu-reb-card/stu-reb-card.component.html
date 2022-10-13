@@ -19,8 +19,8 @@
         <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span><br>
         <span class="small-italics">Both dates are inclusive</span>
     </div>
-    <div id="rebate-reason-container">
-        <b>Reason:</b> {{p_rebate_reason}}
+    <div class="row">
+        <p ><b>Reason:</b> {{p_rebate_reason}}</p>
     </div>
     <div id="rebate-action-container" *ngIf="approval_state=='pending'" style="display:flex;" >
         <button class="btn btn-light rebate-action-btn" (click)="updateRebateData(p_rebate_reason,p_rebate_start,p_rebate_end)">

@@ -65,9 +65,7 @@
     font-weight: 400;
 }
 
-#rebate-reason-container{
-    overflow-x: scroll;
-}
+
 
 #rebate-action-container{
     margin: 0.5rem 0rem;
@@ -76,4 +74,9 @@
     margin-right: 1rem;
     font-weight: bold;
     font-size: 1.15rem;
+}
+
+.row{
+    word-break: break-all;
+    white-space: normal;
 }

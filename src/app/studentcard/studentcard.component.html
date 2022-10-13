@@ -1,28 +1,49 @@
 <div style="background-color: beige; min-height: 100vh;" class="container-fluid">
-<h2>Student Data</h2>
+    <h1>Student Data</h1>
     <div style="justify-content:center ;">
         <div id="studentcard" >
             <div>
-                <img class="card" src="..." class="img-fluid rounded-start" alt="..." >
+                <img class="img-fluid rounded-start" [src]="studentImage" alt="Place image title" *ngIf="!isImageLoading">
             </div>
             <div class="cardcontainer">
                 <h5 id="name">{{student.name}}</h5>
                 <div class="rollnohostel">
                     <div id="rollandhostel">
                         <p id="rollno">Roll no:</p> 
-                        <p id="hostel" style="margin-top:0px;"> Hostel,Room no:<p>
+                        <p id="hostel" style="margin-top:0px;"> Hostel, Room no:<p>
                     </div>                                      
                     <div class="space"> 
                         <p id="studrollno">{{student.id}}</p>
-                        <p>Hostel {{student.hostel}}, {{student.room}} </p>
+                        <p>Hostel {{student.hostel}} {{student.room}} </p>
                     </div>
                 </div>
                     <br> 
                    <div class="test">
-                    <p class="tgl">Status of the card: </p> <input type="checkbox" id="switch"
-                    class="checkbox" />
-                     <label for="switch" class="toggle">
-                     </label>
+                    <p class="tgl">Status of the card: </p> 
+                    <div *ngIf="student.allowed">
+                        <button type="button" class="active-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center active-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Active</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                      <div *ngIf="!student.allowed">
+                        <button type="button" class="inactive-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center inactive-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Inactive</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
                   </div>
             </div>  
         </div>

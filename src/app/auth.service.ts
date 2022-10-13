@@ -71,7 +71,7 @@ export class AuthService {
   }
   
   isStaff(){
-    return this.is_admin || this.is_staff;
+    return this.is_admin || this.isRebate || this.is_staff;
   }
 
   isStudent(){
