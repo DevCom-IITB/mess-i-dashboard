@@ -1,16 +1,7 @@
-<div id="student-list-heading">
-  Students' List
-</div>
 <div class="student-list-table-container">
-  <div id="search-main-area">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <form class="nosubmit">
-            <input type="search" class="form-control nosubmit" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
-          </form>
-        </div>
-    </div>
-    
+  <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
+  <div class="search-main-area">
+      <input type="search" class="form-control nosubmit" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
   </div>
   <table class="table">
     <thead>
@@ -29,8 +20,8 @@
         <tr>
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[0]}}</td>
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].fullname}}</td>
-          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
+          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
           <td>
             <div *ngIf="stud[1].mess_allowed">
               <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
