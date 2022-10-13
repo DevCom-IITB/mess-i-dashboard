@@ -11,11 +11,10 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class HomeComponent implements OnInit {
 
-  public user_name: string = "H9 Hall Manager";
   public pending_rebates: RebateRequest[] = new Array();
   devices:any;
 
-  constructor(private data_service:StudentdataService, private auth_service: AuthService, private router: Router) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
   }
 
   ngOnInit(): void {
