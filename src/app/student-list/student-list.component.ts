@@ -58,7 +58,6 @@ export class StudentListComponent implements OnInit {
           this.temp = res;
           // console.log(this.temp)
           this.studentInfoList = Object.entries(this.temp);
-          console.log(this.studentInfoList)
       }).catch((res)=>{
         this.errMsg = res
       })

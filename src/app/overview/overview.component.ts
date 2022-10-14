@@ -63,7 +63,6 @@ export class OverviewComponent implements OnInit {
         let history = res;
         // console.log(res);
         this.messHistory = this.cleanData(history);
-        console.log(this.messHistory)
       }).catch((res)=>{
         console.log(res)
         this.messHistory = this.cleanData({})

@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
     
     this.data_service.getDevices().then((res)=>{
       this.devices = res;
-      console.log(this.devices);
     }).catch((e)=>{
       console.log(e);
     });
@@ -43,13 +42,11 @@ export class HomeComponent implements OnInit {
 
   updateList(rebateID: any){
     this.pending_rebates = this.pending_rebates.filter((reb) =>{
-      console.log(reb.id);
       return reb.id != rebateID;
     })
   }
 
   populateRebates(response: any): void{
-    console.log(response);
     this.pending_rebates = response;
   } 
 

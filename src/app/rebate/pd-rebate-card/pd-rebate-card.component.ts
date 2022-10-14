@@ -42,7 +42,6 @@ export class PdRebateCardComponent implements OnInit {
     this.data_service.acceptRebate(this.rebate_request.id).then(
       (res) => {
         this.updateList.emit(this.rebate_request.id);
-        console.log(res);
       }
     ).catch(
       (e) =>{
@@ -56,7 +55,6 @@ export class PdRebateCardComponent implements OnInit {
     this.data_service.rejectRebate(this.rebate_request.id).then(
       (res) => {
         this.updateList.emit(this.rebate_request.id);
-        console.log(res);
       }
     ).catch(
       (e) =>{

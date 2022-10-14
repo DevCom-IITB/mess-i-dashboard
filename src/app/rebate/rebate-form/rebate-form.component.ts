@@ -41,7 +41,7 @@ export class RebateFormComponent implements OnInit {
 
 async submitRebate(){
   this.roll_no = this.auth.roll_no;
-  console.log(`Sending roll number in rebate ${this.roll_no}`);
+  // console.log(`Sending roll number in rebate ${this.roll_no}`);
   this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
     alert("Rebate successfully added")
   }).catch((res)=>{

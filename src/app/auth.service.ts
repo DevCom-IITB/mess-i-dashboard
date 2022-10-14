@@ -62,8 +62,6 @@ export class AuthService {
     this.logged_in=false; 
   }
   isLoggedIn(){
-    console.log(this.isStaff());
-    console.log(this.isAdmin());
     return this.logged_in;
   }
   

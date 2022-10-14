@@ -30,7 +30,6 @@ export class RebateComponent implements OnInit {
   async initialise(){
     this.data_service.getAllRebates().then((res)=>{
       this.populateRebates(res);
-      console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
@@ -39,7 +38,6 @@ export class RebateComponent implements OnInit {
 
   updateList(rebateID: any){
     this.pending_rebates = this.pending_rebates.filter((reb) =>{
-      console.log(reb.id);
       return reb.id != rebateID;
     })
   }
