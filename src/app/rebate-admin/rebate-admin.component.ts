@@ -35,6 +35,9 @@ export class RebateAdminComponent implements OnInit {
     });
   }
 
+  updateList(rebateID: any){
+    window.location.reload();
+  }
 
   populateRebates(response: any): void{
     this.pending_rebates = response.pending_rebate;
