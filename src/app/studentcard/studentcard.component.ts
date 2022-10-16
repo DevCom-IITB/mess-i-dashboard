@@ -77,7 +77,6 @@ export class StudentcardComponent implements OnInit {
       footer.push(foot[i].toString());
     }
     let res = {headers:this.headers,body:body,footer:footer}
-    console.log(res);
     return res;
     
   }
@@ -90,7 +89,6 @@ export class StudentcardComponent implements OnInit {
       {
         let history = res;
         this.mess_data = this.cleanData(history);
-        console.log(this.mess_data)
       }).catch((res)=>{
         console.log(res)
         this.mess_data = this.cleanData({})
