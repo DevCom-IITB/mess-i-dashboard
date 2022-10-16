@@ -1,7 +1,7 @@
 <div id="main-container-nav-routerout" class="">
     <div id="navbar-fixed" class="box-style">
       <div class="d-flex flex-column">
-        <img class="" src="/assets/mess-i-logo.png">
+        <img class="" src="assets/mess-i-logo.png">
         <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/home" >HOME</a>
         <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/list">STUDENTS' LIST</a>
         <a id="nav_rebate" class="nav-link nav-items-style" *ngIf="auth.isStudent()"  routerLink="/rebate" >REBATES</a>
