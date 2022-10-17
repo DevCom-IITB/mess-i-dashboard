@@ -44,10 +44,10 @@ async submitRebate(){
   // console.log(`Sending roll number in rebate ${this.roll_no}`);
   this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
     alert("Rebate successfully added")
+    this.router.navigate(['/rebate']);
   }).catch((res)=>{
     alert("Rebate was not added!!")
   });
-  this.router.navigate(['/rebate']);
 }
 
 async updateRebateData(){
@@ -55,11 +55,11 @@ async updateRebateData(){
   let rebate_id = this.generateRebateID(this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.roll_no);
   this.service.updateRebate(this.roll_no,this.rebateID,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
     alert("Rebate successfully updated");
+    this.router.navigateByUrl("/rebate");
   }).catch((e)=>{
     alert("Error occured while updating the rebate");
     console.log(e);
   });
-  this.router.navigateByUrl("/rebate");
 }
 
   handleReasonChange(event: any){
