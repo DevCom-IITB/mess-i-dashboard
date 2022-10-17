@@ -203,8 +203,7 @@ export class StudentdataService {
     });
   }
 
-  async rejectRebate(rebateID: string){
-    let rollNo = this.auth.getRoll();
+  async rejectRebate(rebateID: string, rollNo: string){
     let token = this.auth.getToken();
     let headers = new HttpHeaders({
       'x-access-token': token,

@@ -52,7 +52,7 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   rejectRebate(){
-    this.data_service.rejectRebate(this.rebate_request.id).then(
+    this.data_service.rejectRebate(this.rebate_request.id,this.rebate_request.roll).then(
       (res) => {
         this.updateList.emit(this.rebate_request.id);
       }
