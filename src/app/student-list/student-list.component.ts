@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   // studentImageMap = new Map();
   //studentInfoList_array = [];
   studentInfoList : any;
@@ -38,7 +38,7 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.justAfterScrolling = true;
     this.getList(this.entryNumber);
-    this.updateNav.emit();
+    // this.updateNav.emit();
     this.subject.pipe(debounceTime(1000)).subscribe((val)=>{
       this.getList(1);
     });

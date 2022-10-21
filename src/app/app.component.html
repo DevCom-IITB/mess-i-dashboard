@@ -1,7 +1,10 @@
 <div id="main-container-nav-routerout" class="">
     <div id="navbar-fixed" class="box-style">
-      <div class="d-flex flex-column">
-        <img class="" src="/assets/mess-i-logo.png">
+      <div id="container-nav-items" class="d-flex flex-column h-100">
+        <!-- <div>
+          <img class="mess-i-logo" src="/assets/mess-i-logo.png">
+        </div> -->
+        <img class="mess-i-logo" src="/assets/mess-i-logo.png">
         <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/home" >HOME</a>
         <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isAdmin()" routerLink="/list">STUDENTS' LIST</a>
         <a id="nav_rebate" class="nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
@@ -10,6 +13,37 @@
         <a class="nav-link nav-items-style-login " (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
       </div>
     </div>
+    
+    <!-- mobile navbar -->
+
+    <div id = "mobile-nav-btn-close" class="nav-link nav-items-style" role="button" (click)="hide_nav()">
+      <div id="container-close-btn">
+      <i class="bi bi-x-lg"></i>
+      </div>
+    </div>
+
+    <div id="mobile-navbar" class="box-style">
+      <div class="d-flex flex-column h-100">
+        <!-- <div id="mobile-nav-btn" class="nav-link nav-items-style" role="button" (click)="show_nav()"> -->
+          <i id="mobile-nav-btn" role="button" (click)="show_nav()" class="bi bi-list nav-link nav-items-style nav-mobile-icons"></i>
+        <!-- </div> -->
+        <!-- <div class="nav-link nav-items-style"> -->
+          <!-- <i class="bi bi-house nav-link nav-link-style nav-mobile-icons"></i> -->
+        <!-- </div> -->
+          <i role="button" (click)="show_nav()" id="nav_home_mobile" class="bi bi-house nav-link nav-items-style nav-mobile-icons"></i>
+          <i role="button" (click)="show_nav()" id="nav_student_list_mobile" class="bi bi-card-list nav-link nav-items-style nav-mobile-icons"></i>
+          <i role="button" (click)="show_nav()" id="nav_rebate_mobile" class="bi bi-currency-rupee nav-link nav-items-style nav-mobile-icons"></i>
+          <i role="button" (click)="show_nav()" id="nav_overview_mobile" class="bi bi-person-badge nav-link nav-items-style nav-mobile-icons"></i>
+          <i role="button" (click)="login()" *ngIf="!auth.isLoggedIn()" class="bi bi-power nav-link nav-items-style-login nav-mobile-icons"></i>
+          <i role="button" (click)="logout()" *ngIf="auth.isLoggedIn()" class="bi bi-power nav-link nav-items-style-login nav-mobile-icons"></i>
+      </div>
+
+    </div>
+
+
+    <!-- mobile navbar -->
+
+
 
     <div id="router-outlet">
       <router-outlet (activate)="updateNav()"></router-outlet>
