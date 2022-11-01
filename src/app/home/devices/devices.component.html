@@ -5,7 +5,7 @@
         <div class="device-info">
             <p>Last Synced: {{device.sync}}</p>
             <p>Version: {{device.version}}</p>
-            <p>Cards: {{device.cards.toString()}}</p>
+            <p *ngIf="device.cards">Cards: {{device.cards.toString()}}</p>
         </div>
 
     </div>
