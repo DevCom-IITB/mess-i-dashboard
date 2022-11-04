@@ -99,9 +99,10 @@ export class StudentcardComponent implements OnInit {
   async toggl(){
     this.service.togglActive(this.rollNumber).then((res)=>{
       if (res){
-        this.student.allowed  = ! this.student.allowed;
+        this.student.card_status  = ! this.student.card_status;
       }
     }).catch((res)=>{
+      alert("Unable to toggle");
       console.log(res);
     });
 

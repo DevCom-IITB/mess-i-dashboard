@@ -69,6 +69,7 @@ export class StudentListComponent implements OnInit {
         this.changeMessStatus(currStudRoll);
       }
     }).catch((res)=>{
+      alert("Unable to toggle");
       console.log(res);
     });
 

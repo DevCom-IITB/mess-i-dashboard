@@ -20,7 +20,7 @@
                     <br> 
                    <div class="test">
                     <p class="tgl">Status of the card: </p> 
-                    <div *ngIf="student.allowed">
+                    <div *ngIf="student.card_status">
                         <button type="button" class="active-button" id="{{rollNumber}}" (click)="toggl()">
                           <div class="container px-1 py-0">
                             <div class="row">
@@ -32,7 +32,7 @@
                           </div>
                         </button>
                       </div>
-                      <div *ngIf="!student.allowed">
+                      <div *ngIf="!student.card_status">
                         <button type="button" class="inactive-button" id="{{rollNumber}}" (click)="toggl()">
                           <div class="container px-1 py-0">
                             <div class="row">
