@@ -28,7 +28,7 @@ export class RebateComponent implements OnInit {
   }
 
   async initialise(){
-    this.data_service.getAllRebates().then((res)=>{
+    this.data_service.getStudentRebates().then((res)=>{
       this.populateRebates(res);
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else

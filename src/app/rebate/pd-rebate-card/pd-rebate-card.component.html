@@ -12,12 +12,18 @@
     <div id="rebate-reason-container" class="row">
         <p><b>Reason</b>: {{ p_rebate_reason }}</p>
     </div>
-    <div id="rebate-action-container" class="review-rebate-actions">
-        <button class="btn btn-light rebate-action-btn" (click)="acceptRebate()">
-            Accept
-        </button>
-        <button class="btn btn-light rebate-action-btn" (click)="rejectRebate()">
-            Reject
-        </button>
+    <div id="rebate-action-container">
+        <div id="rebate-comment-container" class="row">
+            <!-- <input id="rebate-comment-input" type="text" value="" placeholder="Add a comment here..."> -->
+            <app-input-field label="Comment" [inputModel]="card_comment" (inputModelChange)="onCommentChanged($event);"></app-input-field>
+        </div>
+        <div id="rebate-decision-container" class="review-rebate-actions">
+            <button class="btn btn-light rebate-action-btn" (click)="acceptRebate()">
+                Accept
+            </button>
+            <button class="btn btn-light rebate-action-btn" (click)="rejectRebate()">
+                Reject
+            </button>
+        </div>
     </div>
 </div>

@@ -42,11 +42,12 @@ export class RebateFormComponent implements OnInit {
 async submitRebate(){
   this.roll_no = this.auth.roll_no;
   // console.log(`Sending roll number in rebate ${this.roll_no}`);
-  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
+  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd))
+  .then((res)=>{
     alert("Rebate successfully added")
     this.router.navigate(['/rebate']);
   }).catch((res)=>{
-    alert("Rebate was not added!!")
+    alert(res.error);
   });
 }
 
@@ -57,7 +58,7 @@ async updateRebateData(){
     alert("Rebate successfully updated");
     this.router.navigateByUrl("/rebate");
   }).catch((e)=>{
-    alert("Error occured while updating the rebate");
+    alert(e.error);
     console.log(e);
   });
 }

@@ -22,6 +22,9 @@
     <div class="row">
         <p ><b>Reason:</b> {{p_rebate_reason}}</p>
     </div>
+    <div *ngIf="p_rebate_comment != ''" class="row">
+        <p ><b>Reviewer Comment:</b> {{p_rebate_comment}}</p>
+    </div>
     <div id="rebate-action-container" *ngIf="approval_state=='pending'" style="display:flex;" >
         <button class="btn btn-light rebate-action-btn" (click)="updateRebateData(p_rebate_reason,p_rebate_start,p_rebate_end)">
             Make Amendments

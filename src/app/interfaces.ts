@@ -7,13 +7,14 @@ export interface Student{
 };
 
 export interface RebateRequest{
-    student: Student,
+    id: string
     roll: string,
+    student: Student,
     start: string,
     end: string,
     request_date: string,
     reason: string,
-    id: string
+    comment: string;
 }
 
 export interface RebateCategorised{

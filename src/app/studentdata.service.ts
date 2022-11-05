@@ -74,7 +74,9 @@ export class StudentdataService {
   // }
 
   async getPendingRebates(){
-    let url = this.baseurl.concat("/rebates");
+    let url = "";
+    if(this.auth.isStudent()) url = this.baseurl.concat("/rebates/student");
+    else url = this.baseurl.concat("/rebates/admin");
 
     return new Promise((resolve, reject) => {
       this.http.get(url,{
@@ -95,8 +97,16 @@ export class StudentdataService {
     });
   }
 
+  async getStudentRebates(){
+    return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/student"));
+  }
+  async getAdminRebates(){
+    return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/admin"));
+  }
   async getAllRebates(){
-    let url = this.baseurl.concat("/rebates");
+    let url = "";
+    if(this.auth.isStudent()) url = this.baseurl.concat("/rebates/student");
+    else url = this.baseurl.concat("/rebates/admin");
 
     return new Promise((resolve, reject) => {
       this.http.get(url,{
@@ -104,7 +114,23 @@ export class StudentdataService {
           'x-access-token': this.auth.getToken(),
         }
       }).subscribe((res)=>{
-        let true_res: RebateRequest[] = [];
+
+        let temp_res = res as RebateCategorised;
+        resolve(temp_res);
+      },
+      (e)=>{
+        reject({});
+      });
+    });
+  }
+
+  async getAllRebatesFromUrl(url: string){
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{
+        headers:{
+          'x-access-token': this.auth.getToken(),
+        }
+      }).subscribe((res)=>{
 
         let temp_res = res as RebateCategorised;
         resolve(temp_res);
@@ -133,7 +159,7 @@ export class StudentdataService {
       this.http.post(url,formData,options).subscribe((res:any) =>{
         resolve(res);
       },(e)=>{
-        console.log(e);
+        // console.log(e);
         reject(e);
       })
     })
@@ -203,7 +229,7 @@ export class StudentdataService {
     });
   }
 
-  async rejectRebate(rebateID: string, rollNo: string){
+  async rejectRebate(rebateID: string, rollNo: string, comment: string){
     let token = this.auth.getToken();
     let headers = new HttpHeaders({
       'x-access-token': token,
@@ -214,6 +240,7 @@ export class StudentdataService {
     var formData = new FormData();
     formData.append("roll",rollNo);
     formData.append("id", rebateID);
+    formData.append("comment", comment);
     return new Promise((resolve,reject) =>{
       this.http.put(url,formData,options).subscribe((res: any) =>{
         resolve(res);

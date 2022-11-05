@@ -41,13 +41,25 @@
 }
 
 #rebate-action-container{
+    border-top: 2px solid lightgray;
+    /* padding-top: 1rem; */
+}
+
+#rebate-decision-container{
     margin: 0.5rem 0rem;
 }
-#rebate-action-container button{
+#rebate-decision-container button{
     margin-right: 1rem;
     font-weight: bold;
     font-size: 1.15rem;
 }
+#rebate-comment-container{
+    padding: 0px 12px;
+}
+#rebate-comment-input{
+    border-radius: 100vh;
+}
+
 .row{
     word-break: break-all;
     white-space: normal;

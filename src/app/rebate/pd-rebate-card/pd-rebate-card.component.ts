@@ -17,25 +17,20 @@ export class PdRebateCardComponent implements OnInit {
   public p_rebate_end: string;
   public p_rebate_reason: string;
 
+  public card_comment: string;
+
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(private data_service: StudentdataService) { }
 
   ngOnInit(): void {
     let rr = new Date(Date.parse(this.rebate_request.request_date));
-    // this.p_request_recieved = `${rr.toLocaleDateString()}, ${rr.toTimeString().slice(0,8)}`;
-    // this.p_rebate_start = this.readableDate(this.rebate_request.start);
-    // this.p_rebate_end = this.readableDate(this.rebate_request.end);
     this.p_request_recieved = `${rr.toLocaleDateString()}, ${rr.toTimeString().slice(0,8)}`;
     this.p_rebate_start = this.readableDateFromString(this.rebate_request.start);
     this.p_rebate_end = this.readableDateFromString(this.rebate_request.end);
     this.p_rebate_reason = "";
-    // this.rebate_request.reason.split(' ').forEach((el)=>{
-    //   if(this.p_rebate_reason.length > 20) return;
-    //   this.p_rebate_reason += el+" ";
-    // });
-    // this.p_rebate_reason = this.p_rebate_reason + (this.rebate_request.reason.length > this.p_rebate_reason.length ? " ..." : "") ;
     this.p_rebate_reason = this.rebate_request.reason;
+    this.card_comment="";
   }
 
   acceptRebate(){
@@ -52,7 +47,7 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   rejectRebate(){
-    this.data_service.rejectRebate(this.rebate_request.id,this.rebate_request.roll).then(
+    this.data_service.rejectRebate(this.rebate_request.id,this.rebate_request.roll, this.card_comment).then(
       (res) => {
         this.updateList.emit(this.rebate_request.id);
       }
@@ -71,6 +66,10 @@ export class PdRebateCardComponent implements OnInit {
   readableDateFromString(inp: string, separator: string = '-'): string{
     let all = inp.split(separator);
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
+  }
+
+  onCommentChanged(event: any): void{
+    this.card_comment = event;
   }
 
 }
