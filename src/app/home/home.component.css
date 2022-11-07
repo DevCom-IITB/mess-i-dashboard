@@ -1,9 +1,7 @@
-body{
-    background: #fffcf4;
-    height: 100%;
-}
 .main-container{
-    padding: 36px;
+    padding: 4%;
+    background-color:#FFFCF4 ;
+    min-height: 100%;
 }
 
 .rebate-card-wrapper{
@@ -14,10 +12,32 @@ body{
 }
 
 .pending-rebates-container{
-    margin-top: 24px;
+    margin-top: 0px;
 }
 
 .pd-rebate-cards-hscroll{
-    border-top: 3px solid #ffc42b;
     overflow-x: scroll;
+    overflow-y: hidden;
+    white-space:nowrap;
+}
+
+#search-container{
+    margin-top: 24px;
+}
+.search-main-area{
+    width: 100%;
+}
+
+#search-box{
+    background-color: #fff4d8;
+    border-radius: 6px;
+}
+#search-query-input{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    width: auto;
+    flex: 1 1 auto;
+}
+#search-query-input:focus{
+    outline: none;
 }

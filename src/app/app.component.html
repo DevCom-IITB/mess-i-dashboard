@@ -1,50 +1,51 @@
-<!-- <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-       Insta Mess Dashboard
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li>
-          <a class="nav-link nav-items-style" routerLink="/list">Student List</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-items-style" routerLink="/student" >Student History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-items-style" routerLink="/overview" >Mess History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-items-style" routerLink="/rebate" >Rebate</a>
-        </li>
-      </ul>
-      <button class="btn btn-danger" type="submit" (click)="logout()" *ngIf="auth.isLoggedIn()">Logout</button>
-      <button class="btn btn-primary" type="submit" (click)="login()" *ngIf="!auth.isLoggedIn()">Log In</button>
+<div id="main-container-nav-routerout" class="">
+  <div id="navbar-fixed" class="box-style">
+    <div id="container-nav-items" class="d-flex flex-column h-100">
+
+      <img class="mess-i-logo" src="assets/mess-i-logo.png">
+      <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/home" >HOME</a>
+      <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/list">STUDENTS' LIST</a>
+      <a id="nav_rebate" class="nav-link nav-items-style" *ngIf="auth.isStudent()" routerLink="/rebate" >REBATES</a>
+      <a id="nav_rebate_admin" class="nav-link nav-items-style" *ngIf="auth.isRebate()" routerLink="/rebate-admin" >REBATES ADMIN</a>
+      <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/overview" >MESS STATS</a>
+      <a class="nav-link nav-items-style-login" role="button" (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
+      <a class="nav-link nav-items-style-login" role="button" (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>
     </div>
-    
   </div>
-</nav> -->
+  
+  <!-- mobile navbar -->
 
-<div class="h-100 px-0 mx-0">
+  <div id = "mobile-nav-btn-close" class="nav-link nav-items-style" role="button" (click)="hide_nav()">
+    <div id="container-close-btn">
+    <i class="bi bi-x-lg"></i>
+    </div>
+  </div>
 
-  <div class="h-100">
-    <div id="navbar-fixed" class="box-style">
-      <div class="row  row-cols-1 h-100">
-        <a id="nav_home" class="col nav-link nav-items-style" routerLink="/home" >HOME</a>
-        <a id="nav_student_list" class="col nav-link nav-items-style" routerLink="/list">STUDENT LIST</a>
-        <!-- <a class="col nav-link nav-items-style" routerLink="/overview" >Mess History</a> -->
-        <a id="nav_rebate" class="col nav-link nav-items-style" routerLink="/rebate" >REBATES</a>
-        <a class="col nav-link nav-items-style-loginButton " (click)="login()" *ngIf="!auth.isLoggedIn()">Log In</a>
-        <a class="col nav-link nav-items-style-loginButton " (click)="logout()" *ngIf="auth.isLoggedIn()">Logout</a>
-      </div>
+  <div id="mobile-navbar" class="box-style">
+    <div class="d-flex flex-column h-100">
+      <!-- <div id="mobile-nav-btn" class="nav-link nav-items-style" role="button" (click)="show_nav()"> -->
+        <i id="mobile-nav-btn" role="button" (click)="show_nav()" class="bi bi-list nav-link nav-items-style nav-mobile-icons"></i>
+      <!-- </div> -->
+      <!-- <div class="nav-link nav-items-style"> -->
+        <!-- <i class="bi bi-house nav-link nav-link-style nav-mobile-icons"></i> -->
+      <!-- </div> -->
+        <!-- <i role="button" (click)="go_to('home')" *ngIf="auth.isAdmin()" id="nav_home_mobile" class="bi bi-house nav-link nav-items-style nav-mobile-icons"></i>
+        <i role="button" (click)="go_to('list')" *ngIf="auth.isAdmin()" id="nav_student_list_mobile" class="bi bi-card-list nav-link nav-items-style nav-mobile-icons"></i>
+        <i role="button" (click)="go_to('rebate')"  id="nav_rebate_mobile" class="bi bi-currency-rupee nav-link nav-items-style nav-mobile-icons"></i>
+        <i role="button" (click)="go_to('overview')" *ngIf="auth.isAdmin()" id="nav_overview_mobile" class="bi bi-person-badge nav-link nav-items-style nav-mobile-icons"></i>
+        <i role="button" (click)="login()" *ngIf="!auth.isLoggedIn()" class="bi bi-power nav-link nav-items-style-login nav-mobile-icons"></i>
+        <i role="button" (click)="logout()" *ngIf="auth.isLoggedIn()" class="bi bi-power nav-link nav-items-style-login nav-mobile-icons"></i> -->
     </div>
 
-    <div id="router-outlet">
-      <router-outlet (activate)="updateNav()"></router-outlet>
-    </div>
+  </div>
+
+
+  <!-- mobile navbar -->
+
+
+
+  <div id="router-outlet">
+    <router-outlet (activate)="updateNav()"></router-outlet>
   </div>
 
 </div>

@@ -1,4 +1,3 @@
-
 .active-circle {
     width: 1em;
     margin-top: 0.3em;
@@ -26,6 +25,12 @@
   padding-right: 1rem;
   background-color: transparent;
 }
+/* .input-group-prepend i{
+  position: relative;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+} */
 
 .inactive-button{
   border-radius: 0.5rem;
@@ -35,7 +40,7 @@
   color: #A8A8A8;
 
   border-style: solid;
-  border-width: 0.09rem;
+  border-width: 0.04rem;
   border-color: #A8A8A8;
 }
   
@@ -46,8 +51,8 @@
 
 
 #column-headers{
+  font-family: "Oxygen",Arial, Helvetica, sans-serif;
   color: #ffc42b;
-  font-weight: 500;
 }
 
 #stud-table{
@@ -72,7 +77,43 @@
   width: 1.5rem;
 }
 
-.student-list-table-container{
+/* .input-group-prepend{
+  background-color: none;
   padding-left: 25px;
   padding-right: 25px;
+  width: 100%;
+
+} */
+
+input.nosubmit{
+  width: 100%;
+  padding: 9px 4px 9px 30px;
+  
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+
+
+h2{
+  font-family: "Oxygen",Arial, Helvetica, sans-serif;
+}
+
+#tr{
+  font-family: 'Lato',Arial, Helvetica, sans-serif;
+}
+
+.nosubmit input {
+  background-color: #FFF4D8;
+  /* width: 100%; */
+  
+}
+
+
+.student-list-table-container{
+  padding: 4%;
+  
+  background-color:#FFFCF4 ;
+  min-height: 100%;
+}
+.search-main-area{
+  width: 100%;
 }

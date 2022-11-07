@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
+import { Student } from '../interfaces';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -55,19 +56,24 @@ export class StudentListComponent implements OnInit {
       this.service.getStudentList(startIndex,this.searchText,this.entriesPerPage).then((res)=>{
         
           this.temp = res;
-          console.log(this.temp)
+          // console.log(this.temp)
           this.studentInfoList = Object.entries(this.temp);
       }).catch((res)=>{
         this.errMsg = res
       })
     }
 
-  toggl(currStudRoll:any){
-    console.log("click")
-    let res = this.service.togglActive(currStudRoll)
-    if (res){
-      this.changeMessStatus(currStudRoll);
-    }
+  async toggl(currStudRoll:any){
+    this.service.togglActive(currStudRoll).then((res)=>{
+      if (res){
+        this.changeMessStatus(currStudRoll);
+      }
+    }).catch((res)=>{
+      alert("Unable to toggle");
+      console.log(res);
+    });
+
+    
   }
 
   async changeMessStatus(rollNumber:any){
@@ -83,6 +89,7 @@ export class StudentListComponent implements OnInit {
     //update the page number and the studInfoList 
       // this.startEntry += this.entriesPerPage; 
       // this.endEntry += Math.min(this.entriesPerPage, this.totalEntry - this.endEntry);
+    // if(this.entryNumber+this.entriesPerPage>this.totalEntry) return;
     this.entryNumber += this.entriesPerPage;
     this.getList(this.entryNumber); 
   }
@@ -90,12 +97,22 @@ export class StudentListComponent implements OnInit {
   async prevEntries(){
       // this.endEntry -= this.entriesPerPage; 
       // this.startEntry -= Math.min(this.startEntry, this.entriesPerPage);
+    if(this.entryNumber==1) return;
     this.entryNumber -= this.entriesPerPage;
     this.getList(this.entryNumber);
   }
 
-  displayStudData(rollNum:any) {
-    console.log(rollNum)  
+  displayStudData(indexOfStudent:any) {
+    // console.log(this.studentInfoList[indexOfStudent]);
+    var temp_student = {
+      id: this.studentInfoList[indexOfStudent][0],
+      name: this.studentInfoList[indexOfStudent][1].fullname,
+      hostel: this.studentInfoList[indexOfStudent][1].hostel,
+      room: this.studentInfoList[indexOfStudent][1].room,
+      card_status: this.studentInfoList[indexOfStudent][1].mess_allowed
+    } as Student;
+    this.service.put_student_in_cache(temp_student);
+    this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
   }
 
 

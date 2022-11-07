@@ -1,18 +1,18 @@
-<div class="mx-3 ">
-<h3 class="mt-3">Rebate</h3>
-<form #rebatedata="ngForm" (ngSubmit)="submitRebate(rebatedata)" class="form-inline">
-    <div class="form-group">
-        <label for="roll">Roll Number</label>
-        <input type="number" class="form-control" id="roll" name="rollnumber" placeholder="Roll Number" ngModel>
+<div class="main-container">
+    <div id="header-container">
+        <span class="page-title">Rebates</span>
+        <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
     </div>
-    <div class="form-group">
-    <label for="date1">Start date</label>
-    <input type="date" class="form-control" id="date1" name="startDate" placeholder="Start Date" ngModel>
+
+    <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
+        <app-stu-reb-card [rebate_request]="p_rebate" approval_state="pending" (updateList)="updateList($event)"></app-stu-reb-card>
     </div>
-    <div class="form-group">
-    <label for="date2">End Date</label>
-    <input type="date" class="form-control" id="date2" name="endDate" placeholder="End Date" ngModel>
+
+    <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
+        <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" (updateList)="updateList($event)"></app-stu-reb-card>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>
+
+    <div class="rebate-card-container" *ngFor="let a_rebate of rejected_rebates">
+        <app-stu-reb-card [rebate_request]="a_rebate" approval_state="rejected" (updateList)="updateList($event)"></app-stu-reb-card>
+    </div>
 </div>

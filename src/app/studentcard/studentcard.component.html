@@ -1,32 +1,76 @@
-<div style="background-color: beige;width: 100vw;height: 100vh;position:fixed">
-    <h2>Student Data</h2>
+<div style="background-color: beige; min-height: 100vh;" class="container-fluid">
+    <h1>Student Data</h1>
     <div style="justify-content:center ;">
         <div id="studentcard" >
             <div>
-                <img id="photo" src="..." class="img-fluid rounded-start" alt="...">
+                <img class="img-fluid rounded-start" [src]="studentImage" alt="Place image title" *ngIf="!isImageLoading">
             </div>
-
             <div class="cardcontainer">
-                <h5 id="name">K Adithya Krishna </h5>
+                <h5 id="name">{{student.name}}</h5>
                 <div class="rollnohostel">
                     <div id="rollandhostel">
                         <p id="rollno">Roll no:</p> 
-                        <p id="hostel" style="margin-top:0px;"> Hostel,Room no:<p>
+                        <p id="hostel" style="margin-top:0px;"> Hostel, Room no:<p>
+                    </div>                                      
+                    <div class="space"> 
+                        <p id="studrollno">{{student.id}}</p>
+                        <p>Hostel {{student.hostel}} {{student.room}} </p>
                     </div>
-                    <div> 
-                        <p id="studrollno">200020025</p>
-                        <p>Hostel 9, 189 </p>
-                    </div>
-                </div>  
-                <span style="color:rgb(249, 212, 28);font-size:1.3rem;font-weight:500" >
-                    Status of the card:
-                    <button id="activation" type="button" class="btn btn-outline-dark rounded_borders py-0" >
-                    <div>Activated</div>
-                    </button>
-                </span>
-            </div>
+                </div>
+                    <br> 
+                   <div class="test">
+                    <p class="tgl">Status of the card: </p> 
+                    <div *ngIf="student.card_status">
+                        <button type="button" class="active-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center active-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Active</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                      <div *ngIf="!student.card_status">
+                        <button type="button" class="inactive-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center inactive-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Inactive</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                  </div>
+            </div>  
         </div>
-        <app-table-component [data]="datatable"></app-table-component>
-
     </div>
+    <br>
+    
+    <form #data="ngForm" (ngSubmit)="getMonthData(data)" class="form-inline">
+        <div class="input-group mb-6" style="max-width: 80%; ;">
+            <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sept</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+            <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+                <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Get</button>
+        </div>
+    </form>
+    <app-table-component *ngIf="mess_data" [data]="mess_data"></app-table-component>
 </div>

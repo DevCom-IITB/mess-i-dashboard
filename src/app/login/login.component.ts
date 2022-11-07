@@ -16,14 +16,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn()){
-      this.router.navigate(['student'])
+      this.router.navigate(['home'])
     }
     this.route.queryParams
       .subscribe(params => {
         if(params.code){
           this.auth.loginUser(params.code);
         } 
-        console.log(params.code);
       }
     );
     this.loginHref = `https://gymkhana.iitb.ac.in/profiles/oauth/authorize/?client_id=${environment.clientID}&response_type=code&scope=basic profile program ldap&redirect_uri=${environment.redirectURL}`;

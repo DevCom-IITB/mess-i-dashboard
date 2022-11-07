@@ -1,44 +1,198 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #fff4d8;
+}
 .box-style{
-    background-color: rgb(45, 45, 43);
-    box-shadow: 10px 0px 20px rgb(45, 45, 43);
+    background-color:#28282B;
+    /* box-shadow: 10px 0px 20px rgb(45, 45, 43); */
+    box-shadow: 0px 0px 20px 4px #28282B;
+    height: 100%;
     /* display: flex;
     flex-direction: column;
     flex-grow: 1; */
 }
 
+
 .nav-items-style{
-    font-size: 26px;
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 1.5vw;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 0px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 0px; */
+    color: white;
+    
 }
+.nav-items-style-login{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 250;
+    font-size: 1.5vw;
+    text-align: center;
+    /* margin-bottom: 5%; */
+    /* margin-top: 30%; */
+    /* margin-top: 10px; */
+    /* margin-bottom: 0px; */
+    margin-top: auto;
+    color: white;
+    
+}
+/* .nav-items-style-login:hover{
+    color: #ffc42b;
+    font-weight: 350px;
+} */
 
 .nav-items-style-active{
-    font-size: 30px;
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 1.5vw;
     text-align: center;
     color: #ffc42b;
-    margin-top: 10px;
-    margin-bottom: 0px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 0px; */
 }
 
 .nav-items-style-loginButton{
-    font-size: 26px;
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-weight: 350px;
+    font-size: 1.5vw;
     text-align: center;
-    margin-bottom: 0%;
-    margin-top: 100%;
+    padding-bottom: 5%;
+    margin-bottom: 20%;
+    /* margin-bottom: 0%; */
+    margin-top: 60%;
+    /* align-self: end; */
+    /* margin-top: 100%; */
+    color: white;
 }
 
 #navbar-fixed{
-    position: fixed;
-    height: 100vh;
-    width: 20vw;
-    top: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* position: fixed; */
+    height: 100%;
+    z-index: 0;
+    flex: 4;
+    display: block;
+    transition: 2s;
 }
 
 #router-outlet{
-    margin-left: 20vw;
+    height:100%;
+    overflow-y: scroll;
+    /* margin-left: 20vw;
     margin-right: 0px;
     width: 80vw;
-    padding-left: 0rem;
+    padding-left: 0rem; */
+    flex: 16;
 }
+
+/* #parent-container-nav-routerout{
+    display: inline-flex;
+
+} */
+#main-container-nav-routerout{
+    display: flex ;
+    height:100vh;
+    /* position:fixed; */
+} 
+
+#mobile-nav-btn{
+    /* overflow-y: hidden; */
+    /* overflow-x: hidden; */
+    /* position: fixed; */
+    /* height: 100vh; */
+    /* z-index: 0; */
+    /* visibility: hidden; */
+    /* position: absolute; */
+    padding: 0px 0px 0px 0px;
+    flex-direction: row;
+
+    display: none;
+}
+
+.nav-mobile-icons{
+    height: fit-content;
+    padding: 0px 0px 0px 0px;
+}
+
+#mobile-nav-btn-close{
+    display: none;
+    /* margin-left: 0%; */
+    flex-direction: row;
+    justify-content: flex-start;
+    z-index: 1 !important;
+}
+
+#mobile-navbar{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* position: fixed; */
+    height: 100%;
+    z-index: 0;
+    flex: 1.15;
+    display: none;
+}
+
+#container-close-btn{
+    display: inline-block;
+    /* margin-left: 0px !important; */
+    margin-right: 100%;
+}
+
+@media (max-width: 800px) {
+    #mobile-navbar{
+        display: block;
+    }
+
+    #navbar-fixed{
+        display: none;
+    }
+
+    #mobile-nav-btn{
+        display: block;
+        /* position: absolute; */
+        /* z-index: 1 !important; */
+    }
+
+    #mobile-nav-btn-close{
+        display: none;
+    }
+
+    .hide-element{
+        display: none !important;
+    }
+
+    .show-element{
+        position: fixed;
+        display: block !important;
+        /* height: 100%; */
+        width: 60vw;
+        /* top: 0px; */
+        z-index: 1 !important;
+        transition: 0.5s;
+    }
+
+    .nav-items-style-login{
+        font-size: 3vw;
+    }
+
+    .nav-items-style-active{
+        font-size: 3vw;
+
+    }
+    .nav-items-style{
+        font-size: 3vw;
+
+    }
+
+    .mess-i-logo{
+        width: 30vw;
+        height: 30vw;
+        align-self: center;
+    }
+    
+}
+
+/* #container-nav-items{ */
+    /* justify-content: space-evenly; */
+/* } */
