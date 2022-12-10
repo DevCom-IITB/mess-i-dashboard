@@ -19,6 +19,12 @@ import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component'
 import { RebateCardComponent } from './rebate/rebate-card/rebate-card.component';
 import { StuRebCardComponent } from './rebate/stu-reb-card/stu-reb-card.component';
 import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
+import { MessBillComponent } from './mess-bill/mess-bill.component';
+import { FormMessBillComponent } from './components/form-mess-bill/form-mess-bill.component';
+import { StuRebateDialogComponent } from './components/stu-rebate-dialog/stu-rebate-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,13 +42,19 @@ import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
     RebateFormComponent,
     RebateCardComponent,
     StuRebCardComponent,
-    RebateAdminComponent
+    RebateAdminComponent,
+    MessBillComponent,
+    FormMessBillComponent,
+    StuRebateDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

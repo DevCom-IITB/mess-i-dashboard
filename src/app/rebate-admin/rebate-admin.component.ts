@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
 import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 
@@ -15,7 +17,7 @@ export class RebateAdminComponent implements OnInit {
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
 
-  constructor(private data_service:StudentdataService,private auth:AuthService, private router:Router) {
+  constructor(private data_service:StudentdataService,private auth:AuthService,private dialog:MatDialog, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -23,6 +25,32 @@ export class RebateAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialise();
+  }
+
+  openDialog(roll:any) :void {
+    // console.log(roll)
+    this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+        this.dialog.open(StuRebateDialogComponent,{
+        data:{accepted_rebates : res.accepted_rebate}
+    })
+    }).catch((e)=>
+    console.log(e))
+
+  }
+  
+  setDialogValues(rebates:any) :void{
+    const dialogRef = this.dialog.open(StuRebateDialogComponent,{
+      // height:'3232px',
+      // width:'5000px',
+      data:{accepted_rebates : rebates}
+    })
+  }
+
+  async getStudentRebates(roll:any,rebates: any){
+    await this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+      rebates = (res.pending_rebate);
+    }).catch((e)=>
+    console.log(e))
   }
 
   async initialise(){
@@ -33,6 +61,9 @@ export class RebateAdminComponent implements OnInit {
       console.log(e);
     });
   }
+
+
+
 
   updateList(rebateID: any){
     window.location.reload();

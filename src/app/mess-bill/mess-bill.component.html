@@ -1,0 +1,27 @@
+<div class="container">
+    <h2 style="border-bottom:3px solid #ffc42b;">Mess Bill Generation</h2>
+    <form #data="ngForm" (ngSubmit)="renderForm(data)" class="form-inline">
+        <div class="input-group mb-3">
+            <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sept</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+            <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+            <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+            </select>
+            <button type="submit" >SUBMIT</button>
+        </div>
+    </form>
+    <app-form-mess-bill *ngIf="render_form" [form_structure]="form_gen_data"></app-form-mess-bill>
+    <!-- <button type="submit">POST</button> -->
+</div>

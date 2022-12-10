@@ -6,6 +6,10 @@ export interface Student{
     card_status: boolean,
 };
 
+export interface DialogData{
+  accepted_rebates: RebateRequest[];
+};
+
 export interface RebateRequest{
     id: string
     roll: string,

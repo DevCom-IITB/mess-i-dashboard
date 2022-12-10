@@ -1,4 +1,5 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 @font-face {
     font-family: "Oxygen";
@@ -26,3 +27,6 @@
 .inblock-el{
     display:inline-block;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

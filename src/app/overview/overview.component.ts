@@ -9,7 +9,7 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
 
   messHistory:any;
   noOfDays:any;
