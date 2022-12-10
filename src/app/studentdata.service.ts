@@ -103,6 +103,29 @@ export class StudentdataService {
   async getAdminRebates(){
     return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/admin"));
   }
+
+  async getAdminRebatesRoll(roll:string){
+    return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/admin?roll="+roll));
+  }
+
+  async putMessPrices(data : string){
+    var token=await this.auth.getToken()
+    let headers = new HttpHeaders({
+      'x-access-token':token,
+    });
+
+    let options = { headers: headers, responseType:'text' as 'json'};
+    let url = this.baseurl.concat("/monthly-mess-prices");
+    return new Promise((resolve,reject) => {
+      this.http.put(url,data,options).subscribe((res:any) =>{
+        resolve(res);
+      },(e)=>{
+        // console.log(e);
+        reject(e);
+      })
+    })
+  }
+
   async getAllRebates(){
     let url = "";
     if(this.auth.isStudent()) url = this.baseurl.concat("/rebates/student");
