@@ -25,6 +25,7 @@ import { StuRebateDialogComponent } from './components/stu-rebate-dialog/stu-reb
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RebateAdminComponent,
     MessBillComponent,
     FormMessBillComponent,
-    StuRebateDialogComponent
+    StuRebateDialogComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,

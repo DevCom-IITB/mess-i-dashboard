@@ -15,6 +15,8 @@ export class RebateFormComponent implements OnInit {
   rebateStart: string = '';
   rebateEnd: string = '';
   roll_no: string = '';
+  isOfficialRebate: boolean = false;
+  officialRebateFile: any;
   isUpdateRequest: boolean = false;
   rebateID: string = '';
 
@@ -42,7 +44,8 @@ export class RebateFormComponent implements OnInit {
 async submitRebate(){
   this.roll_no = this.auth.roll_no;
   // console.log(`Sending roll number in rebate ${this.roll_no}`);
-  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd))
+  // console.log(this.officialRebateFile)
+  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.officialRebateFile)
   .then((res)=>{
     alert("Rebate successfully added")
     this.router.navigate(['/rebate']);
@@ -63,20 +66,32 @@ async updateRebateData(){
   });
 }
 
-  handleReasonChange(event: any){
+  handleReasonChange = (event: any) => {
     this.reason = event;
   }
-  handleHostelChange(event: any){
+  handleHostelChange = (event: any) => {
     this.hostel = event;
   }
-  handleRoomChange(event: any){
+  handleRoomChange = (event: any) => {
     this.roomNo = event;
   }
-  handleRebateStartChange(event: any){
+  handleRebateStartChange = (event: any) => {
     this.rebateStart = event;
   }
-  handleRebateEndChange(event: any){
+  handleRebateEndChange = (event: any) => {
     this.rebateEnd = event;
+  }
+
+  handleOfficialRebateStatusChange = (event : any) => {
+    this.isOfficialRebate = event;
+  }
+
+  handleOfficialRebateFileChange = (event:any) => {
+    // console.log(event.target.files[0])
+    this.officialRebateFile = event.target.files[0];
+    // this.officialRebateFile = {...event.target.files};
+    // this.officialRebateFile = {...event.target.files};
+    // console.log(this.officialRebateFile)
   }
 
   resolveDateFormat(date:string){

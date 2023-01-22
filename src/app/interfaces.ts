@@ -7,7 +7,9 @@ export interface Student{
 };
 
 export interface DialogData{
-  accepted_rebates: RebateRequest[];
+  accepted_rebates: RebateRequest[],
+  rejected_rebates: RebateRequest[],
+  pending_rebates: RebateRequest[]
 };
 
 export interface RebateRequest{

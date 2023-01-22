@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Student } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
+import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-studentcard',
@@ -19,7 +21,7 @@ export class StudentcardComponent implements OnInit {
   isImageLoading:any;
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
 
-  constructor(private route: ActivatedRoute, private service: StudentdataService) {
+  constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog) {
    }
 
   ngOnInit(): void {
@@ -50,6 +52,24 @@ export class StudentcardComponent implements OnInit {
       console.log(res)
     })
     }
+  }
+
+  openDialog(roll:any) :void {
+    console.log(roll)
+    this.dialog.open(StuRebateDialogComponent,{
+    data:{
+      roll: roll
+        }
+    })
+    // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+    //     this.dialog.open(StuRebateDialogComponent,{
+    //     data:{accepted_rebates : res.accepted_rebate,
+    //           rejected_rebates: res.rejected_rebate,
+    //           pendeing_rebates: res.pending_rebate}
+    // })
+    // }).catch((e)=>
+    // console.log(e))
+
   }
 
 

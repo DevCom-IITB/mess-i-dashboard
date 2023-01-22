@@ -28,13 +28,20 @@ export class RebateAdminComponent implements OnInit {
   }
 
   openDialog(roll:any) :void {
-    // console.log(roll)
-    this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-        this.dialog.open(StuRebateDialogComponent,{
-        data:{accepted_rebates : res.accepted_rebate}
+    console.log(roll)
+    this.dialog.open(StuRebateDialogComponent,{
+    data:{
+      roll: roll
+        }
     })
-    }).catch((e)=>
-    console.log(e))
+    // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+    //     this.dialog.open(StuRebateDialogComponent,{
+    //     data:{accepted_rebates : res.accepted_rebate,
+    //           rejected_rebates: res.rejected_rebate,
+    //           pendeing_rebates: res.pending_rebate}
+    // })
+    // }).catch((e)=>
+    // console.log(e))
 
   }
   
@@ -56,6 +63,7 @@ export class RebateAdminComponent implements OnInit {
   async initialise(){
     this.data_service.getAdminRebates().then((res)=>{
       this.populateRebates(res);
+      console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
@@ -73,6 +81,7 @@ export class RebateAdminComponent implements OnInit {
     this.pending_rebates = response.pending_rebate;
     this.accepted_rebates = response.accepted_rebate;
     this.rejected_rebates = response.rejected_rebate;
+    console.log(this.pending_rebates)
   }
 
 }

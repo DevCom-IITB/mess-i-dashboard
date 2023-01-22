@@ -1,4 +1,5 @@
-<div style="background-color: beige; min-height: 100vh;" class="container-fluid">
+<!-- <div style="background-color: beige; min-height: 100vh;" class="container-fluid"> -->
+<div style="background-color:#FFFCF4; min-height: 100vh;" class="container-fluid">
     <h1>Student Data</h1>
     <div style="justify-content:center ;">
         <div id="studentcard" >
@@ -30,6 +31,12 @@
                               <div class="col px-1 py-0">Active</div>
                             </div>
                           </div>
+                        </button>
+                      </div>
+
+                      <div>
+                        <button (click)="openDialog(rollNumber)">
+                          Prev Rebates
                         </button>
                       </div>
                       <div *ngIf="!student.card_status">
