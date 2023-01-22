@@ -14,7 +14,7 @@ export class AppComponent {
   nav_visible:boolean;
   navIdtoUrl = new Map();
   navIds = ["nav_home","nav_student_list","nav_rebate","nav_rebate_admin"
-            ,"nav_overview,nav_mess_bill"]
+            ,"nav_overview","nav_mess_bill"]
   currTab : any; 
   ngOnInit(): void {
   }

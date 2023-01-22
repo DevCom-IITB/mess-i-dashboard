@@ -164,8 +164,9 @@ export class StudentdataService {
     });
   }
 
-  async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string){
+  async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string, file:any){
     var formData: any = new FormData()
+    // console.error(file)
     var token=await this.auth.getToken()
     let headers = new HttpHeaders({
       'x-access-token':token,
@@ -175,6 +176,8 @@ export class StudentdataService {
     formData.append("reason",reason);
     formData.append("start",startDate);
     formData.append("end",endDate);
+    formData.append("rebate_doc",file);
+
 
     let options = { headers: headers, responseType:'text' as 'json'};
     let url = this.baseurl.concat("/rebate/random-string");

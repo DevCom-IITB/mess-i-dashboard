@@ -57,7 +57,7 @@ export class FormMessBillComponent implements OnInit {
   }
 
   async postData(data:any){
-    // console.log(JSON.parse(this.clean_data(data)))
+    console.log(JSON.parse(this.clean_data(data)))
     this.data_service.putMessPrices(this.clean_data(data))
   }
 

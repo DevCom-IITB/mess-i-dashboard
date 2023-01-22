@@ -2,10 +2,29 @@
     <h2 style="border-bottom:3px solid #ffc42b;">Mess Data</h2>
     <form #data="ngForm" (ngSubmit)="getMonthMessData(data)" class="form-inline">
       <div class="input-group mb-3">
-        <div class="form-group">
-          <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel>
-        </div>
+        <!-- <div class="form-group"> -->
+          <!-- <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel> -->
+        <!-- </div> -->
+        <select name="hostel" class="form-select" id="hostel_dropdown" aria-placeholder="Hostel Name">
+          <option value="H1">H1</option>
+          <option value="H2">H2</option>
+          <option value="H3">H3</option>
+          <option value="H4">H4</option>
+          <option value="H5">H5</option>
+          <option value="H6">H6</option>
+          <option value="H7">H7</option>
+          <option value="H8">H8</option>
+          <option value="H9">H9</option>
+          <option value="H10">H10</option>
+          <option value="H11">H11</option>
+          <option value="H12">H12</option>
+          <option value="H13">H13</option>
+          <option value="H14">H14</option>
+          <option value="H15">H15</option>
+          <option value="H16">H16</option>
+        </select>
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+          <option value="" disabled selected>Select a Month</option>
           <option value="1">Jan</option>
           <option value="2">Feb</option>
           <option value="3">Mar</option>
@@ -20,6 +39,7 @@
           <option value="12">Dec</option>
         </select>
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+          <option value="" disabled selected>Select a Year</option>
           <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
         <button type="submit" >GET</button>

@@ -3,7 +3,23 @@
         <span class="page-title">Rebates</span>
         <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
     </div>
-
+    <div>
+        Month Filter
+    </div>
+    <div id="form-container">
+        <div id="from-date-container"> 
+            <app-input-field  label="From" inputType="calender" [inputModel]="from_filter" (inputModelChange)="handle_filter_from_change($event)"></app-input-field>
+        </div>
+        <div id="to-date-container">
+            <app-input-field label="To" inputType="calender" [inputModel]="to_filter" (inputModelChange)="handle_filter_to_change($event)"></app-input-field>
+        </div>
+        <div>
+            <button id="confirm-btn" class="btn btn-primary" (click)="initialiseWithFilter()">Apply Filter</button>
+        </div>
+        <div>
+            <button id="reset-btn" class="btn btn-primary" (click)="initialise()">Reset</button>
+        </div>
+    </div>
     <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
         <app-stu-reb-card [rebate_request]="p_rebate" approval_state="pending" (updateList)="updateList($event)"></app-stu-reb-card>
     </div>
