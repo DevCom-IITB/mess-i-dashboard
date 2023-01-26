@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
+import { StuRebateDialogComponent } from 'src/app/components/stu-rebate-dialog/stu-rebate-dialog.component';
 
 @Component({
   selector: 'app-pd-rebate-card',
@@ -21,7 +23,7 @@ export class PdRebateCardComponent implements OnInit {
 
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  constructor(private data_service: StudentdataService) { }
+  constructor(private data_service: StudentdataService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     let rr = new Date(Date.parse(this.rebate_request.request_date));
@@ -31,6 +33,7 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.card_comment="";
+    console.log(this.rebate_request)
   }
 
   acceptRebate(){
@@ -44,6 +47,15 @@ export class PdRebateCardComponent implements OnInit {
         alert("Error occured while accepting rebate");
       }
     )
+  }
+
+  openDialog() :void {
+    console.log(this.rebate_request.roll)
+    this.dialog.open(StuRebateDialogComponent,{
+    data:{
+      roll: this.rebate_request.roll
+        }
+    })
   }
 
   rejectRebate(){

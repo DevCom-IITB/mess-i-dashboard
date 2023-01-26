@@ -9,7 +9,7 @@ export class CheckboxComponent implements OnInit {
 
   @Input() public label:string;
   @Input() public inputModel: boolean;
-  @Output() public inputModelChange = new EventEmitter<string>();
+  @Output() public inputModelChange = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {

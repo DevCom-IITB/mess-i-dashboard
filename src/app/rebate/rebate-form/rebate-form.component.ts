@@ -16,11 +16,14 @@ export class RebateFormComponent implements OnInit {
   rebateEnd: string = '';
   roll_no: string = '';
   isOfficialRebate: boolean = false;
+  isOfficialRebateString: any;
   officialRebateFile: any;
   isUpdateRequest: boolean = false;
   rebateID: string = '';
+  rebate_docname: string = "";
 
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
+    // console.log(this.isOfficialRebate)
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -33,6 +36,8 @@ export class RebateFormComponent implements OnInit {
       // this.rebateEnd = current_state?.endDate;
       this.isUpdateRequest = current_state?.isUpdate;
       this.rebateID = current_state?.id;
+      this.isOfficialRebate = current_state.official;
+      this.rebate_docname = current_state.rebate_docname;
     }
 
     // console.log(`Recieved: {start: ${this.rebateStart}, end: ${this.rebateEnd}}`);
@@ -42,10 +47,13 @@ export class RebateFormComponent implements OnInit {
   }
 
 async submitRebate(){
+    console.log(this.isOfficialRebate)
+    console.log(this.rebateEnd)
+    console.log(this.rebateStart)
   this.roll_no = this.auth.roll_no;
   // console.log(`Sending roll number in rebate ${this.roll_no}`);
   // console.log(this.officialRebateFile)
-  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.officialRebateFile)
+  this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
   .then((res)=>{
     alert("Rebate successfully added")
     this.router.navigate(['/rebate']);
@@ -57,7 +65,7 @@ async submitRebate(){
 async updateRebateData(){
   this.roll_no = this.auth.roll_no;
   let rebate_id = this.generateRebateID(this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.roll_no);
-  this.service.updateRebate(this.roll_no,this.rebateID,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd)).then((res)=>{
+  this.service.updateRebate(this.roll_no,this.rebateID,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile).then((res)=>{
     alert("Rebate successfully updated");
     this.router.navigateByUrl("/rebate");
   }).catch((e)=>{
@@ -75,16 +83,15 @@ async updateRebateData(){
   handleRoomChange = (event: any) => {
     this.roomNo = event;
   }
-  handleRebateStartChange = (event: any) => {
-    this.rebateStart = event;
-  }
-  handleRebateEndChange = (event: any) => {
-    this.rebateEnd = event;
-  }
+  // handleRebateStartChange = (event: any) => {
+  //   // this.rebateStart = event;
+  //   console.log(this.rebateStart)
+  // }
+  // handleRebateEndChange = (event: any) => {
+  //   // this.rebateEnd = event;
+  //   console.log(this.rebateEnd)
+  // }
 
-  handleOfficialRebateStatusChange = (event : any) => {
-    this.isOfficialRebate = event;
-  }
 
   handleOfficialRebateFileChange = (event:any) => {
     // console.log(event.target.files[0])

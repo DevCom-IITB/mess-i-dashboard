@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData, Student } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
+import { RebateRequest } from 'src/app/interfaces';
 
 //https://material.angular.io/components/dialog/overview
 @Component({
@@ -16,28 +17,12 @@ export class StuRebateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public injected_data: any,
     private data_service : StudentdataService 
   ) {
-    // console.log(roll['roll'])
-    // console.log(injected_data['roll'])
-    // console.log(injected_data)
-    this.fetch_student_data(injected_data['roll'])
    }
 
-  fetch_student_data(roll:any) {
-    this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-      this.data = 
-          { 
-            accepted_rebates : res.accepted_rebate,
-            rejected_rebates: res.rejected_rebate,
-            pending_rebates: res.pending_rebate
-          }
-        console.log(this.data)
-      }).catch((e)=>
-      console.log(e))
-
-  }
+  getRebates = () => this.data_service.getAdminRebatesRoll(this.injected_data['roll'])
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('45%','80%')
+    this.dialogRef.updateSize('58%','80%')
   }
 
   onNoClick(): void{

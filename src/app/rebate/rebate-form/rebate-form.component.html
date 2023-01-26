@@ -5,7 +5,7 @@
 
     <div id="form-container">
         <div id="rebate-reason-container">
-            <app-input-field label="Reason for rebate" inputType="text" [inputModel]="reason" (inputModelChange)="handleReasonChange($event)"></app-input-field>
+            <app-input-field label="Reason for rebate" inputType="text" [(inputModel)]="reason"></app-input-field>
         </div>
         <!-- <div id="from-date-container">
             <app-checkbox label="Official" [inputModel]="isOfficialRebate" (inputModelChange)="handleOfficialRebateStatusChange($event)"></app-checkbox>
@@ -20,18 +20,22 @@
             <app-input-field label="Room No." [inputModel]="roomNo" (inputModelChange)="handleRoomChange($event)"></app-input-field>
         </div> -->
         <div id="from-date-container">
-            <app-input-field label="From" inputType="calender" [inputModel]="rebateStart" (inputModelChange)="handleRebateStartChange($event)"></app-input-field>
+            <app-input-field label="From" inputType="calender" [(inputModel)]="rebateStart"></app-input-field>
         </div>
         <div id="to-date-container">
-            <app-input-field label="Till" inputType="calender" [inputModel]="rebateEnd" (inputModelChange)="handleRebateEndChange($event)"></app-input-field>
+            <app-input-field label="Till" inputType="calender" [(inputModel)]="rebateEnd"></app-input-field>
         </div>
         <div id="is-official-rebate">
-            <app-checkbox label="Official" [inputModel]="isOfficialRebate" (inputModelChange)="handleOfficialRebateStatusChange($event)"></app-checkbox>
+            <app-checkbox label="Official" [(inputModel)]="isOfficialRebate"></app-checkbox>
         </div>
         <div *ngIf="isOfficialRebate" id="file-for-official">
             <!-- <app-checkbox></app-checkbox> -->
             <app-input-field label="Supportive Document" [callbackFunction]="handleOfficialRebateFileChange" inputType="file" ></app-input-field>
         </div>
+        <!-- <div id="current-file">
+            {{rebate_docname}}
+        </div> -->
+        <app-input-field *ngIf="isOfficialRebate && isUpdateRequest" id="current-file" label="Current Document" inputType="show_text" text_to_show = "{{rebate_docname}}"></app-input-field>
     </div>
     <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button>
     <button id="confirm-btn" class="btn btn-primary" *ngIf="isUpdateRequest"(click)="updateRebateData()">UPDATE</button>

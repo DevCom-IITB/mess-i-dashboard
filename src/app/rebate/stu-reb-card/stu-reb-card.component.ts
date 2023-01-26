@@ -57,7 +57,9 @@ export class StuRebCardComponent implements OnInit {
         // roomNo:"",
         startDate: this.rebate_request.start,
         endDate: this.rebate_request.end,
-        isUpdate: true
+        isUpdate: true,
+        official: this.rebate_request.official,
+        rebate_docname: this.rebate_request.rebate_docname,
       }
     };
     this.router.navigate(['/applyrebate'],navigationExtras);

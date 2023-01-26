@@ -1,0 +1,22 @@
+<div>
+    Month Filter
+</div>
+<div id="form-container">
+    <div id="from-date-container"> 
+        <app-input-field  label="From" inputType="calender" [(inputModel)]="from_filter"></app-input-field>
+    </div>
+    <div id="to-date-container">
+        <app-input-field label="To" inputType="calender" [(inputModel)]="to_filter"></app-input-field>
+    </div>
+    <div id="offcialFilter">
+        <app-checkbox [(inputModel)]="officialFilter" label="official"></app-checkbox>
+    </div>
+    <div>
+        <!-- <button id="confirm-btn" class="btn btn-primary" (click)="initialiseWithFilter()">Apply Filter</button> -->
+        <button id="confirm-btn" class="btn btn-primary" (click)="submit()" >Filter</button>
+    </div>
+    <div>
+        <button id="reset-btn" class="btn btn-primary" (click)="reset()">Reset</button>
+        <!-- <button id="reset-btn" class="btn btn-primary" (click)="initialise()">Reset</button> -->
+    </div>
+</div>

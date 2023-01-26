@@ -21,6 +21,8 @@ export interface RebateRequest{
     request_date: string,
     reason: string,
     comment: string;
+    official: boolean;
+    rebate_docname:string;
 }
 
 export interface RebateCategorised{

@@ -26,6 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from './utils/checkbox/checkbox.component';
+import { DateFilterComponent } from './utils/date-filter/date-filter.component';
+import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { CheckboxComponent } from './utils/checkbox/checkbox.component';
     MessBillComponent,
     FormMessBillComponent,
     StuRebateDialogComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    DateFilterComponent,
+    RebateListComponent
   ],
   imports: [
     BrowserModule,
