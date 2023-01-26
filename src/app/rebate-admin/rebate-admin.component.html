@@ -14,7 +14,8 @@
     <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
-            <app-pd-rebate-card (click)="openDialog(p_rebate.roll)" [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card>
+            <!-- <app-pd-rebate-card (click)="openDialog(p_rebate.roll)" [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card> -->
+            <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card>
         </div>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

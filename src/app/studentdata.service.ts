@@ -98,6 +98,8 @@ export class StudentdataService {
   }
 
   async getStudentRebates(){
+    // const base = "http://localhost:5000/api"
+    // return this.getAllRebatesFromUrl(base.concat("/rebates/student"));
     return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/student"));
   }
   async getAdminRebates(){
@@ -164,7 +166,7 @@ export class StudentdataService {
     });
   }
 
-  async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string, file:any){
+  async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string,isOfficialRebate:boolean, file:any){
     var formData: any = new FormData()
     // console.error(file)
     var token=await this.auth.getToken()
@@ -177,6 +179,7 @@ export class StudentdataService {
     formData.append("start",startDate);
     formData.append("end",endDate);
     formData.append("rebate_doc",file);
+    formData.append("official",isOfficialRebate);
 
 
     let options = { headers: headers, responseType:'text' as 'json'};
@@ -191,7 +194,7 @@ export class StudentdataService {
     })
   }
 
-  async updateRebate(rollNo:string,id:string,reason:string,newStartDate: string, newEndDate: string){
+  async updateRebate(rollNo:string,id:string,reason:string,newStartDate: string, newEndDate: string,isOfficialRebate:boolean, file:any){
     let url = this.baseurl.concat(`/rebate/${id}`);
     var formData: any = new FormData()
     var token=await this.auth.getToken()
@@ -203,6 +206,8 @@ export class StudentdataService {
     formData.append("reason",reason);
     formData.append("start",newStartDate);
     formData.append("end",newEndDate);
+    formData.append("rebate_doc",file);
+    formData.append("official",isOfficialRebate);
     let options = { headers: headers};
     return new Promise((resolve,reject) => {
       this.http.put(url,formData,options).subscribe((res:any) =>{

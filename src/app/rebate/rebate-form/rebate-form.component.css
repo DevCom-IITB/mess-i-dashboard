@@ -51,6 +51,11 @@
     grid-column: 2/3;
 }
 
+#current-file{
+    grid-row: 3;
+    grid-column: 3/4;
+}
+
 #confirm-btn{
     /* color: #ffc42b; */
     

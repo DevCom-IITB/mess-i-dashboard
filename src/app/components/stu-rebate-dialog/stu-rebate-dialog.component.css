@@ -1,4 +1,9 @@
 
+/* .hidden-scroll::-webkit-scrollbar{
+  overflow-y: hidden;
+  scrollbar-width: none;
+  display: none;
+} */
 .main-container{
     min-height: 100vh;
     height: max-content;
