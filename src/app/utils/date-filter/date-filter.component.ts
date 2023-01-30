@@ -11,6 +11,7 @@ export class DateFilterComponent implements OnInit {
   officialFilter : boolean;
   @Output() onApplyFilter: EventEmitter<any> = new EventEmitter()
   @Output() onReset: EventEmitter<any> = new EventEmitter()
+  @Output() onDownloadCSV: EventEmitter<any> = new EventEmitter()
   // @Input() reset:any;
   // @Output() public from_filterChange = new EventEmitter<string>();
   // @Output() public to_filterChange= new EventEmitter<string>();
@@ -24,6 +25,10 @@ export class DateFilterComponent implements OnInit {
   reset(){
     // console.log("reset in date-fliter")
     this.onReset.emit();
+  }
+
+  downloadCSVbtn(){
+    this.onDownloadCSV.emit();
   }
 
 

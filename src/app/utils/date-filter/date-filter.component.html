@@ -11,12 +11,9 @@
     <div id="offcialFilter">
         <app-checkbox [(inputModel)]="officialFilter" label="official"></app-checkbox>
     </div>
-    <div>
         <!-- <button id="confirm-btn" class="btn btn-primary" (click)="initialiseWithFilter()">Apply Filter</button> -->
-        <button id="confirm-btn" class="btn btn-primary" (click)="submit()" >Filter</button>
-    </div>
-    <div>
-        <button id="reset-btn" class="btn btn-primary" (click)="reset()">Reset</button>
-        <!-- <button id="reset-btn" class="btn btn-primary" (click)="initialise()">Reset</button> -->
-    </div>
+        <button id="confirm-btn" class="btn btn-primary button-style" (click)="submit()" >Filter</button>
+        <button id="reset-btn" class="btn btn-primary button-style" (click)="reset()">Reset</button>
+        <!-- <button id="csv-down" class="btn btn-primary" (click)="initialise()">Reset</button> -->
+        <button id="csv-down" class="btn btn-primary button-style" (click)="downloadCSVbtn()">Download CSV</button>
 </div>

@@ -3,7 +3,7 @@ import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
-import { promise } from 'protractor';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-rebate-list',
@@ -17,6 +17,7 @@ export class RebateListComponent implements OnInit {
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
   @Input() getRebates: () => Promise<unknown>;
+  CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
 
   constructor(private data_service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -100,7 +101,7 @@ export class RebateListComponent implements OnInit {
       }
     }
   }
-  populateRebatesMonthFilter(res:any,from_filter:string,to_filter:string, official:boolean): void{
+ populateRebatesMonthFilter(res:any,from_filter:string,to_filter:string, official:boolean): void{
     var from_date = new Date(Date.parse(from_filter))
     var to_date = new Date(Date.parse(to_filter))
     this.pending_rebates.splice(0,this.pending_rebates.length)
@@ -109,6 +110,126 @@ export class RebateListComponent implements OnInit {
     this.filterRebates(res.accepted_rebate,this.accepted_rebates,from_date,to_date,official);
     this.filterRebates(res.pending_rebate,this.pending_rebates,from_date,to_date,official);
     this.filterRebates(res.rejected_rebate,this.rejected_rebates,from_date,to_date,official);
+
+  }
+
+  get_entry_in_request(req:RebateRequest,key:String){
+    switch(key) { 
+      case "id": { 
+        return req.id
+         break; 
+      } 
+      case "roll": { 
+        return req.roll
+         break; 
+      } 
+      case "start": { 
+        return req.start
+         break; 
+      } 
+      case "end": { 
+        return req.end
+         break; 
+      } 
+      case "request_date": { 
+        return req.request_date.replace(","," ")
+         break; 
+      } 
+      case "reason": { 
+        return req.reason
+         break; 
+      } 
+      case "comment": { 
+        return req.comment
+         break; 
+      } 
+      case "official": { 
+        return req.official
+         break; 
+      } 
+      case "rebate_docname": { 
+        return req.rebate_docname
+         break; 
+      } 
+      default: { 
+        return "wrong key"
+         break; 
+      } 
+   } 
+  }
+
+  append_data_in_dict(data_dict:any,arr:RebateRequest[],type:string){
+    // for(let req in arr){
+      arr.forEach(req => {
+        this.CSV_fields.forEach((key) =>
+        {
+          // req.__d
+          try{
+          data_dict["type"].push(type)
+          try{
+            // print(req)
+            // console.log(key)
+            // console.log(this.get_entry_in_request(req,key))
+            
+            data_dict[key].push(this.get_entry_in_request(req,key))
+          }catch{
+            data_dict[key].push(" ")
+          }
+
+          }catch{
+            console.log(key)
+          }
+      
+        });
+
+      })
+      // console.log(data_dict)
+      // for(let key in this.CSV_fields)
+  }
+
+  downloadCSV(){
+    // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
+    
+    var data_dict = {
+      "id":[],
+      "start":[],
+      "end":[],
+      "reason":[],
+      "type":[],
+      "request_date":[],
+      "roll":[],
+      "rebate_docame":[],
+      "comment":[],
+      "official":[]
+      
+    }
+
+    this.append_data_in_dict(data_dict,this.rejected_rebates,"rejected")
+    this.append_data_in_dict(data_dict,this.pending_rebates,"pending")
+    this.append_data_in_dict(data_dict,this.accepted_rebates,"accepted")
+    console.log(this.rejected_rebates)
+
+    let csvList = []
+    // Object.keys(data_dict).forEach(([key,value]) => {
+      // ;
+    // });
+    csvList.push(Object.keys(data_dict).join(",")) 
+    for(var i=0; i<data_dict["id"].length; i++){
+      var temp = "";
+      // });
+      for(let [key,value] of Object.entries(data_dict)){
+        temp = temp + value[i] + "," ;
+      }
+      csvList.push(temp.slice(0,temp.length -1 ));
+
+    }
+
+    let csv = csvList.join("\n");
+    // let csv = [for(var i=0; i<data_dict["id"].length(); i++) ].join('\n')
+
+    console.log(csv);
+    var blob = new Blob([csv],{type:'text/csv'})
+    saveAs(blob,"myfile.csv")
 
   }
 

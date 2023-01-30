@@ -2,7 +2,7 @@
     display: grid;
     gap: 1em;
     grid-auto-rows: minmax(60px, auto);
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, .6fr) 1.5fr;
     /* background-color: #ffc659; */
     /* background: ; */
 
@@ -26,6 +26,20 @@
 #confirm-btn{
     grid-row: 1;
     grid-column: 4/5;
+    /* background-color: #ffc659;
+    border-color: #ffc659;
+    border-radius: 120rem;
+    
+    margin-top: 2.4em; 
+    padding-right: 24px;
+    padding-left: 24px;
+
+    height: max-content;
+
+    font-weight: bold; */
+}
+
+.button-style{
     background-color: #ffc659;
     border-color: #ffc659;
     border-radius: 120rem;
@@ -41,21 +55,12 @@
     font-weight: bold;
 }
 
-
 #reset-btn{
     grid-row: 1;
     grid-column: 5/6;
-    background-color: #ffc659;
-    border-color: #ffc659;
-    border-radius: 120rem;
-    
-    /* padding-top: 2em; */
-    margin-top: 2.4em; 
-    padding-right: 24px;
-    padding-left: 24px;
+}
+#csv-down{
+    grid-row: 1;
+    grid-column: 7/8;
 
-    height: max-content;
-    /* margin: 24px 0px; */
-
-    font-weight: bold;
 }
