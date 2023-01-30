@@ -1,3 +1,5 @@
+import { identifierModuleUrl } from "@angular/compiler";
+
 export interface Student{
     id: string,
     name: string,
@@ -23,6 +25,7 @@ export interface RebateRequest{
     comment: string;
     official: boolean;
     rebate_docname:string;
+
 }
 
 export interface RebateCategorised{
