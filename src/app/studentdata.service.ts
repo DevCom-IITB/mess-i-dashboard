@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import { RebateCategorised, RebateRequest, Student } from './interfaces';
 import { StudentcardComponent } from './studentcard/studentcard.component';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +25,16 @@ export class StudentdataService {
   
   async getStudentData(roll:string){
     let url = this.baseurl.concat("/get-student-info/",roll);
-    console.log(url);
+    // console.log(url);
     return new Promise((resolve, reject) => {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),   
         'rejectUnauthorized':'false' 
       }}).subscribe((res:any)=>{
-        console.log(res)
+        // console.log(res)
         resolve(res)
       },(e)=>{
-        console.log(e)
+        // console.log(e)
         reject(e.error)
       })
     });
@@ -109,14 +110,17 @@ export class StudentdataService {
         params:{
           'id':id,
           'roll':roll,
-        }
-      }).subscribe((res)=>{
+        },
+        responseType:'blob'
+      }).subscribe((blob:any)=>{
         // console.log(res)
-        resolve(res)
+        resolve(blob)
+
+        // saveAs(blob,"doc.pdf")
         // resolve(true_res);
       }, 
       (e)=>{
-        reject({});
+        reject(e);
       });
     });
   }
@@ -276,7 +280,7 @@ export class StudentdataService {
         resolve(res);
       },(e)=>{
         reject(e);
-        console.log(e);
+        // console.log(e);
       })
     })
   }
@@ -297,7 +301,7 @@ export class StudentdataService {
         resolve(res);
       },(e) => {
         reject(e);
-        console.log(e);
+        // console.log(e);
       })
     });
   }
@@ -319,14 +323,14 @@ export class StudentdataService {
         resolve(res);
       },(e) => {
         reject(e);
-        console.log(e);
+        // console.log(e);
       })
     });
   }
 
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
     var token=await this.auth.getToken()
-    console.log(token)
+    // console.log(token)
     let headers = new HttpHeaders({
       'x-access-token':token,
       'rejectUnauthorized':'false' 
@@ -338,7 +342,7 @@ export class StudentdataService {
       this.http.post(url,null,options).subscribe((res:any)=>{
         resolve(res)
       },(e)=>{
-        console.log(e)
+        // console.log(e)
         reject(e.error)
       })
     });
@@ -443,7 +447,7 @@ export class StudentdataService {
   } 
 
   getImage(roll:string): Observable<Blob>{
-    console.log("hi");
+    // console.log("hi");
     let url = this.baseurl.concat("/get-image/",roll);
     return this.http.get(url, { 
       responseType: 'blob',

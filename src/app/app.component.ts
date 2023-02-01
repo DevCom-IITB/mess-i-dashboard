@@ -62,8 +62,8 @@ export class AppComponent {
     document.getElementById("mobile-nav-btn")?.classList.add("hide-element");
     document.getElementById("mobile-nav-btn-close")?.classList.add("show-element");
     document.getElementById("navbar-fixed")?.classList.add("show-element");
-    console.log("toggle nav called")
-    console.log(this.nav_visible)
+    // console.log("toggle nav called")
+    // console.log(this.nav_visible)
   }
 
 

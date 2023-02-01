@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { saveAs } from 'file-saver';
 import { MatDialog } from '@angular/material/dialog';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
@@ -33,7 +34,7 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.card_comment="";
-    console.log(this.rebate_request)
+    // console.log(this.rebate_request)
   }
 
   acceptRebate(){
@@ -43,14 +44,14 @@ export class PdRebateCardComponent implements OnInit {
       }
     ).catch(
       (e) =>{
-        console.log(e);
+        // console.log(e);
         alert("Error occured while accepting rebate");
       }
     )
   }
 
   openDialog() :void {
-    console.log(this.rebate_request.roll)
+    // console.log(this.rebate_request.roll)
     this.dialog.open(StuRebateDialogComponent,{
     data:{
       roll: this.rebate_request.roll,
@@ -60,7 +61,10 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   downloadRebateDoc() :void {
-    console.log("working")
+    this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res:any) => {
+      // console.log(typeof(res))
+      saveAs(res,"doc.pdf")
+    })
   }
 
   rejectRebate(){
