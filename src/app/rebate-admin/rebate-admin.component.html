@@ -11,6 +11,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Rejected</button>
         </li>
     </ul>
+    <app-date-filter (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
     <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">

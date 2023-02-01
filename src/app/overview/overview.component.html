@@ -6,22 +6,25 @@
           <!-- <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel> -->
         <!-- </div> -->
         <select name="hostel" class="form-select" id="hostel_dropdown" aria-placeholder="Hostel Name">
-          <option value="H1">H1</option>
-          <option value="H2">H2</option>
-          <option value="H3">H3</option>
-          <option value="H4">H4</option>
-          <option value="H5">H5</option>
-          <option value="H6">H6</option>
-          <option value="H7">H7</option>
-          <option value="H8">H8</option>
-          <option value="H9">H9</option>
-          <option value="H10">H10</option>
-          <option value="H11">H11</option>
-          <option value="H12">H12</option>
-          <option value="H13">H13</option>
-          <option value="H14">H14</option>
-          <option value="H15">H15</option>
-          <option value="H16">H16</option>
+          <option *ngIf="allowedHostels[1]" value="H1">H1</option>
+          <option *ngIf="allowedHostels[2]" value="H2">H2</option>
+          <option *ngIf="allowedHostels[3]" value="H3">H3</option>
+          <option *ngIf="allowedHostels[4]" value="H4">H4</option>
+          <option *ngIf="allowedHostels[5]" value="H5">H5</option>
+          <option *ngIf="allowedHostels[6]" value="H6">H6</option>
+          <option *ngIf="allowedHostels[7]" value="H7">H7</option>
+          <option *ngIf="allowedHostels[8]" value="H8">H8</option>
+          <option *ngIf="allowedHostels[9]" value="H9">H9</option>
+          <option *ngIf="allowedHostels[10]" value="H10">H10</option>
+          <option *ngIf="allowedHostels[11]" value="H11">H11</option>
+          <option *ngIf="allowedHostels[12]" value="H12">H12</option>
+          <option *ngIf="allowedHostels[13]" value="H13">H13</option>
+          <option *ngIf="allowedHostels[14]" value="H14">H14</option>
+          <option *ngIf="allowedHostels[15]" value="H15">H15</option>
+          <option *ngIf="allowedHostels[16]" value="H16">H16</option>
+          <option *ngIf="allowedHostels[17]" value="H17">H17</option>
+          <option *ngIf="allowedHostels[18]" value="H18">H18</option>
+          <option *ngIf="allowedHostels[20]" value="H20">H20</option>
         </select>
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
           <option value="" disabled selected>Select a Month</option>

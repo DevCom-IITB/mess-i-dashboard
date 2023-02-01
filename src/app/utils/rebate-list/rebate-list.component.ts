@@ -18,6 +18,7 @@ export class RebateListComponent implements OnInit {
   rejected_rebates: RebateRequest[] = new Array();
   @Input() getRebates: () => Promise<unknown>;
   @Input() includeCSV: boolean = true;
+  @Input() showFilter: boolean = true;
   CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
 
   constructor(private data_service:StudentdataService,private auth:AuthService, private router:Router) {
@@ -34,13 +35,13 @@ export class RebateListComponent implements OnInit {
     this.pending_rebates.splice(0,this.pending_rebates.length)
     this.accepted_rebates.splice(0,this.accepted_rebates.length)
     this.rejected_rebates.splice(0,this.rejected_rebates.length)
-    console.log("initialised")
+    // console.log("initialised")
     this.getRebates().then((res)=>{
-      console.log(res)
+      // console.log(res)
       this.populateRebates(res);
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
-      console.log(e);
+      // console.log(e);
     });
   }
 
@@ -49,8 +50,8 @@ export class RebateListComponent implements OnInit {
     this.getRebates().then((res)=>{
       this.populateRebatesMonthFilter(res,event[0],event[1],event[2]);
     }).catch((e)=>{
-      //FIXME: Remove the console log, maybe log somewhere else
-      console.log(e);
+      //FIXME: Remove the console log, maybe log somewhere else 
+      // console.log(e);
     });
   }
 
@@ -158,7 +159,8 @@ export class RebateListComponent implements OnInit {
          break; 
       } 
       case "comment": { 
-        return req.comment
+        return req.comment.replace(","," ")
+        // return req.comment
          break; 
       } 
       case "official": { 
@@ -195,7 +197,7 @@ export class RebateListComponent implements OnInit {
           }
 
           }catch{
-            console.log(key)
+            // console.log(key)
           }
       
         });
@@ -225,7 +227,7 @@ export class RebateListComponent implements OnInit {
     this.append_data_in_dict(data_dict,this.rejected_rebates,"rejected")
     this.append_data_in_dict(data_dict,this.pending_rebates,"pending")
     this.append_data_in_dict(data_dict,this.accepted_rebates,"accepted")
-    console.log(this.rejected_rebates)
+    // console.log(this.rejected_rebates)
 
     let csvList = []
     // Object.keys(data_dict).forEach(([key,value]) => {
@@ -245,17 +247,17 @@ export class RebateListComponent implements OnInit {
     let csv = csvList.join("\n");
     // let csv = [for(var i=0; i<data_dict["id"].length(); i++) ].join('\n')
 
-    console.log(csv);
+    // console.log(csv);
     var blob = new Blob([csv],{type:'text/csv'})
     saveAs(blob,"myfile.csv")
 
   }
 
   submit() {
-    console.log("submit")
+    // console.log("submit")
   }
   reset() {
-    console.log("reset")
+    // console.log("reset")
   }
 
 }

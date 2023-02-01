@@ -58,7 +58,7 @@ async submitRebate(){
     alert("Rebate successfully added")
     this.router.navigate(['/rebate']);
   }).catch((res)=>{
-    alert(res.error);
+    alert(JSON.parse(res.error).error);
   });
 }
 

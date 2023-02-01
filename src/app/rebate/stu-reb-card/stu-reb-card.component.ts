@@ -77,9 +77,9 @@ export class StuRebCardComponent implements OnInit {
 
   downloadRebateDoc(){
     console.log("download initiated")
-    this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res) => {
-      // saveAs(res)
-      console.log(typeof(res))
+    this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res:any) => {
+      saveAs(res,"doc.pdf")
+      // console.log(typeof(res))
     })
   }
 }
