@@ -27,6 +27,9 @@
             <button class="btn btn-light rebate-action-btn" (click)="openDialog()">
                Previous Rebates 
             </button>
+            <button *ngIf="rebate_request.official" class="btn btn-light rebate-action-btn" (click)="downloadRebateDoc()">
+               Download Rebate Document 
+            </button>
         </div>
     </div>
 </div>

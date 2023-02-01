@@ -97,6 +97,48 @@ export class StudentdataService {
     });
   }
 
+  async downloadRebateDocument(roll:string,id:string){
+    let url = "";
+    url = this.baseurl.concat("/download-rebate-document");
+
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{
+        headers:{
+          'x-access-token': this.auth.getToken(),
+        },
+        params:{
+          'id':id,
+          'roll':roll,
+        }
+      }).subscribe((res)=>{
+        // console.log(res)
+        resolve(res)
+        // resolve(true_res);
+      }, 
+      (e)=>{
+        reject({});
+      });
+    });
+  }
+  async getAdminHostels(){
+    let url = "";
+    url = this.baseurl.concat("/mess-list");
+
+    return new Promise((resolve, reject) => {
+      this.http.get(url,{
+        headers:{
+          'x-access-token': this.auth.getToken(),
+        },
+      }).subscribe((res)=>{
+        resolve(res)
+      }, 
+      (e)=>{
+        reject({});
+      });
+    });
+  }
+
+
   async getStudentRebates(){
     // const base = "http://localhost:5000/api"
     // return this.getAllRebatesFromUrl(base.concat("/rebates/student"));

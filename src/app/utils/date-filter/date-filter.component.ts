@@ -12,7 +12,7 @@ export class DateFilterComponent implements OnInit {
   @Output() onApplyFilter: EventEmitter<any> = new EventEmitter()
   @Output() onReset: EventEmitter<any> = new EventEmitter()
   @Output() onDownloadCSV: EventEmitter<any> = new EventEmitter()
-  // @Input() reset:any;
+  @Input() includeCSV:boolean;
   // @Output() public from_filterChange = new EventEmitter<string>();
   // @Output() public to_filterChange= new EventEmitter<string>();
 
@@ -30,7 +30,6 @@ export class DateFilterComponent implements OnInit {
   downloadCSVbtn(){
     this.onDownloadCSV.emit();
   }
-
 
   ngOnInit(): void {
   }
