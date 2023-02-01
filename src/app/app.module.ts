@@ -22,7 +22,7 @@ import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
 import { MessBillComponent } from './mess-bill/mess-bill.component';
 import { FormMessBillComponent } from './components/form-mess-bill/form-mess-bill.component';
 import { StuRebateDialogComponent } from './components/stu-rebate-dialog/stu-rebate-dialog.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from './utils/checkbox/checkbox.component';
@@ -58,7 +58,7 @@ import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MatDialogModule,
     ReactiveFormsModule
   ],
