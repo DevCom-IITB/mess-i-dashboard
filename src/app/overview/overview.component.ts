@@ -11,6 +11,8 @@ import { StudentdataService } from '../studentdata.service';
 export class OverviewComponent implements OnInit {
   // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
 
+  allowedHostels:boolean[] = new Array<boolean>(18);
+  // allow
   messHistory:any;
   noOfDays:any;
   date = new Date();
@@ -23,6 +25,18 @@ export class OverviewComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAdminHostel()
+  }
+
+  getAdminHostel(){
+    this.service.getAdminHostels().then((res:any)=>{
+      // for(let a of res){
+      //   console.log(a)
+      // }
+      // for(int i=0;)
+    }).catch((res) =>{
+      console.log(res)
+    })
   }
 
   cleanData(history:any){

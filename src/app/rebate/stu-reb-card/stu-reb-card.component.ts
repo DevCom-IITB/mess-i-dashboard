@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
@@ -73,4 +74,13 @@ export class StuRebCardComponent implements OnInit {
       console.log(e);
     })
   }
+
+  downloadRebateDoc(){
+    console.log("download initiated")
+    this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res) => {
+      // saveAs(res)
+      console.log(typeof(res))
+    })
+  }
 }
+

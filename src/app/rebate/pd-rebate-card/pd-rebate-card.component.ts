@@ -53,9 +53,14 @@ export class PdRebateCardComponent implements OnInit {
     console.log(this.rebate_request.roll)
     this.dialog.open(StuRebateDialogComponent,{
     data:{
-      roll: this.rebate_request.roll
+      roll: this.rebate_request.roll,
+      includeCSV:false
         }
     })
+  }
+
+  downloadRebateDoc() :void {
+    console.log("working")
   }
 
   rejectRebate(){

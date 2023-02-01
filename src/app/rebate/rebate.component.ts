@@ -23,6 +23,7 @@ export class RebateComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    // console.log(this.rejected_rebates)
   }
 
   

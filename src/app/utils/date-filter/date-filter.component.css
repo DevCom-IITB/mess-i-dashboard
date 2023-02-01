@@ -7,20 +7,30 @@
     /* background: ; */
 
     color: #ffc42b;
+    background-color: transparent;
+    /* color: transparent; */
 }
 
 #from-date-container{
     grid-row: 1;
     grid-column: 1/2;
+    /* color: transparent; */
 }
 #to-date-container{
     grid-row: 1;
     grid-column: 2/3;
+    /* color: transparent; */
+    /* background-color: transparent; */
 }
 
 #officalFilter{
     grid-row: 1;
     grid-column: 3/4;
+}
+
+#main-heading{
+    padding-top: .5rem;
+    margin-bottom: 0px;
 }
 
 #confirm-btn{
@@ -44,13 +54,11 @@
     border-color: #ffc659;
     border-radius: 120rem;
     
-    /* padding-top: 2em; */
     margin-top: 2.4em; 
     padding-right: 24px;
     padding-left: 24px;
 
     height: max-content;
-    /* margin: 24px 0px; */
 
     font-weight: bold;
 }

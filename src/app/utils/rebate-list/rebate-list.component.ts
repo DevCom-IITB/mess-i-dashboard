@@ -17,6 +17,7 @@ export class RebateListComponent implements OnInit {
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
   @Input() getRebates: () => Promise<unknown>;
+  @Input() includeCSV: boolean = true;
   CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
 
   constructor(private data_service:StudentdataService,private auth:AuthService, private router:Router) {
@@ -70,12 +71,22 @@ export class RebateListComponent implements OnInit {
   checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
     var start_date = elem.start.split('-')
     var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10),parseInt(start_date[0],10))
+    // console.log(elem.official)
     if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
       if (official) {
         if(elem.official){
           return true
         }
       } 
+      // else if(!official)
+      // else if()
+      else if(!official){
+        if(elem.official == undefined || elem.official == false){
+          return true;
+        }
+        return false
+      }
+      
       return false
     }
 
@@ -85,6 +96,13 @@ export class RebateListComponent implements OnInit {
           return true
         }
       }
+
+      else if(!official){
+        if(elem_date >= from_date && elem_date <= to_date && (elem.official == undefined || !elem.official)){
+          return true
+        }
+      }
+
 
       else if(elem_date >= from_date && elem_date <= to_date){
         return true

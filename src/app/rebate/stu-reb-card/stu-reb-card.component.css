@@ -45,6 +45,23 @@
     border-color: white;
     margin-left: -12px;
 }
+.button-style{
+    background-color: #ffc659;
+    border-color: #ffc659;
+    border-radius: 122rem;
+    color: white;
+
+    
+    /* padding-top: 2em; */
+    /* margin-top: 2.4em;  */
+    /* padding-right: 24px; */
+    /* padding-left: 24px; */
+
+    height: max-content;
+    /* margin: 24px 0px; */
+
+    font-weight: bold;
+}
 
 #rebate-status-indicator{
     display: flex;
@@ -69,6 +86,11 @@
 
 #rebate-action-container{
     margin: 0.5rem 0rem;
+}
+#rebate-doc-div button{
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
 }
 #rebate-action-container button{
     margin-right: 1rem;
