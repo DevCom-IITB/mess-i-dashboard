@@ -38,7 +38,7 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   acceptRebate(){
-    this.data_service.acceptRebate(this.rebate_request.id,this.rebate_request.roll).then(
+    this.data_service.acceptRebate(this.rebate_request.id,this.rebate_request.roll,this.card_comment).then(
       (res) => {
         this.updateList.emit(this.rebate_request.id);
       }
@@ -58,13 +58,20 @@ export class PdRebateCardComponent implements OnInit {
       includeCSV:false
         }
     })
+    console.log(this.card_comment)
   }
 
   downloadRebateDoc() :void {
     this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res:any) => {
       // console.log(typeof(res))
-      saveAs(res,"doc.pdf")
-    })
+      saveAs(res,"rebate_doc.pdf")
+    }).catch((e)=>{
+      // console.log("some erro")
+      // console.alert()
+      window.alert("error in downloading file")
+    }
+
+    )
   }
 
   rejectRebate(){
@@ -89,8 +96,8 @@ export class PdRebateCardComponent implements OnInit {
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
 
-  onCommentChanged(event: any): void{
-    this.card_comment = event;
-  }
+  // onCommentChanged(event: any): void{
+  //   this.card_comment = event;
+  //" }
 
 }

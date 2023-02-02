@@ -31,7 +31,7 @@ export class RebateAdminComponent implements OnInit {
   }
 
   openDialog(roll:any) :void {
-    console.log(roll)
+    // console.log(roll)
     this.dialog.open(StuRebateDialogComponent,{
     data:{
       roll: roll
@@ -63,7 +63,7 @@ export class RebateAdminComponent implements OnInit {
     console.log(e))
   }
 
-  getRebates = () => this.data_service.getStudentRebates();
+  getRebates = () => this.data_service.getAdminRebates();
 
   async initialise(){
     this.data_service.getAdminRebates().then((res)=>{
@@ -86,47 +86,54 @@ export class RebateAdminComponent implements OnInit {
     this.pending_rebates = response.pending_rebate;
     this.accepted_rebates = response.accepted_rebate;
     this.rejected_rebates = response.rejected_rebate;
-    // console.log(this.pending_rebates)
+    // console.log(this.accepted_rebates)
   }
 
   async initialiseWithFilter(event:any){
 
     this.getRebates().then((res)=>{
       this.populateRebatesMonthFilter(res,event[0],event[1],event[2]);
+      // console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
     });
   }
 
-  // updateList(rebateID: any){
-  //   this.pending_rebates = this.pending_rebates.filter((reb) =>{
-  //     return reb.id != rebateID;
-  //   })
-  // }
-  
-  // populateRebates(response: any): void{
-  //   this.pending_rebates = response.pending_rebate;
-  //   this.accepted_rebates = response.accepted_rebate;
-  //   // console.log(this.accepted_rebates);
-  //   this.rejected_rebates = response.rejected_rebate;
-  // }
+  booleanify (value?: any): boolean{
+    const truthy: string[] = [
+        'true',
+        'True',
+        '1',
+    ]
+    if(typeof(value) == "boolean"){
+      return value;
+    }
 
+    if(typeof(value) == "string"){
+      if (value!=undefined){
+        return truthy.includes(value)
+      }
+      return false
+    }
+    return false
+  }
   // populateRebatesMonthFilter(start:Date,end:Date): void{
   checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
     var start_date = elem.start.split('-')
-    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10),parseInt(start_date[0],10))
-    // console.log(elem.official)
+    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10)-1,parseInt(start_date[0],10))
     if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
       if (official) {
-        if(elem.official){
+        if(this.booleanify(elem.official)){
           return true
         }
       } 
-      // else if(!official)
-      // else if()
       else if(!official){
-        if(elem.official == undefined || elem.official == false){
+        // console.log("this is the date filter official",official)
+        // console.log(elem.comment)
+        // console.log("this is the string official",(elem.official))
+        // console.log(this.booleanify(elem.official))
+        if(!this.booleanify(elem.official)){
           return true;
         }
         return false
@@ -137,19 +144,21 @@ export class RebateAdminComponent implements OnInit {
 
     else{
       if(official){
-        if(elem_date >= from_date && elem_date <= to_date && elem.official){
+        if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime() && this.booleanify(elem.official)){
           return true
         }
       }
 
       else if(!official){
-        if(elem_date >= from_date && elem_date <= to_date && (elem.official == undefined || !elem.official)){
+        if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime() && (elem.official == undefined || !this.booleanify(elem.official))){
+        // console.log(elem.official)
+        // console.error(elem_date)
           return true
         }
       }
 
 
-      else if(elem_date >= from_date && elem_date <= to_date){
+      else if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()){
         return true
       }
 
@@ -271,7 +280,7 @@ export class RebateAdminComponent implements OnInit {
     this.append_data_in_dict(data_dict,this.rejected_rebates,"rejected")
     this.append_data_in_dict(data_dict,this.pending_rebates,"pending")
     this.append_data_in_dict(data_dict,this.accepted_rebates,"accepted")
-    console.log(this.rejected_rebates)
+    // console.log(this.rejected_rebates)
 
     let csvList = []
     // Object.keys(data_dict).forEach(([key,value]) => {
@@ -291,16 +300,16 @@ export class RebateAdminComponent implements OnInit {
     let csv = csvList.join("\n");
     // let csv = [for(var i=0; i<data_dict["id"].length(); i++) ].join('\n')
 
-    console.log(csv);
+    // console.log(csv);
     var blob = new Blob([csv],{type:'text/csv'})
     saveAs(blob,"myfile.csv")
 
   }
 
   submit() {
-    console.log("submit")
+    // console.log("submit")
   }
   reset() {
-    console.log("reset")
+    // console.log("reset")
   }
 }

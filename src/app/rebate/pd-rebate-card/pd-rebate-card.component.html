@@ -15,7 +15,8 @@
     <div id="rebate-action-container">
         <div id="rebate-comment-container" class="row">
             <!-- <input id="rebate-comment-input" type="text" value="" placeholder="Add a comment here..."> -->
-            <app-input-field label="Comment" [inputModel]="card_comment" (inputModelChange)="onCommentChanged($event);"></app-input-field>
+            <!-- <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" (inputModelChange)="onCommentChanged($event);"></app-input-field> -->
+            <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" ></app-input-field>
         </div>
         <div id="rebate-decision-container" class="review-rebate-actions">
             <button class="btn btn-light rebate-action-btn" (click)="acceptRebate()">

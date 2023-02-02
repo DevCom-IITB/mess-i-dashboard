@@ -23,7 +23,7 @@ export interface RebateRequest{
     request_date: string,
     reason: string,
     comment: string;
-    official: boolean;
+    official: string;
     rebate_docname:string;
 
 }

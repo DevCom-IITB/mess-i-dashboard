@@ -55,6 +55,25 @@ export class RebateListComponent implements OnInit {
     });
   }
 
+  booleanify (value?: any): boolean{
+    const truthy: string[] = [
+        'true',
+        'True',
+        '1',
+    ]
+    if(typeof(value) == "boolean"){
+      return value;
+    }
+
+    if(typeof(value) == "string"){
+      if (value!=undefined){
+        return truthy.includes(value)
+      }
+      return false
+    }
+    return false
+  }
+
   updateList(rebateID: any){
     this.pending_rebates = this.pending_rebates.filter((reb) =>{
       return reb.id != rebateID;
@@ -71,7 +90,8 @@ export class RebateListComponent implements OnInit {
   // populateRebatesMonthFilter(start:Date,end:Date): void{
   checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
     var start_date = elem.start.split('-')
-    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10),parseInt(start_date[0],10))
+    // var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10),parseInt(start_date[0],10))
+    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10)-1,parseInt(start_date[0],10))
     // console.log(elem.official)
     if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
       if (official) {
@@ -82,7 +102,7 @@ export class RebateListComponent implements OnInit {
       // else if(!official)
       // else if()
       else if(!official){
-        if(elem.official == undefined || elem.official == false){
+        if(!this.booleanify(elem.official)){
           return true;
         }
         return false
@@ -93,13 +113,13 @@ export class RebateListComponent implements OnInit {
 
     else{
       if(official){
-        if(elem_date >= from_date && elem_date <= to_date && elem.official){
+        if(elem_date >= from_date && elem_date <= to_date && this.booleanify(elem.official)){
           return true
         }
       }
 
       else if(!official){
-        if(elem_date >= from_date && elem_date <= to_date && (elem.official == undefined || !elem.official)){
+        if(elem_date >= from_date && elem_date <= to_date && (!this.booleanify(elem.official))){
           return true
         }
       }

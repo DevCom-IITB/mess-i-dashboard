@@ -74,9 +74,9 @@ async updateRebateData(){
   });
 }
 
-  handleReasonChange = (event: any) => {
-    this.reason = event;
-  }
+  // handleReasonChange = (event: any) => {
+  //   this.reason = event;
+  // }
   handleHostelChange = (event: any) => {
     this.hostel = event;
   }
