@@ -285,7 +285,7 @@ export class StudentdataService {
     })
   }
 
-  async acceptRebate(rebateID: string,rollNo: string){
+  async acceptRebate(rebateID: string,rollNo: string,comment: string){
     let token = this.auth.getToken();
     let headers = new HttpHeaders({
       'x-access-token': token,
@@ -296,6 +296,7 @@ export class StudentdataService {
     var formData = new FormData();
     formData.append("roll",rollNo);
     formData.append("id", rebateID);
+    formData.append("comment", comment);
     return new Promise((resolve,reject) =>{
       this.http.put(url,formData,options).subscribe((res: any) =>{
         resolve(res);

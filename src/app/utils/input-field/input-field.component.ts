@@ -11,7 +11,7 @@ export class InputFieldComponent implements OnInit {
   @Input() public bgColor?: string = "#ffffff";
   // @Input() public calender?: boolean = false;
   @Input() public text_to_show : string = "None";
-  @Input() public inputType: string;
+  @Input() public inputType: string = "text";
   @Input() public inputModel?: string;
   @Input() callbackFunction: (args: any) => void;
   @Output() public inputModelChange = new EventEmitter<string>();

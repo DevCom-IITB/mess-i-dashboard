@@ -26,13 +26,13 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdminHostel()
-    console.log(this.allowedHostels)
+    // console.log(this.allowedHostels)
   }
 
   getAdminHostel(){
     this.service.getAdminHostels().then((res:any)=>{
       for(let i=1; i<this.allowedHostels.length; i++){
-        console.log(res)
+        // console.log(res)
         this.allowedHostels[i] = false;
         if(res.includes(`H${i}`)){
           this.allowedHostels[i] = true;

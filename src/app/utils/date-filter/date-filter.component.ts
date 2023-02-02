@@ -8,7 +8,7 @@ import { Component,EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class DateFilterComponent implements OnInit {
   from_filter : string = "NONE";
   to_filter : string = "NONE";
-  officialFilter : boolean;
+  officialFilter : boolean = false;
   @Output() onApplyFilter: EventEmitter<any> = new EventEmitter()
   @Output() onReset: EventEmitter<any> = new EventEmitter()
   @Output() onDownloadCSV: EventEmitter<any> = new EventEmitter()

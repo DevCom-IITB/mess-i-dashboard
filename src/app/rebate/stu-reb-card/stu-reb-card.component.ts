@@ -34,6 +34,7 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
+    // console.log(this.rebate_request)
   }
 
   readableDate(inp: Date): string{

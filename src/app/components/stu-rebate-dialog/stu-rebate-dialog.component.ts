@@ -28,7 +28,7 @@ export class StuRebateDialogComponent implements OnInit {
   getRebates = () => this.data_service.getAdminRebatesRoll(this.injected_data['roll'])
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('60%','80%')
+    this.dialogRef.updateSize('65%','80%')
   }
 
   onNoClick(): void{
