@@ -121,7 +121,9 @@ export class RebateAdminComponent implements OnInit {
   // populateRebatesMonthFilter(start:Date,end:Date): void{
   checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
     var start_date = elem.start.split('-')
+    var end_date = elem.end.split('-')
     var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10)-1,parseInt(start_date[0],10))
+    var elem_date_end = new Date(parseInt(end_date[2],10),parseInt(end_date[1],10)-1,parseInt(end_date[0],10))
     if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
       if (official) {
         if(this.booleanify(elem.official)){
@@ -144,13 +146,13 @@ export class RebateAdminComponent implements OnInit {
 
     else{
       if(official){
-        if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime() && this.booleanify(elem.official)){
+        if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime())) && this.booleanify(elem.official)){
           return true
         }
       }
 
       else if(!official){
-        if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime() && (elem.official == undefined || !this.booleanify(elem.official))){
+        if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime())) && (elem.official == undefined || !this.booleanify(elem.official))){
         // console.log(elem.official)
         // console.error(elem_date)
           return true
@@ -158,7 +160,7 @@ export class RebateAdminComponent implements OnInit {
       }
 
 
-      else if(elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()){
+      else if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime()))){
         return true
       }
 
