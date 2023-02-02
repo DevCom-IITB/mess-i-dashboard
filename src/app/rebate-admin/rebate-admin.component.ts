@@ -236,24 +236,16 @@ export class RebateAdminComponent implements OnInit {
   append_data_in_dict(data_dict:any,arr:RebateRequest[],type:string){
     // for(let req in arr){
       arr.forEach(req => {
+          data_dict["type"].push(type)
         this.CSV_fields.forEach((key) =>
         {
-          // req.__d
           try{
-          data_dict["type"].push(type)
-          try{
-            // print(req)
-            // console.log(key)
-            // console.log(this.get_entry_in_request(req,key))
             
             data_dict[key].push(this.get_entry_in_request(req,key))
           }catch{
             data_dict[key].push(" ")
           }
 
-          }catch{
-            console.log(key)
-          }
       
         });
 
@@ -273,7 +265,7 @@ export class RebateAdminComponent implements OnInit {
       "type":[],
       "request_date":[],
       "roll":[],
-      "rebate_docame":[],
+      "rebate_docname":[],
       "comment":[],
       "official":[]
       
@@ -304,7 +296,7 @@ export class RebateAdminComponent implements OnInit {
 
     // console.log(csv);
     var blob = new Blob([csv],{type:'text/csv'})
-    saveAs(blob,"myfile.csv")
+    saveAs(blob,"rebates.csv")
 
   }
 
