@@ -75,6 +75,7 @@ export class OverviewComponent implements OnInit {
   }
 
   async getMonthMessData(data: any){
+    console.log(data.form.value);
     
     if (data.form.value.year&&data.form.value.month) {
       let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
