@@ -102,7 +102,7 @@ body{
     /* overflow-x: hidden; */
     /* position: fixed; */
     /* height: 100vh; */
-    /* z-index: 0; */
+    /* z-index: 5; */
     /* visibility: hidden; */
     /* position: absolute; */
     padding: 0px 0px 0px 0px;
@@ -121,7 +121,7 @@ body{
     /* margin-left: 0%; */
     flex-direction: row;
     justify-content: flex-start;
-    z-index: 1 !important;
+    z-index: 5 !important;
 }
 
 #mobile-navbar{
