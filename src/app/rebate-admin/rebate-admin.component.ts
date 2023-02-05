@@ -6,6 +6,7 @@ import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-re
 import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 import {saveAs} from 'file-saver';
+import { FilterService } from '../filter.service';
 
 @Component({
   selector: 'app-rebate-admin',
@@ -17,10 +18,11 @@ export class RebateAdminComponent implements OnInit {
   pending_rebates: RebateRequest[] = new Array();
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
+  currTab: String = "pending";
   CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
   includeCSV:boolean = true;
 
-  constructor(private data_service:StudentdataService,private auth:AuthService,private dialog:MatDialog, private router:Router) {
+  constructor(private filter_service:FilterService, private data_service:StudentdataService,private auth:AuthService,private dialog:MatDialog, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -63,6 +65,11 @@ export class RebateAdminComponent implements OnInit {
     console.log(e))
   }
 
+  updateTab(tab:String){
+    this.currTab = tab;
+    console.log(this.currTab)
+  }
+
   getRebates = () => this.data_service.getAdminRebates();
 
   async initialise(){
@@ -92,218 +99,29 @@ export class RebateAdminComponent implements OnInit {
   async initialiseWithFilter(event:any){
 
     this.getRebates().then((res)=>{
-      this.populateRebatesMonthFilter(res,event[0],event[1],event[2]);
+      this.filter_service.populateRebatesMonthFilter(res,event[0],event[1],event[2],{pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates});
       // console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
     });
-  }
 
-  booleanify (value?: any): boolean{
-    const truthy: string[] = [
-        'true',
-        'True',
-        '1',
-    ]
-    if(typeof(value) == "boolean"){
-      return value;
-    }
-
-    if(typeof(value) == "string"){
-      if (value!=undefined){
-        return truthy.includes(value)
-      }
-      return false
-    }
-    return false
-  }
-  // populateRebatesMonthFilter(start:Date,end:Date): void{
-  checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
-    var start_date = elem.start.split('-')
-    var end_date = elem.end.split('-')
-    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10)-1,parseInt(start_date[0],10))
-    var elem_date_end = new Date(parseInt(end_date[2],10),parseInt(end_date[1],10)-1,parseInt(end_date[0],10))
-    if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
-      if (official) {
-        if(this.booleanify(elem.official)){
-          return true
-        }
-      } 
-      else if(!official){
-        // console.log("this is the date filter official",official)
-        // console.log(elem.comment)
-        // console.log("this is the string official",(elem.official))
-        // console.log(this.booleanify(elem.official))
-        if(!this.booleanify(elem.official)){
-          return true;
-        }
-        return false
-      }
-      
-      return false
-    }
-
-    else{
-      if(official){
-        if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime())) && this.booleanify(elem.official)){
-          return true
-        }
-      }
-
-      else if(!official){
-        if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime())) && (elem.official == undefined || !this.booleanify(elem.official))){
-        // console.log(elem.official)
-        // console.error(elem_date)
-          return true
-        }
-      }
-
-
-      else if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime()))){
-        return true
-      }
-
-      return false
-    }
-  }
-
-  filterRebates(res:any,arr:any,from_date:Date,to_date:Date,official:boolean){ 
-    for(let elem of res){
-      if(this.checkFilterOnRebate(from_date,to_date,official,elem)){
-        arr.push(elem)
-      }
-    }
-  }
- populateRebatesMonthFilter(res:any,from_filter:string,to_filter:string, official:boolean): void{
-    var from_date = new Date(Date.parse(from_filter))
-    var to_date = new Date(Date.parse(to_filter))
-    this.pending_rebates.splice(0,this.pending_rebates.length)
-    this.accepted_rebates.splice(0,this.accepted_rebates.length)
-    this.rejected_rebates.splice(0,this.rejected_rebates.length)
-    this.filterRebates(res.accepted_rebate,this.accepted_rebates,from_date,to_date,official);
-    this.filterRebates(res.pending_rebate,this.pending_rebates,from_date,to_date,official);
-    this.filterRebates(res.rejected_rebate,this.rejected_rebates,from_date,to_date,official);
-
-  }
-
-  get_entry_in_request(req:RebateRequest,key:String){
-    switch(key) { 
-      case "id": { 
-        return req.id
-         break; 
-      } 
-      case "roll": { 
-        return req.roll
-         break; 
-      } 
-      case "start": { 
-        return req.start
-         break; 
-      } 
-      case "end": { 
-        return req.end
-         break; 
-      } 
-      case "request_date": { 
-        return req.request_date.replace(","," ")
-         break; 
-      } 
-      case "reason": { 
-        return req.reason
-         break; 
-      } 
-      case "comment": { 
-        return req.comment.replace(","," ")
-        // return req.comment
-         break; 
-      } 
-      case "official": { 
-        return req.official
-         break; 
-      } 
-      case "rebate_docname": { 
-        return req.rebate_docname
-         break; 
-      } 
-      default: { 
-        return "wrong key"
-         break; 
-      } 
-   } 
-  }
-
-  append_data_in_dict(data_dict:any,arr:RebateRequest[],type:string){
-    // for(let req in arr){
-      arr.forEach(req => {
-          data_dict["type"].push(type)
-        this.CSV_fields.forEach((key) =>
-        {
-          try{
-            
-            data_dict[key].push(this.get_entry_in_request(req,key))
-          }catch{
-            data_dict[key].push(" ")
-          }
-
-      
-        });
-
-      })
-      // console.log(data_dict)
-      // for(let key in this.CSV_fields)
   }
 
   downloadCSV(){
     // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
+    if(this.currTab == "pending"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:this.pending_rebates,accepted_rebates:[],rejected_rebates:[]})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
+    else if(this.currTab == "accepted"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:this.accepted_rebates,rejected_rebates:[]})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
+    else if(this.currTab == "rejected"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:[],rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
     
-    var data_dict = {
-      "id":[],
-      "start":[],
-      "end":[],
-      "reason":[],
-      "type":[],
-      "request_date":[],
-      "roll":[],
-      "rebate_docname":[],
-      "comment":[],
-      "official":[]
-      
-    }
-
-    this.append_data_in_dict(data_dict,this.rejected_rebates,"rejected")
-    this.append_data_in_dict(data_dict,this.pending_rebates,"pending")
-    this.append_data_in_dict(data_dict,this.accepted_rebates,"accepted")
-    // console.log(this.rejected_rebates)
-
-    let csvList = []
-    // Object.keys(data_dict).forEach(([key,value]) => {
-      // ;
-    // });
-    csvList.push(Object.keys(data_dict).join(",")) 
-    for(var i=0; i<data_dict["id"].length; i++){
-      var temp = "";
-      // });
-      for(let [key,value] of Object.entries(data_dict)){
-        temp = temp + value[i] + "," ;
-      }
-      csvList.push(temp.slice(0,temp.length -1 ));
-
-    }
-
-    let csv = csvList.join("\n");
-    // let csv = [for(var i=0; i<data_dict["id"].length(); i++) ].join('\n')
-
-    // console.log(csv);
-    var blob = new Blob([csv],{type:'text/csv'})
-    saveAs(blob,"rebates.csv")
-
-  }
-
-  submit() {
-    // console.log("submit")
-  }
-  reset() {
-    // console.log("reset")
   }
 }

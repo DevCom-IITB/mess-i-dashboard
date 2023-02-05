@@ -2,24 +2,24 @@
     <h2 style="border-bottom:3px solid #ffc42b;">Rebates</h2>
     <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pending</button>
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('pending')">Pending</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Accepted</button>
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('accepted')">Accepted</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Rejected</button>
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
         </li>
     </ul>
     <app-date-filter (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
-    <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-content" id="myTabContent" >
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
         <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
             <!-- <app-pd-rebate-card (click)="openDialog(p_rebate.roll)" [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card> -->
             <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card>
         </div>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
         <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
             <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted"></app-stu-reb-card>
         </div>
