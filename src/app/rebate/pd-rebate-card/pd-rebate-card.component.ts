@@ -63,15 +63,10 @@ export class PdRebateCardComponent implements OnInit {
 
   downloadRebateDoc() :void {
     this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res:any) => {
-      // console.log(typeof(res))
       saveAs(res,"rebate_doc.pdf")
     }).catch((e)=>{
-      // console.log("some erro")
-      // console.alert()
       window.alert("error in downloading file")
-    }
-
-    )
+    })
   }
 
   rejectRebate(){
