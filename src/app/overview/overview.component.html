@@ -5,7 +5,8 @@
         <!-- <div class="form-group"> -->
           <!-- <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel> -->
         <!-- </div> -->
-        <select name="hostel" class="form-select" id="hostel_dropdown" aria-placeholder="Hostel Name">
+        <select name="hostel" class="form-select" id="hostel_dropdown" aria-placeholder="Hostel Name" ngModel>
+          <option value="" disabled selected>Select Hostel</option>
           <option *ngIf="allowedHostels[1]" value="H1">H1</option>
           <option *ngIf="allowedHostels[2]" value="H2">H2</option>
           <option *ngIf="allowedHostels[3]" value="H3">H3</option>
