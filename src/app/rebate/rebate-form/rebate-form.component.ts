@@ -47,9 +47,10 @@ export class RebateFormComponent implements OnInit {
   }
 
 async submitRebate(){
-    console.log(this.isOfficialRebate)
-    console.log(this.rebateEnd)
-    console.log(this.rebateStart)
+    // console.log(this.isOfficialRebate)
+    // console.log(this.rebateEnd)
+    // console.log(this.rebateStart)
+    // console.log(this.officialRebateFile)
   this.roll_no = this.auth.roll_no;
   // console.log(`Sending roll number in rebate ${this.roll_no}`);
   // console.log(this.officialRebateFile)
@@ -94,7 +95,11 @@ async updateRebateData(){
 
 
   handleOfficialRebateFileChange = (event:any) => {
-    // console.log(event.target.files[0])
+    // console.log(event.target.files[0].type)
+    // if (event.target.files[0].type)
+
+    // console.lgo
+    // if(t)
     this.officialRebateFile = event.target.files[0];
     // this.officialRebateFile = {...event.target.files};
     // this.officialRebateFile = {...event.target.files};
