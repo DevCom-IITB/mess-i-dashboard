@@ -28,9 +28,10 @@ export class InputFieldComponent implements OnInit {
 
   emitFile(event:any){
     // console.log((event.target.files[0].size)/(10^6))
-    console.log(event.target.files[0])
+    console.log(event.target.files[0].size)
+    console.log(event.target.files[0].size < 20*(1000000))
     if (event.target.files[0].type == "application/pdf"){
-      if(event.target.files[0].size < 20*(10^6)){
+      if(event.target.files[0].size < 20*(1000000)){
         this.callbackFunction(event)
       }else{
         alert("file size should be less than 20MB")
