@@ -28,7 +28,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
-import { MessMenuComponent } from './mess-menu/mess-menu.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { MessMenuComponent } from './mess-menu/mess-menu.component';
     CheckboxComponent,
     DateFilterComponent,
     RebateListComponent,
-    MessMenuComponent
   ],
   imports: [
     BrowserModule,
