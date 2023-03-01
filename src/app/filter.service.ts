@@ -139,7 +139,12 @@ export class FilterService {
          break; 
       } 
       case "room": {
-        return req.room
+        var temp = req.room;
+        if (temp.startsWith("-")){
+          temp = temp.substring(1,temp.length)
+        }
+        return temp
+        
       }
       case "fullname": {
         return req.fullname
@@ -188,8 +193,6 @@ export class FilterService {
       "rebate_docname":[],
       "comment":[],
       "official":[],
-      
-      
     }
 
     this.append_data_in_dict(data_dict,rebates.rejected_rebates,"rejected")
