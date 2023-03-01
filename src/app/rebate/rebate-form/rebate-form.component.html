@@ -8,18 +8,6 @@
         <div id="rebate-reason-container">
             <app-input-field label="Reason for rebate" inputType="text" [(inputModel)]="reason"></app-input-field>
         </div>
-        <!-- <div id="from-date-container">
-            <app-checkbox label="Official" [inputModel]="isOfficialRebate" (inputModelChange)="handleOfficialRebateStatusChange($event)"></app-checkbox>
-        </div> -->
-        <!-- <div *ngIf="isOfficialRebate">
-            <app-input-field label="Supportive Document" inputType="file" [inputModel]></app-input-field>
-        </div> -->
-        <!-- <div id="hostel-container">
-            <app-input-field label="Hostel" [inputModel]="hostel" (inputModelChange)="handleHostelChange($event)"></app-input-field>
-        </div>
-        <div id="roomno-container">
-            <app-input-field label="Room No." [inputModel]="roomNo" (inputModelChange)="handleRoomChange($event)"></app-input-field>
-        </div> -->
         <div id="from-date-container">
             <app-input-field label="From" inputType="calender" [(inputModel)]="rebateStart"></app-input-field>
         </div>

@@ -24,13 +24,18 @@
     font-size: 1.75rem;
     font-weight: 700;
 }
+#stud-sub-details-container{
+    /* margin: 7px 0px; */
+    font-size: 1.25rem;
+    font-weight: 600;
+}
 
 #rebate-duration-container{
     margin: 12px 0px;
 }
 
 #rebate-duration{
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 

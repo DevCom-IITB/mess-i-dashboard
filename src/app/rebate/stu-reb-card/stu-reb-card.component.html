@@ -9,10 +9,14 @@
 
     
     <div id="stud-details-container">
-        <span>{{ rebate_request.roll }}</span>
+        <span>{{ rebate_request.fullname }} </span>
         <span *ngIf="approval_state=='pending'" id="rebate-status-indicator" style="background-color: #FFF4D8; color: #ffc42b;">Pending</span>
         <span *ngIf="approval_state=='accepted'" id="rebate-status-indicator" style="background-color: #E9FFD8; color: #649F34;">Accepted</span>
         <span *ngIf="approval_state=='rejected'" id="rebate-status-indicator" style="background-color: #fcc7c3; color: #b73229;">Rejected</span>
+    </div>
+
+    <div id="stud-sub-details-container">
+        <span>{{ rebate_request.roll }}   Room:{{rebate_request.room}}  </span>
     </div>
 
     <div id="rebate-duration-container">
