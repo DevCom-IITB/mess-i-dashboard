@@ -25,6 +25,8 @@ export interface RebateRequest{
     comment: string;
     official: string;
     rebate_docname:string;
+    fullname: string,
+    room: string,
 
 }
 

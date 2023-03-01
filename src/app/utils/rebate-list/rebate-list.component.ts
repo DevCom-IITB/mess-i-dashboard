@@ -36,9 +36,8 @@ export class RebateListComponent implements OnInit {
     this.pending_rebates.splice(0,this.pending_rebates.length)
     this.accepted_rebates.splice(0,this.accepted_rebates.length)
     this.rejected_rebates.splice(0,this.rejected_rebates.length)
-    // console.log("initialised")
     this.getRebates().then((res)=>{
-      // console.log(res)
+      console.log(res);
       this.populateRebates(res);
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else

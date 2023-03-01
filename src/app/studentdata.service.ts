@@ -198,6 +198,10 @@ export class StudentdataService {
   async getAllRebatesFromUrl(url: string){
     return new Promise((resolve, reject) => {
       this.http.get(url,{
+        params:{
+          'incroom': 'True',
+          'incname' : 'True'
+        },
         headers:{
           'x-access-token': this.auth.getToken(),
         }
@@ -311,7 +315,7 @@ export class StudentdataService {
     let token = this.auth.getToken();
     let headers = new HttpHeaders({
       'x-access-token': token,
-      'rejectUnauthoized':'false'
+      'rejectUnauthoized':'false',
     });
     let options = {headers:headers};
     let url = this.baseurl.concat("/rebate-action/reject");
