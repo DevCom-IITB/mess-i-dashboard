@@ -8,7 +8,7 @@ import { RebateRequest } from './interfaces';
 export class FilterService {
 
   // @Input() getRebates: () => Promise<unknown>;
-  CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
+  CSV_fields : string[] = ["fullname","room","id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
   constructor() { }
 
 
@@ -138,6 +138,12 @@ export class FilterService {
         return req.rebate_docname
          break; 
       } 
+      case "room": {
+        return req.room
+      }
+      case "fullname": {
+        return req.fullname
+      }
       default: { 
         return "wrong key"
          break; 
@@ -170,6 +176,8 @@ export class FilterService {
     // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
     
     var data_dict = {
+      "fullname":[],
+      "room":[],
       "id":[],
       "start":[],
       "end":[],
@@ -179,7 +187,8 @@ export class FilterService {
       "roll":[],
       "rebate_docname":[],
       "comment":[],
-      "official":[]
+      "official":[],
+      
       
     }
 
