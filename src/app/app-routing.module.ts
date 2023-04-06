@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:'studentcard',component:StudentcardComponent},
   {path: 'applyrebate',component:RebateFormComponent},
   {path: 'rebate-admin',component:RebateAdminComponent},
-  {path:'',redirectTo:'/home',pathMatch:'full'}
+  // {path:'',redirectTo:'/home',pathMatch:'full'}
 ];
 
 @NgModule({
