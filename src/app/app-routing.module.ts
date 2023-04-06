@@ -17,12 +17,13 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'overview',component:OverviewComponent},
-  // {path:'mess-bill',component:MessBillComponent},
+  {path:'mess-bill',component:MessBillComponent},
   {path:'list',component:StudentListComponent},
   {path:'rebate',component:RebateComponent},
   {path:'studentcard',component:StudentcardComponent},
   {path: 'applyrebate',component:RebateFormComponent},
-  {path: 'rebate-admin',component:RebateAdminComponent}
+  {path: 'rebate-admin',component:RebateAdminComponent},
+  {path:'',redirectTo:'/home',pathMatch:'full'}
 ];
 
 @NgModule({
