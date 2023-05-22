@@ -1,28 +1,62 @@
-<div style="background-color: beige; min-height: 100vh;" class="container-fluid">
-<h2>Student Data</h2>
+<!-- <div style="background-color: beige; min-height: 100vh;" class="container-fluid"> -->
+<div style="background-color:#FFFCF4; min-height: 100vh;" class="container-fluid">
+    <h1>Student Data</h1>
     <div style="justify-content:center ;">
         <div id="studentcard" >
             <div>
-                <img id="photo" src="..." class="img-fluid rounded-start" alt="...">
+                <img class="img-fluid rounded-start" [src]="studentImage" alt="Place image title" *ngIf="!isImageLoading">
             </div>
-
             <div class="cardcontainer">
                 <h5 id="name">{{student.name}}</h5>
                 <div class="rollnohostel">
                     <div id="rollandhostel">
                         <p id="rollno">Roll no:</p> 
-                        <p id="hostel" style="margin-top:0px;"> Hostel,Room no:<p>
-                    </div>
-                    <div> 
+                        <p id="hostel" style="margin-top:0px;"> Hostel, Room no:<p>
+                    </div>                                      
+                    <div class="space"> 
                         <p id="studrollno">{{student.id}}</p>
-                        <p>Hostel {{student.hostel}}, {{student.room}} </p>
+                        <p>Hostel {{student.hostel}} {{student.room}} </p>
                     </div>
                 </div>
-                
-            </div>
-            
+                    <br> 
+                   <div class="test">
+                    <p class="tgl">Status of the card: </p> 
+                    <div *ngIf="student.card_status">
+                        <button type="button" class="active-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center active-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Active</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+
+                      <div>
+                        <button (click)="openDialog(rollNumber)">
+                          Prev Rebates
+                        </button>
+                      </div>
+                      <div *ngIf="!student.card_status">
+                        <button type="button" class="inactive-button" id="{{rollNumber}}" (click)="toggl()">
+                          <div class="container px-1 py-0">
+                            <div class="row">
+                              <div class="col px-0 align-items-center ">
+                                <div class="align-self-center inactive-circle"></div>
+                              </div>
+                              <div class="col px-1 py-0">Inactive</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                  </div>
+            </div>  
         </div>
     </div>
+    <br>
+    
     <form #data="ngForm" (ngSubmit)="getMonthData(data)" class="form-inline">
         <div class="input-group mb-6" style="max-width: 80%; ;">
             <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>

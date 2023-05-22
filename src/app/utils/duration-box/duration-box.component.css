@@ -1,0 +1,93 @@
+
+.main-container{
+    height:100%;
+    /* padding: 5rem 3rem; */
+}
+.page-title{
+    font-size: 2.5rem;
+}
+#form-instructions{
+    font-size: 1rem; 
+    color: gray;
+    font-weight: 200;
+    /* padding-top: 10px !important; */
+    margin-top: 12px  !important;
+}
+
+#form-container{
+    color: #ffc42b;
+}
+
+#rebate-reason-container{
+    font-size: large;
+    padding-top: 10px;
+    margin : 10px;
+}
+
+.official-container{
+    font-size:15px;
+    height: 32px;
+    line-height: 32px;
+    background-color: green;
+}
+/* #rebate-info-container{
+
+} */
+
+.inline-input {
+    display: inline-block;
+    /* margin-right: 100px;  */
+  }
+  
+#from-date-container{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#to-date-container{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#official-tag{
+    margin-left : 100px;
+}
+
+#is-official-rebate{
+ 
+    padding-top: 10px;
+    font-size: large;
+    padding-right: auto;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#file-for-official{
+    grid-row: 3;
+    grid-column: 2/3;
+}
+
+#current-file{
+    grid-row: 4;
+    grid-column: 1/3;
+}
+
+#confirm-btn{
+    /* color: #ffc42b; */
+    
+    background-color: #ffc659;
+    border-color: #ffc659;
+    border-radius: 120rem;
+    
+    padding-right: 24px;
+    padding-left: 24px;
+
+    height: max-content;
+    margin: 24px 0px;
+
+    font-weight: bold;
+}
+
+#mat-dialog-title{
+    margin-left:10px;
+    width: fit-content; 
+    margin-bottom: 0px;
+}

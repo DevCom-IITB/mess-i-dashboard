@@ -1,0 +1,109 @@
+.maindiv {
+    position: relative;
+}
+
+.accepted{
+    height:25px;
+    width:75px;
+    border-radius: 30px;
+    background-color:blue;
+    border:none;
+    color:white;
+}
+
+.rebate-card-container{
+    min-width: 330px;
+    padding: 12px 36px;
+    border-radius: 12px;
+    box-shadow: 6px 6px 50px -40px;
+    background-color: white;
+}
+
+#stud-details-container{
+    margin: 12px 0px;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+#stud-sub-details-container{
+    /* margin: 7px 0px; */
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+#rebate-duration-container{
+    margin: 12px 0px;
+}
+
+#rebate-duration{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.small-italics{
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.rebate-action-btn{
+    color: #ffc24b;
+    background-color: white;
+    border-color: white;
+    margin-left: -12px;
+}
+.button-style{
+    background-color: #ffc659;
+    border-color: #ffc659;
+    border-radius: 122rem;
+    color: white;
+
+    
+    /* padding-top: 2em; */
+    /* margin-top: 2.4em;  */
+    /* padding-right: 24px; */
+    /* padding-left: 24px; */
+
+    height: max-content;
+    /* margin: 24px 0px; */
+
+    font-weight: bold;
+}
+
+#rebate-status-indicator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    float: right;
+
+    height: 2.3rem;
+    width: 8rem;
+
+    border-radius: 12px;
+    
+    vertical-align: middle;
+    text-align: center;
+    
+    font-size:1.3rem;
+    font-weight: 400;
+}
+
+
+
+#rebate-action-container{
+    margin: 0.5rem 0rem;
+}
+#rebate-doc-div button{
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+.action-container button{
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+
+.row{
+    word-break: break-all;
+    white-space: normal;
+}

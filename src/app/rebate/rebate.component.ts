@@ -1,6 +1,9 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 
 
@@ -11,29 +14,20 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class RebateComponent implements OnInit {
 
-  messHistory:any;
-  date = new Date();
-  noOfDays:any;
-  totalMeals:any;
-  headers = ['Breakfast','Lunch','Snacks','Dinner','Milk','Egg']
   studentData: any;
+  pending_rebates: RebateRequest[] = new Array();
+  accepted_rebates: RebateRequest[] = new Array();
+  rejected_rebates: RebateRequest[] = new Array();
 
-  constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
+  constructor(public data_service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    // console.log(this.rejected_rebates)
   }
 
+  
   ngOnInit(): void {
   }
-
-  async submitRebate(search: any){
-    this.service.setStudentRebate(search.form.value.rollnumber,search.form.value.startDate,search.form.value.endDate).then((res)=>{
-      alert("Rebate successfully added")
-      
-  }).catch((res)=>{
-    alert("Rebate was not added!!")
-  })
-}
-
+  getRebates = () => this.data_service.getStudentRebates();
 }

@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-  // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   // studentImageMap = new Map();
   //studentInfoList_array = [];
   studentInfoList : any;
@@ -38,7 +38,7 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.justAfterScrolling = true;
     this.getList(this.entryNumber);
-    // this.updateNav.emit();
+    this.updateNav.emit();
     this.subject.pipe(debounceTime(1000)).subscribe((val)=>{
       this.getList(1);
     });
@@ -63,12 +63,17 @@ export class StudentListComponent implements OnInit {
       })
     }
 
-  toggl(currStudRoll:any){
-    console.log("click")
-    let res = this.service.togglActive(currStudRoll)
-    if (res){
-      this.changeMessStatus(currStudRoll);
-    }
+  async toggl(currStudRoll:any){
+    this.service.togglActive(currStudRoll).then((res)=>{
+      if (res){
+        this.changeMessStatus(currStudRoll);
+      }
+    }).catch((res)=>{
+      alert("Unable to toggle");
+      console.log(res);
+    });
+
+    
   }
 
   async changeMessStatus(rollNumber:any){
@@ -84,6 +89,7 @@ export class StudentListComponent implements OnInit {
     //update the page number and the studInfoList 
       // this.startEntry += this.entriesPerPage; 
       // this.endEntry += Math.min(this.entriesPerPage, this.totalEntry - this.endEntry);
+    // if(this.entryNumber+this.entriesPerPage>this.totalEntry) return;
     this.entryNumber += this.entriesPerPage;
     this.getList(this.entryNumber); 
   }
@@ -91,6 +97,7 @@ export class StudentListComponent implements OnInit {
   async prevEntries(){
       // this.endEntry -= this.entriesPerPage; 
       // this.startEntry -= Math.min(this.startEntry, this.entriesPerPage);
+    if(this.entryNumber==1) return;
     this.entryNumber -= this.entriesPerPage;
     this.getList(this.entryNumber);
   }

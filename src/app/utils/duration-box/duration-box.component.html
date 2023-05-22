@@ -1,0 +1,50 @@
+<h2 id="mat-dialog-title" class="inline-input" mat-dialog-title>Shrink Duration</h2>
+<!-- <div ngIf="this.isOfficialRebate" id="is-official-rebate" class="inline-input" > -->
+<div *ngIf="isOfficialRebate" id="is-official-rebate" class="inline-input" >
+  <mat-chip-list id="offcial-tag" aria-label="Official Status">
+    <mat-chip selected class="official-component">Official</mat-chip>
+  </mat-chip-list>
+</div>
+<mat-dialog-content class="mat-typography">
+  <div class="main-container">
+
+    <div id="form-container">
+      <!-- <div id="rebate-info-container"> -->
+        <div id="rebate-reason-container" >Reason: {{this.reason}}</div>
+      <!-- </div> -->
+      <div id="date-containter">
+        <div id="from-date-container" class="inline-input">
+          <app-input-field
+            label="From"
+            inputType="calender"
+            [(inputModel)]="rebateStart"
+          ></app-input-field>
+        </div>
+        <div id="to-date-container" class="inline-input">
+          <app-input-field
+            label="Till"
+            inputType="calender"
+            [(inputModel)]="rebateEnd"
+          ></app-input-field>
+        </div>
+      </div>
+
+      <div *ngIf="isOfficialRebate" id="file-for-official">
+        <!-- <app-checkbox></app-checkbox> -->
+        <!-- <app-input-field label="Supportive Document" [callbackFunction]="handleOfficialRebateFileChange" inputType="file" ></app-input-field> -->
+      </div>
+      <!-- <div id="current-file">
+                {{rebate_docname}}
+            </div> -->
+      <app-input-field
+        *ngIf="isOfficialRebate && isUpdateRequest"
+        id="current-file"
+        label="Current Document"
+        inputType="show_text"
+        text_to_show="{{ rebate_docname }}"
+      ></app-input-field>
+    </div>
+    <!-- <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button> -->
+    <button id="confirm-btn" class="btn btn-primary">UPDATE</button>
+  </div>
+</mat-dialog-content>

@@ -1,11 +1,35 @@
 <div class="container">
-    <h3 class="mt-4 mb-2">Mess stats</h3>
+    <h2 style="border-bottom:3px solid #ffc42b;">Mess Data</h2>
     <form #data="ngForm" (ngSubmit)="getMonthMessData(data)" class="form-inline">
       <div class="input-group mb-3">
-        <div class="form-group">
-          <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel>
-        </div>
+        <!-- <div class="form-group"> -->
+          <!-- <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel> -->
+        <!-- </div> -->
+        <select name="hostel" class="form-select" id="hostel_dropdown" aria-placeholder="Hostel Name" ngModel>
+          <option value="" disabled selected>Select Hostel</option>
+          <option *ngIf="allowedHostels[1]" value="H1">H1</option>
+          <option *ngIf="allowedHostels[2]" value="H2">H2</option>
+          <option *ngIf="allowedHostels[3]" value="H3">H3</option>
+          <option *ngIf="allowedHostels[4]" value="H4">H4</option>
+          <option *ngIf="allowedHostels[5]" value="H5">H5</option>
+          <option *ngIf="allowedHostels[6]" value="H6">H6</option>
+          <option *ngIf="allowedHostels[7]" value="H7">H7</option>
+          <option *ngIf="allowedHostels[8]" value="H8">H8</option>
+          <option *ngIf="allowedHostels[9]" value="H9">H9</option>
+          <option *ngIf="allowedHostels[10]" value="H10">H10</option>
+          <option *ngIf="allowedHostels[11]" value="H11">H11</option>
+          <option *ngIf="allowedHostels[12]" value="H12">H12</option>
+          <option *ngIf="allowedHostels[13]" value="H13">H13</option>
+          <option *ngIf="allowedHostels[14]" value="H14">H14</option>
+          <option *ngIf="allowedHostels[15]" value="H15">H15</option>
+          <option *ngIf="allowedHostels[16]" value="H16">H16</option>
+          <option *ngIf="allowedHostels[17]" value="H17">H17</option>
+          <option *ngIf="allowedHostels[18]" value="H18">H18</option>
+          <option *ngIf="allowedHostels[20]" value="H20">H20</option>
+          <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>
+        </select>
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+          <option value="" disabled selected>Select a Month</option>
           <option value="1">Jan</option>
           <option value="2">Feb</option>
           <option value="3">Mar</option>
@@ -20,9 +44,10 @@
           <option value="12">Dec</option>
         </select>
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+          <option value="" disabled selected>Select a Year</option>
           <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
-        <button type="submit" class="btn btn-primary">GET</button>
+        <button type="submit" >GET</button>
       </div>
     </form>
     <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>

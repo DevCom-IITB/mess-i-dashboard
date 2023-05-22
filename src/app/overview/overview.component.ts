@@ -9,8 +9,10 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-  @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
 
+  allowedHostels:boolean[] = new Array<boolean>(22);
+  // allow
   messHistory:any;
   noOfDays:any;
   date = new Date();
@@ -23,6 +25,25 @@ export class OverviewComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAdminHostel()
+    // console.log(this.allowedHostels)
+  }
+
+  getAdminHostel(){
+    this.service.getAdminHostels().then((res:any)=>{
+      for(let i=1; i<this.allowedHostels.length; i++){
+        // console.log(res)
+        this.allowedHostels[i] = false;
+        if(res.includes(`H${i}`)){
+          this.allowedHostels[i] = true;
+        }
+        if(res.includes("TANSA")){
+          this.allowedHostels[21] = true;
+        }
+      }
+    }).catch((res) =>{
+      console.log(res)
+    })
   }
 
   cleanData(history:any){
@@ -54,6 +75,7 @@ export class OverviewComponent implements OnInit {
   }
 
   async getMonthMessData(data: any){
+    // console.log(data.form.value);
     
     if (data.form.value.year&&data.form.value.month) {
       let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
@@ -63,7 +85,6 @@ export class OverviewComponent implements OnInit {
         let history = res;
         // console.log(res);
         this.messHistory = this.cleanData(history);
-        console.log(this.messHistory)
       }).catch((res)=>{
         console.log(res)
         this.messHistory = this.cleanData({})

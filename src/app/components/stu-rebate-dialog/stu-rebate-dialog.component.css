@@ -1,0 +1,44 @@
+
+/* .hidden-scroll::-webkit-scrollbar{
+  overflow-y: hidden;
+  scrollbar-width: none;
+  display: none;
+} */
+.main-container{
+    min-height: 100vh;
+    height: max-content;
+    /* padding: 5rem 3rem; */
+    padding: 4%;
+
+    background-color: #fffcf4;
+}
+.page-title{
+    font-size: 3rem;
+}
+#form-instructions{
+    font-size: 1.5rem; 
+    color: gray;
+    font-weight: 200;
+}
+.rebate-card-container{
+    margin-bottom: 24px;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }

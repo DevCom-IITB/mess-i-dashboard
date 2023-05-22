@@ -1,0 +1,11 @@
+button{
+    background-color: #28282B;
+    color:white;
+    border:0px;
+    border-radius: 4px;
+    width: 8vw;
+    height: 5vh;
+    /* margin-right: 0 !important;
+    margin-left: 80vw !important; */
+    float: right !important;
+}

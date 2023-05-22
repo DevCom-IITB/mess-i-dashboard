@@ -1,0 +1,92 @@
+<div id="maindiv" class="rebate-card-container">
+  <span class="small-italics">Recieved on {{ p_request_recieved }}</span>
+  <!-- <div id="stud-details-container" *ngIf="!isApproved">
+        <span>{{ rebate_request.roll }} <span  style="float: right;height:02.5rem; width:07.5rem; border-radius: 03.0rem; background-color:#FFF4D8 ;  color:#FFDA7C;font-size:1.3rem;text-align:center;"  id="Accepted">Pending</span></span>
+    </div>
+    <div id="stud-details-container" *ngIf="isApproved">
+        <span>{{ rebate_request.roll}} <span   style="float: right;height:02.5rem; width:07.5rem; border-radius: 03.0rem; background-color:#E9FFD8 ;  color:#649F34;font-size:1.3rem;text-align:center;"  id="Accepted">Accepted</span></span>
+    </div> -->
+
+  <div id="stud-details-container">
+    <span>{{ rebate_request.fullname }} </span>
+    <span
+      *ngIf="approval_state == 'pending'"
+      id="rebate-status-indicator"
+      style="background-color: #fff4d8; color: #ffc42b"
+      >Pending</span
+    >
+    <span
+      *ngIf="approval_state == 'accepted'"
+      id="rebate-status-indicator"
+      style="background-color: #e9ffd8; color: #649f34"
+      >Accepted</span
+    >
+    <span
+      *ngIf="approval_state == 'rejected'"
+      id="rebate-status-indicator"
+      style="background-color: #fcc7c3; color: #b73229"
+      >Rejected</span
+    >
+  </div>
+
+  <div id="stud-sub-details-container">
+    <span>{{ rebate_request.roll }} Room:{{ rebate_request.room }} </span>
+  </div>
+
+  <div id="rebate-duration-container">
+    <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span
+    ><br />
+    <span class="small-italics">Both dates are inclusive</span>
+  </div>
+  <div class="row">
+    <p><b>Reason:</b> {{ p_rebate_reason }}</p>
+  </div>
+  <div *ngIf="p_rebate_comment != ''" class="row">
+    <p><b>Reviewer Comment:</b> {{ p_rebate_comment }}</p>
+  </div>
+  <div id="rebate-doc-div">
+    <button
+      class="btn btn-light rebate-action-btn"
+      (click)="downloadRebateDoc()"
+      *ngIf="rebate_request.official"
+    >
+      Download Rebate Doc
+    </button>
+  </div>
+  <div
+    class="action-container"
+    *ngIf="approval_state == 'pending'"
+    style="display: flex"
+  >
+    <button
+      class="btn btn-light rebate-action-btn"
+      (click)="updateRebateData(p_rebate_reason, p_rebate_start, p_rebate_end)"
+      *ngIf="auth.isStudent()"
+    >
+      Make Amendments
+    </button>
+    <button
+      class="btn btn-light rebate-action-btn"
+      (click)="deleteRebate()"
+      *ngIf="auth.isStudent()"
+    >
+      Cancel your rebate
+    </button>
+  </div>
+  <div
+    id="rebate-accepted-container"
+    *ngIf="approval_state == 'accepted'"
+    style="display: flex"
+  >
+  <div class="action-container">
+    <button
+      class="btn btn-light rebate-action-btn"
+      (click)="updateAcceptedRebate(p_rebate_start, p_rebate_end)"
+      *ngIf="auth.isStudent()"
+    >
+      Shrink Duration
+    </button>
+
+  </div>
+  </div>
+</div>

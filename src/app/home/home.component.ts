@@ -11,11 +11,10 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class HomeComponent implements OnInit {
 
-  public user_name: string = "H9 Hall Manager";
   public pending_rebates: RebateRequest[] = new Array();
   devices:any;
 
-  constructor(private data_service:StudentdataService, private auth_service: AuthService, private router: Router) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -36,14 +35,18 @@ export class HomeComponent implements OnInit {
     
     this.data_service.getDevices().then((res)=>{
       this.devices = res;
-      console.log(this.devices);
     }).catch((e)=>{
       console.log(e);
     });
   }
 
+  updateList(rebateID: any){
+    this.pending_rebates = this.pending_rebates.filter((reb) =>{
+      return reb.id != rebateID;
+    })
+  }
+
   populateRebates(response: any): void{
-    console.log(response);
     this.pending_rebates = response;
   } 
 

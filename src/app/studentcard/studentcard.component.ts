@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Student } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
+import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-studentcard',
@@ -15,9 +17,11 @@ export class StudentcardComponent implements OnInit {
   mess_data:any;
   noOfDays:any;
   date = new Date();
+  studentImage:any;
+  isImageLoading:any;
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
 
-  constructor(private route: ActivatedRoute, private service: StudentdataService) {
+  constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog) {
    }
 
   ngOnInit(): void {
@@ -26,11 +30,10 @@ export class StudentcardComponent implements OnInit {
   }
 
   async fetch_student(rollNum: any){
+    this.getImageFromService();
     if(this.service.studentCache.has(rollNum)){
       this.student = this.service.studentCache.get(this.rollNumber);
-    }
-
-    else{
+    }else{
       //make an api call if data not present in the this.studentCache    
       this.service.getStudentData(this.rollNumber).then((res)=>{
         this.student_data = res;
@@ -41,7 +44,6 @@ export class StudentcardComponent implements OnInit {
         room: this.student_data.room,
         card_status: this.student_data.allowed
       } as Student;
-      console.log(temp_student)
 
       this.service.put_student_in_cache(temp_student);     
       this.student = this.service.studentCache.get(this.rollNumber);
@@ -50,6 +52,24 @@ export class StudentcardComponent implements OnInit {
       console.log(res)
     })
     }
+  }
+
+  openDialog(roll:any) :void {
+    console.log(roll)
+    this.dialog.open(StuRebateDialogComponent,{
+    data:{
+      roll: roll
+        }
+    })
+    // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+    //     this.dialog.open(StuRebateDialogComponent,{
+    //     data:{accepted_rebates : res.accepted_rebate,
+    //           rejected_rebates: res.rejected_rebate,
+    //           pendeing_rebates: res.pending_rebate}
+    // })
+    // }).catch((e)=>
+    // console.log(e))
+
   }
 
 
@@ -77,7 +97,6 @@ export class StudentcardComponent implements OnInit {
       footer.push(foot[i].toString());
     }
     let res = {headers:this.headers,body:body,footer:footer}
-    console.log(res);
     return res;
     
   }
@@ -90,12 +109,45 @@ export class StudentcardComponent implements OnInit {
       {
         let history = res;
         this.mess_data = this.cleanData(history);
-        console.log(this.mess_data)
       }).catch((res)=>{
         console.log(res)
         this.mess_data = this.cleanData({})
       });
     }
+  }
+
+  async toggl(){
+    this.service.togglActive(this.rollNumber).then((res)=>{
+      if (res){
+        this.student.card_status  = ! this.student.card_status;
+      }
+    }).catch((res)=>{
+      alert("Unable to toggle");
+      console.log(res);
+    });
+
+    
+  }
+
+  getImageFromService() {
+    this.isImageLoading = true;
+    this.service.getImage(this.rollNumber).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
+  }
+  createImageFromBlob(image: Blob) {
+      let reader = new FileReader();
+      reader.addEventListener("load", () => {
+         this.studentImage = reader.result;
+      }, false);
+   
+      if (image) {
+         reader.readAsDataURL(image);
+      }
   }
 
 

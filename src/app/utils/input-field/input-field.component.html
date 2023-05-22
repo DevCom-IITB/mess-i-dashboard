@@ -1,7 +1,13 @@
 <div class="input-field-wrapper" [ngStyle]="{'background-color': bgColor}">
     <span class="input-field-label" [ngStyle]="{'background-color': bgColor}">{{ label }}</span>
     <div class="input-field-container" [ngStyle]="{'background-color': bgColor}">
-        <input class="input-field" *ngIf="!calender" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
-        <input class="input-field" *ngIf="calender" type="date" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
+        <!-- <input class="input-field" *ngIf="!calender" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
+        <input class="input-field" *ngIf="calender" type="date" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)"> -->
+        <div class="show-text" *ngIf="inputType == 'show_text'" >{{text_to_show}}</div>
+        <input class="input-field" *ngIf="inputType == 'text'" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)" >
+        <input class="input-field" *ngIf="inputType == 'calender'" type="date" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
+        <input class="input-field input-file-field" accept="application/pdf" *ngIf="inputType == 'file'" type="file" [ngStyle]="{'background-color': bgColor}" (change)="emitFile($event)" (ngModelChange)="inputChange($event)">
     </div>
 </div>
+
+

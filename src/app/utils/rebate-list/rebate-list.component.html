@@ -1,0 +1,13 @@
+<app-date-filter *ngIf="showFilter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
+
+<div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
+    <app-stu-reb-card [rebate_request]="p_rebate" approval_state="pending" (updateList)="updateList($event)"></app-stu-reb-card>
+</div>
+
+<div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
+    <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" (updateList)="updateList($event)"></app-stu-reb-card>
+</div>
+
+<div class="rebate-card-container" *ngFor="let a_rebate of rejected_rebates">
+    <app-stu-reb-card [rebate_request]="a_rebate" approval_state="rejected" (updateList)="updateList($event)"></app-stu-reb-card>
+</div>

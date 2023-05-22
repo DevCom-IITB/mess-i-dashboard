@@ -1,0 +1,35 @@
+<form #data="ngForm" (ngSubmit)="postData(data)" class="form-inline">
+<!-- <form class="form-inline"> -->
+    <table class="table">
+            <thead>
+                <tr  id="column-headers">
+                    <ng-container *ngFor="let header of form_structure.headers">
+                        <th scope="col">{{header}}</th>
+                    </ng-container>
+                </tr>
+
+            </thead>
+            <tbody id="stud-table">
+                <ng-container *ngFor="let i of range(form_structure.numOfDays)">
+                    <tr>
+                        <th scope="row">
+                            {{i+1}}
+                        </th>
+                        <ng-container *ngFor="let j of range(form_structure.headers.length - 1)">
+                            <td>
+                                <input
+                                 name="{{i+1}}" id="{{i+1}}" class="text-box" 
+                                 (focusin)="doAutoFill($event)" 
+                                 (focusout)="updateAutoFill($event)" 
+                                 type="text" name="day_{{i}}" id="i_j"
+                                 class="form-control"
+                                 [(ngModel)] = "form_data[i]"
+                                 >
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </tbody>
+    </table>
+            <button type="submit">POST</button>
+</form>

@@ -1,3 +1,5 @@
+import { identifierModuleUrl } from "@angular/compiler";
+
 export interface Student{
     id: string,
     name: string,
@@ -6,13 +8,26 @@ export interface Student{
     card_status: boolean,
 };
 
+export interface DialogData{
+  accepted_rebates: RebateRequest[],
+  rejected_rebates: RebateRequest[],
+  pending_rebates: RebateRequest[]
+};
+
 export interface RebateRequest{
-    student: Student,
+    id: string
     roll: string,
+    student: Student,
     start: string,
     end: string,
     request_date: string,
     reason: string,
+    comment: string;
+    official: string;
+    rebate_docname:string;
+    fullname: string,
+    room: string,
+
 }
 
 export interface RebateCategorised{
