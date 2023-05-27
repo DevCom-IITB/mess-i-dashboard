@@ -1,9 +1,14 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+// import { stat } from 'fs';
+// import { start } from 'repl';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.component';
+
 
 @Component({
   selector: 'app-stu-reb-card',
@@ -22,7 +27,9 @@ export class StuRebCardComponent implements OnInit {
   // @Input() public isApproved: boolean = false;
   @Input() public approval_state: string = "pending";
   @Output() public updateList = new EventEmitter();
-  constructor(private data_service:StudentdataService, private auth_service:AuthService, private router: Router) { }
+
+  constructor(private dialog:MatDialog,private data_service:StudentdataService, private auth_service:AuthService, private router: Router, public auth:AuthService) { }
+
 
   ngOnInit(): void {
     // this.dummyInitialise();
@@ -45,11 +52,14 @@ export class StuRebCardComponent implements OnInit {
     let all = inp.split(separator);
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
-  generateRebateID(startDate: string,endDate: string, rollNo: string){
-    return rollNo+'_'+startDate+'_'+endDate;
-  }
+
+  // generateRebateID(startDate: string,endDate: string, rollNo: string){
+  //   return rollNo+'_'+startDate+'_'+endDate;
+  // }
   updateRebateData(rebateReason: string, startDate: string, endDate: string){
-    let rebate_id : string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    // let rebate_id : string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    let rebate_id : string = this.rebate_request.id;
+
     // console.log(`Passing start: ${this.rebate_request.start} and end: ${this.rebate_request.end}`);
     let navigationExtras: NavigationExtras = {
       state: {
@@ -66,6 +76,25 @@ export class StuRebCardComponent implements OnInit {
     };
     this.router.navigate(['/applyrebate'],navigationExtras);
   }
+
+  updateAcceptedRebate(startDate: string, endDate: string){
+    // let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    let rebate_id : string = this.rebate_request.id;
+    // initialise a pop out of duration box with the rebate data
+    this.dialog.open( DurationBoxComponent,{
+    data:{
+          // roll: roll,
+          id : rebate_id,
+          reason : this.rebate_request.reason,
+          start_date: this.rebate_request.start,
+          end_date : this.rebate_request.end,
+          official : this.rebate_request.official,
+        }
+    })
+  
+  }
+  
+
   deleteRebate(){
     this.data_service.deleteRebate(this.auth_service.getRoll(),this.rebate_request.id).then((res)=>{
       alert("Rebate is deleted")

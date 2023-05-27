@@ -97,7 +97,8 @@
     font-weight: bold;
     font-size: 1.15rem;
 }
-#rebate-action-container button{
+
+.action-container button{
     margin-right: 1rem;
     font-weight: bold;
     font-size: 1.15rem;

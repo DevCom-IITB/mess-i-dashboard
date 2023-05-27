@@ -5,7 +5,8 @@
     background-color: transparent !important;
 }
 .input-field-container{
-    min-width: 120px;
+    min-width: 150px;
+    max-width: 200px;
     height: 48px;
     border: 2px solid currentColor;
     border-radius: 6px;

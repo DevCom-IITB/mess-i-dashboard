@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-
+import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
+import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
+
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
     CheckboxComponent,
     DateFilterComponent,
     RebateListComponent,
+    DurationBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,8 @@ import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    MatChipsModule
     ReactiveFormsModule
   ],
   providers: [],

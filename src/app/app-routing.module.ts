@@ -11,6 +11,7 @@ import { StudentcardComponent } from './studentcard/studentcard.component';
 import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component';
 import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
 import { MessBillComponent } from './mess-bill/mess-bill.component';
+import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 
 
 const routes: Routes = [
