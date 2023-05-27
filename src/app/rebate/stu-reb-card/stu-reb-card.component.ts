@@ -49,11 +49,12 @@ export class StuRebCardComponent implements OnInit {
     let all = inp.split(separator);
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
-  generateRebateID(startDate: string,endDate: string, rollNo: string){
-    return rollNo+'_'+startDate+'_'+endDate;
-  }
+  // generateRebateID(startDate: string,endDate: string, rollNo: string){
+  //   return rollNo+'_'+startDate+'_'+endDate;
+  // }
   updateRebateData(rebateReason: string, startDate: string, endDate: string){
-    let rebate_id : string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    // let rebate_id : string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    let rebate_id : string = this.rebate_request.id;
     // console.log(`Passing start: ${this.rebate_request.start} and end: ${this.rebate_request.end}`);
     let navigationExtras: NavigationExtras = {
       state: {
@@ -71,24 +72,12 @@ export class StuRebCardComponent implements OnInit {
     this.router.navigate(['/applyrebate'],navigationExtras);
   }
   updateAcceptedRebate(startDate: string, endDate: string){
-    let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    // let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    let rebate_id : string = this.rebate_request.id;
     // initialise a pop out of duration box with the rebate data
-
-    // let navigationExtras: NavigationExtras = {
-    //   state: {
-    //     id:this.rebate_request.id,
-    //     reason:this.rebate_request.reason,
-    //     startDate:this.rebate_request.start,
-    //     endDate: this.rebate_request.end,
-    //     isUpdate:true,
-    //     official: this.rebate_request.official,
-    //     rebate_docname: this.rebate_request.rebate_docname,
-    //   }
-    // };
-    // this.router.navigate(['/shrink-duration'],navigationExtras);
     this.dialog.open( DurationBoxComponent,{
     data:{
-      // roll: roll
+          // roll: roll,
           id : rebate_id,
           reason : this.rebate_request.reason,
           start_date: this.rebate_request.start,

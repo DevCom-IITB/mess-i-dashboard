@@ -24,6 +24,9 @@ export class DurationBoxComponent implements OnInit {
   rebateID: string = '';
   rebate_docname: string = "";
 
+  new_rebateEnd: string = '';
+  new_rebateStart: string = '';
+
   constructor(private service: StudentdataService,
     private auth:AuthService,
     public dialog_ref: MatDialogRef<DurationBoxComponent>,
@@ -31,7 +34,6 @@ export class DurationBoxComponent implements OnInit {
 
   ngOnInit(): void {
     // this.dialog_ref.updateSize('50%', '30%');
-
     this.rebateID = this.injected_data.id;
     this.rebateStart = this.injected_data.start_date;
     this.reason = this.injected_data.reason;
@@ -42,6 +44,31 @@ export class DurationBoxComponent implements OnInit {
   onNoClick(): void{
     this.dialog_ref.close();
   }
+
+  makeShrinkRequest(){
+    // print all the important data to the console
+    // console.log(this.rebateID)
+    // console.log("Reason: " + this.reason);
+    // console.log("Rebate Start: " + this.new_rebateStart);
+    // console.log("Rebate End: " + this.new_rebateEnd);
+    this.service.updateRebate(this.auth.roll_no,this.rebateID,"",this.service.resolveDateFormat(this.new_rebateStart),this.service.resolveDateFormat(this.new_rebateEnd),this.isOfficialRebate,"").
+    then(
+      (res:any)=>{
+        console.log(res);
+        window.alert(res.message);
+        // close the dialog box
+        this.dialog_ref.close();
+        window.location.reload();
+      }
+    ).
+    catch(
+      (err)=>{
+        console.log(err);
+        window.alert(err.error.error);
+      });
+  }
+
+
 
   // import { Component, Inject, Input, OnInit } from '@angular/core';
   // import { DialogPosition, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';

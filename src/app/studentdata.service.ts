@@ -464,4 +464,9 @@ export class StudentdataService {
   }
 
 
+  resolveDateFormat(date:string){
+    let dateArr = date.split('-');
+    let correctedDate = dateArr[2]+'-'+dateArr[1]+'-'+dateArr[0];
+    return correctedDate;
+  }
 }

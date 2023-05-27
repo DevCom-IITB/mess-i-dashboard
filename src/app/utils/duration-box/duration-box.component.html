@@ -17,14 +17,14 @@
           <app-input-field
             label="From"
             inputType="calender"
-            [(inputModel)]="rebateStart"
+            [(inputModel)]="new_rebateStart"
           ></app-input-field>
         </div>
         <div id="to-date-container" class="inline-input">
           <app-input-field
             label="Till"
             inputType="calender"
-            [(inputModel)]="rebateEnd"
+            [(inputModel)]="new_rebateEnd"
           ></app-input-field>
         </div>
       </div>
@@ -45,6 +45,6 @@
       ></app-input-field>
     </div>
     <!-- <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button> -->
-    <button id="confirm-btn" class="btn btn-primary">UPDATE</button>
+    <button id="confirm-btn" (click)="makeShrinkRequest()" class="btn btn-primary">UPDATE</button>
   </div>
 </mat-dialog-content>
