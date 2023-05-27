@@ -24,7 +24,6 @@ const routes: Routes = [
   {path:'studentcard',component:StudentcardComponent},
   {path: 'applyrebate',component:RebateFormComponent},
   {path: 'rebate-admin',component:RebateAdminComponent},
-  {path: 'shrink-duration', component:DurationBoxComponent},
   // {path:'',redirectTo:'/home',pathMatch:'full'}
 ];
 

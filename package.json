@@ -7,20 +7,24 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.9",
+    "@angular/cdk": "^11.2.13",
     "@angular/common": "~11.2.9",
     "@angular/compiler": "~11.2.9",
     "@angular/core": "~11.2.9",
     "@angular/forms": "~11.2.9",
+    "@angular/material": "^11.2.13",
     "@angular/platform-browser": "~11.2.9",
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
     "angular": "^1.8.2",
     "bootstrap-icons": "^1.9.1",
+    "file-saver": "^2.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -29,6 +33,7 @@
     "@angular-devkit/build-angular": "~0.1102.8",
     "@angular/cli": "~11.2.8",
     "@angular/compiler-cli": "~11.2.9",
+    "@types/file-saver": "^2.0.5",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
@@ -44,4 +49,5 @@
     "tslint": "~6.1.0",
     "typescript": "~4.1.5"
   }
+
 }

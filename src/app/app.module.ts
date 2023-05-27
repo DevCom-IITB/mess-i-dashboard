@@ -31,6 +31,7 @@ import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +66,7 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
     MatDialogModule,
     ReactiveFormsModule,
     MatChipsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
