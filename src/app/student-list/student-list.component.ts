@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
+import { StateService } from '../state.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
@@ -23,13 +24,13 @@ export class StudentListComponent implements OnInit {
   errMsg = "";
   // isImageLoading:any;
   entriesPerPage = 9;
-  searchText = "";
+  searchText = this.stateService.SearchText;
   totalEntry = 105;
   entryNumber = 1;
   justAfterScrolling = true;
   subject = new Subject();
   
-  constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
+  constructor(private stateService: StateService,private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -47,6 +48,7 @@ export class StudentListComponent implements OnInit {
   search(evt:any){
     const phrase = evt.target.value;
     this.searchText = phrase;
+    this.stateService.SearchText =this.searchText;
     this.subject.next(phrase);
 
   }

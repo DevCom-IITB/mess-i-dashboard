@@ -65,8 +65,8 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
     BrowserAnimationsModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatChipsModule
-    ReactiveFormsModule
+    MatChipsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

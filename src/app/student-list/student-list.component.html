@@ -1,7 +1,7 @@
 <div class="student-list-table-container">
   <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
   <div class="search-main-area">
-      <input type="search" class="form-control nosubmit" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
+      <input type="search" class="form-control nosubmit" [(ngModel)]="searchText" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
   </div>
   <table class="table">
     <thead>
