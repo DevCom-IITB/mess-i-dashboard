@@ -1,0 +1,33 @@
+<div *ngIf="student.card_status && process===false">
+    <button type="button" class="active-button" id="1" (click)="toggl()">
+      <div class="container px-1 py-0">
+        <div class="row">
+          <div class="col px-0 align-items-center ">
+            <div class="align-self-center active-circle"></div>
+          </div>
+          <div class="col px-1 py-0">Active</div>
+        </div>
+      </div>
+    </button>
+</div>
+<div *ngIf="!student.card_status && process===false">
+    <button type="button" class="inactive-button" id="2" (click)="toggl()">
+      <div class="container px-1 py-0">
+        <div class="row">
+          <div class="col px-0 align-items-center ">
+            <div class="align-self-center inactive-circle"></div>
+          </div>
+          <div class="col px-1 py-0">Inactive</div>
+        </div>
+      </div>
+    </button>
+</div>
+<div *ngIf="process===true">
+    <button type="button" class="process-button" id="3" [disabled]="true">
+      <div class="container px-1 py-0">
+        <div class="row">
+          <div class="col px-1 py-0">Processing..</div>
+        </div>
+      </div>
+    </button>
+</div>

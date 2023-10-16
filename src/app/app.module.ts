@@ -30,6 +30,7 @@ import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
+import { CardStatusButtonComponent } from './student-list/card-status-button/card-status-button.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
     DateFilterComponent,
     RebateListComponent,
     DurationBoxComponent,
+    CardStatusButtonComponent,
   ],
   imports: [
     BrowserModule,
