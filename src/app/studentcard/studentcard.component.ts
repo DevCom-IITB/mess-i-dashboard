@@ -117,19 +117,6 @@ export class StudentcardComponent implements OnInit {
     }
   }
 
-  async toggl(){
-    this.process=true;
-    await this.service.togglActive(this.rollNumber).then((res)=>{
-      if (res){
-        this.student.card_status  = ! this.student.card_status;
-      }
-    }).catch((res)=>{
-      alert("Unable to toggle");
-      console.log(res);
-    });
-    this.process=false;
-  }
-
   getImageFromService() {
     this.isImageLoading = true;
     this.service.getImage(this.rollNumber).subscribe(data => {

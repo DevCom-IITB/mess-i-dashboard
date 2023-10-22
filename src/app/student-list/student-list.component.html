@@ -23,7 +23,7 @@
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
           <td>
-            <app-card-status-button [rollNumber]="stud[1].roll" ></app-card-status-button>
+            <app-card-status-button [rollNumber]="stud[1].roll" [cardStatus]="stud[1].mess_allowed" ></app-card-status-button>
           </td>
         </tr>
       </ng-container>

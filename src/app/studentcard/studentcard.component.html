@@ -21,39 +21,7 @@
                 <br> 
                 <div class="test">
                   <p class="tgl">Status of the card: </p> 
-                  <div *ngIf="student.card_status && process===false">
-                    <button type="button" class="active-button" id="{{rollNumber}}" (click)="toggl()">
-                      <div class="container px-1 py-0">
-                        <div class="row">
-                          <div class="col px-0 align-items-center ">
-                            <div class="align-self-center active-circle"></div>
-                          </div>
-                          <div class="col px-1 py-0">Active</div>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <div *ngIf="!student.card_status && process===false">
-                    <button type="button" class="inactive-button" id="{{rollNumber}}" (click)="toggl()">
-                      <div class="container px-1 py-0">
-                        <div class="row">
-                          <div class="col px-0 align-items-center ">
-                            <div class="align-self-center inactive-circle"></div>
-                          </div>
-                          <div class="col px-1 py-0">Inactive</div>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <div *ngIf="process===true">
-                    <button type="button" class="process-button" id="{{rollNumber}}" [disabled]="true">
-                      <div class="container px-1 py-0">
-                        <div class="row">
-                          <div class="col px-1 py-0">Processing..</div>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
+                  <app-card-status-button [rollNumber]="rollNumber" [cardStatus]="student.card_status" ></app-card-status-button>
                 </div>
                 <div>
                   <button class="reb-button" (click)="openDialog(rollNumber)">

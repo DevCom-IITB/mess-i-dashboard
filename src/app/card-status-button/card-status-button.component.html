@@ -1,4 +1,4 @@
-<div *ngIf="student.card_status && process===false">
+<div *ngIf="cardStatus && process===false">
     <button type="button" class="active-button" id="1" (click)="toggl()">
       <div class="container px-1 py-0">
         <div class="row">
@@ -10,7 +10,7 @@
       </div>
     </button>
 </div>
-<div *ngIf="!student.card_status && process===false">
+<div *ngIf="!cardStatus && process===false">
     <button type="button" class="inactive-button" id="2" (click)="toggl()">
       <div class="container px-1 py-0">
         <div class="row">

@@ -65,28 +65,6 @@ export class StudentListComponent implements OnInit {
       })
     }
 
-  async toggl(currStudRoll:any){
-    this.service.togglActive(currStudRoll).then((res)=>{
-      if (res){
-        this.changeMessStatus(currStudRoll);
-      }
-    }).catch((res)=>{
-      alert("Unable to toggle");
-      console.log(res);
-    });
-
-    
-  }
-
-  async changeMessStatus(rollNumber:any){
-
-    for (let index = 0; index < this.studentInfoList.length; index++) {
-      if (this.studentInfoList[index][0] == rollNumber) {
-        this.studentInfoList[index][1].mess_allowed = !this.studentInfoList[index][1].mess_allowed;
-      }
-    }
-  }
-
   async nextEntries(){ //add an argument of pageNumber and pass to to the api to get the corresponding list of students
     //update the page number and the studInfoList 
       // this.startEntry += this.entriesPerPage; 
