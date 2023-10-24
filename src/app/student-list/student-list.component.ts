@@ -48,13 +48,12 @@ export class StudentListComponent implements OnInit {
   search(evt:any){
     const phrase = evt.target.value;
     this.searchText = phrase;
-    this.stateService.SearchText =this.searchText;
     this.subject.next(phrase);
 
   }
 
   async getList(startIndex : any){
-
+    this.stateService.SearchText =this.searchText;
       this.service.getStudentList(startIndex,this.searchText,this.entriesPerPage).then((res)=>{
         
           this.temp = res;
@@ -62,8 +61,8 @@ export class StudentListComponent implements OnInit {
           this.studentInfoList = Object.entries(this.temp);
       }).catch((res)=>{
         this.errMsg = res
-      })
-    }
+    })
+  }
 
   async nextEntries(){ //add an argument of pageNumber and pass to to the api to get the corresponding list of students
     //update the page number and the studInfoList 

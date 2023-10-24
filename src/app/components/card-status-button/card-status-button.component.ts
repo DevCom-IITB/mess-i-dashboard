@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StudentdataService } from '../studentdata.service';
+import { StudentdataService } from '../../studentdata.service';
 
 @Component({
   selector: 'app-card-status-button',

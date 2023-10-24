@@ -30,7 +30,7 @@ import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
-import { CardStatusButtonComponent } from './card-status-button/card-status-button.component';
+import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 
 
 @NgModule({
