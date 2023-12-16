@@ -31,6 +31,7 @@ import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { CardStatusButtonComponent } from './components/card-status-button/card-
     RebateListComponent,
     DurationBoxComponent,
     CardStatusButtonComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
