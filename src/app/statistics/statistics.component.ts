@@ -29,7 +29,9 @@ export class StatisticsComponent implements OnInit {
     let x2:string[]= ['2013-10-04', '2013-10-20', '2013-11-04','2013-11-20', '2013-12-04', '2013-12-20'];
     let y2:number[]= [1,4,2,5,7,3];
     let y21:number[]= [2, 4, 1,8,2,5];
-    this.plot.plotMess("Mess State","plot2",x2,y2,y21);
+    let z = [[1, 20, 30], [20, 1, 60], [30, 60, 1]]
+    this.plot.plotscatter("scatter","scatter",x2,y2,y21);
+    this.plot.plotheatmap("heatmap","heatmap_curve",z)
   }
 
   getAdminHostel(){

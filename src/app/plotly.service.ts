@@ -7,20 +7,8 @@ declare let Plotly: any;
 export class PlotlyService {
 
   constructor() { }
-  plotLine(title: string, plotDiv: string, x:number[], y:number[]){           
-    let trace = {
-      x: x,    
-      y: y,   
-      type: 'scatter'   
-    };
-                  
-    let layout = {
-      title:title
-    };
-    const config = { responsive: true };
-    Plotly.newPlot(plotDiv,[trace], layout,config)     
-  }
-  plotMess(title: string, plotDiv: string, x:string[], y1:number[],y2:number[]){
+  //example for scatter plot
+  plotscatter(title: string, plotDiv: string, x:string[], y1:number[],y2:number[]){
     let trace = [
       {
         x: x,
@@ -53,6 +41,23 @@ export class PlotlyService {
     const config = { responsive: true };
     Plotly.newPlot(plotDiv,trace, layout,config)
   }
+  //example for heatmap
+  plotheatmap(title:string,plotdiv:string,x:number[][]){
+    let data = [
+      {
+        z: [[1, null, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],       
+        x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        y: ['Morning', 'Afternoon', 'Evening'],
+        hoverongaps: false,
+        type: 'heatmap',
+      }
+    ];
+    Plotly.newPlot(plotdiv, data);
+
+  }
+  
+
+  //for hostal statistics
   plotMonthlyMess(title: string, plotDiv: string, day:string[], breakfast:number[],lunch:number[],snacks:number[],dinner:number[],milk:number[],egg:number[]){
     let trace = [
       {
@@ -60,6 +65,7 @@ export class PlotlyService {
         y: breakfast,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'red' },
         name:'Breakfast',
       },
@@ -68,6 +74,7 @@ export class PlotlyService {
         y: lunch,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'green' },
         name:'Lunch',
       },
@@ -76,6 +83,7 @@ export class PlotlyService {
         y: snacks,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'blue' },
         name:'Snacks',
       },
@@ -84,6 +92,7 @@ export class PlotlyService {
         y: dinner,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'purple' },
         name:'Dinner',
       },
@@ -92,6 +101,7 @@ export class PlotlyService {
         y: milk,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'orange' },
         name:'Milk',
       },
@@ -100,6 +110,7 @@ export class PlotlyService {
         y: egg,
         type: 'scatter',
         mode: 'lines+markers',
+        hoverinfo:'none',
         marker: { color: 'cyan' },
         name:'Egg',
       }
