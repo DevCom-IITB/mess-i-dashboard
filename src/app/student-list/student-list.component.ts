@@ -57,10 +57,15 @@ export class StudentListComponent implements OnInit {
         
           this.temp = res;
           // console.log(this.temp)
-          this.studentInfoList = Object.entries(this.temp);
-      }).catch((res)=>{
-        this.errMsg = res
-      })
+          // this.studentInfoList = Object.entries(this.temp);
+          this.studentInfoList = Object.entries(this.temp).map(item => {
+            let student = item[1] as any;
+            student.room = student.room?.replace(/^\-\s*/, '');
+            return [item[0], student];
+          });
+          }).catch((res)=>{
+            this.errMsg = res
+          });
     }
 
   async toggl(currStudRoll:any){
