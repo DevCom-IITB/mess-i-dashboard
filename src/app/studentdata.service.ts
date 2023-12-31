@@ -393,6 +393,25 @@ export class StudentdataService {
   });
   }
 
+  async getMonthlytotaldata(roll:string,year:string,month:string){
+    let url = this.baseurl.concat("/student-stats/",roll,'/',year,'/',month);
+    return new Promise((resolve, reject) => {
+      this.http.get(url,
+        {
+          headers:{
+            'x-access-token':this.auth.getToken(),    
+            'rejectUnauthorized':'false' 
+          }
+        }
+      ).subscribe((res)=> {
+          resolve(res);
+      },
+      (e)=>{
+          reject({})
+      })
+  });
+  }
+
   async getMonthlyMessdata(hostel:string,year:string,month:string){
     let url = this.baseurl.concat("/get-mess-data/",hostel,'/',year,'/',month);
     return new Promise((resolve,reject)=>
