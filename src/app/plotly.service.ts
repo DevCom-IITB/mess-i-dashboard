@@ -9,14 +9,13 @@ export class PlotlyService {
   constructor() { }
 
   //for hostal statistics
-  // TODO: Make this function more generic
   plotMonthlyMess(title: string, plotDiv: string, day:string[], breakfast:number[],lunch:number[],snacks:number[],dinner:number[],milk:number[],egg:number[]){
     let trace = [
       {
         x: day,
         y: breakfast,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'red' },
         name:'Breakfast',
@@ -25,7 +24,7 @@ export class PlotlyService {
         x: day,
         y: lunch,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'green' },
         name:'Lunch',
@@ -34,7 +33,7 @@ export class PlotlyService {
         x: day,
         y: snacks,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'blue' },
         name:'Snacks',
@@ -43,7 +42,7 @@ export class PlotlyService {
         x: day,
         y: dinner,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'purple' },
         name:'Dinner',
@@ -52,7 +51,7 @@ export class PlotlyService {
         x: day,
         y: milk,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'orange' },
         name:'Milk',
@@ -61,7 +60,7 @@ export class PlotlyService {
         x: day,
         y: egg,
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
         hoverinfo:'none',
         marker: { color: 'cyan' },
         name:'Egg',
@@ -116,7 +115,7 @@ export class PlotlyService {
       };
     }
     const layout = {
-      title: title,
+      // title: title,
       annotations:[] as Annotation[],
       xaxis: {
         // tickvals: Array.from({ length: data[0].z[0].length }, (_, i) => i + 1),
@@ -138,7 +137,7 @@ export class PlotlyService {
         showarrow: false,
         font: {
           size: 20,
-          color:"gray",
+          color:"white",
           family: 'monospace', // serif, sans-serif, monospace, Arial, Times New Roman, Courier New
           weight: 'bold',
           opacity: 1 

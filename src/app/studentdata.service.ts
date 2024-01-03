@@ -426,21 +426,7 @@ export class StudentdataService {
       })
     }
     )
-  }
-
-  async getStudentStats(roll:string,year:string,month:string){
-    let url = this.baseurl.concat("/student-stats/",year,'/',month,'?roll=',roll);
-    return new Promise((resolve, reject) => {
-      this.http.get(url, { headers:{'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false' } })
-      .subscribe((res)=> { resolve(res); }, (e)=>{ reject({}) })
-    });
-  }
-  async getHostelStats(hostel:string,year:string,month:string){
-    let url = this.baseurl.concat("/hostel-stats/",year,'/',month,'?hostel=',hostel);
-    return new Promise((resolve,reject)=> {
-      this.http.get(url,{headers:{ 'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false'}})
-      .subscribe((res)=>{resolve(res);},(e)=>{reject({});})
-    })
+    
   }
 
   async getStudentList(startEntry: any,searchText:string,perPage:number){
