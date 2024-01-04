@@ -75,6 +75,7 @@ export class PlotlyService {
       },
       yaxis: {
         title: 'Meal taken',
+        showticklabels: false
       },
     };
     const config = { responsive: true };
@@ -137,7 +138,7 @@ export class PlotlyService {
         showarrow: false,
         font: {
           size: 20,
-          color:"white",
+          color:"#4a4a4a",
           family: 'monospace', // serif, sans-serif, monospace, Arial, Times New Roman, Courier New
           weight: 'bold',
           opacity: 1 
@@ -150,14 +151,12 @@ export class PlotlyService {
   }
 
   plotStudentPieData(plotDiv:string, z:number[]){
-    // for()
     var data = [{
       type: "pie",
-      values: z,
       labels: ["Breakfast", "Lunch", "Snacks", "Dinner", "Milk", "Egg"],
-      textinfo: "label+percent",
-      // textposition: "outside",
-      insidetextorientation: "radial",
+      values: z,
+      textinfo: "label+value",
+      insidetextorientation: 'horizontal',
       hoverinfo:'none',
       automargin: true
     }]
