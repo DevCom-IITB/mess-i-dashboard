@@ -89,6 +89,9 @@ export class StatisticsComponent implements OnInit {
     this.noOfDays = Array(num).fill(1).map((x,i) => (i + 1).toString());
     this.noOfDays2 = Array(num).fill(1).map((x,i) => (`${data.form.value.year}-${data.form.value.month}-${i+1}`));
 
+    this.hostelmessHistory = {exists:true, loaded:false};
+    this.studentmessHistory = {exists:true, loaded:false};
+
     await this.plotHostelData(data);
     await this.plotStudentData(data);
   }
