@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./studentcard.component.css']
 })
 export class StudentcardComponent implements OnInit {
+  process:boolean=false;
   rollNumber: any;
   student : any;
   student_data : any;
@@ -114,19 +115,6 @@ export class StudentcardComponent implements OnInit {
         this.mess_data = this.cleanData({})
       });
     }
-  }
-
-  async toggl(){
-    this.service.togglActive(this.rollNumber).then((res)=>{
-      if (res){
-        this.student.card_status  = ! this.student.card_status;
-      }
-    }).catch((res)=>{
-      alert("Unable to toggle");
-      console.log(res);
-    });
-
-    
   }
 
   getImageFromService() {

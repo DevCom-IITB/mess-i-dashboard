@@ -1,0 +1,49 @@
+<div class="container">
+  <div>
+    <h1 style="border-bottom:3px solid #ffc42b;">Trends</h1>
+    <form #mess_data="ngForm" (ngSubmit)="plotData(mess_data)" class="form-inline">
+      <div class="input-group mb-3">
+        <input *ngIf="roll_selectable" type="text" class="form-control" name="roll" placeholder="Roll Number" aria-label="Roll Number" aria-describedby="basic-addon1" ngModel>
+        <select *ngIf="hostel_selectable" class="form-select" name="hostel" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
+          <option value="" selected>Select Hostel</option>
+          <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+            <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+          </ng-container>    
+          <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
+        </select>
+        <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+          <option value="" disabled selected>Select a Month</option>
+          <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
+        </select>
+        <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+          <option value="" disabled selected>Select a Year</option>
+          <option *ngFor="let year of [0,1,2,3,4,5,6,7,8,9]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+        </select>
+        <button type="submit">GET</button>
+      </div>
+    </form>
+    <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
+    <div id="mess_data" *ngIf="hostelmessHistory.exists"></div>
+    <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
+    </div>
+
+  <hr>
+
+  <div>
+    <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
+    <div id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <div id="pie-textual-container" *ngIf="studentmessHistory.exists">
+      <div id="pie"></div>
+      <div id="textual-stats" *ngIf="studentmessHistory.loaded">
+        <h3 class="bold-ones">Meal Utilization</h3>
+        <ul>
+          <li class="text-stats-item" *ngFor="let tm of studentmessHistory.meals; let i=index">
+            {{tm}}: {{100*studentmessHistory.util[i] | number: '1.1-2'}}% of {{studentmessHistory.available_meals[i]}} offered
+          </li>
+        </ul>
+        <p id="stat-notice">Note: The numbers only account for meals recorded via Mess-I</p>
+      </div>
+    </div>
+    <div *ngIf="!studentmessHistory.exists">No student trends found</div>
+  </div> 
+</div>

@@ -1,0 +1,38 @@
+.indicator-circle{
+  width: 1em;
+  margin-top: 0.23em;
+  padding: 0%;
+  height: 1em;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  background-color: currentColor;
+}
+.mode-active {
+  color: #7CDD6C;
+  border-color: #2E8B57;
+}
+.mode-inactive {
+  color: #e00a0a;
+  border-color: #780606;
+}
+.mode-intermediate{
+  color: rgb(124, 122, 122);
+  color: rgb(124, 122, 122);
+}
+
+.status-button{
+  border-radius: 0.5rem;
+  border-style: solid;
+  border-width: 0.08rem;
+  
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: transparent;
+
+  min-width: 5.6rem;
+}
+
+.align-self-center{
+  align-self: center;
+}

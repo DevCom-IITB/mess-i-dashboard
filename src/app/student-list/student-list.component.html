@@ -1,7 +1,7 @@
 <div class="student-list-table-container">
   <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
   <div class="search-main-area">
-      <input type="search" class="form-control nosubmit" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
+      <input type="search" class="form-control nosubmit" [(ngModel)]="searchText" placeholder="Search by roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
   </div>
   <table class="table">
     <thead>
@@ -23,30 +23,7 @@
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
           <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
           <td>
-            <div *ngIf="stud[1].mess_allowed">
-              <button type="button" class="active-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
-                <div class="container px-1 py-0">
-                  <div class="row">
-                    <div class="col px-0 align-items-center ">
-                      <div class="align-self-center active-circle"></div>
-                    </div>
-                    <div class="col px-1 py-0">Active</div>
-                  </div>
-                </div>
-              </button>
-            </div>
-            <div *ngIf="!stud[1].mess_allowed">
-              <button type="button" class="inactive-button" id="{{stud[1].roll}}" (click)="toggl(stud[1].roll)">
-                <div class="container px-1 py-0">
-                  <div class="row">
-                    <div class="col px-0 align-items-center ">
-                      <div class="align-self-center inactive-circle"></div>
-                    </div>
-                    <div class="col px-1 py-0">Inactive</div>
-                  </div>
-                </div>
-              </button>
-            </div>
+            <app-card-status-button [rollNumber]="stud[1].roll" [cardStatus]="stud[1].mess_allowed" ></app-card-status-button>
           </td>
         </tr>
       </ng-container>

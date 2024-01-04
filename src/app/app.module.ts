@@ -30,6 +30,8 @@ import { CheckboxComponent } from './utils/checkbox/checkbox.component';
 import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
+import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -56,6 +58,8 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
     DateFilterComponent,
     RebateListComponent,
     DurationBoxComponent,
+    CardStatusButtonComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
     MatDialogModule,
     ReactiveFormsModule,
     MatChipsModule,
+
     ReactiveFormsModule
   ],
   providers: [],

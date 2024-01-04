@@ -11,7 +11,8 @@
 }
 
 .page-title{
-    font-size: 3rem;
+  border-bottom:3px solid #ffc42b;
+  font-size: 3rem;
 }
 
 .rebate-card-container{

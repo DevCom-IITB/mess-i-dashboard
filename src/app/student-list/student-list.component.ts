@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
+import { StateService } from '../state.service';
 import { Router } from '@angular/router';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
@@ -23,13 +24,13 @@ export class StudentListComponent implements OnInit {
   errMsg = "";
   // isImageLoading:any;
   entriesPerPage = 9;
-  searchText = "";
+  searchText = this.stateService.SearchText;
   totalEntry = 105;
   entryNumber = 1;
   justAfterScrolling = true;
   subject = new Subject();
   
-  constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
+  constructor(private stateService: StateService,private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -52,7 +53,7 @@ export class StudentListComponent implements OnInit {
   }
 
   async getList(startIndex : any){
-
+    this.stateService.SearchText =this.searchText;
       this.service.getStudentList(startIndex,this.searchText,this.entriesPerPage).then((res)=>{
         
           this.temp = res;
@@ -60,29 +61,7 @@ export class StudentListComponent implements OnInit {
           this.studentInfoList = Object.entries(this.temp);
       }).catch((res)=>{
         this.errMsg = res
-      })
-    }
-
-  async toggl(currStudRoll:any){
-    this.service.togglActive(currStudRoll).then((res)=>{
-      if (res){
-        this.changeMessStatus(currStudRoll);
-      }
-    }).catch((res)=>{
-      alert("Unable to toggle");
-      console.log(res);
-    });
-
-    
-  }
-
-  async changeMessStatus(rollNumber:any){
-
-    for (let index = 0; index < this.studentInfoList.length; index++) {
-      if (this.studentInfoList[index][0] == rollNumber) {
-        this.studentInfoList[index][1].mess_allowed = !this.studentInfoList[index][1].mess_allowed;
-      }
-    }
+    })
   }
 
   async nextEntries(){ //add an argument of pageNumber and pass to to the api to get the corresponding list of students
