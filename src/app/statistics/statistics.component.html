@@ -1,16 +1,14 @@
-
-
 <div class="container">
   <div>
-    <h2 style="border-bottom:3px solid #ffc42b;">Hostel Statistics</h2>
-    <form #mess_data="ngForm" (ngSubmit)="getMonthMessData(mess_data)" class="form-inline">
+    <h2 style="border-bottom:3px solid #ffc42b;">Trends</h2>
+    <form #mess_data="ngForm" (ngSubmit)="plotData(mess_data)" class="form-inline">
       <div class="input-group mb-3">
-        <select class="form-select" name="hostel" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
-          <option value="" disabled selected>Select Hostel</option>
-          <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]">
+        <input *ngIf="roll_selectable" type="text" class="form-control" name="roll" placeholder="Roll Number" aria-label="Roll Number" aria-describedby="basic-addon1" ngModel>
+        <select *ngIf="hostel_selectable" class="form-select" name="hostel" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
+          <option value="" selected>Select Hostel</option>
+          <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
             <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
           </ng-container>    
-          <option *ngIf="allowedHostels[20]" value="H20">H20</option>
           <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
         </select>
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
@@ -19,16 +17,19 @@
         </select>
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
           <option value="" disabled selected>Select a Year</option>
-          <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+          <option *ngFor="let year of [0,1,2,3,4,5,6,7,8,9]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
-        <button type="submit" >GET</button>
+        <button type="submit">GET</button>
       </div>
     </form>
-    <div id="mess_data"  ></div>
+    <h3 *ngIf="hostelmessHistory !== undefined">Hostel Trends</h3>
+    <div id="mess_data" *ngIf="hostelmessHistory!==[]"></div>
+    <div *ngIf="hostelmessHistory===[]">No hostel trends found</div>
   </div>
+  <hr>
   <div>
-    <h2 style="border-bottom:3px solid #ffc42b;">Student Statistics</h2>
-    <form #student_data="ngForm" (ngSubmit)="getMonthStudentData(student_data)" class="form-inline">
+  <!-- TODO: Add UI element for selecting roll number, let it be visible on admin only -->
+    <!-- <form #student_data="ngForm" (ngSubmit)="getMonthStudentData(student_data)" class="form-inline">
       <div class="input-group mb-3">
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
           <option value="" disabled selected>Select a Month</option>
@@ -40,10 +41,12 @@
         </select>
         <button type="submit" >GET</button>
       </div>
-    </form>
-    <span>
-      <div id="student_data" ></div>
-      <div id="pie" ></div>
-    </span> 
+    </form> -->
+    <h3 *ngIf="studentmessHistory !== undefined">Student Trends</h3>
+    <span *ngIf="studentmessHistory!==[]">
+      <div id="student_data"></div>
+      <div id="pie"></div>
+    </span>
+    <div *ngIf="studentmessHistory===[]">No student trends found</div>
   </div> 
 </div>
