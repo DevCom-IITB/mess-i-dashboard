@@ -22,19 +22,19 @@
         <button type="submit">GET</button>
       </div>
     </form>
-    <h2 class="bold-ones" *ngIf="hostelmessHistory !== undefined">Hostel Trends</h2>
-    <div id="mess_data" *ngIf="hostelmessHistory!=={}"></div>
-    <div *ngIf="hostelmessHistory==={}">No hostel trends found</div>
-  </div>
+    <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
+    <div id="mess_data" *ngIf="hostelmessHistory.exists"></div>
+    <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
+    </div>
 
   <hr>
 
   <div>
-    <h2 class="bold-ones" *ngIf="studentmessHistory !== undefined">Student Trends</h2>
-    <div id="student_data"></div>
-    <div id="pie-textual-container">
+    <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
+    <div id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <div id="pie-textual-container" *ngIf="studentmessHistory.exists">
       <div id="pie"></div>
-      <div id="textual-stats" *ngIf="studentmessHistory!==undefined">
+      <div id="textual-stats" *ngIf="studentmessHistory.loaded">
         <h3 class="bold-ones">Meal Utilization</h3>
         <ul>
           <li class="text-stats-item" *ngFor="let tm of studentmessHistory.meals; let i=index">
@@ -44,6 +44,6 @@
         <p id="stat-notice">Note: The numbers only account for meals recorded via Mess-I</p>
       </div>
     </div>
-    <div *ngIf="studentmessHistory==={}">No student trends found</div>
+    <div *ngIf="!studentmessHistory.exists">No student trends found</div>
   </div> 
 </div>

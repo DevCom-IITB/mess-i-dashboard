@@ -13,8 +13,8 @@ export class StatisticsComponent implements OnInit {
   hostel_selectable: boolean = false;
   roll_selectable: boolean = false;
   allowedHostels:boolean[] = new Array<boolean>(22);
-  hostelmessHistory:any;
-  studentmessHistory:any;
+  hostelmessHistory:any = {exists:true, loaded:false};
+  studentmessHistory:any = {exists:true, loaded:false};
   noOfDays:any;
   noOfDays2:any;
   date = new Date();
@@ -48,12 +48,13 @@ export class StatisticsComponent implements OnInit {
         }
       }
     }).catch((res) =>{
-      console.log(res)
+      console.log(res);
+      this.hostelmessHistory = {exists:false, loaded:true};
     })
   }
 
   genHostelPlotData(history: any){
-    if(this.noOfDays.length == 0) return {};
+    if(this.noOfDays.length == 0) return {exists:false, loaded:true};
     let mp = new Map<string, number[]>(this.MEALS.map((meal, index) => [meal, []] as [string, number[]]));
     for(let j=0;j<this.noOfDays.length;j++){
       if(!(this.noOfDays[j]in history)){
@@ -74,7 +75,9 @@ export class StatisticsComponent implements OnInit {
       x: this.noOfDays2,
       y: Array.from(mp.values() as Iterable<number[]>),
       labels: Array.from(mp.keys() as Iterable<string>),
-      meal_counts: Array.from(mp.values() as Iterable<number[]>).map((subarray) => subarray.reduce((acc, value) => acc + (value>0 ? 1 : 0), 0))
+      meal_counts: Array.from(mp.values() as Iterable<number[]>).map((subarray) => subarray.reduce((acc, value) => acc + (value>0 ? 1 : 0), 0)),
+      exists: true,
+      loaded: true
     };
 
 
@@ -116,7 +119,7 @@ export class StatisticsComponent implements OnInit {
 
   genStudentPlotData(history: any){
     let orged_data = this.dictifyStudentData(history);
-    if(Array.from(orged_data.keys() as Iterable<any>).length == 0) return {};
+    if(Array.from(orged_data.keys() as Iterable<any>).length == 0) return {exists:false, loaded:true};
     let hz = Array.from(orged_data.values() as Iterable<number[]>);let sms = hz.map((subarray) => subarray.reduce((acc,value) => acc+(value>0?1:0), 0));
     let nzidx = sms.map((value, index) => (value>0?index:-1)).filter((value) => value>=0);
     let utilization = sms.map((value, index) => {let sum = this.hostelmessHistory.meal_counts[index];return (sum>0?value/sum:'-');});
@@ -127,7 +130,9 @@ export class StatisticsComponent implements OnInit {
       meals: nzidx.map((value) => this.hostelmessHistory.labels[value]),
       colors: nzidx.map((value) => this.COLORS_RGB[value]),
       util: nzidx.map((value) => utilization[value]),
-      available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value])
+      available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value]),
+      exists: true,
+      loaded: true
     };
     return res;
   }
@@ -139,7 +144,7 @@ export class StatisticsComponent implements OnInit {
         this.plot.plotMultiline("Hostel Statistics", "mess_data", this.hostelmessHistory.x, this.hostelmessHistory.y, this.hostelmessHistory.labels);
       }).catch((res)=>{
         console.log(res)
-        this.hostelmessHistory = this.genHostelPlotData({})
+        this.hostelmessHistory = {exists:false, loaded:true};
       });
     }
   }
@@ -153,7 +158,7 @@ export class StatisticsComponent implements OnInit {
         this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
       }).catch((res)=>{
         console.log(res)
-        this.studentmessHistory = this.dictifyStudentData({});
+        this.studentmessHistory = {exists:false, loaded:true};
       });
     }
   }
