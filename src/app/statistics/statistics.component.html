@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <h2 style="border-bottom:3px solid #ffc42b;">Trends</h2>
+    <h1 style="border-bottom:3px solid #ffc42b;">Trends</h1>
     <form #mess_data="ngForm" (ngSubmit)="plotData(mess_data)" class="form-inline">
       <div class="input-group mb-3">
         <input *ngIf="roll_selectable" type="text" class="form-control" name="roll" placeholder="Roll Number" aria-label="Roll Number" aria-describedby="basic-addon1" ngModel>
@@ -22,31 +22,28 @@
         <button type="submit">GET</button>
       </div>
     </form>
-    <h3 *ngIf="hostelmessHistory !== undefined">Hostel Trends</h3>
-    <div id="mess_data" *ngIf="hostelmessHistory!==[]"></div>
-    <div *ngIf="hostelmessHistory===[]">No hostel trends found</div>
+    <h2 class="bold-ones" *ngIf="hostelmessHistory !== undefined">Hostel Trends</h2>
+    <div id="mess_data" *ngIf="hostelmessHistory!=={}"></div>
+    <div *ngIf="hostelmessHistory==={}">No hostel trends found</div>
   </div>
+
   <hr>
+
   <div>
-  <!-- TODO: Add UI element for selecting roll number, let it be visible on admin only -->
-    <!-- <form #student_data="ngForm" (ngSubmit)="getMonthStudentData(student_data)" class="form-inline">
-      <div class="input-group mb-3">
-        <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
-          <option value="" disabled selected>Select a Month</option>
-          <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
-        </select>
-        <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
-          <option value="" disabled selected>Select a Year</option>
-          <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
-        </select>
-        <button type="submit" >GET</button>
-      </div>
-    </form> -->
-    <h3 *ngIf="studentmessHistory !== undefined">Student Trends</h3>
-    <span *ngIf="studentmessHistory!==[]">
-      <div id="student_data"></div>
+    <h2 class="bold-ones" *ngIf="studentmessHistory !== undefined">Student Trends</h2>
+    <div id="student_data"></div>
+    <div id="pie-textual-container">
       <div id="pie"></div>
-    </span>
-    <div *ngIf="studentmessHistory===[]">No student trends found</div>
+      <div id="textual-stats" *ngIf="studentmessHistory!==undefined">
+        <h3 class="bold-ones">Meal Utilization</h3>
+        <ul>
+          <li class="text-stats-item" *ngFor="let tm of studentmessHistory.meals; let i=index">
+            {{tm}}: {{100*studentmessHistory.util[i] | number: '1.1-2'}}% of {{studentmessHistory.available_meals[i]}} offered
+          </li>
+        </ul>
+        <p id="stat-notice">Note: The numbers only account for meals recorded via Mess-I</p>
+      </div>
+    </div>
+    <div *ngIf="studentmessHistory==={}">No student trends found</div>
   </div> 
 </div>

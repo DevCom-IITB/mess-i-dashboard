@@ -24,6 +24,10 @@ input.form-control{
     
 }
 
+.bold-ones{
+    font-weight: bold;
+}
+
 select.form-select{
     margin-left: 2vh;
     margin-right: 2vh;
@@ -42,3 +46,19 @@ button{
 button:hover{
     background-color: #FFC42B;
   }
+
+div#pie-textual-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+div#textual-stats{
+    padding: 4rem;
+}
+p#stat-notice{
+    font-size: x-small;
+}
+li.text-stats-item{
+    font-size: 0.9rem;
+}

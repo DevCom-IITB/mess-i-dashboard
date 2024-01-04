@@ -6,68 +6,23 @@ declare let Plotly: any;
 })
 export class PlotlyService {
 
+  COLORS = ['red', 'green', 'blue', 'purple', 'orange', 'cyan', 'magenta', 'yellow', 'black', 'gray', 'brown', 'pink'];
+
   constructor() { }
 
-  //for hostal statistics
-  // TODO: Make this function more generic
-  plotMonthlyMess(title: string, plotDiv: string, day:string[], breakfast:number[],lunch:number[],snacks:number[],dinner:number[],milk:number[],egg:number[]){
-    let trace = [
-      {
-        x: day,
-        y: breakfast,
+  plotMultiline(title: string, div_identifier: string, x: string[], y: number[][], labels: string[]){
+    let trace = [];
+    for(let i=0;i<y.length;i++){
+      trace.push({
+        x: x,
+        y: y[i],
         type: 'scatter',
         mode: 'lines',
         hoverinfo:'none',
-        marker: { color: 'red' },
-        name:'Breakfast',
-      },
-      {
-        x: day,
-        y: lunch,
-        type: 'scatter',
-        mode: 'lines',
-        hoverinfo:'none',
-        marker: { color: 'green' },
-        name:'Lunch',
-      },
-      {
-        x: day,
-        y: snacks,
-        type: 'scatter',
-        mode: 'lines',
-        hoverinfo:'none',
-        marker: { color: 'blue' },
-        name:'Snacks',
-      },
-      {
-        x: day,
-        y: dinner,
-        type: 'scatter',
-        mode: 'lines',
-        hoverinfo:'none',
-        marker: { color: 'purple' },
-        name:'Dinner',
-      },
-      {
-        x: day,
-        y: milk,
-        type: 'scatter',
-        mode: 'lines',
-        hoverinfo:'none',
-        marker: { color: 'orange' },
-        name:'Milk',
-      },
-      {
-        x: day,
-        y: egg,
-        type: 'scatter',
-        mode: 'lines',
-        hoverinfo:'none',
-        marker: { color: 'cyan' },
-        name:'Egg',
-      }
-    ];
-    
+        marker: { color: this.COLORS[i%this.COLORS.length] },
+        name:labels[i],
+      })
+    }
     const layout = {
       title: title,
       xaxis: {
@@ -80,25 +35,26 @@ export class PlotlyService {
       },
     };
     const config = { responsive: true };
-    Plotly.newPlot(plotDiv,trace, layout,config)
+    Plotly.newPlot(div_identifier,trace, layout,config)
   }
 
-  plotStudentHeatmapData(title:string,plotdiv:string,z:number[][],x:string[]){
-    let y=['Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Milk', 'Egg']
+  plotHeatmap(title: string, div_identifier: string, x: string[], z: number[][], colors: string[], y: string[]){
+    let num_colors = colors.length;
+    let cs = [[0, 'rgb(225,225,225)'], [0.99/(num_colors+0.99), 'rgb(225,225,225)']];
+    for(let i=0;i<num_colors;i++){
+      cs.push([(i+0.99)/(num_colors+0.99), colors[i]]);
+      cs.push([(i+1.99)/(num_colors+0.99), colors[i]]);
+    }
     let data = [
       {
         z: z,
         hoverongaps: true,
         hoverinfo:'none',
-        // colorscale: 'RdBu', //Magma, Viridis, Plasma, Jet, Cividis, RdBu
         type: 'heatmap',
         showscale: false,
-        xgap: 2,
-        ygap: 2,  
-        colorscale: [
-          [0, 'rgb(219, 217, 217)'],   
-          [1, 'rgb(171, 212, 70)']      
-        ]
+        xgap: 1,
+        ygap: 1,
+        colorscale: cs
       }
     ];
     interface Annotation {
@@ -119,14 +75,10 @@ export class PlotlyService {
     const layout = {
       title: title,
       annotations:[] as Annotation[],
-      xaxis: {
-        // tickvals: Array.from({ length: data[0].z[0].length }, (_, i) => i + 1),
-        // ticktext: Array.from({ length: data[0].z[0].length }, (_, i) => (i + 1).toString()),
-        // range:[1,data[0].z[0].length],
-        // autorange: false
-      },
+      xaxis: { },
       yaxis: {
         tickvals: [], // Remove y-axis tick values
+        scaleanchor: 'x'
       }
     };
     for (let i = 0; i < data[0].z.length; i++) {
@@ -138,8 +90,8 @@ export class PlotlyService {
         text: y[i], // Row label text
         showarrow: false,
         font: {
-          size: 20,
-          color:"#4a4a4a",
+          size: 15,
+          color:"black",
           family: 'monospace', // serif, sans-serif, monospace, Arial, Times New Roman, Courier New
           weight: 'bold',
           opacity: 1 
@@ -147,19 +99,19 @@ export class PlotlyService {
       };
       layout.annotations.push(annotation);
     }
-    Plotly.newPlot(plotdiv, data, layout);
+    Plotly.newPlot(div_identifier, data, layout);
 
   }
-
-  plotStudentPieData(plotDiv:string, z:number[]){
+  plotPie(plotDiv:string, z:number[], _labels: string[], _colors: string[]){
     // for()
     var data = [{
       type: "pie",
       values: z,
-      labels: ["Breakfast", "Lunch", "Snacks", "Dinner", "Milk", "Egg"],
+      labels: _labels,
       textinfo: "label+value",
       // textposition: "outside",
-      insidetextorientation: 'horizontal',
+      insidetextorientation: "horizontal",
+      marker: { colors: _colors },
       hoverinfo:'none',
       automargin: true
     }]
