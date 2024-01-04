@@ -76,6 +76,7 @@ export class PlotlyService {
       },
       yaxis: {
         title: 'Meal taken',
+        showticklabels: false
       },
     };
     const config = { responsive: true };
@@ -138,7 +139,7 @@ export class PlotlyService {
         showarrow: false,
         font: {
           size: 20,
-          color:"gray",
+          color:"#4a4a4a",
           family: 'monospace', // serif, sans-serif, monospace, Arial, Times New Roman, Courier New
           weight: 'bold',
           opacity: 1 
@@ -156,9 +157,9 @@ export class PlotlyService {
       type: "pie",
       values: z,
       labels: ["Breakfast", "Lunch", "Snacks", "Dinner", "Milk", "Egg"],
-      textinfo: "label+percent",
+      textinfo: "label+value",
       // textposition: "outside",
-      insidetextorientation: "radial",
+      insidetextorientation: 'horizontal',
       hoverinfo:'none',
       automargin: true
     }]
