@@ -70,7 +70,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     MatDialogModule,
     ReactiveFormsModule,
     MatChipsModule,
-    ReactiveFormsModule,
+
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

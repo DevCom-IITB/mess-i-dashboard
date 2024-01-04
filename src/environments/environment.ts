@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backendURL:"http://localhost:5000",
-  redirectURL:"http://localhost:4200/login",
+  redirectURL:"http://localhost:4200/login", // Do not replace localhost with 127.0.0.1 here. It's known to fail. Gymkhana responds with an error saying that there's a mismatch in the redirect URL.
   clientID:"1dE3mAQY7EvCjw5IdHgoNtbutjgZy14CyIsWKRK8"
 };
 
