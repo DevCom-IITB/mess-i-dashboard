@@ -18,7 +18,7 @@ export class PlotlyService {
         y: y[i],
         type: 'scatter',
         mode: 'lines',
-        hoverinfo:'none',
+        hoverinfo:'x',
         marker: { color: this.COLORS[i%this.COLORS.length] },
         name:labels[i],
       })
@@ -34,7 +34,9 @@ export class PlotlyService {
         showticklabels: false
       },
     };
-    const config = { responsive: true };
+    const config = { 
+      responsive: true,
+      scrollZoom: false, };
     Plotly.newPlot(div_identifier,trace, layout,config)
   }
 
@@ -49,7 +51,7 @@ export class PlotlyService {
       {
         z: z,
         hoverongaps: true,
-        hoverinfo:'none',
+        hoverinfo:'x',
         type: 'heatmap',
         showscale: false,
         xgap: 1,
@@ -99,7 +101,10 @@ export class PlotlyService {
       };
       layout.annotations.push(annotation);
     }
-    Plotly.newPlot(div_identifier, data, layout);
+    const config = { 
+      responsive: true,
+      scrollZoom: false, };
+    Plotly.newPlot(div_identifier, data, layout,config);
 
   }
   plotPie(plotDiv:string, z:number[], _labels: string[], _colors: string[]){
@@ -121,8 +126,11 @@ export class PlotlyService {
       width: 400,
       margin: {"t": 0, "b": 0, "l": 0, "r": 0},
       showlegend: false
-      }
-    
-    Plotly.newPlot(plotDiv, data, layout)
+    }
+    const config = { 
+      responsive: true,
+      scrollZoom: false,
+    };
+    Plotly.newPlot(plotDiv, data, layout,config)
   }
 }
