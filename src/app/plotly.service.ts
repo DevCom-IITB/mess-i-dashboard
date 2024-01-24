@@ -21,6 +21,7 @@ export class PlotlyService {
         hoverinfo:'x',
         marker: { color: this.COLORS[i%this.COLORS.length] },
         name:labels[i],
+        text:[]
       })
     }
     const layout = {
@@ -36,7 +37,19 @@ export class PlotlyService {
     };
     const config = { 
       responsive: true,
-      scrollZoom: false, };
+      scrollZoom: false, 
+      displayModeBar: true,
+      displaylogo : false,
+      modeBarButtonsToRemove: [
+        'zoom',
+        'pan',
+        'select',
+        'zoomIn', 
+        'zoomOut',
+        'autoScale', 
+        'resetScale'
+      ],
+    };
     Plotly.newPlot(div_identifier,trace, layout,config)
   }
 
@@ -103,7 +116,19 @@ export class PlotlyService {
     }
     const config = { 
       responsive: true,
-      scrollZoom: false, };
+      scrollZoom: false,
+      displayModeBar: true,
+      displaylogo : false,
+      modeBarButtonsToRemove: [
+        'zoom',
+        'pan',
+        'select',
+        'zoomIn', 
+        'zoomOut',
+        'autoScale', 
+        'resetScale',
+      ],
+    };
     Plotly.newPlot(div_identifier, data, layout,config);
 
   }
@@ -130,6 +155,7 @@ export class PlotlyService {
     const config = { 
       responsive: true,
       scrollZoom: false,
+      displaylogo : false,
     };
     Plotly.newPlot(plotDiv, data, layout,config)
   }

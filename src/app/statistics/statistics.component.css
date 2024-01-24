@@ -9,7 +9,7 @@ body {
     max-width: 800px; /* Adjust the maximum width as needed */
     margin: 20px auto;
     box-sizing: border-box;
-    overflow:auto;
+    /* overflow:visible; */
   }
 
 .container{
@@ -69,7 +69,7 @@ div#pie-textual-container{
 }
 div#textual-stats{
     padding: 4rem;
-    overflow:visible;
+    overflow:scroll;
 }
 p#stat-notice{
     font-size: x-small;
@@ -78,21 +78,29 @@ li.text-stats-item{
     font-size: 0.9rem;
 }
 
+
 @media (min-width: 320px) {
     div#pie-textual-container{
         flex-direction: column;
     }
-    #student_data,
-    #mess_data{
-        height: 300px; 
+    #student_data{
+        width: 600px;
+        height: 400px;
     }
+    #mess_data{
+        width: 500px;
+    }
+
 }
 @media (min-width: 426px) {
     div#pie-textual-container{
         flex-direction: row;
     }
-    #student_data,
-    #mess_data {
+    #student_data{
+        width: 1000px;
         height: 400px;
+    }
+    #mess_data{
+        width: 1000px;
     }
 }
