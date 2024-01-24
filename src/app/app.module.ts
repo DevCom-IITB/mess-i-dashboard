@@ -32,6 +32,7 @@ import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { GuestEntryComponent } from './guest-entry/guest-entry.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
     DurationBoxComponent,
     CardStatusButtonComponent,
     StatisticsComponent,
+    GuestEntryComponent,
   ],
   imports: [
     BrowserModule,
