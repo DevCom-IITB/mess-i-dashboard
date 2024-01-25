@@ -1,1 +1,45 @@
-<p>guest-entry works!</p>
+<div class="container">
+    <div>
+        <h1 style="border-bottom:3px solid #ffc42b">Guest Entry</h1>
+        <form #data="ngForm" (ngSubmit)="getPlates(data)" class="form-inline">
+            <div class="input-group mb-3">
+              <select class="form-select" name="day" id="day_dropdown" aria-label="Select a day" aria-placeholder="Day" ngModel>
+                <option value="" disabled selected>Select Day</option>
+                <option *ngFor="let day of [ 'Today', 'Tomorrow', 'Day after Tomorrow']; let i=index" [value]="(i+1).toString()">{{day}}</option>    
+              </select>
+              <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
+                <option value="" disabled selected>Select a Meal</option>
+                <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="(i+1).toString()">{{meal}}</option>
+              </select>
+              <button type="submit" >GET</button>
+            </div>
+          </form>
+    </div>
+
+    <hr>
+
+    <div>
+        <table class="table">
+            <thead>
+              <tr id="column-headers">
+                <th scope="col">Hostel</th>
+                <th scope="col">Available</th>
+                <th scope="col">Plates</th>
+                <th scope="col">Status</th>
+              </tr>
+        
+            </thead>
+            <tbody id="plate-table">
+              <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
+              <ng-container *ngFor="let stud of [1,2,3];">
+                <tr>
+                  <td role="button">1</td>
+                  <td role="button">2</td>
+                  <td role="button">3</td>
+                  <td role="button">4</td>
+                </tr>
+              </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

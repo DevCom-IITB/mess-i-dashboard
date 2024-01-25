@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-guest-entry',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestEntryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService, private router:Router) { 
+    if (!this.auth.isLoggedIn()){
+      this.router.navigate(['login'])
+    }
+  }
 
   ngOnInit(): void {
+  }
+
+  async getPlates(data: any){
+    
   }
 
 }
