@@ -1,0 +1,56 @@
+[
+  {
+    "name": "H2",
+    "data": {
+      "2024-01-25": {
+        "breakfast": { "available":"AVL","plates": 100},
+        "lunch": { "available":"AVL","plates": 100},
+        "snacks": { "available":"NA","plates": 0},
+        "dinner": { "available":"AVL","plates": 100}
+      },
+      "2024-01-26": {
+        "breakfast": { "available":"AVL","plates": 100},
+        "lunch": { "available":"AVL","plates": 100},
+        "snacks": { "available":"NA","plates": 0},
+        "dinner": { "available":"AVL","plates": 100}
+      }
+    }
+  },
+  {
+    "name": "H3",
+    "data": {
+      "2024-01-26": {
+        "breakfast": { "available":"AVL","plates": 100},
+        "lunch": { "available":"AVL","plates": 100},
+        "snacks": { "available":"AVL","plates": 100},
+        "dinner": { "available":"AVL","plates": 100}
+      }
+    }
+  },
+  {
+    "name": "H10",
+    "data": {
+      "2024-01-26": {
+        "breakfast": { "available":"AVL","plates": 100},
+        "lunch": { "available":"AVL","plates": 100},
+        "snacks": { "available":"AVL","plates": 100},
+        "dinner": { "available":"AVL","plates": 100}
+      }
+    }
+  },
+  {
+    "name": "H15",
+    "data": {
+      "2024-01-25": {
+        "breakfast": { "available":"AVL","plates": 100},
+        "lunch": { "available":"AVL","plates": 100},
+        "snacks": { "available":"AVL","plates": 100},
+        "dinner": { "available":"AVL","plates": 100}
+      }
+    }
+  }
+]
+      
+    
+  
+  

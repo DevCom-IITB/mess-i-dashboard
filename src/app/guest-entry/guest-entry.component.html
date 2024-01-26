@@ -5,11 +5,11 @@
             <div class="input-group mb-3">
               <select class="form-select" name="day" id="day_dropdown" aria-label="Select a day" aria-placeholder="Day" ngModel>
                 <option value="" disabled selected>Select Day</option>
-                <option *ngFor="let day of [ 'Today', 'Tomorrow', 'Day after Tomorrow']; let i=index" [value]="(i+1).toString()">{{day}}</option>    
+                <option *ngFor="let day of [ 'Today', 'Tomorrow', 'Day after Tomorrow']; let i=index" [value]="(i).toString()">{{day}}</option>    
               </select>
               <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
                 <option value="" disabled selected>Select a Meal</option>
-                <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="(i+1).toString()">{{meal}}</option>
+                <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
               </select>
               <button type="submit" >GET</button>
             </div>
@@ -19,24 +19,45 @@
     <hr>
 
     <div>
-        <table class="table">
+        <table *ngIf="plateHistory" class="table">
             <thead>
               <tr id="column-headers">
-                <th scope="col">Hostel</th>
-                <th scope="col">Available</th>
-                <th scope="col">Plates</th>
-                <th scope="col">Status</th>
+                <ng-container *ngFor="let header of ['Hostel', 'Available', 'Plates', 'Status']">
+                  <th scope="col">{{header}}</th>
+                </ng-container>
               </tr>
         
             </thead>
             <tbody id="plate-table">
-              <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
-              <ng-container *ngFor="let stud of [1,2,3];">
+              <ng-container *ngFor="let plate of plateHistory">
                 <tr>
-                  <td role="button">1</td>
-                  <td role="button">2</td>
-                  <td role="button">3</td>
-                  <td role="button">4</td>
+                  <ng-container *ngFor="let row of plate">
+                    <td>{{row}}</td>
+                  </ng-container>
+                  <td *ngIf="!flag" role="button">
+                    <button type="button" class="status-button mode-active" id="1" (click)="toggl()" >
+                      <div class="container px-1 py-0">
+                        <div class="row">
+                          <div class="col px-0 align-items-center ">
+                            <div class="align-self-center indicator-circle mode-active"></div>
+                          </div>
+                          <div style="color:#000000" class="col px-1 py-0">Book  </div>
+                        </div>
+                      </div>
+                    </button>
+                  </td>
+                  <td *ngIf="flag" role="button">
+                    <button type="button" class="status-button mode-inactive" id="2" (click)="toggl()">
+                      <div class="container px-1 py-0">
+                        <div class="row">
+                          <div class="col px-0 align-items-center ">
+                            <div class="align-self-center indicator-circle mode-inactive"></div>
+                          </div>
+                          <div style="color:#000000" class="col px-1 py-0">Booked</div>
+                        </div>
+                      </div>
+                    </button>
+                  </td>
                 </tr>
               </ng-container>
             </tbody>
