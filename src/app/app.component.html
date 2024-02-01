@@ -7,6 +7,7 @@
       <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/list">STUDENTS' LIST</a>
       <a id="nav_rebate" class="nav-link nav-items-style" *ngIf="auth.isStudent()" routerLink="/rebate" >REBATES</a>
       <a id="nav_rebate_admin" class="nav-link nav-items-style" *ngIf="auth.isRebate()" routerLink="/rebate-admin" >REBATES ADMIN</a>
+      <a id="nav_guest_admin" class="nav-link nav-items-styles" *ngIf="auth.isRebate()" routerLink="/guest-admin">GUEST ADMIN</a>
       <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/overview" >MESS STATS</a>
       <a id="nav_statistics" class="nav-link nav-items-style" *ngIf="auth.isLoggedIn()" routerLink="/statistics" >STATISTICS</a>
       <a id="nav_guest_entry" class="nav-link nav-items-style" *ngIf="auth.isLoggedIn()" routerLink="/guest-entry" >GUEST ENTRY</a>      

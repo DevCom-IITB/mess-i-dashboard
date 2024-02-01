@@ -34,6 +34,8 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
+import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
+import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 
 
 @NgModule({
@@ -63,6 +65,8 @@ import { GuestEntryComponent } from './guest-entry/guest-entry.component';
     CardStatusButtonComponent,
     StatisticsComponent,
     GuestEntryComponent,
+    GuestStatusButtonComponent,
+    GuestAdminComponent,
   ],
   imports: [
     BrowserModule,

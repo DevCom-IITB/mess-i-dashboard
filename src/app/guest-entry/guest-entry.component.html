@@ -34,29 +34,8 @@
                   <ng-container *ngFor="let row of plate">
                     <td>{{row}}</td>
                   </ng-container>
-                  <td *ngIf="!flag" role="button">
-                    <button type="button" class="status-button mode-active" id="1" (click)="toggl()" >
-                      <div class="container px-1 py-0">
-                        <div class="row">
-                          <div class="col px-0 align-items-center ">
-                            <div class="align-self-center indicator-circle mode-active"></div>
-                          </div>
-                          <div style="color:#000000" class="col px-1 py-0">Book  </div>
-                        </div>
-                      </div>
-                    </button>
-                  </td>
-                  <td *ngIf="flag" role="button">
-                    <button type="button" class="status-button mode-inactive" id="2" (click)="toggl()">
-                      <div class="container px-1 py-0">
-                        <div class="row">
-                          <div class="col px-0 align-items-center ">
-                            <div class="align-self-center indicator-circle mode-inactive"></div>
-                          </div>
-                          <div style="color:#000000" class="col px-1 py-0">Booked</div>
-                        </div>
-                      </div>
-                    </button>
+                  <td>
+                    <app-guest-status-button [meal]="meal" [date]="date" [guestHostel]="plate[0]" ></app-guest-status-button>
                   </td>
                 </tr>
               </ng-container>

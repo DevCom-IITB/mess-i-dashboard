@@ -15,9 +15,12 @@ export class GuestEntryComponent implements OnInit {
   hostelData:any;
   plateHistory:any;
   history:any;
-  flag:boolean=false;
+  rollNumber:string;
+  errMsg = "";
+  meal = "";
+  date = "";
 
-  constructor(private auth:AuthService, private router:Router, private guest:GuestdataService, private datePipe:DatePipe, private http:HttpClient) { 
+  constructor(private auth:AuthService, private router:Router, private guestService:GuestdataService, private datePipe:DatePipe, private http:HttpClient) { 
     if (!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -28,13 +31,20 @@ export class GuestEntryComponent implements OnInit {
 
   cleanData(history:any,date:string,meal:string){
     let body=[];
-    // console.log(history)
     for(let hostel of history){
+      // console.log(hostel.data[0][date][meal]["guests"].length)
       let platedata=[];
       platedata.push(hostel.name)
-      if (date in hostel.data){
-        platedata.push(hostel.data[date][meal]["available"])
-        platedata.push(hostel.data[date][meal]["plates"])
+      if (date in hostel.data[0]){
+        console.log(hostel.data[0][date][meal])
+        if((hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)>0){
+          platedata.push("AVL")
+          platedata.push(hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)
+        }
+        else{
+          platedata.push("NA")
+          platedata.push(0)
+        }
       }
       else{
         platedata.push('AVL')
@@ -44,24 +54,31 @@ export class GuestEntryComponent implements OnInit {
     }
     return body
   }
+  
   async getPlates(data: any){
-    if (data.form.value.day&&data.form.value.meal) {
+    this.getHostelPlates(data)
+    if (data.form.value.day&&data.form.value.day) {
       let day = new Date();
-      let meal=data.form.value.meal
+      this.meal=data.form.value.meal
       day.setDate(day.getDate() + parseInt(data.form.value.day));
-      let date=this.datePipe.transform(day, 'yyyy-MM-dd')!
-      console.log(date)
+      this.date=this.datePipe.transform(day, 'dd-MM-yyyy')!
       this.http.get<any>('/assets/hostels.json').subscribe(data=>{
         this.history=data;
-        this.plateHistory=this.cleanData(this.history,date,meal)
+        this.plateHistory=this.cleanData(this.history,this.date,this.meal)
       });
       
     }else{
     }
   }
 
-  toggl(){
-    this.flag=!this.flag
+  async getHostelPlates(data:any){
+    this.guestService.getHostelPlates(data.form.value.day,data.form.value.day).then((res)=>{
+      console.log(res);
+    }).catch((res)=>{
+      this.errMsg =res;
+    })
   }
+
+  
 
 }
