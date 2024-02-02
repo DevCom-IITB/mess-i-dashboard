@@ -21,16 +21,16 @@ export class GuestStatusButtonComponent implements OnInit {
   }
 
   async toggl(){
-    this.process=true;
-    await this.service.addGuest(this.guestHostel, this.meal, this.date).then((res)=>{
-      if (res){
-        this.guestStatus  = ! this.guestStatus;
-      }
-    }).catch((res)=>{
-      alert("Unable to toggle");
-      console.log(res);
-    });
-    this.process=false;
+    // this.process=true;
+    // await this.service.addGuest(this.guestHostel, this.meal, this.date).then((res)=>{
+    //   if (res){
+    //     this.guestStatus  = ! this.guestStatus;
+    //   }
+    // }).catch((res)=>{
+    //   alert("Unable to toggle");
+    //   console.log(res);
+    // });
+    // this.process=false;
   }
 
 }

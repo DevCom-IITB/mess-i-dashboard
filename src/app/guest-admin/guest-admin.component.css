@@ -1,0 +1,46 @@
+.container{
+    padding: 4%;
+    background-color: #FFFCF4; 
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+form{
+    margin-top: 1vw;
+    /* display: flex;
+    flex-direction: row; */
+}
+input.form-control{
+    margin-left: 2vh;
+    margin-right: 2vh;
+    border-color: #FFC42B;
+    border-width: 2px;
+    background-color:#FFF8E8;
+}
+.form-group{
+    margin-left: 3vh;
+    margin-right: 5vh;
+    border-color: #FFC42B;
+    border-width: 2px;
+    
+}
+
+select.form-select{
+    margin-left: 2vh;
+    margin-right: 2vh;
+    border-color: #FFC42B;
+    border-width: 2px;
+    background-color: #FFF8E8;
+}
+
+button{
+    background-color: #28282B;
+    color:white;
+    border:0px;
+    border-radius: 4px;
+}
+
+button:hover{
+    background-color: #FFC42B;
+  }
