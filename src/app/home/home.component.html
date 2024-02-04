@@ -15,47 +15,4 @@
             <app-devices [device]="device"></app-devices>
         </ng-container>
     </div>
-
-    <div class="guest-container">
-        <div>
-            <h1 style="border-bottom:3px solid #ffc42b">Guests</h1>
-            <form #data="ngForm" (ngSubmit)="getGuests(data)" class="form-inline">
-                <div class="input-group mb-3">
-                  <select class="form-select" name="day" id="day_dropdown" aria-label="Select a day" aria-placeholder="Day" ngModel>
-                    <option value="" disabled selected>Select Day</option>
-                    <option *ngFor="let day of [ 'Today', 'Tomorrow', 'Day after Tomorrow']; let i=index" [value]="(i).toString()">{{day}}</option>    
-                  </select>
-                  <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
-                    <option value="" disabled selected>Select a Meal</option>
-                    <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
-                  </select>
-                  <button type="submit" >GET</button>
-                </div>
-              </form>
-        </div>
-    
-        <hr>
-    
-        <div>
-            <table *ngIf="guestHistory" class="table">
-                <thead>
-                  <tr id="column-headers">
-                    <ng-container *ngFor="let header of ['Hostel', 'Available', 'Plates']">
-                      <th scope="col">{{header}}</th>
-                    </ng-container>
-                  </tr>
-            
-                </thead>
-                <tbody id="plate-table">
-                  <ng-container *ngFor="let guest of guestHistory">
-                    <tr>
-                      <ng-container *ngFor="let data of guest">
-                        <td>{{data}}</td>
-                      </ng-container>
-                    </tr>
-                  </ng-container>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>

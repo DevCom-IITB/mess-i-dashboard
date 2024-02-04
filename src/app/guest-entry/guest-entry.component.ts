@@ -15,16 +15,21 @@ export class GuestEntryComponent implements OnInit {
   
   student:any;
   student_data:any;
+  guest_data:any;
   name:string;
   hostel:string;
 
-  hostelData:any;
-  plateHistory:any;
   history:any;
-  rollNumber:string;
   errMsg = "";
-  meal = "";
-  date = "";
+
+  day1 = new Date();
+  temp_day = new Date();
+  day2=this.temp_day.setDate(this.temp_day.getDate() + 1);
+  day3=this.temp_day.setDate(this.temp_day.getDate() + 1);
+  date1 = this.datePipe.transform(this.day1, 'dd-MM-yyyy')!
+  date2 = this.datePipe.transform(this.day2, 'dd-MM-yyyy')!
+  date3 = this.datePipe.transform(this.day3, 'dd-MM-yyyy')!
+  legel_date=[this.date1,this.date2,this.date3]
 
   constructor(private auth:AuthService, private router:Router, private service:StudentdataService, private guestService:GuestdataService, private datePipe:DatePipe, private http:HttpClient) { 
     if (!this.auth.isLoggedIn()){
@@ -34,12 +39,13 @@ export class GuestEntryComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetch_student(this.auth.getRoll())
+    this.getGuestDetail()
   }
-  getRebates = () => this.service.getStudentRebates();
 
   async fetch_student(rollNum: any){
     if(this.service.studentCache.has(rollNum)){
       this.student = this.service.studentCache.get(rollNum);
+      console.log(this.student)
     }else{
       //make an api call if data not present in the this.studentCache    
       this.service.getStudentData(rollNum).then((res)=>{
@@ -52,64 +58,35 @@ export class GuestEntryComponent implements OnInit {
     }
   }
 
-  cleanData(history:any,date:string,meal:string){
+  cleanData(history:any,legel_date:string[]){
+    
     let body=[];
-    for(let hostel of history){
-      // console.log(hostel.data[0][date][meal]["guests"].length)
-      let platedata=[];
-      platedata.push(hostel.name)
-      if (date in hostel.data[0]){
-        console.log(hostel.data[0][date][meal])
-        if((hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)>0){
-          platedata.push("AVL")
-          platedata.push(hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)
-        }
-        else{
-          platedata.push("NA")
-          platedata.push(0)
+    for(let i=0; i<3;i++){
+      if ( Object.keys(history[i]["data"]).length ){
+        for(let key in history[i]["data"]){
+          let booking=[];
+          booking.push(history[i]["data"][key]["hostel"])
+          booking.push(legel_date[i])
+          booking.push(key)
+          body.push(booking)
         }
       }
-      else{
-        platedata.push('AVL')
-        platedata.push(1)
-      }
-      body.push(platedata)
     }
     return body
   }
   
-  async getPlates(data: any){
-    this.getGuesthostel(data)
-    if (data.form.value.day&&data.form.value.day) {
-      let day = new Date();
-      this.meal=data.form.value.meal
-      day.setDate(day.getDate() + parseInt(data.form.value.day));
-      this.date=this.datePipe.transform(day, 'dd-MM-yyyy')!
-      this.http.get<any>('/assets/hostels.json').subscribe(data=>{
-        this.history=data;
-        this.plateHistory=this.cleanData(this.history,this.date,this.meal)
-      });
-      
-    }else{
-    }
+  async getGuestDetail(){
+    let promises = [
+      this.guestService.getGuestDetail(this.auth.getRoll(), this.date1),
+      this.guestService.getGuestDetail(this.auth.getRoll(), this.date2), // Provide different date or parameters
+      this.guestService.getGuestDetail(this.auth.getRoll(), this.date3) // Provide different roll or parameters
+    ];
+    let history = await Promise.all(promises);
+    this.guest_data=this.cleanData(history,this.legel_date)
   }
 
-  async getHostelPlates(data:any){
-    await this.guestService.getAllHostelPlates(data.form.value.day,data.form.value.day).then((res)=>{
-      console.log(res);
-    }).catch((res)=>{
-      this.errMsg =res;
-    })
+  updateList(){
+    this.getGuestDetail()
   }
-
-  async getGuesthostel(data:any){
-    await this.guestService.getGuestHostel("H11","23-01-2024","breakfast").then((res)=>{
-      console.log(res);
-    }).catch((res)=>{
-      this.errMsg =res;
-    })
-  }
-
-  
 
 }

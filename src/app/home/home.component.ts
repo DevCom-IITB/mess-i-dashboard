@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { RebateRequest, Student } from '../interfaces';
@@ -15,12 +13,9 @@ export class HomeComponent implements OnInit {
 
   public pending_rebates: RebateRequest[] = new Array();
   devices:any;
-  meal:string;
   date:string;
-  history:any;
-  guestHistory:any;
 
-  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router, private datePipe:DatePipe, private http:HttpClient) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -76,47 +71,5 @@ export class HomeComponent implements OnInit {
   //     rebate_duration_end: new Date(Date.UTC(2022, 11, 29, 11, 23, 22)),
   //   } as RebateRequest);
   // }
-
-  cleanData(history:any,date:string,meal:string){
-    let body=[];
-    for(let hostel of history){
-      // console.log(hostel.data[0][date][meal]["guests"].length)
-      let platedata=[];
-      platedata.push(hostel.name)
-      if (date in hostel.data[0]){
-        console.log(hostel.data[0][date][meal])
-        if((hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)>0){
-          platedata.push("AVL")
-          platedata.push(hostel.data[0][date][meal]["availability"]-hostel.data[0][date][meal]["guests"].length)
-        }
-        else{
-          platedata.push("NA")
-          platedata.push(0)
-        }
-      }
-      else{
-        platedata.push('AVL')
-        platedata.push(1)
-      }
-      body.push(platedata)
-    }
-    return body
-  }
-
-  async getGuests(data: any){
-    // this.getHostelPlates(data)
-    if (data.form.value.day&&data.form.value.day) {
-      let day = new Date();
-      this.meal=data.form.value.meal
-      day.setDate(day.getDate() + parseInt(data.form.value.day));
-      this.date=this.datePipe.transform(day, 'dd-MM-yyyy')!
-      this.http.get<any>('/assets/hostels.json').subscribe(data=>{
-        this.history=data;
-        this.guestHistory=this.cleanData(this.history,this.date,this.meal)
-      });
-      
-    }else{
-    }
-  }
 
 }

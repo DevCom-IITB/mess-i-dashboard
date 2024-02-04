@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { GuestdataService } from 'src/app/guestdata.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class GuestStatusButtonComponent implements OnInit {
   @Input() meal:any;
   @Input() date:any;
   @Input() guestHostel:any;
+  @Output() public updateList = new EventEmitter();
   constructor( private service:GuestdataService) {
   }
 
@@ -21,16 +22,18 @@ export class GuestStatusButtonComponent implements OnInit {
   }
 
   async toggl(){
-    // this.process=true;
-    // await this.service.addGuest(this.guestHostel, this.meal, this.date).then((res)=>{
-    //   if (res){
-    //     this.guestStatus  = ! this.guestStatus;
-    //   }
-    // }).catch((res)=>{
-    //   alert("Unable to toggle");
-    //   console.log(res);
-    // });
-    // this.process=false;
+    this.process=true;
+    await this.service.removeGuest(this.guestHostel, this.meal, this.date).then((res)=>{
+      if (res){
+        this.guestStatus  = ! this.guestStatus;
+        alert("Withdraw Successful")
+        this.updateList.emit();
+      }
+    }).catch((res)=>{
+      alert("Unable to Withdraw");
+      console.log(res);
+    });
+    this.process=false;
   }
 
 }

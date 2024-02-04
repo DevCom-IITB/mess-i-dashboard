@@ -1,49 +1,33 @@
 <div class="container">
   <div>
       <h1 style="border-bottom:3px solid #ffc42b">Guest Entry</h1>
-      <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
-
-      <!-- <form #data="ngForm" (ngSubmit)="getPlates(data)" class="form-inline">
-          <div class="input-group mb-3">
-            <select class="form-select" name="day" id="day_dropdown" aria-label="Select a day" aria-placeholder="Day" ngModel>
-              <option value="" disabled selected>Select Day</option>
-              <option *ngFor="let day of [ 'Today', 'Tomorrow', 'Day after Tomorrow']; let i=index" [value]="(i).toString()">{{day}}</option>    
-            </select>
-            <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
-              <option value="" disabled selected>Select a Meal</option>
-              <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
-            </select>
-            <button type="submit" >GET</button>
-          </div>
-        </form> -->
+      <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/apply-guest-entry']">New Request</button>
   </div>
 
   <hr>
-  <app-rebate-list [showFilter]="false" [getRebates]="getRebates"></app-rebate-list>
 
-
-  <!-- <div>
-      <table *ngIf="plateHistory" class="table">
+  <div>
+      <table *ngIf="guest_data && guest_data.length" class="table">
           <thead>
             <tr id="column-headers">
-              <ng-container *ngFor="let header of ['Hostel', 'Available', 'Plates', 'Status']">
+              <ng-container *ngFor="let header of ['Hostel', 'Date', 'Meal', ' ']">
                 <th scope="col">{{header}}</th>
               </ng-container>
             </tr>
       
           </thead>
-          <tbody id="plate-table">
-            <ng-container *ngFor="let plate of plateHistory">
+          <tbody id="booking-table">
+            <ng-container *ngFor="let guest of guest_data">
               <tr>
-                <ng-container *ngFor="let row of plate">
+                <ng-container *ngFor="let row of guest">
                   <td>{{row}}</td>
                 </ng-container>
                 <td>
-                  <app-guest-status-button [meal]="meal" [date]="date" [guestHostel]="plate[0]" ></app-guest-status-button>
+                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" ></app-guest-status-button>
                 </td>
               </tr>
             </ng-container>
           </tbody>
       </table>
-  </div> -->
+  </div>
 </div>

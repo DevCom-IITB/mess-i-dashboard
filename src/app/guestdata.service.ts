@@ -54,13 +54,29 @@ export class GuestdataService {
     })
   }
 
+  async getGuestDetail(roll:string, date:string){
+    let url = this.baseurl.concat("/guest-info/",roll,'/',date);
+    return new Promise((resolve,reject)=>
+    {
+      this.http.get(url,{
+        headers:{
+          'x-access-token':this.auth.getToken(),
+          'rejectUnauthorised':'false'
+        }
+      }).subscribe((res)=>{
+        resolve(res);
+      },(e)=>{
+        reject({});
+      })
+    })
+  }
+
   async addGuest(name:string, hostel:string, guestHostel:string, meal:string, date:string){
     let url = this.baseurl.concat("/guest-entry/",date,'/',meal,'/',guestHostel);
     const jsonData = {
-      "_id": this.auth.getToken(),
       "roll": this.auth.getRoll(),
-      "name": name,
-      "fullname": hostel,
+      "name": hostel,
+      "fullname": name,
       "entries": {
         [date]: {
           [meal]:{
@@ -92,18 +108,13 @@ export class GuestdataService {
   async removeGuest(guestHostel:string,meal:string,date:string){
     let url = this.baseurl.concat("/guest-entry-remove/",this.auth.getRoll(),'/',date,'/',meal,'/',guestHostel);
     return new Promise((resolve,reject)=>{
-      this.http.post(url,{headers:{
+      this.http.delete(url,{headers:{
         'x-access-token':this.auth.getToken(),
         'rejectUnauthorized':'false' 
       }}).subscribe((res:any)=>{
-        if(res.status===200){
-          resolve(true);
-        }else{
-          reject(false);
-        }
+        resolve(res)
       },(e)=>{
-        if(e.status===200) resolve(true);
-        else reject(e);
+        reject(e)
       })
     })
     

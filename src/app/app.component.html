@@ -10,7 +10,7 @@
       <a id="nav_guest_admin" class="nav-link nav-items-styles" *ngIf="auth.isRebate()" routerLink="/guest-admin">GUEST ADMIN</a>
       <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/overview" >MESS STATS</a>
       <a id="nav_statistics" class="nav-link nav-items-style" *ngIf="auth.isLoggedIn()" routerLink="/statistics" >STATISTICS</a>
-      <a id="nav_guest_entry" class="nav-link nav-items-style" *ngIf="auth.isLoggedIn()" routerLink="/guest-entry" >GUEST ENTRY</a>      
+      <a id="nav_guest_entry" class="nav-link nav-items-style" *ngIf="auth.isStudent()" routerLink="/guest-entry" >GUEST ENTRY</a>      
       <!-- <a id="nav_mess_bill" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/mess-bill" >MESS BILL</a> -->
       <a class="nav-link nav-items-style-login" role="button" (click)="login()" *ngIf="!auth.isLoggedIn()">LOGIN</a>
       <a class="nav-link nav-items-style-login" role="button" (click)="logout()" *ngIf="auth.isLoggedIn()">LOGOUT</a>

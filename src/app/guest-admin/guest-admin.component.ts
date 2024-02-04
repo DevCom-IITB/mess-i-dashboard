@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { GuestdataService } from '../guestdata.service';
 import { StudentdataService } from '../studentdata.service';
 
@@ -13,13 +12,18 @@ import { StudentdataService } from '../studentdata.service';
 export class GuestAdminComponent implements OnInit {
 
   allowedHostels:boolean[] = new Array<boolean>(22);
-  guestHistory:any;
-  date: string = '';
 
-  constructor(private auth:AuthService, private service:StudentdataService, private guestService:GuestdataService, private router:Router, private datePipe:DatePipe) {
+  hostel: string='' ;
+  meal: string='' ;
+  date: string ;
+
+  guestHistory:any;
+
+  constructor(private auth:AuthService, private service:StudentdataService, private guestService:GuestdataService, private router:Router) {
     let current_state = this.router.getCurrentNavigation()?.extras.state;
     if(current_state != undefined){
-      // this.date=current_state?.date;
+      this.hostel = current_state?.hostel;
+      this.meal = current_state?.meal;
       this.date = this.resolveDateFormat(current_state?.date);
     }
   }
@@ -46,30 +50,47 @@ export class GuestAdminComponent implements OnInit {
   }
 
   cleanData(history:any){
-    
+    let body=[];
+    for(let guest of history["data"]["guests"]){
+      body.push(guest)
+    }
+    return body;
   }
 
-  getGuestList(data:any){
-    console.log(this.date)
-    if (data.form.value.hostel&&data.form.value.meal) {
+  // getGuestList(data:any){
+  //   if (data.form.value.hostel&&data.form.value.meal) {
+  //     if(this.date===""){
+  //       alert("Date is required")
+  //     }else{
+  //       this.guestService.getGuestHostel(data.form.value.hostel,this.resolveDateFormat(this.date),data.form.value.meal).then((res)=>
+  //       {
+  //         let history = res;
+  //         this.guestHistory = this.cleanData(history);
+  //       }).catch((res)=>{
+  //         console.log(res)
+  //         this.guestHistory = this.cleanData({})
+  //       });
+  //       }
+      
+  //   }else{
+  //   }
+    
+  // }
+
+  getGuestList(){
+    if (this.hostel && this.meal && this.date) {
       if(this.date===""){
         alert("Date is required")
       }else{
-        // let day = new Date();
-        // let today = this.datePipe.transform(day, 'dd-MM-yyyy')!
-        // let duration= parseInt(this.date)-parseInt(today)
-        // console.log(parseInt(today))
-        this.guestService.getGuestHostel("H11","23-01-2024","breakfast").then((res)=>
-      {
-        let history = res;
-        // console.log(res);
-        this.guestHistory = this.cleanData(history);
-        console.log(res);
-      }).catch((res)=>{
-        console.log(res)
-        this.guestHistory = this.cleanData({})
-      });
-      }
+        this.guestService.getGuestHostel(this.hostel,this.resolveDateFormat(this.date),this.meal).then((res)=>
+        {
+          let history = res;
+          this.guestHistory = this.cleanData(history);
+        }).catch((res)=>{
+          console.log(res)
+          this.guestHistory = this.cleanData({})
+        });
+        }
       
     }else{
     }
