@@ -57,6 +57,14 @@ select.form-select{
     background-color: #FFF8E8;
 }
 
+#column-headers{
+    color: #ffc42b;
+    font-weight: 500;
+}
+#guest-table{
+    border-top: 2px #ffc42b solid;
+}
+
 button{
     background-color: #28282B;
     color:white;

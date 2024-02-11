@@ -23,7 +23,7 @@
                   <td>{{row}}</td>
                 </ng-container>
                 <td>
-                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" ></app-guest-status-button>
+                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" (updateList)="updateList()" ></app-guest-status-button>
                 </td>
               </tr>
             </ng-container>

@@ -83,6 +83,7 @@ export class GuestEntryFormComponent implements OnInit {
   }
 
   submitEntry(){
+    console.log(this.day1.getMinutes())
     if(this.guestHostel && this.meal && this.date){
       let duration=this.getDaysDifference(this.date1,this.resolveDateFormat(this.date))
       if(![0,1,2].includes(duration)){
@@ -116,9 +117,9 @@ export class GuestEntryFormComponent implements OnInit {
             if(this.guestHostel_data["data"]["availability"]>0){
               this.guestService.addGuest(this.name,this.hostel,this.guestHostel,this.meal,this.resolveDateFormat(this.date)).then((res)=>{
                 if (res){
+                  console.log(res)
                   alert("Guest Entry Booked")
-                  this.router.navigate(['guest-entry'])
-                  console.log(res);
+                  this.router.navigateByUrl('/guest-entry')
                 }
                 
               }).catch((res)=>{

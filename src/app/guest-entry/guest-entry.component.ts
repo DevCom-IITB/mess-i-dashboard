@@ -65,10 +65,31 @@ export class GuestEntryComponent implements OnInit {
       if ( Object.keys(history[i]["data"]).length ){
         for(let key in history[i]["data"]){
           let booking=[];
-          booking.push(history[i]["data"][key]["hostel"])
-          booking.push(legel_date[i])
-          booking.push(key)
-          body.push(booking)
+          if(i==0){
+            if(this.day1.getHours()-10 > 0 && key ==="breakfast"){
+              break;
+            }
+            if(this.day1.getHours()-14 > 0 && key ==="lunch"){
+              break;
+            }
+            if(this.day1.getHours()-18 > 0 && key ==="snacks"){
+              break;
+            }
+            if(this.day1.getHours()-22 > 0 && key ==="dinner"){
+              break;
+            }
+            booking.push(history[i]["data"][key]["guesthostel"])
+            booking.push(legel_date[i])
+            booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+            body.push(booking)
+          }
+          else{
+            booking.push(history[i]["data"][key]["guesthostel"])
+            booking.push(legel_date[i])
+            booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+            body.push(booking)
+          }
+          
         }
       }
     }
@@ -76,6 +97,7 @@ export class GuestEntryComponent implements OnInit {
   }
   
   async getGuestDetail(){
+    this.guest_data={}
     let promises = [
       this.guestService.getGuestDetail(this.auth.getRoll(), this.date1),
       this.guestService.getGuestDetail(this.auth.getRoll(), this.date2), // Provide different date or parameters

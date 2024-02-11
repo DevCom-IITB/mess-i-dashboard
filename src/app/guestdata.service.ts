@@ -72,15 +72,15 @@ export class GuestdataService {
   }
 
   async addGuest(name:string, hostel:string, guestHostel:string, meal:string, date:string){
-    let url = this.baseurl.concat("/guest-entry/",date,'/',meal,'/',guestHostel);
+    let url = this.baseurl.concat("/guest-entry");
     const jsonData = {
       "roll": this.auth.getRoll(),
-      "name": hostel,
+      "hostel": hostel,
       "fullname": name,
       "entries": {
         [date]: {
           [meal]:{
-            "hostel":guestHostel,
+            "guesthostel":guestHostel,
             "entry_at": null,
             "exit_at": null
           }
@@ -92,21 +92,24 @@ export class GuestdataService {
         'x-access-token':this.auth.getToken(),
         'rejectUnauthorized':'false' 
       }}).subscribe((res:any)=>{
-        if(res.status===200){
-          resolve(true);
-        }else{
-          reject(false);
-        }
+        resolve(res)
+        // if(res.status===200){
+        //   resolve(true);
+        // }else{
+        //   reject(false);
+        // }
       },(e)=>{
-        if(e.status===200) resolve(true);
-        else reject(e);
+        // console.log("res")
+        // if(e.status===200) resolve(true);
+        // else reject(e);
+        reject(e)
       })
     })
     
   }
 
   async removeGuest(guestHostel:string,meal:string,date:string){
-    let url = this.baseurl.concat("/guest-entry-remove/",this.auth.getRoll(),'/',date,'/',meal,'/',guestHostel);
+    let url = this.baseurl.concat("/guest-entry/",this.auth.getRoll(),'/',date,'/',meal,'/',guestHostel);
     return new Promise((resolve,reject)=>{
       this.http.delete(url,{headers:{
         'x-access-token':this.auth.getToken(),

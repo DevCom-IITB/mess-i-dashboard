@@ -12,14 +12,16 @@ import { StudentdataService } from '../studentdata.service';
 export class GuestAdminComponent implements OnInit {
 
   allowedHostels:boolean[] = new Array<boolean>(22);
-
+  guestHistory:any;
   hostel: string='' ;
   meal: string='' ;
   date: string ;
-
-  guestHistory:any;
+  headers = ['S. No.','Roll No.','Name','Hostel']
 
   constructor(private auth:AuthService, private service:StudentdataService, private guestService:GuestdataService, private router:Router) {
+    if(!this.auth.isLoggedIn()){
+      this.router.navigate(['login'])
+    }
     let current_state = this.router.getCurrentNavigation()?.extras.state;
     if(current_state != undefined){
       this.hostel = current_state?.hostel;
@@ -50,34 +52,26 @@ export class GuestAdminComponent implements OnInit {
   }
 
   cleanData(history:any){
-    let body=[];
-    for(let guest of history["data"]["guests"]){
-      body.push(guest)
+    if(Object.keys(history).length){
+      let body=[];
+      let i=0;
+      for(let key in history["data"]["guests"]){
+        let guest=[]
+        guest.push(`${++i}`)
+        guest.push(key)
+        guest.push(history["data"]["guests"][key]["fullname"])
+        guest.push(history["data"]["guests"][key]["hostel"])
+        body.push(guest)
+      }
+      let res={headers:this.headers,body:body}
+      return res;
     }
-    return body;
+    return {}
   }
 
-  // getGuestList(data:any){
-  //   if (data.form.value.hostel&&data.form.value.meal) {
-  //     if(this.date===""){
-  //       alert("Date is required")
-  //     }else{
-  //       this.guestService.getGuestHostel(data.form.value.hostel,this.resolveDateFormat(this.date),data.form.value.meal).then((res)=>
-  //       {
-  //         let history = res;
-  //         this.guestHistory = this.cleanData(history);
-  //       }).catch((res)=>{
-  //         console.log(res)
-  //         this.guestHistory = this.cleanData({})
-  //       });
-  //       }
-      
-  //   }else{
-  //   }
-    
-  // }
 
   getGuestList(){
+    this.guestHistory={}
     if (this.hostel && this.meal && this.date) {
       if(this.date===""){
         alert("Date is required")
@@ -95,6 +89,10 @@ export class GuestAdminComponent implements OnInit {
     }else{
     }
     
+  }
+
+  isHistoryEmpty(history:any){
+    return Object.keys(history).length === 0;
   }
 
   resolveDateFormat(date:string){

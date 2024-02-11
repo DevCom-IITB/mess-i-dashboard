@@ -23,7 +23,7 @@ export class GuestStatusButtonComponent implements OnInit {
 
   async toggl(){
     this.process=true;
-    await this.service.removeGuest(this.guestHostel, this.meal, this.date).then((res)=>{
+    await this.service.removeGuest(this.guestHostel, this.meal.toLowerCase(), this.date).then((res)=>{
       if (res){
         this.guestStatus  = ! this.guestStatus;
         alert("Withdraw Successful")
