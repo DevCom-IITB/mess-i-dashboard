@@ -58,34 +58,33 @@ export class GuestEntryComponent implements OnInit {
     }
   }
 
-  cleanData(history:any,legel_date:string[]){
-    
+  cleanData(history:any){
     let body=[];
     for(let i=0; i<3;i++){
       if ( Object.keys(history[i]["data"]).length ){
         for(let key in history[i]["data"]){
           let booking=[];
           if(i==0){
-            if(this.day1.getHours()-10 > 0 && key ==="breakfast"){
-              break;
+            if(this.day1.getHours()-10 >= 0 && key ==="breakfast"){
+              continue;
             }
-            if(this.day1.getHours()-14 > 0 && key ==="lunch"){
-              break;
+            if(this.day1.getHours()-14 >= 0 && key ==="lunch"){
+              continue;
             }
-            if(this.day1.getHours()-18 > 0 && key ==="snacks"){
-              break;
+            if(this.day1.getHours()-18 >= 0 && key ==="snacks"){
+              continue;
             }
-            if(this.day1.getHours()-22 > 0 && key ==="dinner"){
-              break;
+            if(this.day1.getHours()-22 >= 0 && key ==="dinner"){
+              continue;
             }
             booking.push(history[i]["data"][key]["guesthostel"])
-            booking.push(legel_date[i])
+            booking.push(this.legel_date[i])
             booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
             body.push(booking)
           }
           else{
             booking.push(history[i]["data"][key]["guesthostel"])
-            booking.push(legel_date[i])
+            booking.push(this.legel_date[i])
             booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
             body.push(booking)
           }
@@ -104,7 +103,7 @@ export class GuestEntryComponent implements OnInit {
       this.guestService.getGuestDetail(this.auth.getRoll(), this.date3) // Provide different roll or parameters
     ];
     let history = await Promise.all(promises);
-    this.guest_data=this.cleanData(history,this.legel_date)
+    this.guest_data=this.cleanData(history)
   }
 
   updateList(){

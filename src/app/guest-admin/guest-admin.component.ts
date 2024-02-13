@@ -80,9 +80,12 @@ export class GuestAdminComponent implements OnInit {
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
+          console.log(this.guestHistory)
         }).catch((res)=>{
           console.log(res)
           this.guestHistory = this.cleanData({})
+          console.log(this.guestHistory)
+
         });
         }
       

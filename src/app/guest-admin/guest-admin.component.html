@@ -29,7 +29,7 @@
 
   <div>
     <app-table-component *ngIf="guestHistory"  [data]="guestHistory"></app-table-component>
-    <p  *ngIf="!guestHistory">No Guest</p>
+    <p  *ngIf="guestHistory ==={}">No Guest</p>
   </div>
 
 </div>

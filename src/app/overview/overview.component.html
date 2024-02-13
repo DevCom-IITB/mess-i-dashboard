@@ -2,9 +2,6 @@
     <h1 style="border-bottom:3px solid #ffc42b;">Mess Data</h1>
     <form #data="ngForm" (ngSubmit)="getMonthMessData(data)" class="form-inline">
       <div class="input-group mb-3">
-        <!-- <div class="form-group"> -->
-          <!-- <input type="text" class="form-control" id="hostel" name="hostel" placeholder="Hostel" ngModel> -->
-        <!-- </div> -->
         <select class="form-select" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
           <option value="" disabled selected>Select Hostel</option>
           <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]">
@@ -16,18 +13,6 @@
         <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
           <option value="" disabled selected>Select a Month</option>
           <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
-          <!-- <option value="1">Jan</option>
-          <option value="2">Feb</option>
-          <option value="3">Mar</option>
-          <option value="4">Apr</option>
-          <option value="5">May</option>
-          <option value="6">Jun</option>
-          <option value="7">Jul</option>
-          <option value="8">Aug</option>
-          <option value="9">Sept</option>
-          <option value="10">Oct</option>
-          <option value="11">Nov</option>
-          <option value="12">Dec</option> -->
         </select>
         <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
           <option value="" disabled selected>Select a Year</option>
