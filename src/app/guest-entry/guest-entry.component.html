@@ -19,11 +19,11 @@
           <tbody id="booking-table">
             <ng-container *ngFor="let guest of guest_data">
               <tr>
-                <ng-container *ngFor="let row of guest">
-                  <td>{{row}}</td>
+                <ng-container *ngFor="let i of [0,1,2]">
+                  <td>{{guest[i]}}</td>
                 </ng-container>
                 <td>
-                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" (updateList)="updateList()" ></app-guest-status-button>
+                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" [guestStatus]="guest[3]" (updateList)="updateList()" ></app-guest-status-button>
                 </td>
               </tr>
             </ng-container>

@@ -65,27 +65,49 @@ export class GuestEntryComponent implements OnInit {
         for(let key in history[i]["data"]){
           let booking=[];
           if(i==0){
-            if(this.day1.getHours()-10 >= 0 && key ==="breakfast"){
+            if(this.day1.getHours()-8 >= 0 && key ==="breakfast"){
+              booking.push(history[i]["data"][key]["guesthostel"])
+              booking.push(this.legel_date[i])
+              booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+              booking.push(false)
+              body.push(booking)
               continue;
             }
-            if(this.day1.getHours()-14 >= 0 && key ==="lunch"){
+            if(this.day1.getHours()-12 >= 0 && key ==="lunch"){
+              booking.push(history[i]["data"][key]["guesthostel"])
+              booking.push(this.legel_date[i])
+              booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+              booking.push(false)
+              body.push(booking)
               continue;
             }
-            if(this.day1.getHours()-18 >= 0 && key ==="snacks"){
+            if(this.day1.getHours()-17 >= 0 && key ==="snacks"){
+              booking.push(history[i]["data"][key]["guesthostel"])
+              booking.push(this.legel_date[i])
+              booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+              booking.push(false)
+              body.push(booking)
               continue;
             }
-            if(this.day1.getHours()-22 >= 0 && key ==="dinner"){
+            if(this.day1.getHours()-20 >= 0 && key ==="dinner"){
+              booking.push(history[i]["data"][key]["guesthostel"])
+              booking.push(this.legel_date[i])
+              booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+              booking.push(false)
+              body.push(booking)
               continue;
             }
             booking.push(history[i]["data"][key]["guesthostel"])
             booking.push(this.legel_date[i])
             booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+            booking.push(true)
             body.push(booking)
           }
           else{
             booking.push(history[i]["data"][key]["guesthostel"])
             booking.push(this.legel_date[i])
             booking.push(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase())
+            booking.push(true)
             body.push(booking)
           }
           

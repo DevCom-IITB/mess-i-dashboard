@@ -9,11 +9,11 @@ import { GuestdataService } from 'src/app/guestdata.service';
 export class GuestStatusButtonComponent implements OnInit {
 
   process:boolean=false;
-  guestStatus:boolean=false;
 
   @Input() meal:any;
   @Input() date:any;
   @Input() guestHostel:any;
+  @Input() guestStatus:boolean;
   @Output() public updateList = new EventEmitter();
   constructor( private service:GuestdataService) {
   }
