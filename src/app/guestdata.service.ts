@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { StudentdataService } from './studentdata.service';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { promise } from 'protractor';
-import { resolve } from 'dns';
-import { rejects } from 'assert';
+import { Injectable } from '@angular/core';
 
 
 @Injectable({
@@ -14,9 +10,9 @@ import { rejects } from 'assert';
 export class GuestdataService {
 
   baseurl = environment.backendURL+"/api";
-  constructor(private auth:AuthService, private http:HttpClient, private service:StudentdataService) { }
+  constructor(private auth:AuthService, private http:HttpClient) { }
 
-  async getAllHostelPlates(date:string, meal:string){
+  async getAllGuestHostelPlates(date:string, meal:string){
     let url = this.baseurl.concat("/all-hostels-info");
     return new Promise((resolve,reject)=>
     {
@@ -93,15 +89,7 @@ export class GuestdataService {
         'rejectUnauthorized':'false' 
       }}).subscribe((res:any)=>{
         resolve(res)
-        // if(res.status===200){
-        //   resolve(true);
-        // }else{
-        //   reject(false);
-        // }
       },(e)=>{
-        // console.log("res")
-        // if(e.status===200) resolve(true);
-        // else reject(e);
         reject(e)
       })
     })
@@ -120,7 +108,6 @@ export class GuestdataService {
         reject(e)
       })
     })
-    
   }
 
 }

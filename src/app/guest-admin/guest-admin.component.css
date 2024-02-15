@@ -17,7 +17,6 @@ form{
     grid-auto-rows: minmax(60px, auto);
     grid-template-columns: repeat(5, 1fr);
     flex-wrap: wrap;
-
     color: #ffc42b;
 }
 

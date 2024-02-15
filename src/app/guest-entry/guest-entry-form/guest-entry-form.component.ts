@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
-import { DatePipe } from '@angular/common';
-import { StudentdataService } from 'src/app/studentdata.service';
+import { Component, OnInit } from '@angular/core';
 import { GuestdataService } from 'src/app/guestdata.service';
+import { Router } from '@angular/router';
+import { StudentdataService } from 'src/app/studentdata.service';
 
 @Component({
   selector: 'app-guest-entry-form',
@@ -13,27 +12,17 @@ import { GuestdataService } from 'src/app/guestdata.service';
 export class GuestEntryFormComponent implements OnInit {
 
   allowedHostels:string[] = new Array<string>(22);
+  name:string;
+  hostel:string;
+  student:any;
+  student_data:any;
+  Msg: any ;
 
   guestHostel: string ='';
   meal: string='' ;
   date: string ;
 
-  name:string;
-  hostel:string;
-  student:any;
-  student_data:any;
-  guest_data:any;
-  guestHostel_data:any;
-  day1 = new Date();
-  day = new Date();
-  day2=this.day.setDate(this.day.getDate() + 1);
-  day3=this.day.setDate(this.day.getDate() + 1);
-  date1 = this.datePipe.transform(this.day1, 'dd-MM-yyyy')!
-  date2 = this.datePipe.transform(this.day2, 'dd-MM-yyyy')!
-  date3 = this.datePipe.transform(this.day3, 'dd-MM-yyyy')!
-  Msg: any ;
-
-  constructor(private auth:AuthService,private router:Router, private studentService:StudentdataService, private guestService:GuestdataService, private datePipe:DatePipe) {
+  constructor(private auth:AuthService,private router:Router, private studentService:StudentdataService, private guestService:GuestdataService) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -66,9 +55,7 @@ export class GuestEntryFormComponent implements OnInit {
   }
   getAdminHostel(){
     this.studentService.getAdminHostels().then((res:any)=>{
-      for(let i=1; i<this.allowedHostels.length; i++){
-        this.allowedHostels = res;
-      }
+      this.allowedHostels = res;
     }).catch((res) =>{
       console.log(res)
     })

@@ -11,7 +11,7 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class GuestAdminComponent implements OnInit {
 
-  allowedHostels:boolean[] = new Array<boolean>(22);
+  allowedHostels:string[] = new Array<string>(22);
   guestHistory:any;
   hostel: string='' ;
   meal: string='' ;
@@ -36,16 +36,7 @@ export class GuestAdminComponent implements OnInit {
 
   getAdminHostel(){
     this.service.getAdminHostels().then((res:any)=>{
-      for(let i=1; i<this.allowedHostels.length; i++){
-        // console.log(res)
-        this.allowedHostels[i] = false;
-        if(res.includes(`H${i}`)){
-          this.allowedHostels[i] = true;
-        }
-        if(res.includes("TANSA")){
-          this.allowedHostels[21] = true;
-        }
-      }
+      this.allowedHostels=res
     }).catch((res) =>{
       console.log(res)
     })
@@ -73,22 +64,16 @@ export class GuestAdminComponent implements OnInit {
   getGuestList(){
     this.guestHistory={}
     if (this.hostel && this.meal && this.date) {
-      if(this.date===""){
-        alert("Date is required")
-      }else{
-        this.guestService.getGuestHostel(this.hostel,this.resolveDateFormat(this.date),this.meal).then((res)=>
+      this.guestService.getGuestHostel(this.hostel,this.resolveDateFormat(this.date),this.meal).then((res)=>
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
           console.log(this.guestHistory)
         }).catch((res)=>{
-          console.log(res)
           this.guestHistory = this.cleanData({})
           console.log(this.guestHistory)
 
         });
-        }
-      
     }else{
     }
     

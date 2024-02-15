@@ -1,9 +1,9 @@
+import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { GuestdataService } from '../guestdata.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { GuestdataService } from '../guestdata.service';
 import { StudentdataService } from '../studentdata.service';
 
 @Component({
@@ -97,11 +97,7 @@ export class GuestEntryComponent implements OnInit {
   
   async getGuestDetail(){
     this.guest_data={}
-    let promises = [
-      this.guestService.getGuestDetail(this.auth.getRoll(), this.date1),
-      this.guestService.getGuestDetail(this.auth.getRoll(), this.date2), // Provide different date or parameters
-      this.guestService.getGuestDetail(this.auth.getRoll(), this.date3) // Provide different roll or parameters
-    ];
+    let promises = this.legel_date.map(date => this.guestService.getGuestDetail(this.auth.getRoll(),date));
     let history = await Promise.all(promises);
     this.guest_data=this.cleanData(history)
   }
