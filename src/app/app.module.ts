@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
@@ -32,6 +33,10 @@ import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { GuestEntryComponent } from './guest-entry/guest-entry.component';
+import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
+import { GuestAdminComponent } from './guest-admin/guest-admin.component';
+import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
 
 
 @NgModule({
@@ -60,6 +65,10 @@ import { StatisticsComponent } from './statistics/statistics.component';
     DurationBoxComponent,
     CardStatusButtonComponent,
     StatisticsComponent,
+    GuestEntryComponent,
+    GuestStatusButtonComponent,
+    GuestAdminComponent,
+    GuestEntryFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +82,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

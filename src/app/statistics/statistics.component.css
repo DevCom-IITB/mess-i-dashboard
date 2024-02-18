@@ -1,3 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .chart-container {
+    width: 100%;
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin: 20px auto;
+    box-sizing: border-box;
+    /* overflow:visible; */
+  }
+
 .container{
     padding: 4%;
     background-color: #FFFCF4; 
@@ -55,10 +69,38 @@ div#pie-textual-container{
 }
 div#textual-stats{
     padding: 4rem;
+    overflow:scroll;
 }
 p#stat-notice{
     font-size: x-small;
 }
 li.text-stats-item{
     font-size: 0.9rem;
+}
+
+
+@media (min-width: 320px) {
+    div#pie-textual-container{
+        flex-direction: column;
+    }
+    #student_data{
+        width: 600px;
+        height: 400px;
+    }
+    #mess_data{
+        width: 500px;
+    }
+
+}
+@media (min-width: 426px) {
+    div#pie-textual-container{
+        flex-direction: row;
+    }
+    #student_data{
+        width: 1000px;
+        height: 400px;
+    }
+    #mess_data{
+        width: 1000px;
+    }
 }

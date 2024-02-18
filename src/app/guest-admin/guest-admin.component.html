@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 style="border-bottom:3px solid #ffc42b;">Guest Admin</h1>
+  <div id="form-container">
+    <div id="hostel-container">
+      <select class="form-select" [(ngModel)]="hostel" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
+        <option value="" disabled selected>Select Hostel</option>
+        <ng-container >
+          <option *ngFor="let hostel of allowedHostels" [value]="hostel">{{ hostel }}</option>
+        </ng-container>    
+        <option *ngIf="allowedHostels[20]" value="H20">H20</option>
+        <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
+      </select>        
+    </div>
+    <div id="meal-container">
+      <select class="form-select" [(ngModel)]="meal" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
+        <option value="" disabled selected>Select Meal</option>
+        <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
+      </select>       
+    </div>
+    <div id="date-container">
+        <app-input-field label="date" inputType="calender" [(inputModel)]="date"></app-input-field>
+    </div>
+    <button id="confirm-btn" class="btn btn-primary" (click)="getGuestList()">GET</button>
+  </div>
+  
+
+
+  <hr>
+
+  <div>
+    <app-table-component *ngIf="guestHistory"  [data]="guestHistory"></app-table-component>
+    <p  *ngIf="!guestHistory">No Guest</p>
+  </div>
+
+</div>

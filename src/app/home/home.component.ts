@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   public pending_rebates: RebateRequest[] = new Array();
   devices:any;
+  date:string;
 
   constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
   }

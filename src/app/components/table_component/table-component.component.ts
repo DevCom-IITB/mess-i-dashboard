@@ -24,7 +24,9 @@ export class TableComponentComponent implements OnInit {
       csv += row.join(',');
       csv+= '\n';
     })
-    csv += this.data.footer.join(',');
+    if("footer" in this.data){
+      csv += this.data.footer.join(',');
+    }
     csv+= '\n';
     const anchor = document.createElement('a');
     anchor.href = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);

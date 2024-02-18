@@ -22,16 +22,16 @@
         <button type="submit">GET</button>
       </div>
     </form>
-    <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
-    <div id="mess_data" *ngIf="hostelmessHistory.exists"></div>
-    <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
-    </div>
+  </div>
 
   <hr>
 
   <div>
+    <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
+    <div class="chart-container" id="mess_data" *ngIf="hostelmessHistory.exists"></div>
+    <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
     <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
-    <div id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists"></div>
     <div id="pie-textual-container" *ngIf="studentmessHistory.exists">
       <div id="pie"></div>
       <div id="textual-stats" *ngIf="studentmessHistory.loaded">

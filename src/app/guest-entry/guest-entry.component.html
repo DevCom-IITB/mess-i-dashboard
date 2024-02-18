@@ -1,0 +1,33 @@
+<div class="container">
+  <div>
+      <h1 style="border-bottom:3px solid #ffc42b">Guest Entry</h1>
+      <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/apply-guest-entry']">New Request</button>
+  </div>
+
+  <hr>
+
+  <div>
+      <table *ngIf="guest_data && guest_data.length" class="table">
+          <thead>
+            <tr id="column-headers">
+              <ng-container *ngFor="let header of ['Hostel', 'Date', 'Meal', ' ']">
+                <th scope="col">{{header}}</th>
+              </ng-container>
+            </tr>
+      
+          </thead>
+          <tbody id="booking-table">
+            <ng-container *ngFor="let guest of guest_data">
+              <tr>
+                <ng-container *ngFor="let i of [0,1,2]">
+                  <td>{{guest[i]}}</td>
+                </ng-container>
+                <td>
+                  <app-guest-status-button [meal]="guest[2]" [date]="guest[1]" [guestHostel]="guest[0]" [guestStatus]="guest[3]" (updateList)="updateList()" ></app-guest-status-button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+      </table>
+  </div>
+</div>

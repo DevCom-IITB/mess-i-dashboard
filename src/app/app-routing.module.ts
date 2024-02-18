@@ -13,6 +13,9 @@ import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
 import { MessBillComponent } from './mess-bill/mess-bill.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
+import { GuestEntryComponent } from './guest-entry/guest-entry.component';
+import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 
 
 const routes: Routes = [
@@ -24,8 +27,11 @@ const routes: Routes = [
   {path:'rebate',component:RebateComponent},
   {path:'studentcard',component:StudentcardComponent},
   {path: 'applyrebate',component:RebateFormComponent},
+  {path: 'apply-guest-entry',component:GuestEntryFormComponent},
   {path: 'rebate-admin',component:RebateAdminComponent},
   {path: 'statistics',component:StatisticsComponent},
+  {path: 'guest-entry',component:GuestEntryComponent},
+  {path: 'guest-admin',component:GuestAdminComponent}
   // {path:'',redirectTo:'/home',pathMatch:'full'}
 ];
 

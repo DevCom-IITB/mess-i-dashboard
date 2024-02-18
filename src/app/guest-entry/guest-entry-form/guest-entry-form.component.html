@@ -1,0 +1,25 @@
+<div class="main-container">
+    <span class="page-title">Guest Application</span>
+    <br>
+
+    <div id="form-instructions"><i>Please fill all the information correctly.</i></div>
+
+    <div id="form-container">
+        <div id="hostel-container">
+            <select class="form-select" [(ngModel)]="guestHostel" name="guestHostel" id="hostel_dropdown" aria-label="Select a Guest hostel" aria-placeholder="Hostel Name" ngModel>
+                <option value="" disabled selected>Select Hostel</option>
+                <option *ngFor="let hostel of allowedHostels" [value]="hostel">{{hostel}}</option>
+            </select>        
+        </div>
+        <div id="meal-container">
+            <select class="form-select" [(ngModel)]="meal" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
+                <option value="" disabled selected>Select Meal</option>
+                <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
+            </select>       
+        </div>
+        <div id="date-container">
+            <app-input-field label="date" inputType="calender" [(inputModel)]="date"></app-input-field>
+        </div>
+    </div>
+    <button id="confirm-btn" class="btn btn-primary" (click)="submitEntry()">SUBMIT</button>
+</div>
