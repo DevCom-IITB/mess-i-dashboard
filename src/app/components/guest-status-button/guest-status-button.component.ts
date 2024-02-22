@@ -26,6 +26,7 @@ export class GuestStatusButtonComponent implements OnInit {
     await this.service.removeGuest(this.guestHostel, this.meal.toLowerCase(), this.date).then((res)=>{
       if (res){
         this.guestStatus  = ! this.guestStatus;
+        console.log(res)
         alert("Withdraw Successful")
         this.updateList.emit();
       }

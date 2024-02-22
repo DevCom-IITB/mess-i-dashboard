@@ -5,12 +5,14 @@
   </div>
 
   <hr>
-
+  <div class="guest" >
+    <h2>{{guest.name}}-{{guest.id}}-{{guest.hostel}} </h2>
+  </div>
   <div>
       <table *ngIf="guest_data && guest_data.length" class="table">
           <thead>
             <tr id="column-headers">
-              <ng-container *ngFor="let header of ['Hostel', 'Date', 'Meal', ' ']">
+              <ng-container *ngFor="let header of ['Token No.', 'Hostel', 'Date', 'Meal', ' ']">
                 <th scope="col">{{header}}</th>
               </ng-container>
             </tr>
@@ -19,7 +21,7 @@
           <tbody id="booking-table">
             <ng-container *ngFor="let guest of guest_data">
               <tr>
-                <ng-container *ngFor="let i of [0,1,2]">
+                <ng-container *ngFor="let i of [0,1,2,3]">
                   <td>{{guest[i]}}</td>
                 </ng-container>
                 <td>

@@ -8,6 +8,12 @@ export interface Student{
     card_status: boolean,
 };
 
+export interface Guest{
+    id: string,
+    name: string,
+    hostel:string
+}
+
 export interface DialogData{
   accepted_rebates: RebateRequest[],
   rejected_rebates: RebateRequest[],

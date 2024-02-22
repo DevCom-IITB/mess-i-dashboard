@@ -8,7 +8,11 @@
         <div id="hostel-container">
             <select class="form-select" [(ngModel)]="guestHostel" name="guestHostel" id="hostel_dropdown" aria-label="Select a Guest hostel" aria-placeholder="Hostel Name" ngModel>
                 <option value="" disabled selected>Select Hostel</option>
-                <option *ngFor="let hostel of allowedHostels" [value]="hostel">{{hostel}}</option>
+                <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+                    <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+                  </ng-container>   
+                  <option *ngIf="allowedHostels[20]" value="H20">H20</option>
+                  <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option> 
             </select>        
         </div>
         <div id="meal-container">
@@ -20,6 +24,9 @@
         <div id="date-container">
             <app-input-field label="date" inputType="calender" [(inputModel)]="date"></app-input-field>
         </div>
+        <!-- <div *ngIf="availability" id="avl-container">
+            <h3 style="color: green;">AVL-{{availability}}</h3>
+        </div> -->
     </div>
     <button id="confirm-btn" class="btn btn-primary" (click)="submitEntry()">SUBMIT</button>
 </div>
