@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { GuestdataService } from '../guestdata.service';
-import { StudentdataService } from '../studentdata.service';
 
 @Component({
   selector: 'app-guest-admin',
@@ -11,14 +10,14 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class GuestAdminComponent implements OnInit {
 
-  allowedHostels:string[] = new Array<string>(22);
-  guestHistory:any;
+  allowedHostels:boolean[] = new Array<boolean>(22);
+  guestHistory:any = {exists:true, loaded:false};
   hostel: string='' ;
   meal: string='' ;
   date: string ;
-  headers = ['S. No.','Roll No.','Name','Hostel']
+  headers = ['Token No.','Roll No.','Name','Hostel']
 
-  constructor(private auth:AuthService, private service:StudentdataService, private guestService:GuestdataService, private router:Router) {
+  constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -26,17 +25,25 @@ export class GuestAdminComponent implements OnInit {
     if(current_state != undefined){
       this.hostel = current_state?.hostel;
       this.meal = current_state?.meal;
-      this.date = this.resolveDateFormat(current_state?.date);
+      this.date = this.guestService.resolveDateFormat(current_state?.date);
     }
   }
 
   ngOnInit(): void {
-    this.getAdminHostel()
+    this.getGuestHostel()
   }
 
-  getAdminHostel(){
-    this.service.getAdminHostels().then((res:any)=>{
-      this.allowedHostels=res
+  getGuestHostel(){
+    this.guestService.getGuestHostels().then((res:any)=>{
+      for(let i=1; i<this.allowedHostels.length; i++){
+        this.allowedHostels[i] = false;
+        if(res.includes(`H${i}`)){
+          this.allowedHostels[i] = true;
+        }
+        if(res.includes("TANSA")){
+          this.allowedHostels[21] = true;
+        }
+      }
     }).catch((res) =>{
       console.log(res)
     })
@@ -45,13 +52,13 @@ export class GuestAdminComponent implements OnInit {
   cleanData(history:any){
     if(Object.keys(history).length){
       let body=[];
-      let i=0;
       for(let key in history["data"]["guests"]){
+        let rollNo = Object.keys(history["data"]["guests"][key])[0]
         let guest=[]
-        guest.push(`${++i}`)
-        guest.push(key)
-        guest.push(history["data"]["guests"][key]["fullname"])
-        guest.push(history["data"]["guests"][key]["hostel"])
+        guest.push(history["data"]["guests"][key][rollNo]["index"])
+        guest.push(rollNo)
+        guest.push(history["data"]["guests"][key][rollNo]["fullname"])
+        guest.push(history["data"]["guests"][key][rollNo]["hostel"])
         body.push(guest)
       }
       let res={headers:this.headers,body:body}
@@ -64,7 +71,7 @@ export class GuestAdminComponent implements OnInit {
   getGuestList(){
     this.guestHistory={}
     if (this.hostel && this.meal && this.date) {
-      this.guestService.getGuestHostel(this.hostel,this.resolveDateFormat(this.date),this.meal).then((res)=>
+      this.guestService.getGuestHostelData(this.hostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
@@ -79,13 +86,7 @@ export class GuestAdminComponent implements OnInit {
   }
 
   isHistoryEmpty(history:any){
-    return Object.keys(history).length === 0;
-  }
-
-  resolveDateFormat(date:string){
-    let dateArr = date.split('-');
-    let correctedDate = dateArr[2]+'-'+dateArr[1]+'-'+dateArr[0];
-    return correctedDate;
+    return history !== undefined || !history?.length;
   }
 
 }

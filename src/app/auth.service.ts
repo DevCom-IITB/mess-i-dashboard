@@ -54,11 +54,7 @@ export class AuthService {
       sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
       sessionStorage.setItem("mess-i-student",res.is_student.toString());
 
-      if(this.isStaff()){
-        this.router.navigate(['home']);
-      }else{
-        this.router.navigate(['rebate']);
-      }
+      this.router.navigate(['landing']);
     })
   }
   logoutUser(){

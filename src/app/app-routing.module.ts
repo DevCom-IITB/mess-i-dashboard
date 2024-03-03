@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
-
+import { LandingComponent } from './landing/landing.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { RebateComponent } from './rebate/rebate.component';
 
@@ -19,6 +19,7 @@ import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 
 
 const routes: Routes = [
+  {path:'landing',component:LandingComponent},
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'overview',component:OverviewComponent},
@@ -26,8 +27,8 @@ const routes: Routes = [
   {path:'list',component:StudentListComponent},
   {path:'rebate',component:RebateComponent},
   {path:'studentcard',component:StudentcardComponent},
-  {path: 'applyrebate',component:RebateFormComponent},
   {path: 'apply-guest-entry',component:GuestEntryFormComponent},
+  {path: 'applyrebate',component:RebateFormComponent},
   {path: 'rebate-admin',component:RebateAdminComponent},
   {path: 'statistics',component:StatisticsComponent},
   {path: 'guest-entry',component:GuestEntryComponent},

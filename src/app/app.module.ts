@@ -37,6 +37,7 @@ import { GuestEntryComponent } from './guest-entry/guest-entry.component';
 import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-en
     GuestStatusButtonComponent,
     GuestAdminComponent,
     GuestEntryFormComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
