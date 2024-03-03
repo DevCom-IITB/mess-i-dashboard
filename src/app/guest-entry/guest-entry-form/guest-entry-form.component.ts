@@ -45,12 +45,10 @@ export class GuestEntryFormComponent implements OnInit {
       await this.guestService.getavailability(this.guestHostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>{
         let guesthostelData= res as any;
         this.available=guesthostelData['current availability'].toString()+'/'+guesthostelData['total availability'].toString()
-        console.log(this.available)
       }).catch((res)=>{
         console.log(res)
       })
     }
-    console.log(evt)
   }
 
   async fetch_guest(rollNum: any){
