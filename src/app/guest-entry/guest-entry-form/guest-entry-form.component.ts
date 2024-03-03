@@ -1,5 +1,4 @@
 import { AuthService } from 'src/app/auth.service';
-import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { GuestdataService } from 'src/app/guestdata.service';
 import { Guest } from 'src/app/interfaces';
@@ -16,15 +15,13 @@ export class GuestEntryFormComponent implements OnInit {
   guest:any;
   guest_detail:any;
   Msg: any ;
-  availability:number=2;
+  available:string;
+
 
  
   guestHostel: string ='';
   meal: string='' ;
   date: string='' ;
-  // ObguestHostel = new BehaviorSubject<string>(this.guestHostel);
-  // Obmeal = new BehaviorSubject<string>(this.meal);
-  // Obdate = new BehaviorSubject<string>(this.date);
 
   constructor(private auth:AuthService,private router:Router, private guestService:GuestdataService) {
     if(!this.auth.isLoggedIn()){
@@ -36,14 +33,24 @@ export class GuestEntryFormComponent implements OnInit {
       this.meal = current_state?.meal;
       this.date = this.guestService.resolveDateFormat(current_state?.date);
     }
-    // this.ObguestHostel.subscribe(value=>{
-    //   console.log("hello")
-    // })
   }
 
   ngOnInit(): void {
     this.getGuestHostel()
     this.fetch_guest(this.auth.getRoll())
+  }
+
+  async search(evt:Event){
+    if (this.guestService.bookingValidity(this.guestHostel,this.meal,this.date)){
+      await this.guestService.getavailability(this.guestHostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>{
+        let guesthostelData= res as any;
+        this.available=guesthostelData['current availability'].toString()+'/'+guesthostelData['total availability'].toString()
+        console.log(this.available)
+      }).catch((res)=>{
+        console.log(res)
+      })
+    }
+    console.log(evt)
   }
 
   async fetch_guest(rollNum: any){
