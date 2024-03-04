@@ -177,7 +177,7 @@ export class GuestdataService {
     if(guestHostel && meal && date){
       let duration=this.getDaysDifference(this.today,this.resolveDateFormat(date))
       if(![0,1,2].includes(duration)){
-        alert("You can only book within 3 days from today onward")
+        alert("You can only book within 3 days from today")
         return false;
       }//7:30
       if(!duration && (this.day.getHours()*60+this.day.getMinutes())-450 > 0 && meal ==="breakfast"){

@@ -24,8 +24,11 @@
         <div id="date-container">
             <app-input-field label="date" inputType="calender" [(inputModel)]="date" (change)="search($event)"></app-input-field>
         </div>
-        <div *ngIf="available" id="avl-container">
-            <h3 style="color: green;">AVL-{{available}}</h3>
+        <div *ngIf="notAVL" id="avl-container">
+            <h3 style="color: red;">Not Available</h3>
+        </div>
+        <div *ngIf="availability && !notAVL" id="avl-container">
+            <h3 style="color: green;">{{availability}}</h3>
         </div>
     </div>
     <button id="confirm-btn" class="btn btn-primary" (click)="submitEntry()">SUBMIT</button>
