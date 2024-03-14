@@ -10,9 +10,6 @@ import { Router } from '@angular/router';
 export class LandingComponent implements OnInit {
 
   constructor(private auth:AuthService, private router:Router) {
-    if(!this.auth.isLoggedIn()){
-      this.router.navigate(['login'])
-    }
   }
 
   ngOnInit(): void {

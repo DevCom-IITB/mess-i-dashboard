@@ -32,8 +32,8 @@ const routes: Routes = [
   {path: 'rebate-admin',component:RebateAdminComponent},
   {path: 'statistics',component:StatisticsComponent},
   {path: 'guest-entry',component:GuestEntryComponent},
-  {path: 'guest-admin',component:GuestAdminComponent}
-  // {path:'',redirectTo:'/home',pathMatch:'full'}
+  {path: 'guest-admin',component:GuestAdminComponent},
+  {path:'',redirectTo:'/landing',pathMatch:'full'}
 ];
 
 @NgModule({

@@ -21,6 +21,15 @@ h1{
     border-radius: 5px;
     margin-bottom: 20px;
 }
+.badge {
+    background-color: #FFC42B;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    display: inline-block;
+}
 
 .section-info h2 {
     margin-top: 0;

@@ -9,10 +9,10 @@
             <select class="form-select" [(ngModel)]="guestHostel" name="guestHostel" id="hostel_dropdown" aria-label="Select a Guest hostel" aria-placeholder="Hostel Name" (change)="search($event)" ngModel>
                 <option value="" disabled selected>Select Hostel</option>
                 <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-                    <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+                    <option *ngIf="allowedHostels[hostel] && guest.hostel !== 'H'+hostel" [value]="'H' + hostel">H{{ hostel }}</option>
                   </ng-container>   
-                  <option *ngIf="allowedHostels[20]" value="H20">H20</option>
-                  <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option> 
+                  <option *ngIf="allowedHostels[20] && guest.hostel !== 'H20'" value="H20">H20</option>
+                  <option *ngIf="allowedHostels[21] && guest.hostel !== 'TANSA'" value="TANSA">TANSA</option> 
             </select>        
         </div>
         <div id="meal-container">
