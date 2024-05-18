@@ -16,6 +16,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
+import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'statistics',component:StatisticsComponent},
   {path: 'guest-entry',component:GuestEntryComponent},
   {path: 'guest-admin',component:GuestAdminComponent},
+  {path: 'mess-manager' ,component:MessManagerloginComponent},
   {path:'',redirectTo:'/landing',pathMatch:'full'}
 ];
 
