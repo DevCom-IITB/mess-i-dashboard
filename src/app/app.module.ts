@@ -38,7 +38,6 @@ import { GuestStatusButtonComponent } from './components/guest-status-button/gue
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
 import { LandingComponent } from './landing/landing.component';
-import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 
 
 @NgModule({
@@ -72,7 +71,6 @@ import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin
     GuestAdminComponent,
     GuestEntryFormComponent,
     LandingComponent,
-    MessManagerloginComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,8 +20,7 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "allowSyntheticDefaultImports": true,
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

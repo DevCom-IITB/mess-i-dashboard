@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mess-managerlogin',
@@ -9,21 +7,9 @@ import { Router } from '@angular/router';
 })
 export class MessManagerloginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn()){
-      this.router.navigate(['landing'])
-    }
-  }
-
-  onSubmit(username: string, password: string): void {
-    this.authService.loginMessManager(username, password);
-    if(this.authService.isLoggedIn()) {
-      this.router.navigate(['landing']);
-    } else {
-      alert("Invalid credentials");
-    }
   }
 
 }

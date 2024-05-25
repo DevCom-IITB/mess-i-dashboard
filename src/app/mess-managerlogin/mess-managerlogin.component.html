@@ -1,13 +1,12 @@
 <div class="container" style="text-align: center; margin-top: 4%;" >
-    <!-- <form novalidate > -->
-    <form novalidate (ngSubmit)="onSubmit(username.value, password.value)" >
-        <input type="text" name="user" placeholder="enter your username" #username  required>
-        <br>
-        <input type="password" name="password" placeholder="enter your password" #password required>
-        <br><br>
+    <form novalidate >
+        <input type="text" name="user" placeholder="enter your username" ngmodel  required>
+    <br/>
+        <input type="password" name="password" placeholder="enter your password" ngmodel required>
+        <br/><br/>
         <button  type="submit" routerLink="">Submit </button>
-        <br>
-        <a   style="text-decoration: none; color: black;"> Forgot password </a>
+        <br/>
+        <a   style="text-decoration: none; color: black;"> Forget your password </a>
     </form>
     
     </div>

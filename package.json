@@ -14,7 +14,6 @@
   "dependencies": {
     "@angular/animations": "~11.2.9",
     "@angular/cdk": "^11.2.13",
-    "@angular/cli": "^11.2.19",
     "@angular/common": "~11.2.9",
     "@angular/compiler": "~11.2.9",
     "@angular/core": "~11.2.9",
@@ -25,7 +24,6 @@
     "@angular/router": "~11.2.9",
     "angular": "^1.8.2",
     "bootstrap-icons": "^1.9.1",
-    "crypto-js": "^4.2.0",
     "file-saver": "^2.0.5",
     "plotly.js": "^2.27.0",
     "rxjs": "~6.6.0",
@@ -34,8 +32,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.8",
+    "@angular/cli": "~11.2.8",
     "@angular/compiler-cli": "~11.2.9",
-    "@types/crypto-js": "^4.2.2",
     "@types/file-saver": "^2.0.5",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
