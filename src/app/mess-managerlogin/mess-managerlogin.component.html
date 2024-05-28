@@ -1,12 +1,45 @@
-<div class="container" style="text-align: center; margin-top: 4%;">
-  <form novalidate (ngSubmit)="onSubmit(username.value, password.value)">
-    <input type="text" name="user" placeholder="enter your username" #username required>
-    <br>
-    <input type="password" name="password" placeholder="enter your password" #password required>
-    <br><br>
-    <button type="submit" routerLink="">Submit </button>
-    <br>
-    <a style="text-decoration: none; color: black;"> Forgot password </a>
-  </form>
 
+<div class="container">
+  <div class="frame1">
+    <div class="mess-I">
+      <img class="img" src="assets/images/mess.jpg" />
+    </div>
+
+    <div class="heading1">
+      <p>Welcome to Mess-i</p>
+    </div>
+  </div>
+
+  <div class="frame2">
+    <div class="heading2">
+      <p>Enter your credentials</p>
+    </div>
+    <div class="document-sign">
+      <div class="de"><img src="assets/images/document-sign.png" /></div>
+    </div>
+
+    <form novalidate (ngSubmit)="onSubmit(username.value, password.value)">
+      <input
+        class="user"
+        type="text"
+        name="userID"
+        placeholder="UserID"
+        #username  
+        required
+      />
+
+      <input
+        class="password-box"
+        type="password"
+        name="password"
+        placeholder="Password"
+        #password
+        required
+      />
+      <button type="submit" routerLink="">Login</button>
+    </form>
+    <div class="forget-password">
+      <a href="">Forgot password? </a>
+    </div>
+  </div>
 </div>

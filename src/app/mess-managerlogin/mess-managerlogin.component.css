@@ -1,0 +1,160 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+  /* kuch try kar raha tha  
+  width: 100vw;
+    height: 100vh; 
+    */
+}
+
+.frame1 {
+  top: -27px;
+  grid-column: 1;
+  align-items: center;
+  position: absolute;
+  width: 580px;
+  height: 608px; /* 100 % karne par responsive nhi ho rahi thi */
+  margin-top: 27px;
+  margin-left: 0px;
+  gap: 0px;
+  opacity: 0px;
+  background-color: #29292b; /* color ko bhi change kiya hai from black to this because photo clear nhi thi */
+  border-radius: 22px 22px 22px 22px;
+  text-align: center;
+}
+
+.img {
+  position: relative;
+  width: 371px;
+  height: 486px;
+  margin-top: 40px;
+  margin-left: 15px; /* changed kara hai from 164px */
+  gap: 0px;
+  opacity: 0px;
+}
+
+.heading1 {
+  position: relative;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32.68px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.frame2 {
+  top: -27px;
+  grid-column: 2;
+  align-items: center;
+  position: absolute;
+  width: 600px;
+  height: 608px;
+  margin-top: 27px;
+  margin-left: 600px;
+  gap: 0px;
+  border-radius: 22px 22px 22px 22px;
+  opacity: 0px;
+  background: #fed05b;
+}
+.heading2 {
+  position: absolute;
+  width: 343px;
+  height: 34px;
+  margin-top: 6px;
+  margin-left: 130px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: open sans;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 43.58px;
+  text-align: center;
+}
+.document-sign {
+  align-items: center;
+  position: absolute;
+  width: 331px;
+  height: 329px;
+  margin-top: 34px;
+  margin-left: 115px;
+  padding: 32.9px 26.93px 32.9px 26.92px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.de {
+  position: absolute;
+  width: 277.15px;
+  height: 263.2px;
+  top: 32.9px;
+  left: 26.92px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.user {
+  position: absolute;
+  width: 259px;
+  height: 33px;
+  margin-top: 412px;
+  margin-left: 170px;
+  gap: 0px;
+  border-radius: 18px 18px 18px 18px;
+  opacity: 0.4px;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  border-color: #ffffff;
+}
+.password-box {
+  position: absolute;
+  width: 259px;
+  height: 33px;
+  margin-top: 465px;
+  margin-left: 170px;
+  gap: 0px;
+  border-radius: 18px 18px 18px 18px;
+  opacity: 0.4px;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  border-color: #ffffff;
+}
+
+.forget-password {
+  position: absolute;
+  width: 99px;
+  height: 16px;
+  margin-top: 504px;
+  margin-left: 325px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+a {
+  font-family: Open Sans;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.34px;
+  text-align: left;
+  color: #1b2a7d;
+}
+
+button {
+  color: #ffffff;
+  position: absolute;
+  width: 119px;
+  height: 36px;
+  margin-top: 530px;
+  margin-left: 310px;
+  gap: 0px;
+  border-radius: 19px 19px 19px 19px;
+  opacity: 0px;
+  background-color: black;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21.79px;
+  text-align: center;
+}
