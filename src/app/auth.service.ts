@@ -10,13 +10,15 @@ import { environment } from './../environments/environment';
 export class AuthService {
   logged_in = false;
   token:any;
+  access_token:any;
+  refresh_token:any;
   is_admin:boolean;
   is_staff:boolean;
   is_rebate:boolean;
   is_student:boolean;
   roll_no:any;
   url = environment.backendURL+'/api/dash/auth';
-  urlMessManager = environment.backendURL+'/api/dash/auth/messmanager';
+  urlMessManager = environment.backendURL+'/api/login';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
     this.roll_no = sessionStorage.getItem("mess-i-roll");
@@ -69,22 +71,24 @@ export class AuthService {
       params,
     };
     return this.http.get(this.urlMessManager, header_node).subscribe((res: any) => {
-      this.token = res.token;
+      this.access_token = res.access_token;
+      this.refresh_token = res.refresh_token;
       this.logged_in = true;
       
-      this.is_admin = res.is_admin;
-      this.is_rebate = res.is_rebate;
-      this.is_staff = res.is_staff;
-      this.is_student = res.is_student;
+      this.is_admin = false;
+      this.is_rebate = true;
+      this.is_staff = true;
+      this.is_student = false;
 
-      this.roll_no = res.roll;
-      sessionStorage.setItem("mess-i-token",res.token);
-      sessionStorage.setItem("mess-i-roll",res.roll);
+      // this.roll_no = res.roll;
+      sessionStorage.setItem("mess-i-access-token",res.access_token);
+      sessionStorage.setItem("mess-i-refresh-token",res.refresh_token);
+      // sessionStorage.setItem("mess-i-roll",res.roll);
       
-      sessionStorage.setItem("mess-i-admin",res.is_admin.toString());
-      sessionStorage.setItem("mess-i-staff",res.is_staff.toString());
-      sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
-      sessionStorage.setItem("mess-i-student",res.is_student.toString());
+      sessionStorage.setItem("mess-i-admin","false");
+      sessionStorage.setItem("mess-i-staff","true");
+      sessionStorage.setItem("mess-i-rebate","true");
+      sessionStorage.setItem("mess-i-student","false");
 
       this.router.navigate(['landing']);
     });
