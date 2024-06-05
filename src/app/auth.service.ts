@@ -70,7 +70,7 @@ export class AuthService {
       headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
       params,
     };
-    return this.http.get(this.urlMessManager, header_node).subscribe((res: any) => {
+    return this.http.post(this.urlMessManager, header_node).subscribe((res: any) => {
       this.access_token = res.access_token;
       this.refresh_token = res.refresh_token;
       this.logged_in = true;

@@ -1,19 +1,25 @@
 .container {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  background-color: #ffffff;
+  /* grid-template-columns: 1fr 1fr; Two columns with equal width */
   /* kuch try kar raha tha  
   width: 100vw;
     height: 100vh; 
     */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
 }
-
 .frame1 {
-  top: -27px;
-  grid-column: 1;
+  /* top: -27px; */
+  /* grid-column: 1; */
   align-items: center;
   position: absolute;
-  width: 580px;
-  height: 608px; /* 100 % karne par responsive nhi ho rahi thi */
+  width: 45%;
+  height: 90%;
   margin-top: 27px;
   margin-left: 0px;
   gap: 0px;
@@ -44,14 +50,15 @@
 }
 
 .frame2 {
-  top: -27px;
-  grid-column: 2;
+  /* top: -27px; */
+  /* grid-column: 2; */
   align-items: center;
   position: absolute;
-  width: 600px;
-  height: 608px;
+  width: 45%;
+  height: 90%;
   margin-top: 27px;
   margin-left: 600px;
+  margin-right: 0px;
   gap: 0px;
   border-radius: 22px 22px 22px 22px;
   opacity: 0px;
