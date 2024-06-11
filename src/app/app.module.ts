@@ -39,6 +39,7 @@ import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
 import { LandingComponent } from './landing/landing.component';
 import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
+import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin
     GuestEntryFormComponent,
     LandingComponent,
     MessManagerloginComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin
     MatDialogModule,
     ReactiveFormsModule,
     MatChipsModule,
-
+    
     ReactiveFormsModule
   ],
   providers: [DatePipe],

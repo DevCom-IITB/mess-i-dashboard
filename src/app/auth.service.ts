@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  _errservice:any;
   logged_in = false;
   token:any;
   access_token:any;
@@ -94,9 +97,26 @@ export class AuthService {
     });
   }
   
-  logoutUser(){
-    this.token="";
-    this.logged_in=false; 
+  // logoutUser(){
+  //   this.token="";
+  //   this.logged_in=false; 
+  // }
+  
+  logoutUser(): Observable<any> {
+    this.token = "";
+    this.logged_in = false;
+    return this.http.post('/api/dash/auth', {}).pipe(
+      catchError((error) => {
+        // Handle error
+        console.error('Error occurred while calling API:', error);
+        return throwError(error); //
+      })
+    );
+  }
+
+  // Function to navigate to login page
+  navigateToLogin() {
+    this.router.navigate(['login']);
   }
   isLoggedIn(){
     return this.logged_in;
@@ -125,4 +145,16 @@ export class AuthService {
     return this.roll_no;
   }
 
+  forgetPassword(data: { email: any; }) {
+    return this.http.post<any>(`/api/change_password `, {
+      requestType: 'Password_reset',
+      email: data.email
+    }).pipe(
+      catchError(err => {
+        // Handle errors
+        console.error('Error occurred:', err);
+        return throwError(err); // Rethrow it back to the caller
+      })
+    );
+  }
 }

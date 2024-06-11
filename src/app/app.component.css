@@ -197,3 +197,14 @@ body{
 /* #container-nav-items{ */
     /* z-index: 10; */
 /* } */
+
+
+/* adding something  by HARSH CHOPRA TO TRY */
+
+.mess-i-logo{
+    width: 20vw;
+    height: 20vw;
+    align-self: center;
+}
+
+/* so that this can show up just worked */

@@ -1,8 +1,11 @@
+
 <div id="main-container-nav-routerout" class="">
+  <div *ngIf="showNavbar()">
   <div id="navbar-fixed" class="box-style">
+    
     <div id="container-nav-items" class="d-flex flex-column h-100">
 
-      <img class="mess-i-logo" src="assets/mess-i-logo.png">
+      <img class="mess-i-logo" src="assets/mess-i-logo.png"> <!-- isme issues hai -->
       <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/home" >HOME</a>
       <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/list">STUDENTS' LIST</a>
       <a id="nav_rebate" class="nav-link nav-items-style" *ngIf="auth.isStudent()" routerLink="/rebate" >REBATES</a>
@@ -42,7 +45,7 @@
     </div>
 
   </div>
-
+</div>
 
   <!-- mobile navbar -->
 

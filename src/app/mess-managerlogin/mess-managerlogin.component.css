@@ -1,44 +1,26 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  background-color: #ffffff;
-  /* grid-template-columns: 1fr 1fr; Two columns with equal width */
-  /* kuch try kar raha tha  
-  width: 100vw;
-    height: 100vh; 
-    */
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 5;
-}
-.frame1 {
-  /* top: -27px; */
-  /* grid-column: 1; */
-  align-items: center;
-  position: absolute;
-  width: 45%;
-  height: 90%;
-  margin-top: 27px;
-  margin-left: 0px;
+
+
+.frame1{
+  height: 100%;
   gap: 0px;
   opacity: 0px;
-  background-color: #29292b; /* color ko bhi change kiya hai from black to this because photo clear nhi thi */
+  background-color: #29292b;
   border-radius: 22px 22px 22px 22px;
-  text-align: center;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  display: inline;
 }
 
-.img {
+/* .img {
   position: relative;
   width: 371px;
   height: 486px;
-  margin-top: 40px;
-  margin-left: 15px; /* changed kara hai from 164px */
-  gap: 0px;
+  margin-top: 77px;
+  margin-left: 15px; 
+   gap: 0px;
   opacity: 0px;
-}
-
+} 
 .heading1 {
   position: relative;
   font-family: Open Sans;
@@ -47,121 +29,191 @@
   line-height: 32.68px;
   text-align: center;
   color: #ffffff;
-}
+}  */
 
-.frame2 {
-  /* top: -27px; */
-  /* grid-column: 2; */
+
+.mess-I{
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  width: 45%;
-  height: 90%;
-  margin-top: 27px;
-  margin-left: 600px;
-  margin-right: 0px;
+  display: inline;
+  flex-direction: column;
+}
+.img2-fluid {
+  text-align: center; /* Center the image horizontally */
+  width: 366px;
+  height: 486px;
+  margin-top: 0%;
+  margin-left: 10%;
+  gap: 0px;
+  opacity: 0px;
+  position: relative;
+  display: block; /* Use display: block; for images */
+  margin: 0 auto; /* Center the image horizontally */
+} 
+.heading1 {
+  display: flex;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32.68px;
+  text-align: center;
+  color: #ffffff;
+  margin-left: 33%;
+} 
+
+.frame2{
+  height: 100vh;
+  display: inline;
+  align-items: center;
   gap: 0px;
   border-radius: 22px 22px 22px 22px;
   opacity: 0px;
-  background: #fed05b;
+  background-color: #fed05b;
 }
+
 .heading2 {
-  position: absolute;
+  top: 0;
+  justify-content: center;
+  /* align-items: center; */
+  display: inline;
   width: 343px;
-  height: 34px;
-  margin-top: 6px;
-  margin-left: 130px;
+  height: 44px;
+  /* margin-top: 72px;
+  margin-left: 158px; */
   gap: 0px;
   opacity: 0px;
-  font-family: open sans;
+  font-family: Open Sans;
   font-size: 32px;
   font-weight: 600;
   line-height: 43.58px;
+  padding-bottom: 0;
   text-align: center;
 }
-.document-sign {
-  align-items: center;
-  position: absolute;
-  width: 331px;
-  height: 329px;
-  margin-top: 34px;
-  margin-left: 115px;
-  padding: 32.9px 26.93px 32.9px 26.92px;
-  gap: 0px;
-  opacity: 0px;
-}
 
-.de {
-  position: absolute;
+
+.img-fluid {
+  text-align: center; /* Center the image horizontally */
+  padding-top: 0;
   width: 277.15px;
   height: 263.2px;
-  top: 32.9px;
-  left: 26.92px;
-  gap: 0px;
-  opacity: 0px;
-}
-
-.user {
-  position: absolute;
-  width: 259px;
-  height: 33px;
-  margin-top: 412px;
-  margin-left: 170px;
-  gap: 0px;
-  border-radius: 18px 18px 18px 18px;
-  opacity: 0.4px;
-  font-family: Open Sans;
-  font-size: 16px;
-  font-weight: 600;
-  border-color: #ffffff;
-}
-.password-box {
-  position: absolute;
-  width: 259px;
-  height: 33px;
-  margin-top: 465px;
-  margin-left: 170px;
-  gap: 0px;
-  border-radius: 18px 18px 18px 18px;
-  opacity: 0.4px;
-  font-family: Open Sans;
-  font-size: 16px;
-  font-weight: 600;
-  border-color: #ffffff;
-}
-
-.forget-password {
-  position: absolute;
-  width: 99px;
-  height: 16px;
-  margin-top: 504px;
-  margin-left: 325px;
-  gap: 0px;
-  opacity: 0px;
-}
-
-a {
-  font-family: Open Sans;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16.34px;
-  text-align: left;
-  color: #1b2a7d;
+  position: relative;
+  display: block; /* Use display: block; for images */
+  margin: 0 auto; /* Center the image horizontally */
 }
 
 button {
   color: #ffffff;
-  position: absolute;
   width: 119px;
   height: 36px;
-  margin-top: 530px;
-  margin-left: 310px;
   gap: 0px;
   border-radius: 19px 19px 19px 19px;
   opacity: 0px;
   background-color: black;
+  margin-top: 2%;
+  font-size: 16px;
+  font-weight: 400; 
+  line-height: 21.79px;
+  text-align: center;
+  margin-right:-57%;
+} 
+a{
+  margin-right: -55%;
+}
+
+.form-control{
+  width: 259px;
+  height: 33px;
+  gap: 0px;
+  border-radius: 18px 18px 18px 18px;
+  opacity: 0.4px;
   font-family: Open Sans;
   font-size: 16px;
   font-weight: 600;
-  line-height: 21.79px;
-  text-align: center;
+  border-color: #ffffff;
 }
+
+input{
+  font-style: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21.79px;
+  text-align: left;
+  margin-bottom: 2%;
+}
+
+.formcase{
+  text-align: center;
+  max-width: fit-content;
+  max-height: fit-content;
+  margin: auto auto;
+}
+
+
+
+.contain {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+/* Create four equal columns */
+.frame1  {
+  flex: 25%;
+  padding: 20px;
+  margin-right: 20px;
+}
+.frame2{
+  padding: 20px;
+  flex: 25%;
+}
+
+
+/* On screens that are 992px wide or less, go from four columns to two columns */
+@media screen and (max-width: 880px) {
+  .frame1 ,  .frame2 {
+    flex: 100vh;
+  }
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 880px) {
+  /* .contain {
+    flex-direction: column;
+  } */
+    .frame1{
+      visibility: none;
+      display: none;
+    }
+    
+    .frame2{
+      height: 100vh;
+    }
+  /* .col-sm-2 {
+      display: none;
+  }
+  .col-sm-10 {
+      width: 100%;
+  } */
+}
+@media screen and (max-width:390px) {
+  .img-fluid{
+      width: 80%;
+      height: 44%;
+  }
+  .frame2{
+      height:100vh;
+  }
+}
+/*  ask about this  
+@media screen and (max-width: 1500px) and (min-width:1000px) {
+    .img-fluid{
+      margin-bottom: 2%;
+      width: 350px;
+height: 350px;
+
+    }
+    
+    .frame2{
+      height: 100vh;
+    }
+  } */
