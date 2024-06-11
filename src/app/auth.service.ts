@@ -74,6 +74,11 @@ export class AuthService {
       params,
     };
     return this.http.post(this.urlMessManager, header_node).subscribe((res: any) => {
+      if(res.message) {
+        alert("Invalid Credentials");
+        return;
+      }
+
       this.access_token = res.access_token;
       this.refresh_token = res.refresh_token;
       this.logged_in = true;
