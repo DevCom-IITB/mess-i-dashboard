@@ -52,11 +52,16 @@ export class AppComponent {
     // );
 
   logout(){
-   
     this.auth.logoutUser().subscribe(
       (response) => {
-        // Upon successful logout and API call
-        // Navigate to the login page
+        this.auth.logged_in=false;
+        this.auth.token="";
+        sessionStorage.removeItem("mess-i-token")
+        sessionStorage.removeItem("mess-i-admin")
+        sessionStorage.removeItem("mess-i-staff")
+        sessionStorage.removeItem("mess-i-roll")
+        sessionStorage.removeItem("mess-i-student")
+        sessionStorage.removeItem("mess-i-rebate")
         this.auth.navigateToLogin();
       },
       (error) => {

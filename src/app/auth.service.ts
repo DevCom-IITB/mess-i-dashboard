@@ -79,20 +79,12 @@ export class AuthService {
         return;
       }
 
-      this.access_token = res.access_token;
-      this.refresh_token = res.refresh_token;
       this.logged_in = true;
-      
       this.is_admin = false;
       this.is_rebate = true;
       this.is_staff = true;
       this.is_student = false;
 
-      // this.roll_no = res.roll;
-      sessionStorage.setItem("mess-i-access-token",res.access_token);
-      sessionStorage.setItem("mess-i-refresh-token",res.refresh_token);
-      // sessionStorage.setItem("mess-i-roll",res.roll);
-      
       sessionStorage.setItem("mess-i-admin","false");
       sessionStorage.setItem("mess-i-staff","true");
       sessionStorage.setItem("mess-i-rebate","true");
@@ -108,9 +100,13 @@ export class AuthService {
   // }
   
   logoutUser(): Observable<any> {
-    this.token = "";
-    this.logged_in = false;
-    return this.http.post('/api/dash/auth', {}).pipe(
+    let parameters = new HttpParams();
+    parameters = parameters.append('token',this.token);
+    let header_node = {
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
+      params: parameters
+    };
+    return this.http.delete(this.url, header_node).pipe(
       catchError((error) => {
         // Handle error
         console.error('Error occurred while calling API:', error);
