@@ -22,6 +22,7 @@ export class AuthService {
   roll_no:any;
   url = environment.backendURL+'/api/dash/auth';
   urlMessManager = environment.backendURL+'/api/login';
+  refreshTokenURL = environment.backendURL+'/api/refresh';
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
     this.roll_no = sessionStorage.getItem("mess-i-roll");
@@ -65,38 +66,48 @@ export class AuthService {
   }
 
   loginMessManager(username: string, password: string) {
-    let params = new HttpParams();
+    // let params = new HttpParams();
 
-    params = params.append('username', username);
-    params = params.append('password', password);
+    // params = params.append('username', username);
+    // params = params.append('password', password);
     let header_node = {
-      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
-      params,
+      headers: new HttpHeaders({ rejectUnauthorized: 'false' }),
+      // params,
     };
-    return this.http.post(this.urlMessManager, header_node).subscribe((res: any) => {
-      if(res.message) {
-        alert("Invalid Credentials");
-        return;
-      }
+    return this.http
+      .post(
+        this.urlMessManager,
+        {
+          username: username,
+          password: password,
+        },
+        header_node
+      )
+      .subscribe((res: any) => {
+        // console.log(res.status);
+        if (res.error) {
+          alert('Invalid Credentials');
+          return;
+        }
 
-      this.access_token = res.access_token;
-      this.refresh_token = res.refresh_token;
-      this.logged_in = true;
-      
-      this.is_admin = false;
-      this.is_rebate = true;
-      this.is_staff = true;
-      this.is_student = false;
+        // this.access_token = res.access_token;
+        // this.refresh_token = res.refresh_token;
+        this.logged_in = true;
 
-      // this.roll_no = res.roll;
-      sessionStorage.setItem("mess-i-access-token",res.access_token);
-      sessionStorage.setItem("mess-i-refresh-token",res.refresh_token);
-      // sessionStorage.setItem("mess-i-roll",res.roll);
-      
-      sessionStorage.setItem("mess-i-admin","false");
-      sessionStorage.setItem("mess-i-staff","true");
-      sessionStorage.setItem("mess-i-rebate","true");
-      sessionStorage.setItem("mess-i-student","false");
+        this.is_admin = false;
+        this.is_rebate = true;
+        this.is_staff = true;
+        this.is_student = false;
+
+        // this.roll_no = res.roll;
+        // sessionStorage.setItem('mess-i-access-token', res.access_token);
+        // sessionStorage.setItem('mess-i-refresh-token', res.refresh_token);
+        // sessionStorage.setItem("mess-i-roll",res.roll);
+
+        sessionStorage.setItem('mess-i-admin', 'false');
+        sessionStorage.setItem('mess-i-staff', 'true');
+        sessionStorage.setItem('mess-i-rebate', 'true');
+        sessionStorage.setItem('mess-i-student', 'false');
 
       this.router.navigate(['landing']);
     });
@@ -161,5 +172,9 @@ export class AuthService {
         return throwError(err); // Rethrow it back to the caller
       })
     );
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.post<any>(this.refreshTokenURL, {});
   }
 }
