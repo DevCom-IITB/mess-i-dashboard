@@ -20,8 +20,7 @@ export class AuthService {
   is_rebate:boolean;
   is_student:boolean;
   roll_no:any;
-  url = environment.backendURL+'/api/dash/auth';
-  urlMessManager = environment.backendURL+'/api/login';
+  baseurl = environment.backendURL;
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
     this.roll_no = sessionStorage.getItem("mess-i-roll");
@@ -30,19 +29,20 @@ export class AuthService {
     this.is_rebate = JSON.parse(sessionStorage.getItem("mess-i-rebate") ?? "false");
     this.is_student = JSON.parse(sessionStorage.getItem("mess-i-student") ?? "false");
 
-    if(this.token!=null){
+    if(this.token!=null  || this.is_staff){
       this.logged_in = true;
     }
   }
 
   loginUser(code:string){
+    let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();
     parameters = parameters.append('code',code);
     let header_node = {
       headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
       params: parameters
     };
-    return this.http.get(this.url,header_node).subscribe((res:any) => {
+    return this.http.get(url,header_node).subscribe((res:any) => {
       this.token = res.token;
       this.logged_in = true;
       
@@ -65,25 +65,23 @@ export class AuthService {
   }
 
   loginMessManager(username: string, password: string) {
+    let url = this.baseurl.concat("/api/login");
     let params = new HttpParams();
-
     params = params.append('username', username);
     params = params.append('password', password);
     let header_node = {
       headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
       params,
+      withCredentials:true
     };
-    return this.http.post(this.urlMessManager, header_node).subscribe((res: any) => {
-      if(res.message) {
-        alert("Invalid Credentials");
-        return;
-      }
-
+    return new Promise((resolve,reject)=>{
+      this.http.get(url, header_node).subscribe((res: any) => {
       this.logged_in = true;
       this.is_admin = false;
       this.is_rebate = true;
       this.is_staff = true;
       this.is_student = false;
+      this.token = 'null'
 
       sessionStorage.setItem("mess-i-admin","false");
       sessionStorage.setItem("mess-i-staff","true");
@@ -91,7 +89,12 @@ export class AuthService {
       sessionStorage.setItem("mess-i-student","false");
 
       this.router.navigate(['landing']);
+      resolve(res)
+    },(e)=>{
+      alert('Invalid Credential')
+      reject(e)
     });
+    })
   }
   
   // logoutUser(){
@@ -100,13 +103,15 @@ export class AuthService {
   // }
   
   logoutUser(): Observable<any> {
+    let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();
     parameters = parameters.append('token',this.token);
     let header_node = {
       headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
-      params: parameters
+      params: parameters,
+      withCredentials:true
     };
-    return this.http.delete(this.url, header_node).pipe(
+    return this.http.delete(url, header_node).pipe(
       catchError((error) => {
         // Handle error
         console.error('Error occurred while calling API:', error);
@@ -146,10 +151,12 @@ export class AuthService {
     return this.roll_no;
   }
 
-  forgetPassword(data: { email: any; }) {
-    return this.http.post<any>(`/api/change_password `, {
+  forgetPassword(email: any) {
+    let url = this.baseurl.concat("/api/change_password");
+    console.log(email)
+    return this.http.patch<any>(url, {
       requestType: 'Password_reset',
-      email: data.email
+      email: email
     }).pipe(
       catchError(err => {
         // Handle errors

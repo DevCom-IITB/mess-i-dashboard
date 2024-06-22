@@ -12,7 +12,7 @@ export class ForgetPasswordComponent implements OnInit {
   public getJsonValue: any;
   public postJsonValue: any;
   public putJsonValue: any;
-  constructor(private http: HttpClient, private fb: FormBuilder, private _authService: AuthService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService) { }
 
   forgetForm: FormGroup;
   error: any = null;
@@ -24,9 +24,8 @@ export class ForgetPasswordComponent implements OnInit {
     });
   }
 
-  onForgetSubmit() {
-    if (this.forgetForm.valid) {
-      this._authService.forgetPassword(this.forgetForm.value).subscribe(
+  onForgetSubmit(email:any) {
+    this.authService.forgetPassword(email).subscribe(
         (res) => {
           console.log(res);
           this.success = true;
@@ -36,14 +35,15 @@ export class ForgetPasswordComponent implements OnInit {
           this.error = err;
         }
       );
-    } else {
-      Object.keys(this.forgetForm.controls).forEach(key => {
-        const control = this.forgetForm.controls[key];
-        if (control.errors != null) {
-          control.markAsTouched();
-        }
-      });
-    }
+    // if (this.forgetForm.valid) { 
+    // } else {
+    //   Object.keys(this.forgetForm.controls).forEach(key => {
+    //     const control = this.forgetForm.controls[key];
+    //     if (control.errors != null) {
+    //       control.markAsTouched();
+    //     }
+    //   });
+    // }
   }
   // Add comments or section headers here if needed
 }

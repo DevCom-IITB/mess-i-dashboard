@@ -19,11 +19,6 @@ export class MessManagerloginComponent implements OnInit {
 
   onSubmit(username: string, password: string): void {
     this.authService.loginMessManager(username, password);
-    // if(this.authService.isLoggedIn()) {
-    //   this.router.navigate(['landing']);
-    // } else {
-    //   alert("Invalid credentials");
-    // }
   }
 
 }
