@@ -160,9 +160,8 @@ export class StudentdataService {
   }
 
   async putMessPrices(data : string){
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
     });
 
     let options = { headers: headers, responseType:'text' as 'json',withCredentials:true};
@@ -221,10 +220,8 @@ export class StudentdataService {
 
   async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string,isOfficialRebate:boolean, file:any){
     var formData: any = new FormData()
-    // console.error(file)
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false'
     });
     formData.append("roll",rollNumber);
@@ -250,9 +247,8 @@ export class StudentdataService {
   async updateRebate(rollNo:string,id:string,reason:string,newStartDate: string, newEndDate: string,isOfficialRebate:boolean, file:any){
     let url = this.baseurl.concat(`/rebate/${id}`);
     var formData: any = new FormData()
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false'
     });
     formData.append("roll",rollNo);
@@ -273,9 +269,8 @@ export class StudentdataService {
   }
 
   async deleteRebate(rollNumber: string,id: string){
-    var token = await this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
+      'x-access-token': this.auth.getToken(),
       'rejectUnauthorized': 'false'
     })
     let url = this.baseurl.concat(`/rebate/${id}`);
@@ -293,10 +288,9 @@ export class StudentdataService {
   }
 
   async acceptRebate(rebateID: string,rollNo: string,comment: string){
-    let token = this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
-      'rejectUnauthoized':'false'
+      'x-access-token': this.auth.getToken(),
+      'rejectUnauthorized':'false'
     });
     let options = {headers:headers,withCredentials:true};
     let url = this.baseurl.concat("/rebate-action/accept");
@@ -315,10 +309,9 @@ export class StudentdataService {
   }
 
   async rejectRebate(rebateID: string, rollNo: string, comment: string){
-    let token = this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
-      'rejectUnauthoized':'false',
+      'x-access-token': this.auth.getToken(),
+      'rejectUnauthorized':'false',
     });
     let options = {headers:headers,withCredentials:true};
     let url = this.baseurl.concat("/rebate-action/reject");
@@ -337,10 +330,9 @@ export class StudentdataService {
   }
 
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
-    var token=await this.auth.getToken()
     // console.log(token)
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false' 
       
     });
