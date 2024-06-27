@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,134 +7,109 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  _errservice: any;
+  _errservice:any;
   logged_in = false;
-  token: any;
-  access_token: any;
-  refresh_token: any;
-  is_admin: boolean;
-  is_staff: boolean;
-  is_rebate: boolean;
-  is_student: boolean;
-  roll_no: any;
+  token:any;
+  access_token:any;
+  refresh_token:any;
+  is_admin:boolean;
+  is_staff:boolean;
+  is_rebate:boolean;
+  is_student:boolean;
+  roll_no:any;
   baseurl = environment.backendURL;
-  url = this.baseurl + '/api/dash/auth';
-  urlMessManager = this.baseurl + '/api/login';
-  refreshTokenURL = this.baseurl + '/api/refresh';
-  constructor(private http: HttpClient, private router: Router) {
-    this.token = sessionStorage.getItem('mess-i-token');
-    this.roll_no = sessionStorage.getItem('mess-i-roll');
-    this.is_admin = JSON.parse(
-      sessionStorage.getItem('mess-i-admin') ?? 'false'
-    );
-    this.is_staff = JSON.parse(
-      sessionStorage.getItem('mess-i-staff') ?? 'false'
-    );
-    this.is_rebate = JSON.parse(
-      sessionStorage.getItem('mess-i-rebate') ?? 'false'
-    );
-    this.is_student = JSON.parse(
-      sessionStorage.getItem('mess-i-student') ?? 'false'
-    );
+  constructor(private http:HttpClient, private router:Router) { 
+    this.token = sessionStorage.getItem("mess-i-token");
+    this.roll_no = sessionStorage.getItem("mess-i-roll");
+    this.is_admin = JSON.parse(sessionStorage.getItem("mess-i-admin") ?? "false");
+    this.is_staff = JSON.parse(sessionStorage.getItem("mess-i-staff") ?? "false");
+    this.is_rebate = JSON.parse(sessionStorage.getItem("mess-i-rebate") ?? "false");
+    this.is_student = JSON.parse(sessionStorage.getItem("mess-i-student") ?? "false");
 
-    if (this.token != null || this.is_staff) {
+    if(this.token!=null  || this.is_staff){
       this.logged_in = true;
     }
   }
 
-  loginUser(code: string) {
-    // let url = this.baseurl.concat("/api/dash/auth");
+  loginUser(code:string){
+    let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();
-    parameters = parameters.append('code', code);
+    parameters = parameters.append('code',code);
     let header_node = {
-      headers: new HttpHeaders({ rejectUnauthorized: 'false' }),
-      params: parameters,
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
+      params: parameters
     };
-    return this.http.get(this.url, header_node).subscribe((res: any) => {
+    return this.http.get(url,header_node).subscribe((res:any) => {
       this.token = res.token;
       this.logged_in = true;
-
+      
       this.is_admin = res.is_admin;
       this.is_rebate = res.is_rebate;
       this.is_staff = res.is_staff;
       this.is_student = res.is_student;
 
       this.roll_no = res.roll;
-      sessionStorage.setItem('mess-i-token', res.token);
-      sessionStorage.setItem('mess-i-roll', res.roll);
-
-      sessionStorage.setItem('mess-i-admin', res.is_admin.toString());
-      sessionStorage.setItem('mess-i-staff', res.is_staff.toString());
-      sessionStorage.setItem('mess-i-rebate', res.is_rebate.toString());
-      sessionStorage.setItem('mess-i-student', res.is_student.toString());
+      sessionStorage.setItem("mess-i-token",res.token);
+      sessionStorage.setItem("mess-i-roll",res.roll);
+      
+      sessionStorage.setItem("mess-i-admin",res.is_admin.toString());
+      sessionStorage.setItem("mess-i-staff",res.is_staff.toString());
+      sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
+      sessionStorage.setItem("mess-i-student",res.is_student.toString());
 
       this.router.navigate(['landing']);
-    });
+    })
   }
 
   loginMessManager(username: string, password: string) {
-    // let params = new HttpParams();
-
-    // params = params.append('username', username);
-    // params = params.append('password', password);
+    let url = this.baseurl.concat("/api/login");
+    let params = new HttpParams();
+    params = params.append('username', username);
+    params = params.append('password', password);
     let header_node = {
-      headers: new HttpHeaders({ rejectUnauthorized: 'false' }),
-      // params,
-      withCredentials: true,
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
+      params,
+      withCredentials:true
     };
-    return this.http
-      .post(this.urlMessManager, { username, password }, header_node)
-      .subscribe((res: any) => {
-        if (res.error) {
-          alert('Invalid Credentials');
-          return;
-        }
+    return new Promise((resolve,reject)=>{
+      this.http.get(url, header_node).subscribe((res: any) => {
+      this.logged_in = true;
+      this.is_admin = false;
+      this.is_rebate = true;
+      this.is_staff = true;
+      this.is_student = false;
+      this.token = 'null'
 
-        // this.access_token = res.access_token;
-        // this.refresh_token = res.refresh_token;
-        this.logged_in = true;
+      sessionStorage.setItem("mess-i-admin","false");
+      sessionStorage.setItem("mess-i-staff","true");
+      sessionStorage.setItem("mess-i-rebate","true");
+      sessionStorage.setItem("mess-i-student","false");
 
-        this.is_admin = false;
-        this.is_rebate = true;
-        this.is_staff = true;
-        this.is_student = false;
-
-        // this.roll_no = res.roll;
-        // sessionStorage.setItem("mess-i-access-token",res.access_token);
-        // sessionStorage.setItem("mess-i-refresh-token",res.refresh_token);
-        // sessionStorage.setItem("mess-i-roll",res.roll);
-
-        sessionStorage.setItem('mess-i-admin', 'false');
-        sessionStorage.setItem('mess-i-staff', 'true');
-        sessionStorage.setItem('mess-i-rebate', 'true');
-        sessionStorage.setItem('mess-i-student', 'false');
-
-        this.router.navigate(['landing']);
-      });
-    //   resolve(res)
-    // },(e)=>{
-    //   alert('Invalid Credential')
-    //   reject(e)
-    // });
-    // })
+      this.router.navigate(['landing']);
+      resolve(res)
+    },(e)=>{
+      alert('Invalid Credential')
+      reject(e)
+    });
+    })
   }
-
+  
   // logoutUser(){
   //   this.token="";
-  //   this.logged_in=false;
+  //   this.logged_in=false; 
   // }
-
+  
   logoutUser(): Observable<any> {
-    let url = this.baseurl.concat('/api/dash/auth');
+    let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();
-    parameters = parameters.append('token', this.token);
+    parameters = parameters.append('token',this.token);
     let header_node = {
-      headers: new HttpHeaders({ rejectUnauthorized: 'false' }),
+      headers: new HttpHeaders({ 'rejectUnauthorized': 'false' }),
       params: parameters,
-      withCredentials: true,
+      withCredentials:true
     };
     return this.http.delete(url, header_node).pipe(
       catchError((error) => {
@@ -149,51 +124,45 @@ export class AuthService {
   navigateToLogin() {
     this.router.navigate(['login']);
   }
-  isLoggedIn() {
+  isLoggedIn(){
     return this.logged_in;
   }
-
-  isAdmin() {
+  
+  isAdmin(){
     return this.is_admin;
   }
-
-  isStaff() {
-    return this.is_admin || this.is_rebate || this.is_staff;
+  
+  isStaff(){
+    return (this.is_admin || this.is_rebate || this.is_staff);
   }
 
-  isStudent() {
+  isStudent(){
     return this.is_student;
   }
-
-  isRebate() {
-    return this.is_admin || this.is_rebate;
+  
+  isRebate(){
+    return (this.is_admin || this.is_rebate);
   }
 
-  getToken() {
+  getToken(){
     return this.token;
   }
-  getRoll() {
+  getRoll(){
     return this.roll_no;
   }
 
   forgetPassword(email: any) {
-    let url = this.baseurl.concat('/api/change_password');
-    console.log(email);
-    return this.http
-      .patch<any>(url, {
-        requestType: 'Password_reset',
-        email: email,
+    let url = this.baseurl.concat("/api/change_password");
+    console.log(email)
+    return this.http.patch<any>(url, {
+      requestType: 'Password_reset',
+      email: email
+    }).pipe(
+      catchError(err => {
+        // Handle errors
+        console.error('Error occurred:', err);
+        return throwError(err); // Rethrow it back to the caller
       })
-      .pipe(
-        catchError((err) => {
-          // Handle errors
-          console.error('Error occurred:', err);
-          return throwError(err); // Rethrow it back to the caller
-        })
-      );
-  }
-
-  refreshToken(): Observable<any> {
-    return this.http.post<any>(this.refreshTokenURL, {});
+    );
   }
 }

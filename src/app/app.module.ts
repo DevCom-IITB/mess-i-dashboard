@@ -40,8 +40,6 @@ import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-en
 import { LandingComponent } from './landing/landing.component';
 import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './token.interceptor';
 
 
 @NgModule({
@@ -90,7 +88,7 @@ import { TokenInterceptor } from './token.interceptor';
     
     ReactiveFormsModule
   ],
-  providers: [DatePipe, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
