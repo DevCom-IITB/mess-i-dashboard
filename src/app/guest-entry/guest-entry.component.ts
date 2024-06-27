@@ -39,6 +39,9 @@ export class GuestEntryComponent implements OnInit {
   ngOnInit(): void {
     this.fetch_guest(this.auth.getRoll())
     this.getGuestDetail()
+    if (!this.isAuthorized()) {
+      this.router.navigate(['/landing']);
+    }
   }
 
   async fetch_guest(rollNum: any){
@@ -91,6 +94,10 @@ export class GuestEntryComponent implements OnInit {
 
   updateList(){
     this.getGuestDetail()
+  }
+
+  isAuthorized(): boolean {
+    return this.auth.isLoggedIn() && this.auth.isSSOLogin();
   }
 
 }
