@@ -1,5 +1,4 @@
 
-
 .frame1{
   height: 100%;
   gap: 0px;
@@ -10,6 +9,7 @@
   justify-content: center;
   align-items: center;
   display: inline;
+  margin-right: 5vh;
 }
 
 /* .img {
@@ -40,8 +40,8 @@
 }
 .img2-fluid {
   text-align: center; /* Center the image horizontally */
-  width: 366px;
-  height: 486px;
+  width: 55%;
+  height: 75%;
   margin-top: 0%;
   margin-left: 10%;
   gap: 0px;
@@ -59,6 +59,9 @@
   text-align: center;
   color: #ffffff;
   margin-left: 33%;
+  justify-content: center;
+  align-items: center;
+  display: inline;
 } 
 
 .frame2{
@@ -69,6 +72,7 @@
   border-radius: 22px 22px 22px 22px;
   opacity: 0px;
   background-color: #fed05b;
+  
 }
 
 .heading2 {
@@ -88,14 +92,21 @@
   line-height: 43.58px;
   padding-bottom: 0;
   text-align: center;
+  
 }
+
 
 
 .img-fluid {
   text-align: center; /* Center the image horizontally */
-  padding-top: 0;
-  width: 277.15px;
-  height: 263.2px;
+  margin-top: 0%;
+  margin-left: 10%;
+  gap: 0px;
+  opacity: 0px;
+  width: 54%;
+  height: 55%;
+  /* width: 366px;
+  height: 486px; */
   position: relative;
   display: block; /* Use display: block; for images */
   margin: 0 auto; /* Center the image horizontally */
@@ -116,6 +127,7 @@ button {
   text-align: center;
   margin-right:-57%;
 } 
+
 a{
   margin-right: -55%;
 }
@@ -153,18 +165,25 @@ input{
 .contain {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
+  margin-right: 5vh;
+  margin-left: 5vh;
+  margin-bottom: 0vh;
+  margin-top: 2vh;
 }
 
 /* Create four equal columns */
 .frame1  {
-  flex: 25%;
+  flex: 40%;
   padding: 20px;
-  margin-right: 20px;
+  height: 95vh;
+  margin-left:5vh;
 }
 .frame2{
+  margin-right:  5vh;
   padding: 20px;
-  flex: 25%;
+  flex: 40%;
+  height: 95vh
+
 }
 
 
