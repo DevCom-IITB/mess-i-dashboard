@@ -19,6 +19,7 @@ export class AuthService {
   is_staff:boolean;
   is_rebate:boolean;
   is_student:boolean;
+  is_sso_login: boolean;
   roll_no:any;
   baseurl = environment.backendURL;
   constructor(private http:HttpClient, private router:Router) { 
@@ -28,6 +29,7 @@ export class AuthService {
     this.is_staff = JSON.parse(sessionStorage.getItem("mess-i-staff") ?? "false");
     this.is_rebate = JSON.parse(sessionStorage.getItem("mess-i-rebate") ?? "false");
     this.is_student = JSON.parse(sessionStorage.getItem("mess-i-student") ?? "false");
+    this.is_sso_login = JSON.parse(sessionStorage.getItem("mess-i-sso") ?? "false");
 
     if(this.token!=null  || this.is_staff){
       this.logged_in = true;
@@ -50,11 +52,12 @@ export class AuthService {
       this.is_rebate = res.is_rebate;
       this.is_staff = res.is_staff;
       this.is_student = res.is_student;
+      this.is_sso_login = true;
 
       this.roll_no = res.roll;
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("mess-i-roll",res.roll);
-      
+      sessionStorage.setItem("mess-i-sso",this.is_sso_login.toString());
       sessionStorage.setItem("mess-i-admin",res.is_admin.toString());
       sessionStorage.setItem("mess-i-staff",res.is_staff.toString());
       sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
@@ -81,12 +84,14 @@ export class AuthService {
       this.is_rebate = true;
       this.is_staff = true;
       this.is_student = false;
+      this.is_sso_login = false;
       this.token = 'null'
 
       sessionStorage.setItem("mess-i-admin","false");
       sessionStorage.setItem("mess-i-staff","true");
       sessionStorage.setItem("mess-i-rebate","true");
       sessionStorage.setItem("mess-i-student","false");
+      sessionStorage.setItem("mess-i-sso",this.is_sso_login.toString());
 
       this.router.navigate(['landing']);
       resolve(res)
@@ -142,6 +147,10 @@ export class AuthService {
   
   isRebate(){
     return (this.is_admin || this.is_rebate);
+  }
+
+  isSSOLogin() {
+    return this.is_sso_login;
   }
 
   getToken(){

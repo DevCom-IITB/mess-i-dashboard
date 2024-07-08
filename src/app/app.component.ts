@@ -62,6 +62,7 @@ export class AppComponent {
         sessionStorage.removeItem("mess-i-roll")
         sessionStorage.removeItem("mess-i-student")
         sessionStorage.removeItem("mess-i-rebate")
+        sessionStorage.removeItem("mess-i-sso")
         this.auth.navigateToLogin();
       },
       (error) => {
