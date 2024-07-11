@@ -32,11 +32,12 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token': this.auth.getToken(),
-        },
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res)
       }, 
       (e)=>{
+        console.log(e)
         reject({});
       });
     });
@@ -49,12 +50,12 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token':this.auth.getToken(),
-          'rejectUnauthorised':'false'
+          'rejectUnauthorized':'false'
         },
         params:{
           'date':date,
           'meal':meal
-        }
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -70,8 +71,8 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token':this.auth.getToken(),
-          'rejectUnauthorised':'false'
-        }
+          'rejectUnauthorized':'false'
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -86,8 +87,8 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token':this.auth.getToken(),
-          'rejectUnauthorised':'false'
-        }
+          'rejectUnauthorized':'false'
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -103,8 +104,8 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token':this.auth.getToken(),
-          'rejectUnauthorised':'false'
-        }
+          'rejectUnauthorized':'false'
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -120,8 +121,8 @@ export class GuestdataService {
       this.http.get(url,{
         headers:{
           'x-access-token':this.auth.getToken(),
-          'rejectUnauthorised':'false'
-        }
+          'rejectUnauthorized':'false'
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -150,7 +151,7 @@ export class GuestdataService {
       this.http.post(url,jsonData,{headers:{
         'x-access-token':this.auth.getToken(),
         'rejectUnauthorized':'false' 
-      }}).subscribe((res:any)=>{
+      },withCredentials:true}).subscribe((res:any)=>{
         resolve(res)
       },(e)=>{
         reject(e)
@@ -165,7 +166,7 @@ export class GuestdataService {
       this.http.delete(url,{headers:{
         'x-access-token':this.auth.getToken(),
         'rejectUnauthorized':'false' 
-      }}).subscribe((res:any)=>{
+      },withCredentials:true}).subscribe((res:any)=>{
         resolve(res)
       },(e)=>{
         reject(e)
@@ -177,7 +178,7 @@ export class GuestdataService {
     if(guestHostel && meal && date){
       let duration=this.getDaysDifference(this.today,this.resolveDateFormat(date))
       if(![0,1,2].includes(duration)){
-        alert("You can only book within 3 days from today onward")
+        alert("You can only book within 3 days from today")
         return false;
       }//7:30
       if(!duration && (this.day.getHours()*60+this.day.getMinutes())-450 > 0 && meal ==="breakfast"){

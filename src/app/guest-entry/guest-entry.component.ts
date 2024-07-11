@@ -33,6 +33,8 @@ export class GuestEntryComponent implements OnInit {
   constructor(private auth:AuthService, private router:Router, private guestService:GuestdataService, private datePipe:DatePipe) { 
     if (!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
+    }if (!this.auth.isSSOLogin()){
+      this.router.navigate(['landing'])
     }
   }
 
@@ -92,5 +94,4 @@ export class GuestEntryComponent implements OnInit {
   updateList(){
     this.getGuestDetail()
   }
-
 }

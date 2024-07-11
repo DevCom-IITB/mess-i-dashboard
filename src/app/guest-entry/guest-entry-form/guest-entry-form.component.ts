@@ -15,7 +15,8 @@ export class GuestEntryFormComponent implements OnInit {
   guest:any;
   guest_detail:any;
   Msg: any ;
-  available:string;
+  notAVL:any;
+  availability:string;
 
 
  
@@ -44,7 +45,13 @@ export class GuestEntryFormComponent implements OnInit {
     if (this.guestService.bookingValidity(this.guestHostel,this.meal,this.date)){
       await this.guestService.getavailability(this.guestHostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>{
         let guesthostelData= res as any;
-        this.available=guesthostelData['current availability'].toString()+'/'+guesthostelData['total availability'].toString()
+        if (guesthostelData['current availability'] == 0){
+          this.notAVL=true
+        } 
+        else{
+          this.notAVL=false
+          this.availability='AVL-'+guesthostelData['current availability'].toString()+'/'+guesthostelData['total availability'].toString()
+        }
       }).catch((res)=>{
         console.log(res)
       })
