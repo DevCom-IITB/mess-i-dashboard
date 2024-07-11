@@ -16,10 +16,10 @@ body, html {
 }
 .frame{
   flex: 40%;
-  padding: 20px;
-  margin-right: 5vh;
+  padding: 77px;
+  margin-right: 0.5vh;
   height: 95vh;
-  margin-left:5vh;
+  margin-left:0.5vh;
   gap: 0px;
   opacity: 0px;
   background-color: #28282B;
@@ -66,6 +66,9 @@ body, html {
   align-items: center;
   display: inline;
 } 
+.heading1 p{
+  margin-top: 5vh;
+}
 
 .heading2 {
   margin: 0;
@@ -113,6 +116,7 @@ body, html {
   font-size: 16px;
   font-weight: 600;
   border-color: #ffffff;
+  margin-top: 3.5vh;
 }
 input{
   font-style: Open Sans;
@@ -121,6 +125,9 @@ input{
   line-height: 21.79px;
   text-align: left;
   margin-bottom: 2%;
+}
+.inputbox2 {
+  margin-top: 3vh;
 }
 button {
   color: #ffffff;
