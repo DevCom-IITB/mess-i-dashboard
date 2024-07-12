@@ -21,23 +21,6 @@
     white-space:nowrap;
 }
 
-#search-container{
+#device-container{
     margin-top: 24px;
-}
-.search-main-area{
-    width: 100%;
-}
-
-#search-box{
-    background-color: #fff4d8;
-    border-radius: 6px;
-}
-#search-query-input{
-    border: none;
-    background-color: rgba(0,0,0,0);
-    width: auto;
-    flex: 1 1 auto;
-}
-#search-query-input:focus{
-    outline: none;
 }
