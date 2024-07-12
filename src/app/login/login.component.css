@@ -5,18 +5,20 @@
     bottom: 0;
     left: 0;
     right: 0;
-    display:flex;
-    z-index: 5;
-    
+    /* display:flex;
+    z-index: 5; 
+    not need since i removed the nav component 
+    */  
     margin: auto;
 }
 
-.image{
-    width: 20%;
+/* .image{
+    width: 20%; 
     margin-left: auto;
     margin-right:auto;
     margin-top:auto;
-}
+} */
+
 
 a{
     color: rgb(255, 255, 255);
@@ -27,5 +29,109 @@ a{
     padding-left: 2rem;
 }
 a:hover{
-    background-color:gold ;
+    background-color:#FFC42B ;
 }
+
+/* added by harsh */
+.button_class{
+    margin-top: 0%;
+}
+
+/* changes made by me 
+1. image css remove kiya */
+/* then media queries add kar di */
+
+@media screen and (min-width : 750px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+                    height:auto;
+        width: 35%;
+    }
+     
+   }
+
+   @media screen and (max-width : 750px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+                    height:auto;
+    max-width: 30%;
+    }
+     
+   }
+
+   @media screen and (max-width : 690px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+    height:auto;
+    max-width: 35%;
+    }
+     
+   }
+
+   @media screen and (max-width : 580px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+                    height:auto;
+    max-width: 40%;
+    }
+     
+   }
+
+   @media screen and (max-width : 430px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+                    height:auto;
+    max-width: 50%;
+    }
+     
+   }
+   @media screen and (max-width : 380px) {
+    /* .img-fluid{
+     display:none;
+    } */
+    .img-fluid{
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:auto;
+                    height:auto;
+    max-width: 100%;
+    }
+     
+   }

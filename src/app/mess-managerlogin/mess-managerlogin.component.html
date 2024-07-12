@@ -1,0 +1,39 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<div class="container">
+  <div class="frame left-frame">
+    <div class="mess-i-logo">
+      <img class="img1-fluid" src="assets/images/mess.jpg" alt="Mess-i-logo" />
+    </div>
+    <div class="heading1">
+      <p>Welcome to Mess-i</p>
+    </div>
+  </div>
+
+  <div class="frame right-frame" >
+    <div class="heading2">
+      <p>Enter your credentials</p>
+    </div>
+    <div class="documentImg">
+      <img class="img2-fluid" src="assets/images/document-sign.png" alt="document-sign-img" />
+    </div>
+    <div class="form">
+      <form novalidate (ngSubmit)="onSubmit(username.value, password.value)"> 
+        <div class="inputbox1">
+          <input type="text" name="userID" class="form-control" id="userID" placeholder="UserID" required #username />
+        </div>
+        <div class="inputbox2">
+          <input type="password" name="password" class="form-control" id="password" placeholder="Password" style="margin-top: 4%;" required #password />
+        </div>
+        <a href="/forget-password">Forgot Password?</a>
+        <br/><br/>
+        <button type="submit" class="btn btn-primary" style="margin-top: 0%;">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
