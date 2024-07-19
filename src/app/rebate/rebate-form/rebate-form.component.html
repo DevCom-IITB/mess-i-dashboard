@@ -15,11 +15,14 @@
             <app-input-field label="Till" inputType="calender" [(inputModel)]="rebateEnd"></app-input-field>
         </div>
         <div id="is-official-rebate">
-            <app-checkbox label="Official" [(inputModel)]="isOfficialRebate"></app-checkbox>
-        </div>
+            <div class="info-container">
+                <button class="info-button"><b>i</b></button>
+                <app-checkbox label="Official" [(inputModel)]="isOfficialRebate"></app-checkbox>
+            </div>
+        </div>        
         <div *ngIf="isOfficialRebate" id="file-for-official">
             <!-- <app-checkbox></app-checkbox> -->
-            <app-input-field label="Supportive Document" [callbackFunction]="handleOfficialRebateFileChange" inputType="file" ></app-input-field>
+            <app-input-field label="Supporting Document" [callbackFunction]="handleOfficialRebateFileChange" inputType="file" ></app-input-field>
         </div>
         <!-- <div id="current-file">
             {{rebate_docname}}
