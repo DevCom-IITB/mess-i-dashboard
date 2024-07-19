@@ -57,7 +57,7 @@ export class AuthService {
       this.roll_no = res.roll;
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("mess-i-roll",res.roll);
-      
+      sessionStorage.setItem("mess-i-sso",this.is_sso_login.toString());
       sessionStorage.setItem("mess-i-admin",res.is_admin.toString());
       sessionStorage.setItem("mess-i-staff",res.is_staff.toString());
       sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
@@ -91,6 +91,7 @@ export class AuthService {
       sessionStorage.setItem("mess-i-staff","true");
       sessionStorage.setItem("mess-i-rebate","true");
       sessionStorage.setItem("mess-i-student","false");
+      sessionStorage.setItem("mess-i-sso",this.is_sso_login.toString());
 
       this.router.navigate(['landing']);
       resolve(res)

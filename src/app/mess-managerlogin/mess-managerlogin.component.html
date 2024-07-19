@@ -1,184 +1,36 @@
-<!-- 
-<div class="container">
-    <div class="frame1">
-    <div class="mess-I">
-      <img class="img" src="assets/images/mess.jpg" />
-    </div>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
 
+<div class="container">
+  <div class="frame left-frame">
+    <div class="mess-I">
+      <img class="img1-fluid" src="assets/images/mess.jpg" alt="Mess-i-logo" />
+    </div>
     <div class="heading1">
       <p>Welcome to Mess-i</p>
     </div>
   </div>
 
-  <div class="frame2">
+  <div class="frame right-frame" >
     <div class="heading2">
       <p>Enter your credentials</p>
     </div>
-    <div class="document-sign">
-      <div class="de"><img src="assets/images/document-sign.png" /></div>
-    </div>
-
-    <form novalidate (ngSubmit)="onSubmit(username.value, password.value)">
-      <input  
-        class="user"
-        type="text"
-        name="userID"
-        placeholder="UserID"
-        #username  
-        required
-      />
-
-      <input
-        class="password-box"
-        type="password"
-        name="password"
-        placeholder="Password"
-        #password
-        required
-      />
-      <button type="submit">Login</button>
-    </form>
-    <div class="forget-password">
-      <a href="">Forgot password? </a>
-    </div>
-  </div>
-</div> -->
-
-
-
-
-<!-- NEW HTML TEMPLATE  -->
-
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-</head>
-
-
-   <div class="contain">
-    <div class="frame1">
-      <div class="mess-I">
-        <img class="img2-fluid" src="assets/images/mess.jpg" />
-      </div>
-      
-      <div class="heading1">
-        <p>Welcome to Mess-i</p>
-      </div>
-      
-    </div>
-  
-    <div class="frame2" >
-      <div class="heading2">
-        <p>Enter your credentials</p>
-      </div>
-      <!--     
-      <div class="document-sign">
-        <div class="de"><img src="assets/images/document-sign.png" /></div>
-      </div>
-  
-  
-      <form novalidate>
-        <input
-          class="user"
-          type="text"
-          name="userID"
-          placeholder="UserID"
-          #username  
-          required
-        />
-  
-        <input
-          class="password-box"
-          type="password"
-          name="password"
-          placeholder="Password"
-          #password
-          required
-        />
-        <button  routerLink="">Login</button>
-      </form>
-      <div class="forget-password">
-        <a href="">Forgot password? </a>
-      </div>
-    </div>  -->
-      
-      <img src="assets/images/document-sign.png" class="img-fluid" alt="..." />
-      <!-- <form class="form1" style="float: right" novalidate (ngSubmit)="onSubmit(username.value, password.value)"> -->
-        
-
-        <!-- <div class="col-sm-10">
-          <input
-            type="text"
-            name="userID"
-            class="form-control"
-            id="inputEmail3"
-            placeholder="UserID"
-            required
-            #username
-          />
-        </div>
-    
-        <div class="col-sm-10">
-          <input
-            type="password"
-            name="password"
-            class="form-control"
-            id="inputPassword3"
-            placeholder="Password"
-            required
-            #password
-          />
-          <br/>
-        </div> -->
-        <!-- <div class="row mb-3">
-        <a href="/forget-password" style=" position: relative; text-align: right; display: inline; text-decoration: none;" > forget password</a> -->
-
-       
-          <!-- <div class="col-sm-10 offset-sm-4">
-            <div class="col-sm-12 mb-3">
-            <div class="form-check">
-              
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="col-sm-12">
-        <button type="submit" class="btn btn-primary" style="float: right">
-          Login
-        </button>
-      </div>
-    </div>
-    </form> -->
-    <div class="formcase">
+    <img class="img2-fluid" src="assets/images/document-sign.png" alt="document-sign-img" />
+    <div class="form">
       <form novalidate (ngSubmit)="onSubmit(username.value, password.value)"> 
-          <div class="inputbox">
-          <input
-          type="text"
-          name="userID"
-          class="form-control"
-          id="inputEmail3"
-          placeholder="UserID"
-          required
-          #username
-      />
-  </div>
-  
-  <div class="inputbox">
-          <input style="margin-top: 4%;"
-          type="password"
-          name="password"
-          class="form-control"
-          id="inputPassword3"
-          placeholder="Password"
-          required
-          #password
-      />
-  </div>
-  <a href="/forget-password">Forget-Password?</a>
-  <br/>
-      <button type="submit" style="margin-top: 0%;" class="btn btn-primary">Login</button>
-
+        <div class="inputbox1">
+          <input type="text" name="userID" class="form-control" id="userID" placeholder="UserID" required #username />
+        </div>
+        <div class="inputbox2">
+          <input type="password" name="password" class="form-control" id="password" placeholder="Password" style="margin-top: 4%;" required #password />
+        </div>
+        <a href="/forget-password">Forgot Password?</a>
+        <br/><br/>
+        <button type="submit" class="btn btn-primary" style="margin-top: 0%;">Login</button>
       </form>
-
+    </div>
   </div>
-  </div>
+</div>

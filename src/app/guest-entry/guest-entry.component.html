@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isAuthorized(); else landingPage">
+<div class="container">
   <div>
       <h1 style="border-bottom:3px solid #ffc42b">Guest Entry</h1>
       <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/apply-guest-entry']">New Request</button>
@@ -33,7 +33,3 @@
       </table>
   </div>
 </div>
-
-<ng-template #landingPage>
-  <p>Redirecting to landing page...</p>
-</ng-template>
