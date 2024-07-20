@@ -47,7 +47,7 @@ body{
     font-weight: 700;
     font-size: 1.5vw;
     text-align: center;
-    color: #ffc42b;
+    color: #FFC42B;
     /* margin-top: 10px; */
     /* margin-bottom: 0px; */
 }
@@ -197,3 +197,14 @@ body{
 /* #container-nav-items{ */
     /* z-index: 10; */
 /* } */
+
+
+/* adding something  by HARSH CHOPRA TO TRY */
+
+.mess-i-logo{
+    width: 20vw;
+    height: 20vw;
+    align-self: center;
+}
+
+/* so that this can show up just worked */

@@ -16,6 +16,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
+import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
+import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,8 @@ const routes: Routes = [
   {path: 'statistics',component:StatisticsComponent},
   {path: 'guest-entry',component:GuestEntryComponent},
   {path: 'guest-admin',component:GuestAdminComponent},
+  {path: 'mess-manager' ,component:MessManagerloginComponent},
+  {path: 'forget-password' , component:ForgetPasswordComponent },
   {path:'',redirectTo:'/landing',pathMatch:'full'}
 ];
 
@@ -41,3 +45,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+

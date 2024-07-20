@@ -19,19 +19,12 @@
   border-radius: 0.5rem;
   border-style: solid;
   border-width: 0.04rem;
-  border-color: #ffc42b;
+  border-color: #FFC42B;
   
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: transparent;
 }
-/* .input-group-prepend i{
-  position: relative;
-    right: 0px;
-    padding: 10px 12px;
-    pointer-events: none;
-} */
-
 .inactive-button{
   border-radius: 0.5rem;
   padding-left: 1rem;
@@ -43,24 +36,21 @@
   border-width: 0.04rem;
   border-color: #A8A8A8;
 }
-  
-
 .rounded_borders{
   border-radius: 50000px;
 }
 
-
 #column-headers{
   font-family: "Oxygen",Arial, Helvetica, sans-serif;
-  color: #ffc42b;
+  color: #FFC42B;
 }
 
 #stud-table{
-  border-top: 2px #ffc42b solid;
+  border-top: 2px #FFC42B solid;
 }
 
 #student-list-footer{
-  color: #ffc42b;
+  color: #FFC42B;
 }
 
 #num-rows-selector{
@@ -69,7 +59,7 @@
 
 .page-navigator-btn{
   border-radius: 0.4rem;
-  border-color: #ffc42b;
+  border-color: #FFC42B;
   border: 1px solid;
   text-align: center;
 
@@ -77,13 +67,6 @@
   width: 1.5rem;
 }
 
-/* .input-group-prepend{
-  background-color: none;
-  padding-left: 25px;
-  padding-right: 25px;
-  width: 100%;
-
-} */
 
 input.nosubmit{
   width: 100%;

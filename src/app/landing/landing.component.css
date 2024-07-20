@@ -1,9 +1,9 @@
 .container{
-    padding: 4%;
+    /* padding: 4%; */
     background-color: #FFFCF4; 
-    display: flex;
+    /* display: flex;
     min-height: 100%;
-    flex-direction: column;
+    flex-direction: column; */
 }
 h1{
     color: #FFC42B;
@@ -23,7 +23,7 @@ h1{
 }
 .badge {
     background-color: #FFC42B;
-    color: white;
+    color: #28282B;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 0.8em;
