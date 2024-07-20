@@ -20,7 +20,7 @@
     grid-template-columns: repeat(5, 1fr);
     flex-wrap: wrap;
 
-    color: #ffc42b;
+    color: #FFC42B;
 }
 
 #hostel-container{
@@ -49,19 +49,16 @@ select.form-select{
     background-color: #FFF8E8;
 }
 
-
 #confirm-btn{
-    /* color: #ffc42b; */
-    
-    background-color: #ffc659;
-    border-color: #ffc659;
+    background-color: #FFC42B;
+    border-color: #FFC42B;
     border-radius: 120rem;
-    
     padding-right: 24px;
     padding-left: 24px;
-
     height: max-content;
     margin: 24px 0px;
-
     font-weight: bold;
+}
+#confirm-btn:hover{
+    background-color: #28282b;
 }

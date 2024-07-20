@@ -9,6 +9,7 @@ body, html {
   max-width: 100%;
   min-height:100% ;
   justify-content: center;
+  background-color: #FFFCF4;
   align-items: stretch;
   padding: 15px;
   gap: 12px; 

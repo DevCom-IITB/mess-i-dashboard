@@ -37,6 +37,6 @@
         </div> -->
         <app-input-field *ngIf="isOfficialRebate && isUpdateRequest" id="current-file" label="Current Document" inputType="show_text" text_to_show = "{{rebate_docname}}"></app-input-field>
     </div>
-    <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">SUBMIT</button>
-    <button id="confirm-btn" class="btn btn-primary" *ngIf="isUpdateRequest"(click)="updateRebateData()">UPDATE</button>
+    <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">Submit</button>
+    <button id="confirm-btn" class="btn btn-primary" *ngIf="isUpdateRequest"(click)="updateRebateData()">Update</button>
 </div>
