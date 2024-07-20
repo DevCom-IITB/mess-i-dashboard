@@ -413,7 +413,7 @@ export class StudentdataService {
   }
 
   async getMonthlyMessdata(hostel:string,year:string,month:string){
-    let url = this.baseurl.concat("/get-mess-data/",hostel,'/',year,'/',month);
+    let url = this.baseurl.concat("/get-mess-data/" ,year,'/',month ,'?hostel=',hostel);
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{headers:{
