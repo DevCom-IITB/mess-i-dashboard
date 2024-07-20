@@ -76,6 +76,7 @@
     bottom: 100%;
     right: 100%;
     transform: translateY(-8px) translateX(325px);
+    z-index: 5;
 }
 
 .info-button:hover::after {
