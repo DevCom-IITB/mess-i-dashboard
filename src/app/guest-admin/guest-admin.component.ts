@@ -16,11 +16,13 @@ export class GuestAdminComponent implements OnInit {
   meal: string='' ;
   date: string ;
   headers = ['Token No.','Roll No.','Name','Hostel']
+  isAdmin = false;
 
   constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    this.isAdmin = auth.isAdmin()
     let current_state = this.router.getCurrentNavigation()?.extras.state;
     if(current_state != undefined){
       this.hostel = current_state?.hostel;

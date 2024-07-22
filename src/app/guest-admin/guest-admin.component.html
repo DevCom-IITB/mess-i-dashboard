@@ -2,7 +2,7 @@
   <h1 style="border-bottom:3px solid #ffc42b;">Guest Admin</h1>
   <div id="form-container">
     <div id="hostel-container">
-      <select class="form-select" [(ngModel)]="hostel" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
+      <select class="form-select" [(ngModel)]="hostel" *ngIf="isAdmin" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
         <option value="" disabled selected>Select Hostel</option>
         <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
           <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
