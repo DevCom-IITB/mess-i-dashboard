@@ -72,7 +72,7 @@ export class GuestAdminComponent implements OnInit {
 
   getGuestList(){
     this.guestHistory={}
-    if (this.hostel && this.meal && this.date) {
+    if (this.meal && this.date) {
       this.guestService.getGuestHostelData(this.hostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>
         {
           let history = res;
