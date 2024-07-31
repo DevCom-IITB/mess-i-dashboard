@@ -5,31 +5,12 @@
     min-height: 100%;
     flex-direction: column;
 }
-
-form{
-    margin-top: 1vw;
-    /* display: flex;
-    flex-direction: row; */
-}
-#form-container{
+.input-group {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    align-items: flex-end;
-    color: #ffc42b;
-}
-
-#date-container {
-    margin-left: 100px;
-}
-
-#date-container,
-#hostel-container,
-#meal-container,
-#button-container {
-    flex: 1;
-    min-width: 150px; /* Adjust this value as needed */
-    text-align: center;
+    align-items: stretch;
+    width: 100%;
 }
 
 input.form-control{
@@ -46,7 +27,6 @@ input.form-control{
     border-width: 2px;
     
 }
-
 select.form-select{
     margin-left: 2vh;
     margin-right: 2vh;
@@ -54,22 +34,12 @@ select.form-select{
     border-width: 2px;
     background-color: #FFF8E8;
 }
-
-#column-headers{
-    color: #ffc42b;
-    font-weight: 500;
-}
-#guest-table{
-    border-top: 2px #ffc42b solid;
-}
-
 button{
     background-color: #28282B;
     color:white;
     border:0px;
     border-radius: 4px;
 }
-
 button:hover{
     background-color: #FFC42B;
 }
