@@ -1,8 +1,11 @@
 <div class="container">
   <h1 style="border-bottom:3px solid #ffc42b;">Guest Admin</h1>
   <div id="form-container">
-    <div id="hostel-container">
-      <select class="form-select" [(ngModel)]="hostel" *ngIf="isAdmin" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
+    <div id="date-container">
+      <app-input-field label="date" inputType="calender" [(inputModel)]="date"></app-input-field>
+    </div>
+    <div id="hostel-container" *ngIf="isAdmin">
+      <select class="form-select" [(ngModel)]="hostel" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
         <option value="" disabled selected>Select Hostel</option>
         <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
           <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
@@ -17,10 +20,9 @@
         <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
       </select>       
     </div>
-    <div id="date-container">
-        <app-input-field label="date" inputType="calender" [(inputModel)]="date"></app-input-field>
+    <div id="button-container">
+      <button id="confirm-btn" class="btn btn-primary" (click)="getGuestList()">GET</button>
     </div>
-    <button id="confirm-btn" class="btn btn-primary" (click)="getGuestList()">GET</button>
   </div>
   
 
