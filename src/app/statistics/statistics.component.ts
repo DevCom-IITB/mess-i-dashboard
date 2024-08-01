@@ -94,6 +94,7 @@ export class StatisticsComponent implements OnInit {
 
     await this.plotHostelData(data);
     await this.plotStudentData(data);
+    // console.log("h1" , data.form.value)
   }
 
 
@@ -145,9 +146,14 @@ export class StatisticsComponent implements OnInit {
       await this.service.getHostelStats(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>{
         this.hostelmessHistory = this.genHostelPlotData(res);
         this.plot.plotMultiline("Hostel Statistics", "mess_data", this.hostelmessHistory.x, this.hostelmessHistory.y, this.hostelmessHistory.labels);
+        console.log("hi",this.service.getHostelStats)
+      
       }).catch((res)=>{
         console.log(res)
+        console.log("hi" , this.service.getHostelStats)
         this.hostelmessHistory = {exists:false, loaded:true};
+        // console.log(this.hostelmessHistory)
+        // console.log(this.studentmessHistory)
       });
     }
   }
