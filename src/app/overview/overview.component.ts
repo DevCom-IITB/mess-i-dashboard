@@ -10,8 +10,12 @@ import { StudentdataService } from '../studentdata.service';
 })
 export class OverviewComponent implements OnInit {
   // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
+  hostel_selectable: boolean = false;
+  roll_selectable: boolean = false;
+  hostelmessHistory:any = {exists:true, loaded:false};
 
-  allowedHostels:boolean[] = new Array<boolean>(22);
+  allowedHostels: boolean[] = new Array<boolean>(22);
+
   // allow
   messHistory:any;
   noOfDays:any;
@@ -26,25 +30,27 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdminHostel()
+    this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
     // console.log(this.allowedHostels)
   }
 
   getAdminHostel(){
-    this.service.getAdminHostels().then((res:any)=>{
-      for(let i=1; i<this.allowedHostels.length; i++){
-        // console.log(res)
+    this.service.getAdminHostels().then((res: any) => {
+      for(let i = 1; i < this.allowedHostels.length; i++) {
         this.allowedHostels[i] = false;
-        if(res.includes(`H${i}`)){
+        if(res.includes(`H${i}`)) {
           this.allowedHostels[i] = true;
         }
-        if(res.includes("TANSA")){
+        if(res.includes("TANSA")) {
           this.allowedHostels[21] = true;
         }
       }
-    }).catch((res) =>{
-      console.log(res)
-    })
+    }).catch((res) => {
+      console.log(res);
+      this.hostelmessHistory = { exists: false, loaded: true };
+    });
   }
+  
 
   cleanData(history:any){
     let body = [];
@@ -75,7 +81,8 @@ export class OverviewComponent implements OnInit {
   }
 
   async getMonthMessData(data: any){
-    // console.log(data.form.value);
+    console.log(data.form.value);
+   
     
     if (data.form.value.year&&data.form.value.month) {
       let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
@@ -86,9 +93,12 @@ export class OverviewComponent implements OnInit {
         // console.log(res);
         this.messHistory = this.cleanData(history);
         console.log(this.messHistory);
+       
       }).catch((res)=>{
         console.log(res)
         this.messHistory = this.cleanData({})
+        console.log("hello world ")
+        console.log(data.form.value.hostel)
       });
     }else{
     }

@@ -63,17 +63,20 @@ export class GuestdataService {
       })
     })
   }
-  //Give data of perticular hostel
-  async getGuestHostelData(hostel:string, date:string, meal:string){
-    let url = this.baseurl.concat("/hostel-info/",hostel,'/',date,'/',meal);
-    return new Promise((resolve,reject)=>
-    {
-      this.http.get(url,{
-        headers:{
-          'x-access-token':this.auth.getToken(),
-          'rejectUnauthorized':'false'
-        },withCredentials:true
-      }).subscribe((res)=>{
+  // Give data of particular hostel
+  async getGuestHostelData(hostel: string, date: string, meal: string) {
+    let url = this.baseurl.concat("/hostel-info/", date, "/", meal);
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: {
+          'x-access-token': this.auth.getToken(),
+          'rejectUnauthorized': 'false'
+        },
+        params: {
+          hostel: hostel
+        },
+        withCredentials: true
+      }).subscribe((res) => {
         resolve(res);
       },(e)=>{
         reject({});

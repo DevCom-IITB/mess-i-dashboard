@@ -12,21 +12,15 @@ export class GuestAdminComponent implements OnInit {
 
   allowedHostels:boolean[] = new Array<boolean>(22);
   guestHistory:any = {exists:true, loaded:false};
-  hostel: string='' ;
-  meal: string='' ;
-  date: string ;
   headers = ['Token No.','Roll No.','Name','Hostel']
+  isAdmin = false;
 
   constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    this.isAdmin = auth.isAdmin()
     let current_state = this.router.getCurrentNavigation()?.extras.state;
-    if(current_state != undefined){
-      this.hostel = current_state?.hostel;
-      this.meal = current_state?.meal;
-      this.date = this.guestService.resolveDateFormat(current_state?.date);
-    }
   }
 
   ngOnInit(): void {
@@ -68,10 +62,10 @@ export class GuestAdminComponent implements OnInit {
   }
 
 
-  getGuestList(){
+  getGuestList(data:any){
     this.guestHistory={}
-    if (this.hostel && this.meal && this.date) {
-      this.guestService.getGuestHostelData(this.hostel,this.guestService.resolveDateFormat(this.date),this.meal).then((res)=>
+    if (data.form.value.date && data.form.value.meal) {
+      this.guestService.getGuestHostelData(data.form.value.hostel,this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
