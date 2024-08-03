@@ -25,8 +25,8 @@ export class ForgetPasswordComponent implements OnInit {
     });
   }
 
-  onForgetSubmit(username:any, email:any) {
-    this.authService.forgetPassword(username, email).subscribe(
+  onForgetSubmit(username:any) {
+    this.authService.forgetPassword(username).subscribe(
         (res) => {
           console.log(res);
           this.success = true;

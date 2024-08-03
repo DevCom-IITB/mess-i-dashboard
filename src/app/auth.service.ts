@@ -160,12 +160,11 @@ export class AuthService {
     return this.roll_no;
   }
 
-  forgetPassword(username:any, email: any) {
+  forgetPassword(username:any) {
     let url = this.baseurl.concat("/api/change_password");
     return this.http.put<any>(url, {
       requestType: 'Password_reset',
-      username: username,
-      email: email
+      username: username
     }).pipe(
       catchError(err => {
         // Handle errors
