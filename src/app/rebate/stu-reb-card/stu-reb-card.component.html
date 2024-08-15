@@ -61,14 +61,14 @@
     <button
       class="btn btn-light rebate-action-btn"
       (click)="updateRebateData(p_rebate_reason, p_rebate_start, p_rebate_end)"
-      *ngIf="auth.isStudent()"
+      *ngIf="isStudentPage()"
     >
       Make Amendments
     </button>
     <button
       class="btn btn-light rebate-action-btn"
       (click)="deleteRebate()"
-      *ngIf="auth.isStudent()"
+      *ngIf="isStudentPage()"
     >
       Cancel your rebate
     </button>
@@ -82,7 +82,7 @@
     <button
       class="btn btn-light rebate-action-btn"
       (click)="updateAcceptedRebate(p_rebate_start, p_rebate_end)"
-      *ngIf="auth.isStudent()"
+      *ngIf="isStudentPage()"
     >
       Shrink Duration
     </button>
