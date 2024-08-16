@@ -30,7 +30,8 @@ export class StudentdataService {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),   
         'rejectUnauthorized':'false' 
-      }}).subscribe((res:any)=>{
+      },
+      withCredentials:true}).subscribe((res:any)=>{
         // console.log(res)
         resolve(res)
       },(e)=>{
@@ -83,7 +84,7 @@ export class StudentdataService {
       this.http.get(url,{
         headers:{
           'x-access-token': this.auth.getToken(),
-        }
+        },withCredentials:true
       }).subscribe((res)=>{
         let true_res: RebateRequest[] = [];
         
@@ -111,7 +112,8 @@ export class StudentdataService {
           'id':id,
           'roll':roll,
         },
-        responseType:'blob'
+        responseType:'blob',
+        withCredentials:true
       }).subscribe((blob:any)=>{
         // console.log(res)
         resolve(blob)
@@ -133,6 +135,7 @@ export class StudentdataService {
         headers:{
           'x-access-token': this.auth.getToken(),
         },
+        withCredentials:true
       }).subscribe((res)=>{
         resolve(res)
       }, 
@@ -157,12 +160,11 @@ export class StudentdataService {
   }
 
   async putMessPrices(data : string){
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
     });
 
-    let options = { headers: headers, responseType:'text' as 'json'};
+    let options = { headers: headers, responseType:'text' as 'json',withCredentials:true};
     let url = this.baseurl.concat("/monthly-mess-prices");
     return new Promise((resolve,reject) => {
       this.http.put(url,data,options).subscribe((res:any) =>{
@@ -183,7 +185,7 @@ export class StudentdataService {
       this.http.get(url,{
         headers:{
           'x-access-token': this.auth.getToken(),
-        }
+        },withCredentials:true
       }).subscribe((res)=>{
 
         let temp_res = res as RebateCategorised;
@@ -204,7 +206,7 @@ export class StudentdataService {
         },
         headers:{
           'x-access-token': this.auth.getToken(),
-        }
+        },withCredentials:true
       }).subscribe((res)=>{
 
         let temp_res = res as RebateCategorised;
@@ -218,10 +220,8 @@ export class StudentdataService {
 
   async postRebate(rollNumber:string,reason:string,startDate:string,endDate:string,isOfficialRebate:boolean, file:any){
     var formData: any = new FormData()
-    // console.error(file)
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false'
     });
     formData.append("roll",rollNumber);
@@ -232,7 +232,7 @@ export class StudentdataService {
     formData.append("official",isOfficialRebate);
 
 
-    let options = { headers: headers, responseType:'text' as 'json'};
+    let options = { headers: headers, responseType:'text' as 'json',withCredentials:true};
     let url = this.baseurl.concat("/rebate/random-string");
     return new Promise((resolve,reject) => {
       this.http.post(url,formData,options).subscribe((res:any) =>{
@@ -247,9 +247,8 @@ export class StudentdataService {
   async updateRebate(rollNo:string,id:string,reason:string,newStartDate: string, newEndDate: string,isOfficialRebate:boolean, file:any){
     let url = this.baseurl.concat(`/rebate/${id}`);
     var formData: any = new FormData()
-    var token=await this.auth.getToken()
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false'
     });
     formData.append("roll",rollNo);
@@ -258,7 +257,7 @@ export class StudentdataService {
     formData.append("end",newEndDate);
     formData.append("rebate_doc",file);
     formData.append("official",isOfficialRebate);
-    let options = { headers: headers};
+    let options = { headers: headers,withCredentials:true};
     return new Promise((resolve,reject) => {
       this.http.put(url,formData,options).subscribe((res:any) =>{
         resolve(res);
@@ -270,15 +269,14 @@ export class StudentdataService {
   }
 
   async deleteRebate(rollNumber: string,id: string){
-    var token = await this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
+      'x-access-token': this.auth.getToken(),
       'rejectUnauthorized': 'false'
     })
     let url = this.baseurl.concat(`/rebate/${id}`);
     var formData: any = new FormData();
     formData.append("roll",rollNumber);
-    let options = {headers: headers,body:formData};
+    let options = {headers: headers,body:formData,withCredentials:true};
     return new Promise((resolve,reject) =>{
       this.http.delete(url,options).subscribe((res:any)=>{
         resolve(res);
@@ -290,12 +288,11 @@ export class StudentdataService {
   }
 
   async acceptRebate(rebateID: string,rollNo: string,comment: string){
-    let token = this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
-      'rejectUnauthoized':'false'
+      'x-access-token': this.auth.getToken(),
+      'rejectUnauthorized':'false'
     });
-    let options = {headers:headers};
+    let options = {headers:headers,withCredentials:true};
     let url = this.baseurl.concat("/rebate-action/accept");
     var formData = new FormData();
     formData.append("roll",rollNo);
@@ -312,12 +309,11 @@ export class StudentdataService {
   }
 
   async rejectRebate(rebateID: string, rollNo: string, comment: string){
-    let token = this.auth.getToken();
     let headers = new HttpHeaders({
-      'x-access-token': token,
-      'rejectUnauthoized':'false',
+      'x-access-token': this.auth.getToken(),
+      'rejectUnauthorized':'false',
     });
-    let options = {headers:headers};
+    let options = {headers:headers,withCredentials:true};
     let url = this.baseurl.concat("/rebate-action/reject");
     var formData = new FormData();
     formData.append("roll",rollNo);
@@ -334,14 +330,13 @@ export class StudentdataService {
   }
 
   async setStudentRebate(rollnumber:string,startDate:string,endDate:string){
-    var token=await this.auth.getToken()
     // console.log(token)
     let headers = new HttpHeaders({
-      'x-access-token':token,
+      'x-access-token':this.auth.getToken(),
       'rejectUnauthorized':'false' 
       
     });
-      let options = { headers: headers ,responseType:'text' as 'json'};
+      let options = { headers: headers ,responseType:'text' as 'json',withCredentials:true};
     let url = this.baseurl.concat("/add-rebate/",rollnumber,'/',startDate,'/',endDate);
     return new Promise((resolve, reject) => {
       this.http.post(url,null,options).subscribe((res:any)=>{
@@ -360,7 +355,7 @@ export class StudentdataService {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),
         'rejectUnauthorized':'false' 
-      }}).subscribe((res:any)=>{
+      },withCredentials:true}).subscribe((res:any)=>{
         if(res.status===200){
           resolve(true);
         }else{
@@ -382,7 +377,7 @@ export class StudentdataService {
           headers:{
             'x-access-token':this.auth.getToken(),    
             'rejectUnauthorized':'false' 
-          }
+          },withCredentials:true
         }
       ).subscribe((res)=> {
           resolve(res);
@@ -401,7 +396,7 @@ export class StudentdataService {
           headers:{
             'x-access-token':this.auth.getToken(),    
             'rejectUnauthorized':'false' 
-          }
+          },withCredentials:true
         }
       ).subscribe((res)=> {
           resolve(res);
@@ -419,7 +414,7 @@ export class StudentdataService {
       this.http.get(url,{headers:{
         'x-access-token':this.auth.getToken(),  
         'rejectUnauthorized':'false'   
-      }}).subscribe((res)=>{
+      },withCredentials:true}).subscribe((res)=>{
         resolve(res);
       },(e)=>{
         reject({});
@@ -431,14 +426,14 @@ export class StudentdataService {
   async getStudentStats(roll:string,year:string,month:string){
     let url = this.baseurl.concat("/student-stats/",year,'/',month,'?roll=',roll);
     return new Promise((resolve, reject) => {
-      this.http.get(url, { headers:{'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false' } })
+      this.http.get(url, { headers:{'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false' },withCredentials:true })
       .subscribe((res)=> { resolve(res); }, (e)=>{ reject({}) })
     });
   }
   async getHostelStats(hostel:string,year:string,month:string){
     let url = this.baseurl.concat("/hostel-stats/",year,'/',month,'?hostel=',hostel);
     return new Promise((resolve,reject)=> {
-      this.http.get(url,{headers:{ 'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false'}})
+      this.http.get(url,{headers:{ 'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false'},withCredentials:true})
       .subscribe((res)=>{resolve(res);},(e)=>{reject({});})
     })
   }
@@ -455,10 +450,12 @@ export class StudentdataService {
         params:{
           'search':searchText,
           'show':perPage.toString()
-        }
+        },
+        withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
+        console.log(e)
         reject({});
       })
     }
@@ -474,7 +471,7 @@ export class StudentdataService {
           'rejectUnauthorized':'false' 
         },
         params:{
-        }
+        },withCredentials:true
       }).subscribe((res)=>{
         resolve(res);
       },(e)=>{
@@ -492,7 +489,7 @@ export class StudentdataService {
       headers:{
         'x-access-token':this.auth.getToken(),    
         'rejectUnauthorized':'false' 
-      } 
+      } ,withCredentials:true
     });
   }
 

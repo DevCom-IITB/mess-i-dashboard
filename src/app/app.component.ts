@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
   currTab : any; 
   ngOnInit(): void {
   }
-  constructor(public auth:AuthService,private router:Router){
+  constructor(public auth:AuthService,private router:Router , private http:HttpClient){
     this.nav_visible = false;
     this.navIdtoUrl.set("nav_home","/home")
     this.navIdtoUrl.set("nav_student_list","/list",)
@@ -31,14 +32,50 @@ export class AppComponent {
     // this.navIdtoUrl.set("nav_mess_bill","/mess-bill")
   }
 
+  showNavbar() {
+    // Check if the current route is not mess-manager or login
+    if (!this.router.url.includes('mess-manager') && !this.router.url.includes('login') && !this.router.url.includes('forget-password') ) {
+      return true; // Render the navbar for all routes except mess-manager and login
+    } else {
+      return false; // Don't render the navbar for the mess-manager or login routes
+    }
+  }
+  
+   // this.auth.logoutUser();
+    // this.router.navigate(['login']);
+    // this.http.post('/api/dash/auth', {}).subscribe(
+    //   (response) => {
+    //   },
+    //   (error) => {
+    //     console.error('Error occurred while calling API:', error);
+    //   }
+    // );
+
   logout(){
-    this.auth.logoutUser();
-    this.router.navigate(['login'])
+    this.auth.logoutUser().subscribe(
+      (response) => {
+        this.auth.logged_in=false;
+        this.auth.token="";
+        sessionStorage.removeItem("mess-i-token")
+        sessionStorage.removeItem("mess-i-admin")
+        sessionStorage.removeItem("mess-i-staff")
+        sessionStorage.removeItem("mess-i-roll")
+        sessionStorage.removeItem("mess-i-student")
+        sessionStorage.removeItem("mess-i-rebate")
+        sessionStorage.removeItem("mess-i-sso")
+        this.auth.navigateToLogin();
+      },
+      (error) => {
+        // Print error message
+        console.error('Error occurred while logging out and calling API:', error);
+      }
+    );
+  
   }
 
   login(){
     this.router.navigate(['login'])
-  }
+   }
   
   updateNav() {
     this.navIds.forEach(element => {
@@ -98,3 +135,5 @@ export class AppComponent {
 }
 
 
+
+  }
