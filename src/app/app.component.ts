@@ -123,17 +123,6 @@ export class AppComponent {
     this.router.navigate([place])
   }
 
-  rebateRoute(){
-    if(this!.auth.isStaff() && this!.auth.isAdmin() ){
-      this.router.navigate(['rebate'])
-    }
-    else{
-      this.router.navigate(['landing'])
-    }
-  }
-
 }
 
 
-
-  }
