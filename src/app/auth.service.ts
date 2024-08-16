@@ -159,6 +159,7 @@ export class AuthService {
   getRoll(){
     return this.roll_no;
   }
+  
 
   forgetPassword(username:any) {
     let url = this.baseurl.concat("/api/change_password");
@@ -173,4 +174,5 @@ export class AuthService {
       })
     );
   }
+
 }
