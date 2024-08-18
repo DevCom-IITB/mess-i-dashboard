@@ -24,7 +24,7 @@ export class RebateComponent implements OnInit {
       this.router.navigate(['login'])
     }
     // console.log(this.rejected_rebates)
-    if(this.auth.isStaff() && this!.auth.isStudent() ){
+    if(!this.auth.isStudent() ){
       this.router.navigate(['landing'])
     }
     
