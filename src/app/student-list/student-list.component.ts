@@ -42,6 +42,7 @@ export class StudentListComponent implements OnInit {
     this.updateNav.emit();
     this.subject.pipe(debounceTime(1000)).subscribe((val)=>{
       this.getList(1);
+      this.entryNumber = 1;
     });
   }
   
