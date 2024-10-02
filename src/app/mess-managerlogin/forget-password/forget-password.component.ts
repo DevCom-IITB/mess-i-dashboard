@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 
@@ -13,9 +13,9 @@ export class ForgetPasswordComponent implements OnInit {
   public getJsonValue: any;
   public postJsonValue: any;
   public putJsonValue: any;
-  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService , private router : Router) { }
+  constructor(private http: HttpClient, private fb: UntypedFormBuilder, private authService: AuthService , private router : Router) { }
 
-  forgetForm: FormGroup;
+  forgetForm: UntypedFormGroup;
   error: any = null;
   success: boolean = false;
 
