@@ -66,19 +66,24 @@
                   "maximumError": "4kb"
                 }
               ]
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mess-i-dashboard:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "mess-i-dashboard:build:production"
+            },
+            "development": {
+              "browserTarget": "mess-i-dashboard:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -122,14 +127,17 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mess-i-dashboard:serve"
+            "protractorConfig": "e2e/protractor.conf.js"
           },
           "configurations": {
             "production": {
               "devServerTarget": "mess-i-dashboard:serve:production"
+            },
+            "development": {
+              "devServerTarget": "mess-i-dashboard:serve:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }
