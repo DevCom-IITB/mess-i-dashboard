@@ -77,10 +77,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "mess-i-dashboard:build:production"
+              "buildTarget": "mess-i-dashboard:build:production"
             },
             "development": {
-              "browserTarget": "mess-i-dashboard:build:development"
+              "buildTarget": "mess-i-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mess-i-dashboard:build"
+            "buildTarget": "mess-i-dashboard:build"
           }
         },
         "test": {
