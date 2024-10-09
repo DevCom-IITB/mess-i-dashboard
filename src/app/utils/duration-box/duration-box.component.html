@@ -1,9 +1,9 @@
 <h2 id="mat-dialog-title" class="inline-input" mat-dialog-title>Shrink Duration</h2>
 <!-- <div ngIf="this.isOfficialRebate" id="is-official-rebate" class="inline-input" > -->
 <div *ngIf="isOfficialRebate" id="is-official-rebate" class="inline-input" >
-  <mat-chip-list id="offcial-tag" aria-label="Official Status">
-    <mat-chip selected class="official-component">Official</mat-chip>
-  </mat-chip-list>
+  <mat-chip-listbox id="offcial-tag" aria-label="Official Status">
+    <mat-chip-option selected class="official-component">Official</mat-chip-option>
+  </mat-chip-listbox>
 </div>
 <mat-dialog-content class="mat-typography">
   <div class="main-container">

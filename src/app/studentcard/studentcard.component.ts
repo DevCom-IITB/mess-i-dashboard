@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Student } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-studentcard',

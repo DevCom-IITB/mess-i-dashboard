@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.component';
 
 
