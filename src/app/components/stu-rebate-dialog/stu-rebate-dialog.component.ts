@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { DialogPosition, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LegacyDialogPosition as DialogPosition, MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { DialogData, Student } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { RebateRequest } from 'src/app/interfaces';

@@ -1,7 +1,7 @@
 .device-card{
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start; /*replaced "start" with "flex-start" due to warning while running server - ./src/app/home/devices/devices.component.css?ngResource - Warning: Module Warning (from ./node_modules/postcss-loader/dist/cjs.js): Warning (4:5) autoprefixer: start value has mixed support, consider using flex-start instead*/
     padding: 20px 0 ;
 }
 .device-data{
