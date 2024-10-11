@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'mess-i-dashboard';
   nav_visible:boolean;
   navIdtoUrl = new Map();
   // navIds = ["nav_home","nav_student_list","nav_rebate","nav_rebate_admin","nav_overview","nav_mess_bill"]
