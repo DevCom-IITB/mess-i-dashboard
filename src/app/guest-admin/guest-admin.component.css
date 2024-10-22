@@ -12,7 +12,6 @@
     align-items: stretch;
     width: 100%;
 }
-
 input.form-control{
     margin-left: 2vh;
     margin-right: 2vh;
@@ -24,8 +23,7 @@ input.form-control{
     margin-left: 3vh;
     margin-right: 5vh;
     border-color: #FFC42B;
-    border-width: 2px;
-    
+    border-width: 2px;  
 }
 select.form-select{
     margin-left: 2vh;

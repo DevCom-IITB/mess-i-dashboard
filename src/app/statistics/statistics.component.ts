@@ -19,7 +19,6 @@ export class StatisticsComponent implements OnInit {
   noOfDays2:any;
   date = new Date();
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
-  
   MEALS = ['Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Milk', 'Egg', 'Fruit'];
   COLORS = ['#fc5095', '#fc9a50', '#cefc50', '#fce250', '#87fc50', '#fc5350', '#50fca9'];
   COLORS_RGB = ['rgb(252, 80, 149)', 'rgb(252, 154, 80)', 'rgb(206, 252, 80)', 'rgb(252, 226, 80)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)']
@@ -94,7 +93,6 @@ export class StatisticsComponent implements OnInit {
 
     await this.plotHostelData(data);
     await this.plotStudentData(data);
-    // console.log("h1" , data.form.value)
   }
 
 
@@ -152,8 +150,6 @@ export class StatisticsComponent implements OnInit {
         console.log(res)
         console.log("hi" , this.service.getHostelStats)
         this.hostelmessHistory = {exists:false, loaded:true};
-        // console.log(this.hostelmessHistory)
-        // console.log(this.studentmessHistory)
       });
     }
   }

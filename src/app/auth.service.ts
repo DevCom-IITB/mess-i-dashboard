@@ -102,11 +102,6 @@ export class AuthService {
     })
   }
   
-  // logoutUser(){
-  //   this.token="";
-  //   this.logged_in=false; 
-  // }
-  
   logoutUser(): Observable<any> {
     let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();

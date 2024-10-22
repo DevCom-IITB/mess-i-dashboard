@@ -5,13 +5,11 @@
     box-shadow: 6px 6px 50px -40px;
     background-color: white;
 }
-
 #stud-details-container{
     margin: 12px 0px;
     font-size: 1.75rem;
     font-weight: 700;
 }
-
 #stud-sub-details-container{
     margin: 12px 0px;
     font-size: 1.25rem;
@@ -20,36 +18,29 @@
 #rebate-duration-container{
     margin: 12px 0px;
 }
-
 #rebate-duration{
     font-size: 1rem;
     font-weight: 600;
 }
-
 .small-italics{
     font-size: 0.75rem;
     font-style: italic;
 }
-
 .rebate-action-btn{
     color: #ffc24b;
     background-color: white;
     border-color: white;
     margin-left: -12px;
 }
-
 #review-rebate-btn{
     color: #ffc24b;
     background-color: white;
     border-color: white;
     margin-left: -12px;
 }
-
 #rebate-action-container{
     border-top: 2px solid lightgray;
-    /* padding-top: 1rem; */
 }
-
 #rebate-decision-container{
     margin: 0.5rem 0rem;
 }
@@ -64,7 +55,6 @@
 #rebate-comment-input{
     border-radius: 100vh;
 }
-
 .row{
     word-break: break-all;
     white-space: normal;

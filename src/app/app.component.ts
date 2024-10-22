@@ -40,16 +40,6 @@ export class AppComponent {
       return false; // Don't render the navbar for the mess-manager or login routes
     }
   }
-  
-   // this.auth.logoutUser();
-    // this.router.navigate(['login']);
-    // this.http.post('/api/dash/auth', {}).subscribe(
-    //   (response) => {
-    //   },
-    //   (error) => {
-    //     console.error('Error occurred while calling API:', error);
-    //   }
-    // );
 
   logout(){
     this.auth.logoutUser().subscribe(
@@ -105,8 +95,6 @@ export class AppComponent {
     // console.log("toggle nav called")
     // console.log(this.nav_visible)
   }
-
-
 
   hide_nav(){
     if (this.nav_visible) {
