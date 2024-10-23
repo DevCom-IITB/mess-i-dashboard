@@ -3,7 +3,7 @@ import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
-import {saveAs} from 'file-saver';
+import {saveAs} from 'file-saver-es';
 import { FilterService } from 'src/app/filter.service';
 
 @Component({

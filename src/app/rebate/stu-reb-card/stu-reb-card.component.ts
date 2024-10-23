@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';

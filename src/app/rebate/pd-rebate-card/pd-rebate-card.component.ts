@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 import { MatDialog } from '@angular/material/dialog';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';

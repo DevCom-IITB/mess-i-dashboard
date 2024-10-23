@@ -5,7 +5,7 @@ import { AuthService } from '../auth.service';
 import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
 import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
-import {saveAs} from 'file-saver';
+import {saveAs} from 'file-saver-es';
 import { FilterService } from '../filter.service';
 
 @Component({
