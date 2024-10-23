@@ -16,7 +16,6 @@ export class CheckboxComponent implements OnInit {
   }
 
   inputChange(event: any){
-    // console.log(event)
     this.inputModelChange.emit(event);
   }
 

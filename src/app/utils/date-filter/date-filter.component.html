@@ -1,9 +1,3 @@
-<!-- <div id="main-heading">
-    Month Filter
-</div> -->
-<!-- <h2 id="main-heading">
-    Month Filter
-</h2> -->
 <div id="form-container">
     <div id="from-date-container"> 
         <app-input-field  label="From" inputType="calender" [(inputModel)]="from_filter"></app-input-field>
@@ -14,9 +8,7 @@
     <div id="offcialFilter">
         <app-checkbox [(inputModel)]="officialFilter" label="official"></app-checkbox>
     </div>
-        <!-- <button id="confirm-btn" class="btn btn-primary" (click)="initialiseWithFilter()">Apply Filter</button> -->
         <button id="confirm-btn" class="btn btn-primary button-style" (click)="submit()" >Filter</button>
         <button id="reset-btn" class="btn btn-primary button-style" (click)="reset()">Reset</button>
-        <!-- <button id="csv-down" class="btn btn-primary" (click)="initialise()">Reset</button> -->
         <button *ngIf="includeCSV" id="csv-down" class="btn btn-primary button-style" (click)="downloadCSVbtn()">Download CSV</button>
 </div>

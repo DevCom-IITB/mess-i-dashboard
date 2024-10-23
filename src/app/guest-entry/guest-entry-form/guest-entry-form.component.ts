@@ -17,9 +17,7 @@ export class GuestEntryFormComponent implements OnInit {
   Msg: any ;
   notAVL:any;
   availability:string;
-
-
- 
+  
   guestHostel: string ='';
   meal: string='' ;
   date: string='' ;

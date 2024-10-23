@@ -48,17 +48,12 @@ export class RebateListComponent implements OnInit {
 
     this.getRebates().then((res)=>{
       this.filter_service.populateRebatesMonthFilter(res,event[0],event[1],event[2],{pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates});
-      // console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
     });
 
   }
-
-//     }
-//     return false
-//   }
 
   updateList(rebateID: any){
     this.pending_rebates = this.pending_rebates.filter((reb) =>{
@@ -74,9 +69,7 @@ export class RebateListComponent implements OnInit {
   }
 
   downloadCSV(){
-
     var blob = new Blob([this.filter_service.makeCSV({pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
     saveAs(blob,"myfile.csv")
-
   }
 }

@@ -5,7 +5,6 @@
     min-height: 100%;
     flex-direction: column;
 }
-
 form{
     margin-top: 1vw;
 }
@@ -20,10 +19,8 @@ input.form-control{
     margin-left: 3vh;
     margin-right: 5vh;
     border-color: #FFC42B;
-    border-width: 2px;
-    
+    border-width: 2px;   
 }
-
 select.form-select{
     margin-left: 2vh;
     margin-right: 2vh;
@@ -31,14 +28,12 @@ select.form-select{
     border-width: 2px;
     background-color: #FFF8E8;
 }
-
 button{
     background-color: #28282B;
     color:white;
     border:0px;
     border-radius: 4px;
 }
-
 button:hover{
     background-color: #FFC42B;
-  }
+}

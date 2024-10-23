@@ -1,4 +1,3 @@
-//import { identifierModuleUrl } from "@angular/compiler"; #upgrading from angular 12->13, this command gives error while running the server(probably deprecated)
 
 export interface Student{
     id: string,

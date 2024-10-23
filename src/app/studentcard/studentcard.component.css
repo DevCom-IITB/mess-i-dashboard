@@ -1,26 +1,21 @@
-
 .rollnohostel{
-    margin-top:1rem;
-    display:flex;
-    flex-direction: row;
+  margin-top:1rem;
+  display:flex;
+  flex-direction: row;
 }
-
 #studentcard {
-    max-width:50vw;
-    display: flex;
-    flex-direction: row;
-    background-color: #FFF8E8;
-    padding-left: 0px;
-    margin-right: 10px;
-    padding: 3vh;
-    margin-top: 4vh;
+  max-width:50vw;
+  display: flex;
+  flex-direction: row;
+  background-color: #FFF8E8;
+  padding-left: 0px;
+  margin-right: 10px;
+  padding: 3vh;
+  margin-top: 4vh;
 }
 #rollandhostel{
-    color:gray;
+  color:gray;
 }
-/* .form-inline{
-    margin-top: 15vh;
-} */
 .toggle {
   position : relative ;
   display : inline-block;
@@ -50,11 +45,9 @@
 .checkbox {
   display : none;
 }
-
 .img-fluid {
   width: 190px;
   height: 190px;
-  /* background-color: aqua; */
 }
 p.tgl{
   color: #FFC42B ;
@@ -75,23 +68,23 @@ p.tgl{
 .form-select{
   margin: 2vh;
   border-color: #FFC42B;
-    border-width: 2px;
-    background-color: #FFF8E8;
+  border-width: 2px;
+  background-color: #FFF8E8;
 }
 .btn{
   position: relative;
-    z-index: 2;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    margin-top: 12px;
-    user-select: none;
-    height: 36px;
-    border: 1px solid transparent;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    background-color: #28282B;
+  z-index: 2;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: 12px;
+  user-select: none;
+  height: 36px;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  background-color: #28282B;
     
 }
 .btn:hover{
@@ -106,13 +99,6 @@ h2{
   padding-left: 10px;
   margin-right: 10vh;
 }
-
-
-/* On mouse-over, add a deeper shadow */
-/* .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}    */
-
 .active-circle {
   width: 1em;
   margin-top: 0.3em;
@@ -122,38 +108,28 @@ h2{
   border-radius: 50%
 }
 .inactive-circle {
-width: 1em;
-margin-top: 0.3em;
-padding: 0%;
-height: 1em;
-background: #A8A8A8;
-border-radius: 50%
+  width: 1em;
+  margin-top: 0.3em;
+  padding: 0%;
+  height: 1em;
+  background: #A8A8A8;
+  border-radius: 50%
 }
-
 .active-button{
 border-radius: 0.5rem;
 border-style: solid;
 border-width: 0.04rem;
 border-color: #ffc42b;
-
 padding-left: 1rem;
 padding-right: 1rem;
 background-color: transparent;
 }
-/* .input-group-prepend i{
-position: relative;
-  right: 0px;
-  padding: 10px 12px;
-  pointer-events: none;
-} */
-
 .inactive-button{
 border-radius: 0.5rem;
 padding-left: 1rem;
 padding-right: 1rem;
 background-color: transparent;
 color: #A8A8A8;
-
 border-style: solid;
 border-width: 0.04rem;
 border-color: #A8A8A8;
@@ -163,17 +139,13 @@ border-color: #A8A8A8;
   border-style: solid;
   border-width: 0.04rem;
   border-color: #808080;
-  
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: transparent;
 }
-
-
 .rounded_borders{
 border-radius: 50000px;
 }
-
 .reb-button {
   padding: 10px 16px;
   background-color: #FFC42B; /* Change to your preferred background color */
@@ -183,7 +155,6 @@ border-radius: 50000px;
   cursor: pointer;
   transition: background-color 0.3s; /* Smooth hover effect */
 }
-
 .reb-button:hover {
   background-color: #2980b9; /* Change to your preferred hover color */
 }

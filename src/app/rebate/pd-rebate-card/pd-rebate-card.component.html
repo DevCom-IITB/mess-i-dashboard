@@ -3,12 +3,10 @@
     <div id="stud-details-container">
         <span>{{ rebate_request.roll }}</span>
         <br>
-        <!-- <span>{{ rebate_request.student.name }}</span> -->
     </div>
     <div id="stud-sub-details-container">
         <span>{{ rebate_request.fullname}} Room:{{rebate_request.room}}</span>
         <br>
-        <!-- <span>{{ rebate_request.student.name }}</span> -->
     </div>
     <div id="rebate-duration-container">
         <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span><br>
@@ -19,8 +17,6 @@
     </div>
     <div id="rebate-action-container">
         <div id="rebate-comment-container" class="row">
-            <!-- <input id="rebate-comment-input" type="text" value="" placeholder="Add a comment here..."> -->
-            <!-- <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" (inputModelChange)="onCommentChanged($event);"></app-input-field> -->
             <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" ></app-input-field>
         </div>
         <div id="rebate-decision-container" class="review-rebate-actions">

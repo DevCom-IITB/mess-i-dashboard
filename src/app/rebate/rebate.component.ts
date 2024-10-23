@@ -1,7 +1,5 @@
-//import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
@@ -23,7 +21,6 @@ export class RebateComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
-    // console.log(this.rejected_rebates)
   }
 
   

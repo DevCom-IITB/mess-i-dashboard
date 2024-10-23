@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,32 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-  public getJsonValue: any;
-  public postJsonValue: any;
-  public putJsonValue: any;
-  constructor(private http: HttpClient, private fb: UntypedFormBuilder, private authService: AuthService , private router : Router) { }
-
-  forgetForm: UntypedFormGroup;
-  error: any = null;
-  success: boolean = false;
-
+  constructor(private authService: AuthService , private router : Router) { }
   ngOnInit(): void {
-    this.forgetForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
   }
 
   onForgetSubmit(username:any) {
     this.authService.forgetPassword(username).subscribe(
         (res) => {
           console.log(res);
-          this.success = true;
           alert('New password sent to registerd email successfully!');
           this.router.navigate(['/mess-manager']);
         },
         (err) => {
           console.log(err);
-          this.error = err;
           let errorMessage = 'An error occurred while sending the password reset email. Please try again later.';
           if (err.status === 400) {
             errorMessage = 'Invalid email address. Please check the email address and try again.';
@@ -53,15 +38,6 @@ export class ForgetPasswordComponent implements OnInit {
           });;
         }
       );
-    // if (this.forgetForm.valid) { 
-    // } else {
-    //   Object.keys(this.forgetForm.controls).forEach(key => {
-    //     const control = this.forgetForm.controls[key];
-    //     if (control.errors != null) {
-    //       control.markAsTouched();
-    //     }
-    //   });
-    // }
   }
   // Add comments or section headers here if needed
 }

@@ -26,34 +26,22 @@ export class RebateAdminComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
-   }
+  }
 
   ngOnInit(): void {
     this.initialise();
   }
 
   openDialog(roll:any) :void {
-    // console.log(roll)
     this.dialog.open(StuRebateDialogComponent,{
     data:{
       roll: roll
         }
     })
-    // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-    //     this.dialog.open(StuRebateDialogComponent,{
-    //     data:{accepted_rebates : res.accepted_rebate,
-    //           rejected_rebates: res.rejected_rebate,
-    //           pendeing_rebates: res.pending_rebate}
-    // })
-    // }).catch((e)=>
-    // console.log(e))
-
   }
   
   setDialogValues(rebates:any) :void{
     const dialogRef = this.dialog.open(StuRebateDialogComponent,{
-      // height:'3232px',
-      // width:'5000px',
       data:{accepted_rebates : rebates}
     })
   }
@@ -71,19 +59,14 @@ export class RebateAdminComponent implements OnInit {
   }
 
   getRebates = () => this.data_service.getAdminRebates();
-
   async initialise(){
     this.data_service.getAdminRebates().then((res)=>{
       this.populateRebates(res);
-      // console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       // console.log(e);
     });
   }
-
-
-
 
   updateList(rebateID: any){
     window.location.reload();
@@ -93,19 +76,15 @@ export class RebateAdminComponent implements OnInit {
     this.pending_rebates = response.pending_rebate;
     this.accepted_rebates = response.accepted_rebate;
     this.rejected_rebates = response.rejected_rebate;
-    // console.log(this.accepted_rebates)
   }
 
   async initialiseWithFilter(event:any){
-
     this.getRebates().then((res)=>{
       this.filter_service.populateRebatesMonthFilter(res,event[0],event[1],event[2],{pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates});
-      // console.log(res)
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
     });
-
   }
 
   downloadCSV(){
@@ -122,6 +101,5 @@ export class RebateAdminComponent implements OnInit {
       var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:[],rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
       saveAs(blob,"rebates.csv");
     }
-    
   }
 }

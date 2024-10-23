@@ -19,9 +19,7 @@ export class PdRebateCardComponent implements OnInit {
   public p_rebate_start: string;
   public p_rebate_end: string;
   public p_rebate_reason: string;
-
   public card_comment: string;
-
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(private data_service: StudentdataService,private dialog:MatDialog) { }
@@ -34,7 +32,6 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.card_comment="";
-    // console.log(this.rebate_request)
   }
 
   acceptRebate(){
@@ -44,21 +41,19 @@ export class PdRebateCardComponent implements OnInit {
       }
     ).catch(
       (e) =>{
-        // console.log(e);
+        console.log(e);
         alert("Error occured while accepting rebate");
       }
     )
   }
 
   openDialog() :void {
-    // console.log(this.rebate_request.roll)
     this.dialog.open(StuRebateDialogComponent,{
     data:{
       roll: this.rebate_request.roll,
       includeCSV:false
         }
     })
-    console.log(this.card_comment)
   }
 
   downloadRebateDoc() :void {
@@ -90,9 +85,4 @@ export class PdRebateCardComponent implements OnInit {
     let all = inp.split(separator);
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
-
-  // onCommentChanged(event: any): void{
-  //   this.card_comment = event;
-  //" }
-
 }
