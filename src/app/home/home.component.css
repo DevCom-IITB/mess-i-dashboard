@@ -3,24 +3,20 @@
     background-color:#FFFCF4 ;
     min-height: 100%;
 }
-
 .rebate-card-wrapper{
     display: inline-block;
     margin: 12px;
     margin-left: 0px;
     overflow: visible;
 }
-
 .pending-rebates-container{
     margin-top: 0px;
 }
-
 .pd-rebate-cards-hscroll{
     overflow-x: scroll;
     overflow-y: hidden;
     white-space:nowrap;
 }
-
 #device-container{
     margin-top: 24px;
 }

@@ -78,8 +78,8 @@ export class HomeComponent implements OnInit {
   // dummyInitialise(): void{
   //   this.pending_rebates.push({
   //     student:{
-  //       id: "210070028",
-  //       name: "Dheer Banker",
+  //       id: "22b0045",
+  //       name: "Student1",
   //     } as Student,
   //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
   //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),
@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit {
   //   } as RebateRequest);
   //   this.pending_rebates.push({
   //     student:{
-  //       id: "210051128",
-  //       name: "Rahul Kumari",
+  //       id: "22b0433",
+  //       name: "Student2",
   //     } as Student,
   //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
   //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),

@@ -65,8 +65,6 @@ export class FilterService {
 
       else if(!official){
         if(((elem_date.getTime() >= from_date.getTime() && elem_date.getTime() <= to_date.getTime()) ||(elem_date_end.getTime() >= from_date.getTime() && elem_date_end.getTime() <= to_date.getTime())) && (elem.official == undefined || !this.booleanify(elem.official))){
-        // console.log(elem.official)
-        // console.error(elem_date)
           return true
         }
       }

@@ -9,14 +9,10 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-  // @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   hostel_selectable: boolean = false;
   roll_selectable: boolean = false;
   hostelmessHistory:any = {exists:true, loaded:false};
-
   allowedHostels: boolean[] = new Array<boolean>(22);
-
-  // allow
   messHistory:any;
   noOfDays:any;
   date = new Date();
@@ -31,7 +27,6 @@ export class OverviewComponent implements OnInit {
   ngOnInit(): void {
     this.getAdminHostel()
     this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
-    // console.log(this.allowedHostels)
   }
 
   getAdminHostel(){
@@ -81,7 +76,6 @@ export class OverviewComponent implements OnInit {
   }
 
   async getMonthMessData(data: any){
-    console.log(data.form.value);
    
     
     if (data.form.value.year&&data.form.value.month) {
@@ -90,15 +84,11 @@ export class OverviewComponent implements OnInit {
       this.service.getMonthlyMessdata(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>
       {
         let history = res;
-        // console.log(res);
         this.messHistory = this.cleanData(history);
-        console.log(this.messHistory);
        
       }).catch((res)=>{
         console.log(res)
         this.messHistory = this.cleanData({})
-        console.log("hello world ")
-        console.log(data.form.value.hostel)
       });
     }else{
     }

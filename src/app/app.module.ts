@@ -7,7 +7,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { OverviewComponent } from './overview/overview.component';
 import { StudentListComponent } from './student-list/student-list.component'
 import { RebateComponent } from './rebate/rebate.component';
@@ -42,53 +42,45 @@ import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    OverviewComponent,
-    StudentListComponent,
-    RebateComponent,
-    HomeComponent,
-    PdRebateCardComponent,
-    StudentcardComponent,
-    InputFieldComponent,
-    TableComponentComponent,
-    DevicesComponent,
-    RebateFormComponent,
-    RebateCardComponent,
-    StuRebCardComponent,
-    RebateAdminComponent,
-    MessBillComponent,
-    FormMessBillComponent,
-    StuRebateDialogComponent,
-    CheckboxComponent,
-    DateFilterComponent,
-    RebateListComponent,
-    DurationBoxComponent,
-    CardStatusButtonComponent,
-    StatisticsComponent,
-    GuestEntryComponent,
-    GuestStatusButtonComponent,
-    GuestAdminComponent,
-    GuestEntryFormComponent,
-    LandingComponent,
-    MessManagerloginComponent,
-    ForgetPasswordComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatChipsModule,
-    
-    ReactiveFormsModule
-  ],
-  providers: [DatePipe],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        OverviewComponent,
+        StudentListComponent,
+        RebateComponent,
+        HomeComponent,
+        PdRebateCardComponent,
+        StudentcardComponent,
+        InputFieldComponent,
+        TableComponentComponent,
+        DevicesComponent,
+        RebateFormComponent,
+        RebateCardComponent,
+        StuRebCardComponent,
+        RebateAdminComponent,
+        MessBillComponent,
+        FormMessBillComponent,
+        StuRebateDialogComponent,
+        CheckboxComponent,
+        DateFilterComponent,
+        RebateListComponent,
+        DurationBoxComponent,
+        CardStatusButtonComponent,
+        StatisticsComponent,
+        GuestEntryComponent,
+        GuestStatusButtonComponent,
+        GuestAdminComponent,
+        GuestEntryFormComponent,
+        LandingComponent,
+        MessManagerloginComponent,
+        ForgetPasswordComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatChipsModule,
+        ReactiveFormsModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

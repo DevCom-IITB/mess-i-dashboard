@@ -1,34 +1,25 @@
 .main-container{
     min-height: 100vh;
     height:max-content;
-    /* padding: 5rem 3rem; */
     padding: 4%;
-
     background-color: #fffcf4;
 }
 #header-container{
     height: max-content;
 }
-
 .page-title{
     font-size: 3rem;
 }
-
 .rebate-card-container{
     margin: 12px 0px;
 }
-
 #form-container{
     display: grid;
     gap: 1em;
     grid-auto-rows: minmax(60px, auto);
     grid-template-columns: repeat(5, 1fr);
-    /* background-color: #ffc659; */
-    /* background: ; */
-
     color: #ffc42b;
 }
-
 #from-date-container{
     grid-row: 1;
     grid-column: 1/2;
@@ -37,54 +28,38 @@
     grid-row: 1;
     grid-column: 2/3;
 }
-
 #confirm-btn{
     grid-row: 1;
     grid-column: 3/4;
     background-color: #ffc659;
     border-color: #ffc659;
     border-radius: 120rem;
-    
-    /* padding-top: 2em; */
     margin-top: 2.4em; 
     padding-right: 24px;
     padding-left: 24px;
-
     height: max-content;
-    /* margin: 24px 0px; */
-
     font-weight: bold;
 }
-
 #reset-btn{
     grid-row: 1;
     grid-column: 4/5;
     background-color: #ffc659;
     border-color: #ffc659;
     border-radius: 120rem;
-    
-    /* padding-top: 2em; */
     margin-top: 2.4em; 
     padding-right: 24px;
     padding-left: 24px;
-
     height: max-content;
-    /* margin: 24px 0px; */
-
     font-weight: bold;
 }
-
 #new-request-btn{
     background-color: #ffc659;
     border-color: #ffc659;
     border-radius: 120rem;
-
     padding-right: 24px;
     padding-left: 24px;
-
     float:right;    
     height: max-content;
     margin: auto 0px;
-
     font-weight: bold;
 }

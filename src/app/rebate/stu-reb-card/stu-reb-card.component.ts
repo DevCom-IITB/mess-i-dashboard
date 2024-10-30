@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { saveAs } from 'file-saver';
-// import { stat } from 'fs';
-// import { start } from 'repl';
+import { saveAs } from 'file-saver-es';
 import { AuthService } from 'src/app/auth.service';
 import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
@@ -17,13 +15,13 @@ import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.co
 })
 export class StuRebCardComponent implements OnInit {
 
-  @Input() public rebate_request: RebateRequest;
   public p_request_recieved: string;
   public p_rebate_start: string;
   public p_rebate_end: string;
   public p_rebate_reason: string;
   public p_rebate_comment: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  @Input() public rebate_request: RebateRequest;
   // @Input() public isApproved: boolean = false;
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/rebate-admin","/studentcard"];
@@ -44,8 +42,6 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_reason = this.rebate_request.reason;
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
-
-    // console.log(this.rebate_request)
   }
 
   readableDate(inp: Date): string{
@@ -97,7 +93,6 @@ export class StuRebCardComponent implements OnInit {
     })
   
   }
-  
 
   deleteRebate(){
     this.data_service.deleteRebate(this.auth_service.getRoll(),this.rebate_request.id).then((res)=>{
@@ -113,7 +108,6 @@ export class StuRebCardComponent implements OnInit {
     console.log("download initiated")
     this.data_service.downloadRebateDocument(this.rebate_request.roll,this.rebate_request.id).then((res:any) => {
       saveAs(res,"doc.pdf")
-      // console.log(typeof(res))
     }).catch((e)=>{
       alert("error occured in downloading the file");
       console.log(e);

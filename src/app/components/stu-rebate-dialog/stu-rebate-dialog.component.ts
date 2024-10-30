@@ -1,8 +1,7 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DialogPosition, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData, Student } from 'src/app/interfaces';
+import { DialogData} from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
-import { RebateRequest } from 'src/app/interfaces';
 
 //https://material.angular.io/components/dialog/overview
 @Component({
@@ -11,7 +10,6 @@ import { RebateRequest } from 'src/app/interfaces';
   styleUrls: ['./stu-rebate-dialog.component.css']
 })
 export class StuRebateDialogComponent implements OnInit {
-  // @Input()
   includeCSV:boolean = true;
   data : DialogData
   constructor(

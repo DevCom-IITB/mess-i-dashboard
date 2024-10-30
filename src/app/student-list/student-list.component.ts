@@ -4,7 +4,6 @@ import {StudentdataService} from 'src/app/studentdata.service'
 import { AuthService } from '../auth.service';
 import { StateService } from '../state.service';
 import { Router } from '@angular/router';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { HostListener } from '@angular/core';
 import { Student } from '../interfaces';
 import { Observable, Subject } from 'rxjs';
