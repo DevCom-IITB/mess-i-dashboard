@@ -21,8 +21,10 @@ export class StuRebCardComponent implements OnInit {
   public p_rebate_reason: string;
   public p_rebate_comment: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
   @Input() public rebate_request: RebateRequest;
+  // @Input() public isApproved: boolean = false;
+  public on_admin_page:boolean ;
+  private adminRoutes: string[] = ["/rebate-admin","/studentcard"];
   @Input() public approval_state: string = "pending";
   @Output() public updateList = new EventEmitter();
 
@@ -39,6 +41,7 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
+    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
   readableDate(inp: Date): string{
@@ -110,5 +113,9 @@ export class StuRebCardComponent implements OnInit {
       console.log(e);
     })
   }
+  isStudentPage() {
+    return this.auth.isStudent() && !this.on_admin_page;
+  }
+
 }
 

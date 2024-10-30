@@ -13,6 +13,29 @@ export class HomeComponent implements OnInit {
 
   public pending_rebates: RebateRequest[] = new Array();
   devices:any;
+  // devices = [
+  //   {
+  //     hostel: 'Hostel A',
+  //     id: 123,
+  //     sync: '2024-08-15 10:00 AM',
+  //     version: '1.0.3',
+  //     cards: ['Card1', 'Card2', 'Card3']
+  //   },
+  //   {
+  //     hostel: 'Hostel B',
+  //     id: 456,
+  //     sync: '2024-08-15 10:05 AM',
+  //     version: '1.0.4',
+  //     cards: ['Card4', 'Card5', 'Card6']
+  //   },
+  //   {
+  //     hostel: 'Hostel C',
+  //     id: 789,
+  //     sync: '2024-08-15 10:10 AM',
+  //     version: '1.0.5',
+  //     cards: ['Card7', 'Card8', 'Card9']
+  //   }
+  // ];
   date:string;
 
   constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
@@ -33,7 +56,8 @@ export class HomeComponent implements OnInit {
       //FIXME: Remove the console log, maybe log somewhere else
       console.log(e);
     });
-    
+  
+
     this.data_service.getDevices().then((res)=>{
       this.devices = res;
     }).catch((e)=>{

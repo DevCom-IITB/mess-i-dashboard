@@ -21,6 +21,9 @@ export class RebateComponent implements OnInit {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    if(!this.auth.isStudent() ){
+      this.router.navigate(['landing'])
+    }
   }
 
   
