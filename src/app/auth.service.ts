@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -102,11 +102,6 @@ export class AuthService {
     })
   }
   
-  // logoutUser(){
-  //   this.token="";
-  //   this.logged_in=false; 
-  // }
-  
   logoutUser(): Observable<any> {
     let url = this.baseurl.concat("/api/dash/auth");
     let parameters = new HttpParams();
@@ -159,6 +154,7 @@ export class AuthService {
   getRoll(){
     return this.roll_no;
   }
+  
 
   forgetPassword(username:any) {
     let url = this.baseurl.concat("/api/change_password");
@@ -173,4 +169,5 @@ export class AuthService {
       })
     );
   }
+
 }

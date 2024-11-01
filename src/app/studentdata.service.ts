@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import { RebateCategorised, RebateRequest, Student } from './interfaces';
 import { StudentcardComponent } from './studentcard/studentcard.component';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 
 @Injectable({
   providedIn: 'root'

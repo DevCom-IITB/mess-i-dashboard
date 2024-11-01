@@ -1,7 +1,6 @@
 .input-field-wrapper{
     padding-top: 12px;
     box-sizing: border-box;
-    /* background-color: #f5f5f5; */
     background-color: transparent !important;
 }
 .input-field-container{
@@ -10,7 +9,6 @@
     height: 48px;
     border: 2px solid currentColor;
     border-radius: 6px;
-
     position: relative;
     top:0px;
     left:0px;
@@ -20,12 +18,8 @@
     left:24px;
     top:12px;
     height: 12px;
-
     padding: 0px 6px;
-
     background-color: #f5f5f5;
-    /* background-color: transparent !important; */
-
     z-index: 2;
 }
 .input-field{
@@ -33,15 +27,12 @@
     border-radius: 6px;
     width: 100%;
     height: 100%;
-    /* background-color: #f5f5f5; */
     background-color: transparent !important;
     padding: 0px 12px;
 }
-
 .input-file-field{
     padding-top: 12px;
 }
-
 .show-text{
     padding-top: 12px;
     font-size: larger;

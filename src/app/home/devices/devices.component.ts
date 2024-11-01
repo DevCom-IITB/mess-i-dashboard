@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DevicesComponent implements OnInit {
 
-  @Input() device:any;
+  @Input() device : any ;
+  
   constructor() { }
 
   ngOnInit(): void {

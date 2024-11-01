@@ -1,4 +1,3 @@
-import { identifierModuleUrl } from "@angular/compiler";
 
 export interface Student{
     id: string,

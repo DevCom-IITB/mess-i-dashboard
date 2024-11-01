@@ -20,7 +20,6 @@ export class GuestAdminComponent implements OnInit {
       this.router.navigate(['login'])
     }
     this.isAdmin = auth.isAdmin()
-    let current_state = this.router.getCurrentNavigation()?.extras.state;
   }
 
   ngOnInit(): void {

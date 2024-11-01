@@ -23,7 +23,6 @@ export class DateFilterComponent implements OnInit {
   }
 
   reset(){
-    // console.log("reset in date-fliter")
     this.onReset.emit();
   }
 

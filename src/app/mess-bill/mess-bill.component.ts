@@ -13,7 +13,6 @@ export class MessBillComponent implements OnInit {
   render_form : boolean;
   form_gen_data: any;
   date = new Date()
-  // constructor(private service) {
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
@@ -25,9 +24,7 @@ export class MessBillComponent implements OnInit {
   }
 
   async renderForm(data:any){
-    // console.log(data)
     let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
-    // console.log(num)
 
     this.form_gen_data = {
       headers: ["Day","Cost Per Day"],

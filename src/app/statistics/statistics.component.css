@@ -2,16 +2,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-  }
-  
-  .chart-container {
+}
+.chart-container {
     width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
+    max-width: 800px; 
     margin: 20px auto;
     box-sizing: border-box;
-    /* overflow:visible; */
-  }
-
+}
 .container{
     padding: 4%;
     background-color: #FFFCF4; 
@@ -19,7 +16,6 @@ body {
     min-height: 100%;
     flex-direction: column;
 }
-
 form{
     margin-top: 1vw;
 }
@@ -34,14 +30,11 @@ input.form-control{
     margin-left: 3vh;
     margin-right: 5vh;
     border-color: #FFC42B;
-    border-width: 2px;
-    
+    border-width: 2px; 
 }
-
 .bold-ones{
     font-weight: bold;
 }
-
 select.form-select{
     margin-left: 2vh;
     margin-right: 2vh;
@@ -49,18 +42,15 @@ select.form-select{
     border-width: 2px;
     background-color: #FFF8E8;
 }
-
 button{
     background-color: #28282B;
     color:white;
     border:0px;
     border-radius: 4px;
 }
-
 button:hover{
     background-color: #FFC42B;
-  }
-
+}
 div#pie-textual-container{
     display: flex;
     flex-direction: row;
@@ -78,7 +68,6 @@ li.text-stats-item{
     font-size: 0.9rem;
 }
 
-
 @media (min-width: 320px) {
     div#pie-textual-container{
         flex-direction: column;
@@ -90,7 +79,6 @@ li.text-stats-item{
     #mess_data{
         width: 500px;
     }
-
 }
 @media (min-width: 426px) {
     div#pie-textual-container{

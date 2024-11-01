@@ -39,8 +39,5 @@ export class InputFieldComponent implements OnInit {
     }else{
       alert('choose pdf only')
     }
-
   }
-
-
 }

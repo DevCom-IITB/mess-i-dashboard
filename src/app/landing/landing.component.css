@@ -1,19 +1,13 @@
 .container{
-    /* padding: 4%; */
-    background-color: #FFFCF4; 
-    /* display: flex;
-    min-height: 100%;
-    flex-direction: column; */
+    background-color: #FFFCF4;
 }
 h1{
     color: #FFC42B;
 }
-
 .section {
     display: flex;
     justify-content: space-around;
 }
-
 .section-info {
     width: 45%;
     padding: 20px;
@@ -30,25 +24,20 @@ h1{
     margin-bottom: 10px;
     display: inline-block;
 }
-
 .section-info h2 {
     margin-top: 0;
 }
-
 .section-info p {
     margin: 10px 0;
 }
-
 .section-info ul {
     margin: 10px 0;
     padding-left: 20px;
 }
-
 .timings {
     list-style-type: none;
     margin-top: 10px;
 }
-
 .timings strong {
     font-size: 1.1em;
 }
@@ -57,7 +46,6 @@ h1{
     .section {
         flex-direction: column; 
     }
-    
     .section-info {
         width: 100%; 
     }
