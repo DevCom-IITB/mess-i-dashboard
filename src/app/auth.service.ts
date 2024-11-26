@@ -87,6 +87,7 @@ export class AuthService {
       this.is_sso_login = false;
       this.token = 'null'
 
+      sessionStorage.setItem("mess-i-token",this.token);
       sessionStorage.setItem("mess-i-admin","false");
       sessionStorage.setItem("mess-i-staff","true");
       sessionStorage.setItem("mess-i-rebate","true");
