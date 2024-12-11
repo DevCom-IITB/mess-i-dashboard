@@ -12,16 +12,14 @@
   border-bottom:3px solid #FFC42B;
 }
 #new-request-btn{
-    background-color: #FFC42B;
-    border-color: #FFC42B;
-    border-radius: 120rem;
-
-    padding-right: 24px;
-    padding-left: 24px;
-
+    background-color: #28282b;
+    color: white;
+    border: 0px;
+    border-radius: 4px;
     float:right;    
     height: max-content;
     margin: auto 0px;
-
-    font-weight: bold;
+}
+#new-request-btn:hover{
+    background-color: #FFC42B;
 }
