@@ -19,6 +19,13 @@ export class CardStatusButtonComponent implements OnInit {
   }
 
   async toggl(){
+    const confirmation = window.confirm(
+      `Are you sure you want to ${this.cardStatus ? 'deactivate' : 'activate'} this card?`
+    );
+  
+    if (!confirmation) {
+      return;
+    }
     this.process=true;
     await this.service.togglActive(this.rollNumber).then((res)=>{
       if (res){

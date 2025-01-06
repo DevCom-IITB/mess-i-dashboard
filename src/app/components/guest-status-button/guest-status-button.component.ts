@@ -22,6 +22,13 @@ export class GuestStatusButtonComponent implements OnInit {
   }
 
   async toggl(){
+    const confirmation = window.confirm(
+      `Are you sure you want to ${this.guestStatus ? 'withdraw' : ""} this entry?`
+    );
+  
+    if (!confirmation) {
+      return;
+    }
     this.process=true;
     await this.service.removeGuest(this.guestHostel, this.meal.toLowerCase(), this.date).then((res)=>{
       if (res){
