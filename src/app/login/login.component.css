@@ -14,9 +14,39 @@ a{
     background-color: #FFC42B;
     padding-right: 2rem;
     padding-left: 2rem;
+    border:0px;
+    transition: all 0.2s cubic-bezier(0, 0, 0.29, 0.95);
+}
+a.btn:hover{
+    color: #28282B;
+    font-size: larger;
+    background-color: #FFFFFF;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    transform: scale(1.1);
+    
 }
 .button_class{
     margin-top: 0%;
+    position: relative;
+    bottom: 50%;
+}
+#welcome-message{
+    color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+}
+
+#made-by{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+    text-align: center;
 }
 
 @media screen and (min-width : 750px) {
@@ -27,7 +57,7 @@ a{
         margin-right:auto;
         margin-top:auto;
         height:auto;
-        width: 35%;
+        width: 25%;
     }
 }
 @media screen and (max-width : 750px) {

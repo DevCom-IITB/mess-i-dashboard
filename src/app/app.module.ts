@@ -40,6 +40,8 @@ import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-en
 import { LandingComponent } from './landing/landing.component';
 import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { HomeCardComponent } from './components/home-card/home-card.component';
 
 
 @NgModule({ declarations: [
@@ -74,6 +76,9 @@ import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/for
         LandingComponent,
         MessManagerloginComponent,
         ForgetPasswordComponent,
+        AppBarComponent,
+        HomeCardComponent,
+        RebateCardComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
@@ -82,5 +87,5 @@ import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/for
         MatDialogModule,
         ReactiveFormsModule,
         MatChipsModule,
-        ReactiveFormsModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
+        ReactiveFormsModule,], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

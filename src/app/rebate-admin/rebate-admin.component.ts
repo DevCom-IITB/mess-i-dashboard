@@ -32,74 +32,87 @@ export class RebateAdminComponent implements OnInit {
     this.initialise();
   }
 
-  openDialog(roll:any) :void {
-    this.dialog.open(StuRebateDialogComponent,{
-    data:{
-      roll: roll
-        }
-    })
-  }
-  
-  setDialogValues(rebates:any) :void{
-    const dialogRef = this.dialog.open(StuRebateDialogComponent,{
-      data:{accepted_rebates : rebates}
-    })
+  initialise(): void {
+    // // Populate with dummy data
+    this.pending_rebates = [
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'John Doe',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      },
+ 
+    ];
+    
+    // Sample data for accepted and rejected tabs
+  //   this.accepted_rebates = [
+  //     {
+  //       id: 'REB004',
+  //       studentName: 'Sarah Wilson',
+  //       studentId: 'S13579',
+  //       amount: 275.00,
+  //       date: new Date('2025-04-05'),
+  //       reason: 'Internship',
+  //       mealsMissed: 5,
+  //       status: 'accepted',
+  //       approvedBy: 'Admin User',
+  //       approvedDate: new Date('2025-04-07')
+  //     }
+  //   ];
+    
+  //   this.rejected_rebates = [
+  //     {
+  //       id: 'REB005',
+  //       studentName: 'Tom Brown',
+  //       studentId: 'S97531',
+  //       amount: 150.00,
+  //       date: new Date('2025-04-02'),
+  //       reason: 'Personal leave',
+  //       mealsMissed: 3,
+  //       status: 'rejected',
+  //       rejectedBy: 'Admin User',
+  //       rejectedDate: new Date('2025-04-03'),
+  //       rejectionReason: 'Insufficient documentation provided'
+  //     }
+  //   ];
+   }
+
+  updateTab(tabName: string): void {
+    // This would typically fetch data based on the selected tab
+    console.log(`Tab changed to: ${tabName}`);
+    // For now, we're using the data already loaded in initialise()
   }
 
-  async getStudentRebates(roll:any,rebates: any){
-    await this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-      rebates = (res.pending_rebate);
-    }).catch((e)=>
-    console.log(e))
+  updateList(event: any): void {
+    // This would typically refresh data after an update
+    console.log('Update requested', event);
+    this.initialise();
   }
 
-  updateTab(tab:String){
-    this.currTab = tab;
-    console.log(this.currTab)
+  initialiseWithFilter(dateRange: any): void {
+    console.log('Filter applied:', dateRange);
+    // In a real app, this would filter the data based on date range
+    // For now, just use the same dummy data
+    this.initialise();
   }
 
-  getRebates = () => this.data_service.getAdminRebates();
-  async initialise(){
-    this.data_service.getAdminRebates().then((res)=>{
-      this.populateRebates(res);
-    }).catch((e)=>{
-      //FIXME: Remove the console log, maybe log somewhere else
-      // console.log(e);
-    });
-  }
-
-  updateList(rebateID: any){
-    window.location.reload();
-  }
-
-  populateRebates(response: any): void{
-    this.pending_rebates = response.pending_rebate;
-    this.accepted_rebates = response.accepted_rebate;
-    this.rejected_rebates = response.rejected_rebate;
-  }
-
-  async initialiseWithFilter(event:any){
-    this.getRebates().then((res)=>{
-      this.filter_service.populateRebatesMonthFilter(res,event[0],event[1],event[2],{pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates});
-    }).catch((e)=>{
-      //FIXME: Remove the console log, maybe log somewhere else
-      console.log(e);
-    });
-  }
-
-  downloadCSV(){
-    // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
-    if(this.currTab == "pending"){
-      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:this.pending_rebates,accepted_rebates:[],rejected_rebates:[]})],{type:'text/csv'});
-      saveAs(blob,"rebates.csv");
-    }
-    else if(this.currTab == "accepted"){
-      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:this.accepted_rebates,rejected_rebates:[]})],{type:'text/csv'});
-      saveAs(blob,"rebates.csv");
-    }
-    else if(this.currTab == "rejected"){
-      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:[],rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
-      saveAs(blob,"rebates.csv");
-    }
+  downloadCSV(): void {
+    console.log('Download CSV requested');
+    // This would export the current data as CSV
+    alert('CSV download would start here in a real implementation');
   }
 }

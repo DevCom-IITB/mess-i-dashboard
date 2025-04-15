@@ -16,6 +16,9 @@
   </div>
 
   <div class="frame right-frame" >
+    <div id="logo-container" class="img-class">
+      <img class="img3-fluid" src="assets/mess-i-logo.png" alt="document-sign-img" />
+    </div>
     <div class="heading2">
       <p>Enter your credentials</p>
     </div>
@@ -30,7 +33,7 @@
         <div class="inputbox2">
           <input type="password" name="password" class="form-control" id="password" placeholder="Password" style="margin-top: 4%;" required #password />
         </div>
-        <a [routerLink]="['/forget-password']">Forgot Password?</a>
+        <a id="forget-password" [routerLink]="['/forget-password']">Forgot Password?</a>
         <br/><br/>
         <button type="submit" class="btn btn-primary" style="margin-top: 0%;">Login</button>
       </form>

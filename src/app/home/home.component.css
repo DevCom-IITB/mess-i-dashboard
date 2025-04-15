@@ -20,3 +20,8 @@
 #device-container{
     margin-top: 24px;
 }
+@media screen and (min-width: 431px){
+    .mobile-view{
+        display: none;
+    }
+}

@@ -99,20 +99,76 @@ button {
   font-weight: 400; 
   line-height: 21.79px;
   text-align: center;
+  border: none;
+}
+button:hover {
+  background-color: #FFFFFF;
+  color: #28282B;
+  transform: scale(1.1);
+  transition: all 0.2s cubic-bezier(0, 0, 0.29, 0.95);
+}
+#forget-password{
+  text-decoration: none;
+}
+#forget-password:hover{
+  color: #ffffff;
 }
 a{
   margin-right: -55%;
   color: #28282B;
 }
+.img3-fluid {
+  display: none;
+}
 
 @media (max-width: 767px) {
   .container {
     flex-direction: column;
+    padding: 0px ;
   }
   .left-frame {
     display: none;
   }   
   .right-frame {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    border-radius: 0px;
+    background-color: #28282B;
     width: 100%;
+  }
+  button{
+    background-color: #FFC42B;
+    color: #28282B;
+    border: 0px;
+  }
+  .heading2 p{
+    color: #ECE6D3;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+  }
+  #forget-password{
+    color: #FFC42B;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+  }
+  #forget-password:hover{
+    color: #ECE6D3;
+    transition: all 0.1s cubic-bezier(0, 0, 0.29, 0.95);
+  }
+  .img2-fluid{
+    display: none;
+  }
+  .img3-fluid{
+    display:block;
+    width: 60%;
+  }
+  #logo-container{
+    display: flex;
+    justify-content: center;
   }
 }
