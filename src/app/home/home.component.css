@@ -20,8 +20,10 @@
 #device-container{
     margin-top: 24px;
 }
-@media screen and (min-width: 431px){
-    .mobile-view{
-        display: none;
+@media screen and (max-width: 431px){
+    .main-container{
+        padding: 4%;
+        /* background-color:#28282B; */
+        min-height: 100%;
     }
 }

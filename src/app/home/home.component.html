@@ -11,7 +11,7 @@
 
     <div id="device-container">
         <h1 style="border-bottom:3px solid #FFC42B;">Devices</h1>
-        <app-app-bar class="mobile-view" id="app-bar"></app-app-bar>
+        <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar>
         <app-home-card class="mobile-view" id="rebate"></app-home-card>
         <app-home-card class="mobile-view" id="guest-booking"></app-home-card>
         <ng-container *ngFor="let device of devices">

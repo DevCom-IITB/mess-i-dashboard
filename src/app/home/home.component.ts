@@ -10,32 +10,30 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  app_bar_suffix : string = "Home";
   public pending_rebates: RebateRequest[] = new Array();
-  devices:any;
-  // devices = [
-  //   {
-  //     hostel: 'Hostel A',
-  //     id: 123,
-  //     sync: '2024-08-15 10:00 AM',
-  //     version: '1.0.3',
-  //     cards: ['Card1', 'Card2', 'Card3']
-  //   },
-  //   {
-  //     hostel: 'Hostel B',
-  //     id: 456,
-  //     sync: '2024-08-15 10:05 AM',
-  //     version: '1.0.4',
-  //     cards: ['Card4', 'Card5', 'Card6']
-  //   },
-  //   {
-  //     hostel: 'Hostel C',
-  //     id: 789,
-  //     sync: '2024-08-15 10:10 AM',
-  //     version: '1.0.5',
-  //     cards: ['Card7', 'Card8', 'Card9']
-  //   }
-  // ];
+  devices:any = [
+    {
+      hostel: 'Brahmaputra',
+      id: '001',
+      sync: '2025-04-22 14:30',
+      version: '2.1.5',
+      cards: 42
+    },
+    {
+      hostel: 'Siang',
+      id: '002',
+      sync: '2025-04-22 15:45',
+      version: '2.1.5',
+      cards: 37
+    },
+    {
+      hostel: 'Umiam',
+      id: '003',
+      sync: '2025-04-22 10:15',
+      version: '2.1.4',
+      cards: 53
+    }];
   date:string;
 
   constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
@@ -75,25 +73,5 @@ export class HomeComponent implements OnInit {
     this.pending_rebates = response;
   } 
 
-  // dummyInitialise(): void{
-  //   this.pending_rebates.push({
-  //     student:{
-  //       id: "22b0045",
-  //       name: "Student1",
-  //     } as Student,
-  //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
-  //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),
-  //     rebate_duration_end: new Date(Date.UTC(2022, 11, 29, 11, 23, 22)),
-  //   } as RebateRequest);
-  //   this.pending_rebates.push({
-  //     student:{
-  //       id: "22b0433",
-  //       name: "Student2",
-  //     } as Student,
-  //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
-  //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),
-  //     rebate_duration_end: new Date(Date.UTC(2022, 11, 29, 11, 23, 22)),
-  //   } as RebateRequest);
-  // }
 
 }

@@ -10,6 +10,7 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 #menu{
     position: absolute;
@@ -33,4 +34,9 @@
     left: 22%;
     top: 53%;
     color: #BEBEBE
+}
+@media screen and (min-width: 431px){
+    .container{
+        display: none
+    }
 }

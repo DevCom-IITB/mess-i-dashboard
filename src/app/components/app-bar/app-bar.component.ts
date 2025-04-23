@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-app-bar',
@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './app-bar.component.css'
 })
 export class AppBarComponent {
-  suffix: string = "Home";
+  @Input() suffix: string ;
 
 }
