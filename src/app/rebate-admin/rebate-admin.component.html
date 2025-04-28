@@ -1,5 +1,11 @@
 <div class="main-container">
-    <h1 style="border-bottom:3px solid #ffc42b;">Rebates</h1>
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
+    <div class="btn-box">
+        <button class="filter-btn">Pending</button>
+        <button class="filter-btn">Accepted</button>
+        <button class="filter-btn">Rejected</button>
+    </div>
+    <h1 id="page-title" style="border-bottom:3px solid #ffc42b;">Rebates</h1>
     <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('pending')">Pending</button>
@@ -11,7 +17,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
         </li>
     </ul>
-    <app-date-filter (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
+    <app-date-filter id="date-filter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
     <div class="tab-content" id="myTabContent" >
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
         <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
@@ -29,4 +35,10 @@
         </div>
     </div>
     </div>
+    <mat-date-range-picker #rangePicker id="datefilter">
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button matDateRangePickerApply>Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
 </div>

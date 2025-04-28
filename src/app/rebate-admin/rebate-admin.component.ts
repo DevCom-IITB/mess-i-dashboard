@@ -14,7 +14,7 @@ import { FilterService } from '../filter.service';
   styleUrls: ['./rebate-admin.component.css']
 })
 export class RebateAdminComponent implements OnInit {
-
+  app_bar_suffix: string = "Rebates";
   pending_rebates: RebateRequest[] = new Array();
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();

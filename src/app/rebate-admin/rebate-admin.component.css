@@ -2,7 +2,7 @@
     min-height: 100vh;
     height: max-content;
     padding: 4%;
-    background-color: #fffcf4;
+    background-color: #28272c;
 }
 .page-title{
     font-size: 3rem;
@@ -17,4 +17,45 @@
 }
 #myTabContent{
     padding-top: 1em;
+}
+.filter-btn{
+    display: none;
+}
+@media screen and (max-width: 431px){
+    #page-title{
+        display: none;
+    }
+    ul{
+        display: none;
+    }
+    #date-filter{
+        display: none;
+    }
+    .filter-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 84px;
+        height: 42px;
+        border-radius: 50px;
+        padding: 4px 19px 4px 19px;
+        border: none;
+    }
+    .btn-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 12px;
+        width: 100%;
+        height: 42px;
+        position: relative;
+        top: 7vh;
+        gap: 30px;
+    }
+    #datefilter{
+        position: relative;
+        top: 10vh;
+        height: 42px;
+        width: 42px;
+    }
 }

@@ -12,6 +12,33 @@ import { StudentdataService } from '../studentdata.service';
 export class HomeComponent implements OnInit {
   app_bar_suffix : string = "Home";
   public pending_rebates: RebateRequest[] = new Array();
+  mobile_cards: any = [
+    {
+      title: 'Rebates',
+      redirect: '/',
+      description: 'Review applications for rebates'
+    },
+    {
+      title: 'Guest List',
+      redirect: '/',
+      description: 'Meal coupons for your hostel'
+    },
+    {
+      title: "Students' List",
+      redirect: '/',
+      description: 'List of students and their details'
+    },
+    {
+      title: 'Statistics',
+      redirect: '/',
+      description: 'Watch your meals consumption'
+    },
+    {
+      title: 'Devices',
+      redirect: '/',
+      description: 'List of connected devices'
+    },
+  ];
   devices:any = [
     {
       hostel: 'Brahmaputra',

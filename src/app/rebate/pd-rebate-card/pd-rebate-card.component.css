@@ -4,6 +4,8 @@
     border-radius: 12px;
     box-shadow: 6px 6px 50px -40px;
     background-color: white;
+    position: relative;
+    top: 20vh;
 }
 #stud-details-container{
     margin: 12px 0px;

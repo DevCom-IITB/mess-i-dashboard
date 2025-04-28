@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-home-card',
@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './home-card.component.css'
 })
 export class HomeCardComponent {
-  title: string = "Title";
-  description: string = "Lorem ipsum";
-  leftButton: string = "Left Button";
-  rightButton: string = "Right Button";
+  @Input() card : any ;
+  redirect: string = "";
 }

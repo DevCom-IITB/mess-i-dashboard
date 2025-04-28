@@ -1,5 +1,5 @@
 .card{
-    height: 149px;
+    height: 89px;
     width: 100%;
     border-radius: 10px;
     padding: 18px 12px 18px 12px;
@@ -7,6 +7,7 @@
     gap: 10px;
     border: none;
     position: relative;
+    top: 64px;
 }
 .container{
     margin-top: 10px;
@@ -17,6 +18,7 @@
     font-weight: 600;
     font-size: 24px;
     color: #28272C;
+    top: 0px;
 }
 #desc{
     font-family: 'Open Sans', sans-serif;
@@ -24,6 +26,8 @@
     font-size: 14px;
     color: #28272C;
     margin-top: 4px;
+    position: relative;
+    top: -10px;
 }
 #left-btn{
     border: 2px solid #ffce5d;

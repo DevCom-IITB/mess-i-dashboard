@@ -42,6 +42,11 @@ import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { HomeCardComponent } from './components/home-card/home-card.component';
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({ declarations: [
@@ -78,7 +83,7 @@ import { HomeCardComponent } from './components/home-card/home-card.component';
         ForgetPasswordComponent,
         AppBarComponent,
         HomeCardComponent,
-        RebateCardComponent
+        RebateCardComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
@@ -87,5 +92,10 @@ import { HomeCardComponent } from './components/home-card/home-card.component';
         MatDialogModule,
         ReactiveFormsModule,
         MatChipsModule,
-        ReactiveFormsModule,], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
