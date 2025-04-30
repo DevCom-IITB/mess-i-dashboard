@@ -55,7 +55,66 @@ export class RebateAdminComponent implements OnInit {
         request_date: '2025-03-29',
         room: 'A-101'
       },
- 
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe 2',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'John Doe 2',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      },
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'John Doe',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      },
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe 2',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'John Doe 2',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      }
     ];
     
     // Sample data for accepted and rejected tabs

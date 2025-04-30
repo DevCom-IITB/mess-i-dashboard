@@ -19,6 +19,7 @@ export class PdRebateCardComponent implements OnInit {
   public p_rebate_start: string;
   public p_rebate_end: string;
   public p_rebate_reason: string;
+  public p_rebate_days: string;
   public card_comment: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -32,6 +33,7 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.card_comment="";
+    this.p_rebate_days= this.noOfDays(this.rebate_request.start, this.rebate_request.end);
   }
 
   acceptRebate(){
@@ -84,5 +86,13 @@ export class PdRebateCardComponent implements OnInit {
   readableDateFromString(inp: string, separator: string = '-'): string{
     let all = inp.split(separator);
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
+  }
+
+  noOfDays(start: string, end: string): string{
+    let startDate = new Date(Date.parse(start));
+    let endDate = new Date(Date.parse(end));
+    let diff = Math.abs(endDate.getTime() - startDate.getTime());
+    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
+    return diffDays.toString();
   }
 }

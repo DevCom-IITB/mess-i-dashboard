@@ -5,6 +5,21 @@
         <button class="filter-btn">Accepted</button>
         <button class="filter-btn">Rejected</button>
     </div>
+    <mat-form-field id="range-date">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+          <input matStartDate placeholder="Start date" />
+          <input matEndDate placeholder="End date" />
+        </mat-date-range-input>
+        <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
+        <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button matDateRangePickerApply>Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+      </mat-form-field>
     <h1 id="page-title" style="border-bottom:3px solid #ffc42b;">Rebates</h1>
     <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -34,11 +49,5 @@
             <app-stu-reb-card [rebate_request]="a_rebate" approval_state="rejected"></app-stu-reb-card>
         </div>
     </div>
-    </div>
-    <mat-date-range-picker #rangePicker id="datefilter">
-        <mat-date-range-picker-actions>
-          <button mat-button matDateRangePickerCancel>Cancel</button>
-          <button mat-raised-button matDateRangePickerApply>Apply</button>
-        </mat-date-range-picker-actions>
-      </mat-date-range-picker>
+    </div> 
 </div>

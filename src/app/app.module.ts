@@ -47,7 +47,21 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
+
+export const MY_DATE_FORMATS = {
+    parse: {
+      dateInput: 'DD/MM/YYYY',
+    },
+    display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY'
+    }
+  };
 
 @NgModule({ declarations: [
         AppComponent,
@@ -97,5 +111,9 @@ import { MatButtonModule } from '@angular/material/button';
         MatNativeDateModule,
         MatInputModule,
         MatFormFieldModule,
-        MatButtonModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
+        MatButtonModule,
+        MatIconModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
+            { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+            { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+        ] })
 export class AppModule { }

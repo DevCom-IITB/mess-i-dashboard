@@ -10,6 +10,7 @@ import { GuestdataService } from '../guestdata.service';
 })
 export class GuestAdminComponent implements OnInit {
 
+  app_bar_suffix: string = "Guest Booking";
   allowedHostels:boolean[] = new Array<boolean>(22);
   guestHistory:any = {exists:true, loaded:false};
   headers = ['Token No.','Roll No.','Name','Hostel']
