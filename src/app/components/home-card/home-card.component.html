@@ -1,7 +1,12 @@
 <div class="container">
   <div class="card">
-    <p id="title">{{ card.title }}</p>
-    <p id="desc">{{ card.description }}</p>
-    <img src="././assets/IconSet/Icon=Info.svg" alt="info" id="info" />
+    <p *ngIf="app_bar_suffix=='Home'" id="title">{{ card.title }}</p>
+    <p *ngIf="app_bar_suffix=='Home'" id="desc">{{ card.description }}</p>
+    <img *ngIf="app_bar_suffix=='Home'" src="././assets/IconSet/Icon=Info.svg" alt="info" id="info" />
+    <p *ngIf="app_bar_suffix=='Student List'" id="name">{{ stud[1].fullname }}</p>
+    <img *ngIf="app_bar_suffix=='Student List' && stud[1].mess_allowed" src="././assets/IconSet/Icon=Active.svg" alt="info" id="status" />
+    <img *ngIf="app_bar_suffix=='Student List' && !stud[1].mess_allowed" src="././assets/IconSet/Icon=Inactive.svg" alt="info" id="status" />
+    <p *ngIf="app_bar_suffix=='Student List'" id="rollNumber">Roll no. {{ stud[0] }}</p>
+    <p *ngIf="app_bar_suffix=='Student List'" id="roomNumber">Room no. {{ stud[1].room }}</p>
   </div>
 </div>

@@ -58,3 +58,39 @@
     position: absolute;
     right: 10%;
 }
+#status{
+    height: auto;
+    width: 78px;
+}
+#name{
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 255px;
+    overflow-wrap: break-word;
+}
+#status{
+    position: absolute;
+    right: 12px;
+    top: 9px;
+}
+#rollNumber{
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0%;
+    position: absolute;
+    bottom: 0px;
+    left: 12px;
+}
+#roomNumber{
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0%;
+    position: absolute;
+    bottom: 0px;
+    right: 12px;
+}

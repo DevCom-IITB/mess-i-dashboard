@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 .active-circle {
     width: 1em;
     margin-top: 0.3em;
@@ -62,19 +63,16 @@
   border-color: #FFC42B;
   border: 1px solid;
   text-align: center;
-
   height: 1.5rem;
   width: 1.5rem;
 }
 
-
 input.nosubmit{
   width: 100%;
   padding: 9px 4px 9px 30px;
-  
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+  background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
+  background-size: 16px 16px;
 }
-
 
 h2{
   font-family: "Oxygen",Arial, Helvetica, sans-serif;
@@ -93,10 +91,58 @@ h2{
 
 .student-list-table-container{
   padding: 4%;
-  
   background-color:#FFFCF4 ;
-  min-height: 100%;
+  min-height: 100vh;
+  height: max-content;
 }
 .search-main-area{
-  width: 100%;
+  background-color: #fffcf4;
+  position: relative;
+  left: 10%;
+  width: 80%;
+}
+#stud-cards{
+  display: none;
+}
+@media screen and (max-width: 431px){
+  .student-list-table-container{
+    background-color: #28272c;
+  }
+  .table{
+    display: none;
+  }
+  h1{
+    display: none;
+  }
+  .row{
+    display: none;
+  }
+  input.nosubmit{
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
+  }
+  .search-main-area{
+    /* width: 80vw; */
+    position: relative;
+    top: 8vh;
+    left: 0px;
+  }
+  #main{
+    background-color: #28272c;
+    min-height: 100vh;
+    height: max-content;
+  }
+  #stud-cards{
+    display: block;
+    width: 95vw;
+    position: absolute;
+    top: 8vh;
+  }
+  .search-main-area{
+    background-color: #ffffff ;
+    display: block;
+    border-radius: 8px;
+  }
 }

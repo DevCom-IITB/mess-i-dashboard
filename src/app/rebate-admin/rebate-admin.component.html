@@ -45,8 +45,8 @@
         </div>
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div class="rebate-card-container" *ngFor="let a_rebate of rejected_rebates">
-            <app-stu-reb-card [rebate_request]="a_rebate" approval_state="rejected"></app-stu-reb-card>
+        <div class="rebate-card-container" *ngFor="let r_rebate of rejected_rebates">
+            <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected"></app-stu-reb-card>
         </div>
     </div>
     </div> 

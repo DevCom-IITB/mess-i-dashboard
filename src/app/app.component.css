@@ -208,3 +208,8 @@ body{
 }
 
 /* so that this can show up just worked */
+@media screen and (max-width: 431px){
+    #mobile-navbar{
+        display: none;
+    }
+}

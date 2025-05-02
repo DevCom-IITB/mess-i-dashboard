@@ -18,7 +18,20 @@ export class StudentListComponent implements OnInit {
   @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   // studentImageMap = new Map();
   //studentInfoList_array = [];
-  studentInfoList : any;
+  studentInfoList : any =[
+  ["24B1243",{
+    fullname: "Ganesh Preetham Vulise",
+    hostel: "Hostel 16",
+    room: "A-908",
+    mess_allowed: true,
+  }],
+  ["24B1248",{
+    fullname: "Arkapally Sai Druvan Teja",
+    hostel: "Hostel 1",
+    room: "000",
+    mess_allowed: false,
+  }]
+  ];
   temp : any;
   errMsg = "";
   // isImageLoading:any;
@@ -28,6 +41,7 @@ export class StudentListComponent implements OnInit {
   entryNumber = 1;
   justAfterScrolling = true;
   subject = new Subject();
+  app_bar_suffix : string = "Student List";
   
   constructor(private stateService: StateService,private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){

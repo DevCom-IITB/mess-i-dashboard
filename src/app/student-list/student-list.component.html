@@ -1,52 +1,59 @@
-<div class="student-list-table-container">
-  <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
-  <div class="search-main-area">
+<app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
+<div id="main">
+  <div class="student-list-table-container">
+    <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
+    <div class="search-main-area">
       <input type="search" class="form-control nosubmit" [(ngModel)]="searchText" placeholder="Search by name or roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
-  </div>
-  <table class="table">
-    <thead>
-      <tr id="column-headers">
-        <th scope="col">ROLL NO.</th>
-        <th scope="col">NAME</th>
-        <th scope="col">ROOM NO.</th>
-        <th scope="col">HOSTEL</th>
-        <th scope="col">CARD STATUS</th>
-      </tr>
-
-    </thead>
-    <tbody id="stud-table">
-      <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
-      <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
-        <tr>
-          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[0]}}</td>
-          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].fullname}}</td>
-          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
-          <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
-          <td>
-            <app-card-status-button [rollNumber]="stud[1].roll" [cardStatus]="stud[1].mess_allowed" ></app-card-status-button>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
-
-  <div id="student-list-footer" class="row">
-    <div class="col-lg-3">
-      <p>{{entryNumber}}-{{entryNumber+entriesPerPage}}</p>
     </div>
-    <div class="col-lg-9">
-      <div style="float:right">
-        <div id="num-rows-selector" class="inblock-el">
-          <p class="inblock-el">Rows per page: {{entriesPerPage}}</p>
-        </div>
-        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="prevEntries()">
-          <i class="bi bi-caret-left"></i>
-        </div>
-        <div class="clickable inblock-el page-navigator-btn" role="button" (click)="nextEntries()">
-          <i class="bi bi-caret-right"></i>
+    <table class="table">
+      <thead>
+        <tr id="column-headers">
+          <th scope="col">ROLL NO.</th>
+          <th scope="col">NAME</th>
+          <th scope="col">ROOM NO.</th>
+          <th scope="col">HOSTEL</th>
+          <th scope="col">CARD STATUS</th>
+        </tr>
+
+      </thead>
+      <tbody id="stud-table">
+        <!-- <tr role="button" *ngFor="let stud of studentInfoList" (click)="displayStudData(this[stud[0]])"> -->
+        <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
+          <tr>
+            <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[0]}}</td>
+            <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].fullname}}</td>
+            <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].room}}</td>
+            <td role="button" (click)="displayStudData(indexOfelemnet)">{{stud[1].hostel}}</td>
+            <td>
+              <app-card-status-button [rollNumber]="stud[1].roll" [cardStatus]="stud[1].mess_allowed" ></app-card-status-button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <div id="student-list-footer" class="row">
+      <div class="col-lg-3">
+        <p>{{entryNumber}}-{{entryNumber+entriesPerPage}}</p>
+      </div>
+      <div class="col-lg-9">
+        <div style="float:right">
+          <div id="num-rows-selector" class="inblock-el">
+            <p class="inblock-el">Rows per page: {{entriesPerPage}}</p>
+          </div>
+          <div class="clickable inblock-el page-navigator-btn" role="button" (click)="prevEntries()">
+            <i class="bi bi-caret-left"></i>
+          </div>
+          <div class="clickable inblock-el page-navigator-btn" role="button" (click)="nextEntries()">
+            <i class="bi bi-caret-right"></i>
+          </div>
         </div>
       </div>
     </div>
-
+  </div>
+  <div id="stud-cards">
+    <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
+      <app-home-card [app_bar_suffix]="app_bar_suffix" [stud]="stud" role="button" (click)="displayStudData(indexOfelemnet)"></app-home-card>
+    </ng-container>
   </div>
 </div>

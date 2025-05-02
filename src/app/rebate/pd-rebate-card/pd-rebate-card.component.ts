@@ -21,6 +21,7 @@ export class PdRebateCardComponent implements OnInit {
   public p_rebate_reason: string;
   public p_rebate_days: string;
   public card_comment: string;
+  public rebate_status: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(private data_service: StudentdataService,private dialog:MatDialog) { }

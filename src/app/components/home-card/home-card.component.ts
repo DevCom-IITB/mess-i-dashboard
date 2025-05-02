@@ -7,5 +7,7 @@ import { Component, Input} from '@angular/core';
 })
 export class HomeCardComponent {
   @Input() card : any ;
+  @Input() stud : any;
+  @Input() app_bar_suffix : string;
   redirect: string = "";
 }
