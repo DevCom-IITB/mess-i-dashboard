@@ -1,15 +1,15 @@
 <div class="main-container">
     <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
     <div class="btn-box">
-        <button class="filter-btn">Pending</button>
-        <button class="filter-btn">Accepted</button>
-        <button class="filter-btn">Rejected</button>
+        <button class="filter-btn" (click)="updateTab('pending')">Pending</button>
+        <button class="filter-btn" (click)="updateTab('accepted')">Accepted</button>
+        <button class="filter-btn" (click)="updateTab('rejected')">Rejected</button>
     </div>
     <mat-form-field id="range-date">
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [rangePicker]="rangePicker">
-          <input matStartDate placeholder="Start date" />
-          <input matEndDate placeholder="End date" />
+          <input matStartDate placeholder="Start date"/>
+          <input matEndDate placeholder="End date"/>
         </mat-date-range-input>
         <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
         <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>

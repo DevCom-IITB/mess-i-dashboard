@@ -15,27 +15,27 @@ export class HomeComponent implements OnInit {
   mobile_cards: any = [
     {
       title: 'Rebates',
-      redirect: '/',
+      redirect: '/rebate-admin',
       description: 'Review applications for rebates'
     },
     {
       title: 'Guest List',
-      redirect: '/',
+      redirect: '/guest-admin',
       description: 'Meal coupons for your hostel'
     },
     {
       title: "Students' List",
-      redirect: '/',
+      redirect: '/list',
       description: 'List of students and their details'
     },
     {
       title: 'Statistics',
-      redirect: '/',
+      redirect: '/statistics',
       description: 'Watch your meals consumption'
     },
     {
       title: 'Devices',
-      redirect: '/',
+      redirect: '/devices',
       description: 'List of connected devices'
     },
   ];
@@ -98,7 +98,8 @@ export class HomeComponent implements OnInit {
 
   populateRebates(response: any): void{
     this.pending_rebates = response;
-  } 
-
-
+  }
+  redirect(card:any): void{
+    this.router.navigate([card.redirect]);
+  }
 }

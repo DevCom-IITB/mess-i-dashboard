@@ -78,6 +78,7 @@ body{
 }
 
 #router-outlet{
+    background-color: #fffcf4;
     height:100%;
     overflow-y: scroll;
     /* margin-left: 20vw;
@@ -208,8 +209,12 @@ body{
 }
 
 /* so that this can show up just worked */
+
 @media screen and (max-width: 431px){
-    #mobile-navbar{
+    /* #mobile-navbar{
         display: none;
+    } */
+    #router-outlet{
+        background-color: #28272c;
     }
 }

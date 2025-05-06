@@ -34,7 +34,7 @@ export class RebateAdminComponent implements OnInit {
 
   initialise(): void {
     // // Populate with dummy data
-    this.pending_rebates = [
+    this.accepted_rebates = [
       {
         id: 'REB001',
         student: {
@@ -117,37 +117,6 @@ export class RebateAdminComponent implements OnInit {
       }
     ];
     
-    // Sample data for accepted and rejected tabs
-  //   this.accepted_rebates = [
-  //     {
-  //       id: 'REB004',
-  //       studentName: 'Sarah Wilson',
-  //       studentId: 'S13579',
-  //       amount: 275.00,
-  //       date: new Date('2025-04-05'),
-  //       reason: 'Internship',
-  //       mealsMissed: 5,
-  //       status: 'accepted',
-  //       approvedBy: 'Admin User',
-  //       approvedDate: new Date('2025-04-07')
-  //     }
-  //   ];
-    
-  //   this.rejected_rebates = [
-  //     {
-  //       id: 'REB005',
-  //       studentName: 'Tom Brown',
-  //       studentId: 'S97531',
-  //       amount: 150.00,
-  //       date: new Date('2025-04-02'),
-  //       reason: 'Personal leave',
-  //       mealsMissed: 3,
-  //       status: 'rejected',
-  //       rejectedBy: 'Admin User',
-  //       rejectedDate: new Date('2025-04-03'),
-  //       rejectionReason: 'Insufficient documentation provided'
-  //     }
-  //   ];
    }
 
   updateTab(tabName: string): void {
