@@ -5,20 +5,17 @@
     <span
       *ngIf="approval_state == 'pending'"
       id="rebate-status-indicator"
-      style="background-color: #fff4d8; color: #ffc42b"
-      >Pending</span
+      ><img src="../../assets/RebateIcons/rebate-status-pending.svg" alt="Pending"></span
     >
     <span
       *ngIf="approval_state == 'accepted'"
       id="rebate-status-indicator"
-      style="background-color: #e9ffd8; color: #649f34"
-      >Accepted</span
+      ><img src="../../assets/RebateIcons/rebate-status-accepted.svg" alt="Accepted"></span
     >
     <span
       *ngIf="approval_state == 'rejected'"
       id="rebate-status-indicator"
-      style="background-color: #fcc7c3; color: #b73229"
-      >Rejected</span
+      ><img src="../../assets/RebateIcons/rebate-status-rejected.svg" alt="Rejected"></span
     >
   </div>
 

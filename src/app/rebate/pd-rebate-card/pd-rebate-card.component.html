@@ -1,7 +1,11 @@
 <div class="pd-rebate-card-container">
     <span>Recieved on {{ p_request_recieved }}</span>
+    <span
+      id="rebate-status-indicator"
+      ><img src="../../assets/RebateIcons/rebate-status-pending.svg" alt="Pending"></span
+    >
     <div id="stud-name">
-        <span>{{ rebate_request.fullname }}</span>
+        <span style="font-size: 23px;">{{ rebate_request.fullname }}</span>
         <br>
     </div>
     <div id="stud-sub-details-container">

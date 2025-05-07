@@ -1,4 +1,5 @@
 import { Component, Input} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-bar',
@@ -7,5 +8,8 @@ import { Component, Input} from '@angular/core';
 })
 export class AppBarComponent {
   @Input() suffix: string ;
-
+  constructor(private router: Router) { }
+  toggleMenu(): void {
+    this.router.navigate(['/home']);
+  }
 }

@@ -25,7 +25,7 @@ export class StuRebCardComponent implements OnInit {
   // @Input() public isApproved: boolean = false;
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/rebate-admin","/studentcard"];
-  @Input() public approval_state: string = "pending";
+  @Input() public approval_state: string = "accepted";
   @Output() public updateList = new EventEmitter();
 
   constructor(private dialog:MatDialog,private data_service:StudentdataService, private auth_service:AuthService, private router: Router, public auth:AuthService) { }

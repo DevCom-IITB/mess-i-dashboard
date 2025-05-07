@@ -49,6 +49,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 export const MY_DATE_FORMATS = {
@@ -112,7 +113,8 @@ export const MY_DATE_FORMATS = {
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatIconModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
+        MatIconModule,
+        MatSlideToggleModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
             { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
             { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
         ] })

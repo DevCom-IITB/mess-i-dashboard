@@ -24,13 +24,16 @@
 #range-date{
     display: none;
 }
+#official-toggle{
+    display: none;
+}
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
     }
     .rebate-card-container{
         position: relative;
-        top: 10vh;
+        top: 8vh;
     }
     #page-title{
         display: none;
@@ -50,6 +53,9 @@
         border-radius: 50px;
         padding: 4px 19px 4px 19px;
         border: none;
+        background-color: #ffffff;
+        font-family: "Open Sans";
+        font-weight: 600;
     }
     .btn-box{
         display: flex;
@@ -63,13 +69,10 @@
         gap: 30px;
     }
     #range-date{
-        position: relative;
-        top: 10vh;
-        left: 12px;
-        width: 260px;
-        display: flex;
+        width: 265px;
         border: none;
         border-radius: 8px;
+        display: block;
     }
     #calender-icon{
         position: absolute;
@@ -77,5 +80,60 @@
         right: -40px;
         z-index: 1;
         size: scale(2);
+    }
+    #calender-icon:hover{
+        cursor: pointer;
+    }
+    :host ::ng-deep .mat-mdc-text-field-wrapper{
+        background-color: #ffffff !important;
+        border-radius: 10px;
+    }
+    :host ::ng-deep .mat-mdc-form-field-bottom-align{
+        display: none !important;
+    }
+    #official-toggle{
+        display: flex;
+    }
+    #official-toggle-container{
+        width: 110px;
+        height: 56px;
+        z-index: 0;
+        background-color: #ffffff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    #official-toggle-container p{
+        margin-bottom: 0px;
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-weight: 600;
+    }
+    #range-date-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        top: 8vh;
+        padding-top: 1vh;
+    }
+    :host ::ng-deep .mdc-switch__track::after{
+        padding: 2px;
+        background-color: #ffc24b !important;
+    }
+    :host ::ng-deep .mdc-switch__track::before{
+        background-color: #ffffff !important;
+        border: 2px solid black;
+    }
+    :host ::ng-deep .mdc-switch__icons{
+        background-color: black !important;
+        border-radius: 50px;
+        margin: 0px;
+    }
+    :host ::ng-deep .mdc-switch__ripple::after{
+        background-color: #ffc24b !important;
     }
 }

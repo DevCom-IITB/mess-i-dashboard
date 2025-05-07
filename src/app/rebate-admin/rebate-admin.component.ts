@@ -34,7 +34,7 @@ export class RebateAdminComponent implements OnInit {
 
   initialise(): void {
     // // Populate with dummy data
-    this.accepted_rebates = [
+    this.pending_rebates = [
       {
         id: 'REB001',
         student: {
@@ -44,7 +44,7 @@ export class RebateAdminComponent implements OnInit {
           room: 'A-101',
           card_status: true
         },
-        fullname: 'John Doe',
+        fullname: 'Ganesh Preetham Vulise',
         roll: 'CS21B001',
         start: '2025-04-01',
         end: '2025-04-05',

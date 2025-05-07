@@ -126,6 +126,8 @@
     margin-bottom: 0px;
     position: relative;
     left: 0px;
+    font-size: 14px;
+    font-weight: 600;
 }
 #nobold{
     font-weight: 400;
@@ -140,4 +142,8 @@
 #days{
     position: relative;
     bottom: 10px;
+}
+#rebate-status-indicator{
+    position: absolute;
+    right: 36px;
 }
