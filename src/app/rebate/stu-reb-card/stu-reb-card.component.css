@@ -80,3 +80,54 @@
     word-break: break-all;
     white-space: normal;
 }
+@media screen and (max-width: 431px){
+    *{
+        font-family: 'Open Sans', sans-serif;
+        letter-spacing: 0%;
+    }
+    .small-italics{
+        font-style: normal;
+    }
+    #received-on{
+        font-size: 14px;
+    }
+    #student-details-container{
+        margin: 12px 0px;
+    }
+    #fullname{
+        font-size: 23px;
+        font-weight: 700;
+        width: 100%;
+    }
+    .rebate-card-container{
+        padding: 14px 12px;
+    }
+    #rebate-status-indicator{
+        height: auto;
+        width: auto;
+        position: relative;
+        top: 0px;
+    }
+    #stud-sub-details-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    #rollNo,#roomNo,#rebate-duration-start,#rebate-duration-end{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    #roomNo{
+        flex: 1;
+        position: static;
+        text-align: right;
+    }
+    #rebate-duration-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin: 12px 0px 0px 0px;
+    }
+}

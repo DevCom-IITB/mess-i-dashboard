@@ -5,6 +5,9 @@
     <div class="search-main-area">
       <input type="search" class="form-control nosubmit" [(ngModel)]="searchText" placeholder="Search by name or roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
     </div>
+    <div id="csv-download-container">
+      CSV <img src="\assets\IconSet\Icon=Download.svg" alt="downlaod-icon" role="button" (click)="downloadCSV()">
+    </div>
     <table class="table">
       <thead>
         <tr id="column-headers">

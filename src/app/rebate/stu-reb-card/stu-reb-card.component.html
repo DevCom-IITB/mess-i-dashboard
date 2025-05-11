@@ -1,8 +1,6 @@
 <div id="maindiv" class="rebate-card-container">
-  <span class="small-italics">Recieved on {{ p_request_recieved }}</span>
-  <div id="stud-details-container">
-    <span>{{ rebate_request.fullname }} </span>
-    <span
+  <span class="small-italics" id="received-on">Recieved on {{ p_request_recieved }}</span>
+  <span
       *ngIf="approval_state == 'pending'"
       id="rebate-status-indicator"
       ><img src="../../assets/RebateIcons/rebate-status-pending.svg" alt="Pending"></span
@@ -17,15 +15,20 @@
       id="rebate-status-indicator"
       ><img src="../../assets/RebateIcons/rebate-status-rejected.svg" alt="Rejected"></span
     >
+  <div id="stud-details-container">
+    <span id="fullname">{{ rebate_request.fullname }} </span>
   </div>
 
   <div id="stud-sub-details-container">
-    <span>{{ rebate_request.roll }} Room:{{ rebate_request.room }} </span>
+    <span id="rollNo">{{ rebate_request.roll }}</span>
+    <span id="roomNo">Room:{{ rebate_request.room }} </span>
   </div>
 
   <div id="rebate-duration-container">
-    <span id="rebate-duration">{{ p_rebate_start }} - {{ p_rebate_end }}</span
-    ><br />
+    <span id="rebate-duration-start">{{ p_rebate_start }}</span> <img src="../../assets/IconSet/Icon=DoubleArrow.svg" alt="arrow"> <span id="rebate-duration-end">{{ p_rebate_end }}</span>
+    <br />
+  </div>
+  <div id="days">
     <span class="small-italics">Both dates are inclusive</span>
   </div>
   <div class="row">

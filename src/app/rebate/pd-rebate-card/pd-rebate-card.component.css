@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
-*{
-    font-family: 'Open Sans', sans-serif;
-}
 .pd-rebate-card-container{
     min-width: 330px;
-    padding: 12px 36px;
+    padding: 14px 12px;
     border-radius: 12px;
     box-shadow: 6px 6px 50px -40px;
     background-color: white;
@@ -16,14 +13,18 @@
     font-size: 1.75rem;
     font-weight: 700;
 }
-#room-no{
-    position: absolute;
-    right: 36px;
-}
 #stud-sub-details-container{
     margin: 12px 0px;
     font-size: 16px;
     font-weight: 600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#room-no{
+    flex: 1;
+    text-align: right;
 }
 #rebate-duration-container {
     font-size: 16px;
@@ -91,16 +92,6 @@
     word-break: break-all;
     white-space: normal;
 }
-#official{
-    border: none;
-    background-color: white;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: "Open Sans";
-    width: auto;
-    position: absolute;
-    right: 24px;
-}
 .acc-rej{
     height: 48px;
     width: 132px;
@@ -145,5 +136,23 @@
 }
 #rebate-status-indicator{
     position: absolute;
-    right: 36px;
+    right: 12px;
 }
+#rebate-reason-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#official{
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    width: auto;
+}
+@media screen and (max-width: 431px) {
+    *{
+        font-family: 'Open Sans', sans-serif;
+    }
+} 

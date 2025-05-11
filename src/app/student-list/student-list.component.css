@@ -104,6 +104,9 @@ h2{
 #stud-cards{
   display: none;
 }
+#csv-download-container{
+  display: none;
+}
 @media screen and (max-width: 431px){
   .student-list-table-container{
     background-color: #28272c;
@@ -124,10 +127,10 @@ h2{
     background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
   }
   .search-main-area{
-    /* width: 80vw; */
+    width: 72vw;
     position: relative;
-    top: 8vh;
-    left: 0px;
+    top: 0vh;
+    left: 4px;
   }
   #main{
     background-color: #28272c;
@@ -135,14 +138,30 @@ h2{
     height: max-content;
   }
   #stud-cards{
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 95vw;
-    position: absolute;
-    top: 8vh;
+    position: relative;
+    top: -92vh;
+    left: 10px;
   }
   .search-main-area{
     background-color: #ffffff ;
     display: block;
     border-radius: 8px;
+  }
+  #csv-download-container{
+    font-family: "Open Sans";
+    font-weight: 600;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 43px;
+    position: relative;
+    top: -4.6vh;
+    left: 75vw;
   }
 }

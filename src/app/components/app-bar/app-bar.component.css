@@ -1,16 +1,16 @@
 .container {
     background-color: #28282B;
     color:#FFFFFF;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
+    top: 0%;
+    left: -4%;
+    width: 108%;
     height: 75px;
     background-color: #28282B;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 4px 0px #000000;
-    z-index: 10;
+    box-shadow: 0 4px 4px 0px #202020;
+    z-index: 2;
 }
 #menu{
     position: absolute;

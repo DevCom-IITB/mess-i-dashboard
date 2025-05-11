@@ -106,6 +106,7 @@ export class StudentListComponent implements OnInit {
     this.service.put_student_in_cache(temp_student);
     this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
   }
+  downloadCSV(): void {}
 
 
 

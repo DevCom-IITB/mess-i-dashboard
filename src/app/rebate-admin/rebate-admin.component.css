@@ -24,16 +24,17 @@
 #range-date{
     display: none;
 }
-#official-toggle{
+#official-toggle-container{
     display: none;
 }
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
+        padding-top: 0%;
     }
     .rebate-card-container{
         position: relative;
-        top: 8vh;
+        top: 1vh;
     }
     #page-title{
         display: none;
@@ -65,7 +66,7 @@
         width: 100%;
         height: 42px;
         position: relative;
-        top: 7vh;
+        top: 0.5vh;
         gap: 30px;
     }
     #range-date{
@@ -117,7 +118,7 @@
         justify-content: center;
         gap: 10px;
         position: relative;
-        top: 8vh;
+        top: 1vh;
         padding-top: 1vh;
     }
     :host ::ng-deep .mdc-switch__track::after{
