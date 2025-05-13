@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     },
     {
       title: 'Devices',
-      redirect: '/devices',
+      redirect: '/device-list',
       description: 'List of connected devices'
     },
   ];

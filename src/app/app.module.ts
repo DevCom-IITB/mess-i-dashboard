@@ -50,6 +50,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DeviceListComponent } from './device-list/device-list.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -99,6 +100,7 @@ export const MY_DATE_FORMATS = {
         AppBarComponent,
         HomeCardComponent,
         RebateCardComponent,
+        DeviceListComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

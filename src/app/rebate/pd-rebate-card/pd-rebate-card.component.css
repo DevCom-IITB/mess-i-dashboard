@@ -151,8 +151,6 @@
     font-family: "Open Sans";
     width: auto;
 }
-@media screen and (max-width: 431px) {
-    *{
-        font-family: 'Open Sans', sans-serif;
-    }
-} 
+*{
+    font-family: 'Open Sans', sans-serif;
+}

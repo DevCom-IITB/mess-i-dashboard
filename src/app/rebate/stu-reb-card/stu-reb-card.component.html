@@ -1,20 +1,22 @@
 <div id="maindiv" class="rebate-card-container">
-  <span class="small-italics" id="received-on">Recieved on {{ p_request_recieved }}</span>
-  <span
-      *ngIf="approval_state == 'pending'"
-      id="rebate-status-indicator"
-      ><img src="../../assets/RebateIcons/rebate-status-pending.svg" alt="Pending"></span
-    >
+  <div id="indicator">
+    <span class="small-italics" id="received-on">Recieved on {{ p_request_recieved }}</span>
     <span
-      *ngIf="approval_state == 'accepted'"
-      id="rebate-status-indicator"
-      ><img src="../../assets/RebateIcons/rebate-status-accepted.svg" alt="Accepted"></span
-    >
-    <span
-      *ngIf="approval_state == 'rejected'"
-      id="rebate-status-indicator"
-      ><img src="../../assets/RebateIcons/rebate-status-rejected.svg" alt="Rejected"></span
-    >
+        *ngIf="approval_state == 'pending'"
+        id="rebate-status-indicator"
+        ><img src="../../assets/RebateIcons/rebate-status-pending.svg" alt="Pending"></span
+      >
+      <span
+        *ngIf="approval_state == 'accepted'"
+        id="rebate-status-indicator"
+        ><img src="../../assets/RebateIcons/rebate-status-accepted.svg" alt="Accepted"></span
+      >
+      <span
+        *ngIf="approval_state == 'rejected'"
+        id="rebate-status-indicator"
+        ><img src="../../assets/RebateIcons/rebate-status-rejected.svg" alt="Rejected"></span
+      >
+    </div>
   <div id="stud-details-container">
     <span id="fullname">{{ rebate_request.fullname }} </span>
   </div>
@@ -29,13 +31,13 @@
     <br />
   </div>
   <div id="days">
-    <span class="small-italics">Both dates are inclusive</span>
+    <span id="noOfDays">{{ p_rebate_days }} days </span><span id="both-inclusive">(Both inclusive)</span>
   </div>
   <div class="row">
-    <p><b>Reason:</b> {{ p_rebate_reason }}</p>
+    <p>{{ p_rebate_reason }}</p>
   </div>
-  <div *ngIf="p_rebate_comment != ''" class="row">
-    <p><b>Reviewer Comment:</b> {{ p_rebate_comment }}</p>
+  <div *ngIf="p_rebate_comment != ''" class="comment">
+    <p>Comment: {{ p_rebate_comment }}</p>
   </div>
   <div id="rebate-doc-div">
     <button

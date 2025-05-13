@@ -11,6 +11,7 @@
     align-items: center;
     box-shadow: 0 4px 4px 0px #202020;
     z-index: 2;
+    margin-bottom: 12px;
 }
 #menu{
     position: absolute;

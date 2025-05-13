@@ -1,5 +1,5 @@
-<app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
 <div id="main">
+  <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
   <div class="student-list-table-container">
     <h1 style="border-bottom:3px solid #ffc42b;"> Students' List </h1>
     <div class="search-main-area">
@@ -57,6 +57,7 @@
   <div id="stud-cards">
     <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
       <app-home-card [app_bar_suffix]="app_bar_suffix" [stud]="stud" role="button" (click)="displayStudData(indexOfelemnet)"></app-home-card>
+      <!-- app-home-card is used in home page and student-list page -->
     </ng-container>
   </div>
 </div>

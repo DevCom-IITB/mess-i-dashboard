@@ -21,5 +21,6 @@
         <app-home-card class="mobile-view" id="guest-booking"></app-home-card> -->
         <ng-container *ngFor="let card of mobile_cards">
             <app-home-card [app_bar_suffix]="app_bar_suffix" [card]="card" (click)="redirect(card)"></app-home-card>
+            <!-- app-home-card is used in home page and student-list page -->
         </ng-container>
 </div>
