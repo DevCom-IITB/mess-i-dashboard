@@ -283,6 +283,7 @@ export class RebateAdminComponent implements OnInit {
    }
 
   updateTab(tabName: string): void {
+    this.currTab = tabName;
     // This would typically fetch data based on the selected tab
     console.log(`Tab changed to: ${tabName}`);
     // For now, we're using the data already loaded in initialise()

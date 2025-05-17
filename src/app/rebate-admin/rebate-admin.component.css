@@ -56,7 +56,9 @@
         border: none;
         background-color: #ffffff;
         font-family: "Open Sans";
-        font-weight: 600;
+        font-weight: 500;
+        color: #5f6368;
+        transition: all 0.15s ease-in-out;
     }
     .btn-box{
         display: flex;
@@ -68,6 +70,14 @@
         position: relative;
         top: 0.5vh;
         gap: 30px;
+    }
+    .btn-box button.active{
+        background-color: #ffce5d;
+        color: #28272c;
+        width: 112.8px;
+        font-size: 16.8px;
+        font-weight: 600;
+        transition: all 0.15s ease-in-out;
     }
     #range-date{
         width: 265px;

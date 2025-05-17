@@ -1,5 +1,5 @@
 <div id="main-container" class="main-container">
-    <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar>
+    <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
         <div id="pending-rebates-container" class="pending-rebates-container" *ngIf="auth_service.isRebate()">
             <h1 style="border-bottom:3px solid #FFC42B;">Pending Rebates</h1>
             <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll" *ngIf="pending_rebates.length>0">
@@ -16,10 +16,7 @@
                 <app-devices [device]="device"></app-devices>
             </ng-container>
         </div>
-        <!-- <app-home-card class="mobile-view" id="rebate"></app-home-card>
-        <app-home-card class="mobile-view" id="stats"></app-home-card>
-        <app-home-card class="mobile-view" id="guest-booking"></app-home-card> -->
-        <ng-container *ngFor="let card of mobile_cards">
+        <ng-container *ngFor="let card of mobile_cards"> <!-- Only for mobile view -->
             <app-home-card [app_bar_suffix]="app_bar_suffix" [card]="card" (click)="redirect(card)"></app-home-card>
             <!-- app-home-card is used in home page and student-list page -->
         </ng-container>

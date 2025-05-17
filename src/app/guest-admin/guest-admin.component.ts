@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { GuestdataService } from '../guestdata.service';
+// import { exists } from 'fs';
+// import { exists } from 'fs';
 
 @Component({
   selector: 'app-guest-admin',
@@ -25,6 +27,25 @@ export class GuestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGuestHostel()
+    this.guestHistory ={
+      exists: true,
+      loaded: true,
+      headers: this.headers,
+      body: [
+        {
+          token: "Token No.1",
+          roll: "Roll No.1",
+          name: "Ganesh Preetham Vulise",
+          hostel: "H16"
+        },
+        {
+          token: "Token No.2",
+          roll: "Roll No.1",
+          name: "Ganesh Preetham Vulise",
+          hostel: "H16"
+        }
+      ]
+    }
   }
 
   getGuestHostel(){
@@ -55,7 +76,7 @@ export class GuestAdminComponent implements OnInit {
         guest.push(history["data"]["guests"][key][rollNo]["hostel"])
         body.push(guest)
       }
-      let res={headers:this.headers,body:body}
+      let res={headers:this.headers,body:body,exists:true, loaded:true}
       return res;
     }
     return {}
