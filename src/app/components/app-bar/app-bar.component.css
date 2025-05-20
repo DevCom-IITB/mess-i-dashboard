@@ -36,6 +36,11 @@
     top: 53%;
     color: #BEBEBE
 }
+#home-icon{
+    position: relative;
+    left: 75vw;
+    align-items: center;
+}
 @media screen and (min-width: 431px){
     .container{
         display: none

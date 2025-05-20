@@ -12,4 +12,7 @@ export class AppBarComponent {
   toggleMenu(): void {
     this.router.navigate(['/home']);
   }
+  goToHome(): void {
+    this.router.navigate(['/home']);
+  }
 }

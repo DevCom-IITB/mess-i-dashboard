@@ -7,6 +7,8 @@ import { RebateRequest } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 import {saveAs} from 'file-saver-es';
 import { FilterService } from '../filter.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-rebate-admin',
@@ -21,6 +23,11 @@ export class RebateAdminComponent implements OnInit {
   currTab: String = "pending";
   CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
   includeCSV:boolean = true;
+  range = new FormGroup({
+    start : new FormControl<Date | null>(null),
+    end : new FormControl<Date | null>(null)
+  });
+  toggle: boolean = false;
 
   constructor(private filter_service:FilterService, private data_service:StudentdataService,private auth:AuthService,private dialog:MatDialog, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -306,5 +313,11 @@ export class RebateAdminComponent implements OnInit {
     console.log('Download CSV requested');
     // This would export the current data as CSV
     alert('CSV download would start here in a real implementation');
+  }
+
+  onToggleChange(event : MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    console.log('Toggle state:', this.toggle);
   }
 }

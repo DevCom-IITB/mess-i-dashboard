@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./studentcard.component.css']
 })
 export class StudentcardComponent implements OnInit {
+  app_bar_suffix : string = "Student Card";
   process:boolean=false;
   rollNumber: any;
   student : any;
