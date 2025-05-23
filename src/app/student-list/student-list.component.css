@@ -105,7 +105,7 @@ h2{
 #stud-cards{
   display: none;
 }
-#csv-download-container{
+#csv-download-container, #official-toggle-container{
   display: none;
 }
 @media screen and (max-width: 431px){
@@ -139,7 +139,7 @@ h2{
     position: relative;
   }
   .search-main-area{
-    width: 70vw;
+    width: 46.5vw;
     background-color: #ffffff ;
     display: block;
     border-radius: 8px;
@@ -156,5 +156,39 @@ h2{
     width: 15vw;
     height: 43px;
     position: static;
+  }
+  #official-toggle-container{
+      width: 120px;
+      height: 43px;
+      z-index: 0;
+      background-color: #ffffff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      /* padding: 10px !important; */
+  }
+  #official-toggle-container p{
+      margin-bottom: 0px;
+      font-family: "Open Sans";
+      font-size: 14px;
+      font-weight: 600;
+  }
+  :host ::ng-deep .mdc-switch__track::after{
+      padding: 2px;
+      background-color: #ffc24b !important;
+  }
+  :host ::ng-deep .mdc-switch__track::before{
+      background-color: #ffffff !important;
+      border: 2px solid black;
+  }
+  :host ::ng-deep .mdc-switch__icons{
+      background-color: black !important;
+      border-radius: 50px;
+      margin: 0px;
+  }
+  :host ::ng-deep .mdc-switch__ripple::after{
+      background-color: #ffc24b !important;
   }
 }

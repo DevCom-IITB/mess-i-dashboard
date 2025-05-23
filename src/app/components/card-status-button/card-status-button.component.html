@@ -1,5 +1,5 @@
 <div *ngIf="cardStatus && process===false">
-    <button type="button" class="status-button mode-active" id="1" (click)="toggl()">
+    <button type="button" class="status-button mode-active" id="green" (click)="toggl()">
       <div class="container px-1 py-0">
         <div class="row">
           <div class="col px-0 align-items-center ">
@@ -8,10 +8,11 @@
           <div style="color:#000000" class="col px-1 py-0">Active  </div>
         </div>
       </div>
+      <img src="..\assets\IconSet\Icon=Active.svg" alt="Active">
     </button>
 </div>
 <div *ngIf="!cardStatus && process===false">
-    <button type="button" class="status-button mode-inactive" id="2" (click)="toggl()">
+    <button type="button" class="status-button mode-inactive" id="red" (click)="toggl()">
       <div class="container px-1 py-0">
         <div class="row">
           <div class="col px-0 align-items-center ">
@@ -20,10 +21,11 @@
           <div style="color:#000000" class="col px-1 py-0">Inactive</div>
         </div>
       </div>
+      <img src="..\assets\IconSet\Icon=Inactive.svg" alt="">
     </button>
 </div>
 <div *ngIf="process===true">
-    <button type="button" class="status-button mode-intermediate" id="3" [disabled]="true">
+    <button type="button" class="status-button mode-intermediate" id="grey" [disabled]="true">
       <div class="container px-1 py-0">
         <div class="row">
           <div class="col px-1 py-0"> . . . </div>

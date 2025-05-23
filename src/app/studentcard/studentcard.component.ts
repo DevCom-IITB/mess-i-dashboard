@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '../interfaces';
 import { StudentdataService } from '../studentdata.service';
 import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RebateRequest } from '../interfaces';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-studentcard',
@@ -21,14 +23,95 @@ export class StudentcardComponent implements OnInit {
   date = new Date();
   studentImage:any;
   isImageLoading:any;
+  currTab: string = 'pending';
+  pending_rebates: RebateRequest[] = new Array();
+  accepted_rebates: RebateRequest[] = new Array();
+  rejected_rebates: RebateRequest[] = new Array();
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
+  mobile_headers = ["Day", "Breakfast", "Lunch","Snacks","Dinner"]
+  mobile_body = [[1,"23:59","23:59","23:59","23:59"],[2,"23:59","23:59","23:59","23:59"],[3,"23:59","23:59","23:59","23:59"],[4,"23:59","23:59","23:59","23:59"],[5,"23:59","23:59","23:59","23:59"],[6,"23:59","23:59","23:59","23:59"],[7,"23:59","23:59","23:59","23:59"]]
+  toggle: boolean = false;
 
-  constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog) {
+  constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog, private router: Router) {
    }
 
   ngOnInit(): void {
     this.rollNumber = this.route.snapshot.queryParams['rollNum'];
-    this.fetch_student(this.rollNumber) 
+    this.fetch_student(this.rollNumber);
+    this.initialise();
+  }
+  initialise(): void {
+    this.pending_rebates = [
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'Ganesh Preetham Vulise',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      }
+    ];
+    this.accepted_rebates = [
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'Ganesh Preetham Vulise',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      }
+    ];
+    this.rejected_rebates = [
+      {
+        id: 'REB001',
+        student: {
+          id: 'S12345',
+          name: 'John Doe',
+          hostel: 'Brahmaputra',
+          room: 'A-101',
+          card_status: true
+        },
+        fullname: 'Ganesh Preetham Vulise',
+        roll: 'CS21B001',
+        start: '2025-04-01',
+        end: '2025-04-05',
+        rebate_docname: 'medical_certificate.pdf',
+        official: 'Dr. Smith',
+        reason: 'Medical Leave',
+        comment: 'Hospitalized for 5 days',
+        request_date: '2025-03-29',
+        room: 'A-101'
+      }
+    ];
+    this.mess_data = {
+      headers: this.mobile_headers,
+      body: this.mobile_body
+    }
+    console.log(this.pending_rebates, this.accepted_rebates, this.rejected_rebates);
   }
 
   async fetch_student(rollNum: any){
@@ -138,6 +221,23 @@ export class StudentcardComponent implements OnInit {
          reader.readAsDataURL(image);
       }
   }
-
-
+  goBack(): void {
+    this.router.navigate(['/list']);
+  }
+  updateTab(tabName: string): void {
+    this.currTab = tabName;
+    // This would typically fetch data based on the selected tab
+    console.log(`Tab changed to: ${tabName}`);
+    // For now, we're using the data already loaded in initialise()
+  }
+  updateList(event: any): void {
+    // This would typically refresh data after an update
+    console.log('Update requested', event);
+    this.initialise();
+  }
+  onToggleChange(event: MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    console.log('Toggle state:', this.toggle);
+  }
 }

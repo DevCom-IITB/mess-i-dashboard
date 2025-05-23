@@ -8,6 +8,7 @@ import { HostListener } from '@angular/core';
 import { Student } from '../interfaces';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-student-list',
@@ -21,7 +22,7 @@ export class StudentListComponent implements OnInit {
   studentInfoList : any =[
   ["24B1243",{
     fullname: "Ganesh Preetham Vulise",
-    hostel: "Hostel 16",
+    hostel: "16",
     room: "A-908",
     mess_allowed: true,
   }],
@@ -42,6 +43,7 @@ export class StudentListComponent implements OnInit {
   justAfterScrolling = true;
   subject = new Subject();
   app_bar_suffix : string = "Student List";
+  toggle : boolean = false;
   
   constructor(private stateService: StateService,private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -106,7 +108,14 @@ export class StudentListComponent implements OnInit {
     this.service.put_student_in_cache(temp_student);
     this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
   }
-  downloadCSV(): void {}
+  downloadCSV(): void {
+    console.log("Will be written afterwards");
+  }
+  onToggleChange(event : MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    console.log('Toggle state:', this.toggle);
+  }
 
 
 

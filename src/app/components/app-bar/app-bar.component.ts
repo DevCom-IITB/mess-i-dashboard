@@ -10,7 +10,7 @@ export class AppBarComponent {
   @Input() suffix: string ;
   constructor(private router: Router) { }
   toggleMenu(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/list']);
   }
   goToHome(): void {
     this.router.navigate(['/home']);

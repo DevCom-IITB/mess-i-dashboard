@@ -68,3 +68,14 @@
   background-color: inherit;
   color: goldenrod;
 }
+@media screen and (max-width: 431px) {
+  #stud-table{
+    color: #ffffff;
+  }
+  .csv-btn{
+    display: none;
+  }
+  .first-column{
+    color: #ffce5d;
+  }
+}

@@ -30,7 +30,7 @@
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
-        padding-top: 0%;
+        padding: 0% 4%;
     }
     .rebate-card-container{
         position: relative;
@@ -44,6 +44,7 @@
     }
     #myTab2{
         display: flex;
+        border-bottom: none;
     }
     #date-filter{
         display: none;
