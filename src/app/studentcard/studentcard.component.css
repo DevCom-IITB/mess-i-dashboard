@@ -79,9 +79,9 @@ p.tgl{
   z-index: 2;
   text-align: center;
   text-decoration: none;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   cursor: pointer;
-  margin-top: 12px;
+  /* margin-top: 12px; */
   user-select: none;
   height: 36px;
   border: 1px solid transparent;
@@ -168,8 +168,33 @@ border-radius: 50000px;
   *{
     font-family: "Open Sans", "sans-serif";
   }
-  #rollno1,.btn-primary,select,.reb-button, #desktop-table{
+  #rollno1,#desktop-get-btn,#desktop-date-picker,.reb-button, #desktop-table{
     display: none;
+  }
+  .form-inline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-select{
+    background-color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px !important;
+    margin: 0px;
+  }
+  .input-group{
+    width: 92vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px !important;
+  }
+  .btn-primary{
+    color: #28272c;
+    background-color: #ffffff;
+    border-radius: 8px !important;
+    height: 40px;
+    margin: 0px;
   }
   .container-fluid{
     padding: 0% 4%;
@@ -238,8 +263,12 @@ border-radius: 50000px;
     display: flex;
     border-bottom: 3px solid #ffce5d;
   }
+  ul{
+    margin-bottom: 16px;
+  }
   #myTabContent{
     display: block;
+    padding-top: 2%;
   }
   .nav-link{
     border: none;

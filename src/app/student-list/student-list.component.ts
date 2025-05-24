@@ -109,7 +109,7 @@ export class StudentListComponent implements OnInit {
     this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
   }
   downloadCSV(): void {
-    console.log("Will be written afterwards");
+    console.log("Download CSV function will be written afterwards");
   }
   onToggleChange(event : MatSlideToggleChange): void {
     const isChecked = event.checked;

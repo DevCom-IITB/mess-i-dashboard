@@ -107,11 +107,6 @@ export class StudentcardComponent implements OnInit {
         room: 'A-101'
       }
     ];
-    this.mess_data = {
-      headers: this.mobile_headers,
-      body: this.mobile_body
-    }
-    console.log(this.pending_rebates, this.accepted_rebates, this.rejected_rebates);
   }
 
   async fetch_student(rollNum: any){
