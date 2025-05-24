@@ -77,7 +77,7 @@
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
-            <form #data="ngForm" (ngSubmit)="getMonthData(data)" class="form-inline">
+            <form #mobileData="ngForm" (ngSubmit)="getMonthData(mobileData)" class="form-inline">
                 <div class="input-group mb-6" style="max-width: 80%; ;">
                     <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
                         <option value="" disabled selected>Month</option>
@@ -93,7 +93,8 @@
             <app-table-component *ngIf="mess_data" [data]="mess_data" id="mobile-table"></app-table-component>
         </div>
     </div> 
-    <form #data="ngForm" (ngSubmit)="getMonthData(data)" class="form-inline">
+
+    <form #desktopData="ngForm" (ngSubmit)="getMonthData(desktopData)" class="form-inline">
         <div class="input-group mb-6" id="desktop-date-picker">
             <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
                 <option value="" disabled selected>Select a Month</option>

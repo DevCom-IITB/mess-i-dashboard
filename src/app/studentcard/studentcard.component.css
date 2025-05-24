@@ -164,11 +164,14 @@ border-radius: 50000px;
 #myTab, #myTabContent{
   display: none;
 }
+#desktop-table {
+    display: block;
+}
 @media screen and (max-width: 431px){
   *{
     font-family: "Open Sans", "sans-serif";
   }
-  #rollno1,#desktop-get-btn,#desktop-date-picker,.reb-button, #desktop-table{
+  #rollno1,#desktop-get-btn,#desktop-date-picker,.reb-button,#desktop-table{
     display: none;
   }
   .form-inline{

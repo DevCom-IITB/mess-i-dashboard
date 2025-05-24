@@ -193,6 +193,7 @@ export class StudentcardComponent implements OnInit {
         console.log(res)
         this.mess_data = this.cleanData({})
       });
+      console.log(this.mess_data);
     }
   }
 
