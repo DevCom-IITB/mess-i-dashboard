@@ -42,6 +42,77 @@ button{
 button:hover{
     background-color: #FFC42B;
 }
+.nav-link{
+    color: black;
+}
+.mobile-csv-download{
+    display: none;
+}
 @media screen and (max-width: 431px){
-    
+    .container{
+        padding-top: 0%;
+        background-color: #28272c;
+    }
+    #heading, hr, #table, #meal_dropdown, #get-button{
+        display: none;
+    }
+    .nav-item{
+        width: fit-content;
+    }
+    .nav-link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 17.14vw;
+        height: 50px;
+        border-radius: 50px;
+        padding: 4px 19px 4px 19px;
+        margin: 0px 8px;
+        border: none;
+        background-color: #ffffff;
+        font-size: 12px;
+        font-family: "Open Sans";
+        font-weight: 500;
+        color: #5f6368;
+        transition: all 0.15s ease-in-out;
+    }
+    .btn-box button.active{
+        background-color: #ffce5d;
+        color: #28272c;
+        width: 20.76vw;
+        font-size: 14.4px;
+        font-weight: 600;
+        transition: all 0.15s ease-in-out;
+    }
+    #myTab{
+        margin: 8px 0px 16px !important;
+        display: flex;
+        border-bottom: none;
+        height: 50px;
+        justify-content: center;
+    }
+    /* All the importants are added because they have a diff css designed in their component acc to desktop view */
+    .input-group{
+        width: 92vw;
+        margin-bottom: 4px !important;
+    }
+    .form-control{
+        margin-left: 0px !important;
+        background-color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        height: 42px !important;
+    }
+    .mobile-csv-download{
+        background-color: #ffffff;
+        font-weight: 600;
+        border-radius: 8px !important;
+        padding: 14px 12px;
+        position: relative;
+        /* left: 10vw; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 42px;
+    }
 }

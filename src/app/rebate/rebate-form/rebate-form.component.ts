@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { StudentdataService } from 'src/app/studentdata.service';
+import { FormControl } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-rebate-form',
@@ -21,6 +23,11 @@ export class RebateFormComponent implements OnInit {
   isUpdateRequest: boolean = false;
   rebateID: string = '';
   rebate_docname: string = "";
+  app_bar_suffix :string = 'New Rebate';
+  startDate = new FormControl();
+  endDate = new FormControl();
+  dayCount: string = 'days';
+  mobile_toggle: boolean = false;
 
   constructor(private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -35,6 +42,7 @@ export class RebateFormComponent implements OnInit {
       this.rebateID = current_state?.id;
       this.isOfficialRebate = current_state.official;
       this.rebate_docname = current_state.rebate_docname;
+      this.mobile_toggle = current_state.official;
     }
   }
 
@@ -81,5 +89,35 @@ export class RebateFormComponent implements OnInit {
   generateRebateID(startDate: string,endDate: string, rollNo: string){
     return rollNo+'_'+startDate+'_'+endDate;
   }
-
+  getDateRange() {
+    return {
+      startDate: this.startDate.value.toISOString().split('T')[0], // Format to YYYY-MM-DD
+      endDate: this.endDate.value.toISOString().split('T')[0]
+    };
+  }
+  applyDateRange() {
+    const range = this.getDateRange();
+    console.log('Date Range:', range);
+    this.dayCount = this.noOfDays(range.startDate, range.endDate)+" days";
+    const dayCountDiv = document.getElementById('noOfDays');
+    if(dayCountDiv){
+      dayCountDiv.innerHTML = this.dayCount;
+      dayCountDiv.style.color = '#28272c';
+    }
+    // Use the range for your logic
+  }
+  noOfDays(start: string, end: string): string{
+    let startDate = new Date(Date.parse(start));
+    let endDate = new Date(Date.parse(end));
+    let diff = Math.abs(endDate.getTime() - startDate.getTime());
+    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
+    return diffDays.toString();
+  }
+  onToggleChange(event : MatSlideToggleChange): void {
+      const isChecked = event.checked;
+      this.mobile_toggle = isChecked;
+      this.isOfficialRebate = isChecked;
+      
+      console.log('Toggle state:', this.mobile_toggle);
+    }
 }

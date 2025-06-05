@@ -27,9 +27,7 @@ export class StudentcardComponent implements OnInit {
   pending_rebates: RebateRequest[] = new Array();
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
-  headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
-  mobile_headers = ["Day", "Breakfast", "Lunch","Snacks","Dinner"]
-  mobile_body = [[1,"23:59","23:59","23:59","23:59"],[2,"23:59","23:59","23:59","23:59"],[3,"23:59","23:59","23:59","23:59"],[4,"23:59","23:59","23:59","23:59"],[5,"23:59","23:59","23:59","23:59"],[6,"23:59","23:59","23:59","23:59"],[7,"23:59","23:59","23:59","23:59"]]
+  headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','  Egg  ','Fruit']
   toggle: boolean = false;
 
   constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog, private router: Router) {
@@ -56,7 +54,7 @@ export class StudentcardComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: false,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -78,7 +76,7 @@ export class StudentcardComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -100,7 +98,7 @@ export class StudentcardComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',

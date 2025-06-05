@@ -1,0 +1,32 @@
+<div class="calender-container">
+    <div id="weekDays">
+        <div *ngFor=" let weekday of weekdays()">
+            {{ weekday }}
+        </div>
+    </div>
+    <div id="calender-grid">
+        <div [ngClass]="{'calender-grid-cell': true}" *ngFor="let day of daysOfMonth(); let i = index" class="calender-day">
+            {{ day.day }}
+        </div>
+    </div>
+
+
+
+
+
+
+    <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('Breakfast')">Breakfast</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('Lunch')">Lunch</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('Snacks')">Snacks</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="button" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateTab('Dinner')">Dinner</button>
+        </li>
+    </ul>
+</div>

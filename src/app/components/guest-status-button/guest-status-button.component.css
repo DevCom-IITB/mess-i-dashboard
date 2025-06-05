@@ -36,3 +36,26 @@
 .align-self-center{
   align-self: center;
 }
+.mobile-only{
+  display: none;
+}
+@media screen and (max-width: 431px){
+  .desktop-only{
+    display: none;
+  }
+  .mobile-only{
+    display: block;
+  }
+  .mobile-only button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #ffce5d;
+    border-radius: 50px;
+    border: 2px solid #ffce5d;
+  }
+}

@@ -10,18 +10,24 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
-  hostel_selectable: boolean = false;
-  roll_selectable: boolean = false;
+  hostel_selectable: boolean = true;
+  roll_selectable: boolean = true;
   allowedHostels:boolean[] = new Array<boolean>(22);
   hostelmessHistory:any = {exists:true, loaded:false};
   studentmessHistory:any = {exists:true, loaded:false};
   noOfDays:any;
   noOfDays2:any;
+  selectedMonth: number;
+  selectedYear: number;
+  app_bar_suffix: string = "Statistics";
   date = new Date();
-  headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit']
+  headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit'];
   MEALS = ['Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Milk', 'Egg', 'Fruit'];
   COLORS = ['#fc5095', '#fc9a50', '#cefc50', '#fce250', '#87fc50', '#fc5350', '#50fca9'];
-  COLORS_RGB = ['rgb(252, 80, 149)', 'rgb(252, 154, 80)', 'rgb(206, 252, 80)', 'rgb(252, 226, 80)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)']
+  // COLORS_RGB = ['rgb(251, 80, 148)', 'rgb(253, 155, 84)', 'rgb(206, 252, 81)', 'rgb(252, 226, 81)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)'];
+  COLORS_RGB = ['rgb(252, 80, 149)', 'rgb(252, 154, 80)', 'rgb(206, 252, 80)', 'rgb(252, 226, 80)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)'];
+  public on_admin_page:boolean ;
+  private adminRoutes: string[] = ["/statistics"];
 
 
 
@@ -33,6 +39,7 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.getAdminHostel();
     this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
+    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
   getAdminHostel(){
@@ -75,6 +82,8 @@ export class StatisticsComponent implements OnInit {
       y: Array.from(mp.values() as Iterable<number[]>),
       labels: Array.from(mp.keys() as Iterable<string>),
       meal_counts: Array.from(mp.values() as Iterable<number[]>).map((subarray) => subarray.reduce((acc, value) => acc + (value>0 ? 1 : 0), 0)),
+      heatmapz: Array.from(mp.values() as Iterable<number[]>).map(arr => [0].concat(arr)),
+      colors: this.COLORS_RGB,
       exists: true,
       loaded: true
     };
@@ -90,7 +99,9 @@ export class StatisticsComponent implements OnInit {
 
     this.hostelmessHistory = {exists:true, loaded:false};
     this.studentmessHistory = {exists:true, loaded:false};
-
+    this.selectedMonth = parseInt(data.form.value.month);
+    this.selectedYear = parseInt(data.form.value.year);
+    console.log("Selected Month:", this.selectedMonth, "Selected Year:", this.selectedYear);
     await this.plotHostelData(data);
     await this.plotStudentData(data);
   }
@@ -122,7 +133,8 @@ export class StatisticsComponent implements OnInit {
   genStudentPlotData(history: any){
     let orged_data = this.dictifyStudentData(history);
     if(Array.from(orged_data.keys() as Iterable<any>).length == 0) return {exists:false, loaded:true};
-    let hz = Array.from(orged_data.values() as Iterable<number[]>);let sms = hz.map((subarray) => subarray.reduce((acc,value) => acc+(value>0?1:0), 0));
+    let hz = Array.from(orged_data.values() as Iterable<number[]>);
+    let sms = hz.map((subarray) => subarray.reduce((acc,value) => acc+(value>0?1:0), 0));
     let nzidx = sms.map((value, index) => (value>0?index:-1)).filter((value) => value>=0);
     let utilization = sms.map((value, index) => {let sum = this.hostelmessHistory.meal_counts[index];return (sum>0?value/sum:'-');});
 
@@ -144,11 +156,9 @@ export class StatisticsComponent implements OnInit {
       await this.service.getHostelStats(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>{
         this.hostelmessHistory = this.genHostelPlotData(res);
         this.plot.plotMultiline("Hostel Statistics", "mess_data", this.hostelmessHistory.x, this.hostelmessHistory.y, this.hostelmessHistory.labels);
-        console.log("hi",this.service.getHostelStats)
-      
+        // this.plot.plotHeatmap("Hostel Meal Distribution", "hostel_heatmap", this.noOfDays, this.hostelmessHistory.heatmapz, this.hostelmessHistory.colors, this.hostelmessHistory.labels);
       }).catch((res)=>{
         console.log(res)
-        console.log("hi" , this.service.getHostelStats)
         this.hostelmessHistory = {exists:false, loaded:true};
       });
     }
@@ -167,5 +177,7 @@ export class StatisticsComponent implements OnInit {
       });
     }
   }
-
+  isStudentPage() {
+    return this.auth.isStudent() && !this.on_admin_page;
+  }
 }

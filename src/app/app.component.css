@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 body{
     background-color: #fff4d8;
 }
@@ -211,6 +212,9 @@ body{
 /* so that this can show up just worked */
 
 @media screen and (max-width: 431px){
+    *{
+        font-family: "Open Sans", "sans-serif";
+    }
     #mobile-navbar{
         display: none;
     }

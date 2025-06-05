@@ -10,7 +10,7 @@
                 <span id="name">{{ student.name }}</span>
                 <div class="rollnohostel">
                     <div id="rollandhostel">
-                        <p class="rollno" id="rollno1">Roll no:</p>
+                        <!-- <p class="rollno" id="rollno1">Roll no:</p> -->
                         <p class="rollno" id="rollno2">Roll no.</p> 
                         <p id="hostel" style="margin-top:0px;"> Hostel, Room no:<p>
                     </div>                                      
@@ -67,13 +67,13 @@
                 </div>
             </div>
             <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
-                <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)"></app-pd-rebate-card>
+                <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)" *ngIf="!toggle || (toggle && p_rebate.official)"></app-pd-rebate-card>
             </div>
             <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
-                <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted"></app-stu-reb-card>
+                <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" *ngIf="!toggle || (toggle && a_rebate.official)"></app-stu-reb-card>
             </div>
             <div class="rebate-card-container" *ngFor="let r_rebate of rejected_rebates">
-                <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected"></app-stu-reb-card>
+                <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected" *ngIf="!toggle || (toggle && r_rebate.official)"></app-stu-reb-card>
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >

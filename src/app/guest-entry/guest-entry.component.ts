@@ -14,12 +14,14 @@ export class GuestEntryComponent implements OnInit {
   
   guest:any;
   guest_detail:any;
-  guest_data:any;
+  guest_data:any = [["1","H34","2025-06-06","Dinner",true],["1","H34","2025-06-06","Dinner",true],["1","H34","2025-06-06","Dinner",true]];
   name:string;
   hostel:string;
+  card_data:any[] = ['1', '24B1243', 'Ganesh Preetham Vulise', 'H34', false];
 
   history:any;
   errMsg = "";
+  app_bar_suffix: string = 'Guest Bookings';
 
   day1 = new Date();
   temp_day = new Date();
@@ -31,19 +33,21 @@ export class GuestEntryComponent implements OnInit {
   legel_date=[this.date1,this.date2,this.date3]
 
   constructor(private auth:AuthService, private router:Router, private guestService:GuestdataService, private datePipe:DatePipe) { 
-    if (!this.auth.isLoggedIn()){
-      this.router.navigate(['login'])
-    }if (!this.auth.isSSOLogin()){
-      this.router.navigate(['landing'])
-    }
+    // if (!this.auth.isLoggedIn()){
+    //   this.router.navigate(['login'])
+    // }if (!this.auth.isSSOLogin()){
+    //   this.router.navigate(['landing'])
+    // }
   }
 
   ngOnInit(): void {
-    this.fetch_guest(this.auth.getRoll())
-    this.getGuestDetail()
+    this.fetch_guest("23B2287");
+    // this.fetch_guest(this.auth.getRoll());
+    // this.getGuestDetail()
+    console.log(this.guest_data)
   }
 
-  async fetch_guest(rollNum: any){
+  async fetch_guest(rollNum: any = "23B2287"){
     if(this.guestService.guestCache.has(rollNum)){
       this.guest = this.guestService.guestCache.get(rollNum);
     }else{
@@ -82,13 +86,16 @@ export class GuestEntryComponent implements OnInit {
       }
     }
     return body
+    // return [["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
   }
   
   async getGuestDetail(){
-    this.guest_data={}
+    this.guest_data=[];
     let promises = this.legel_date.map(date => this.guestService.getGuestData(this.auth.getRoll(),date));
     let history = await Promise.all(promises);
-    this.guest_data=this.cleanData(history)
+    this.guest_data=this.cleanData(history);
+    this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
+    console.log(this.guest_data);
   }
 
   updateList(){

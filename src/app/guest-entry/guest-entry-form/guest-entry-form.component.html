@@ -1,4 +1,5 @@
 <div class="main-container">
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
     <span class="page-title">Guest Application</span>
     <br>
 
@@ -6,8 +7,10 @@
 
     <div id="form-container">
         <div id="hostel-container">
+            <img src="..\assets\IconSet\Icon=Hostel-bgBlack.svg" alt="hostel" class="icon">
+            <span class="titles">Hostel</span>
             <select class="form-select" [(ngModel)]="guestHostel" name="guestHostel" id="hostel_dropdown" aria-label="Select a Guest hostel" aria-placeholder="Hostel Name" (change)="search($event)" ngModel>
-                <option value="" disabled selected>Select Hostel</option>
+                <option value="" disabled selected style="color: #bebebe;">Select Hostel</option>
                 <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
                     <option *ngIf="allowedHostels[hostel] && guest.hostel !== 'H'+hostel" [value]="'H' + hostel">H{{ hostel }}</option>
                   </ng-container>   
@@ -16,16 +19,19 @@
             </select>        
         </div>
         <div id="meal-container">
+            <img src="..\assets\IconSet\Icon=Food-Dish-bgBlack.svg" alt="" class="icon">
+            <span class="titles">Meal Options</span>
             <select class="form-select" [(ngModel)]="meal" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" (change)="search($event)" ngModel>
                 <option value="" disabled selected>Select Meal</option>
                 <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
             </select>       
         </div>
         <div id="date-container">
+            <span class="titles">Date</span>
             <app-input-field label="date" inputType="calender" [(inputModel)]="date" (change)="search($event)"></app-input-field>
         </div>
         <div *ngIf="notAVL" id="avl-container">
-            <h3 style="color: red;">Not Available</h3>
+            <h3 style="color: red; font-family: 'Open Sans'; margin: 0px">Not Available</h3>
         </div>
         <div *ngIf="availability && !notAVL" id="avl-container">
             <h3 style="color: green;">{{availability}}</h3>

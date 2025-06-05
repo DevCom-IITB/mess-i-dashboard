@@ -56,3 +56,51 @@ select.form-select{
 #confirm-btn:hover{
     background-color: #28282b;
 }
+.icon, .titles{
+    display: none;
+}
+@media screen and (max-width: 431px) {
+    .main-container{
+        padding: 0% 4% 4% 4%;
+    }
+    .page-title, #form-instructions{
+        display: none;
+    }
+    #form-container{
+        display: flex;
+        position: relative;
+        top: -3%;
+    }
+    #hostel-container, #meal-container, #date-container{
+        width: 100%;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .form-select{
+        height: 56px;
+        border: none;
+        margin: 2vh 0vh 0vh 0vh !important;
+        padding: 6px 36px 6px 50px !important;
+        background-color: #ffffff !important;
+        border-radius: 50px;
+        color: #bebebe;
+    }
+    .icon{
+        display: block;
+        position: relative;
+        top: 78.14px;
+        left: 20px;
+    }
+    #confirm-btn{
+        width: 100%;
+        height: 56px;
+        margin: 0px;
+        border-radius: 50px;
+        color: #28272c;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .titles{
+        display: block;
+    }
+}

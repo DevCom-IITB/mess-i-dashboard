@@ -363,4 +363,10 @@ border-radius: 50000px;
   :host ::ng-deep .mdc-switch__ripple::after{
       background-color: #ffc24b !important;
   }
+  #mobile-table{
+    margin-top: 18px;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
 }

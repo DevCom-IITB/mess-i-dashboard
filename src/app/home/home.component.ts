@@ -102,4 +102,7 @@ export class HomeComponent implements OnInit {
   redirect(card:any): void{
     this.router.navigate([card.redirect]);
   }
+  isStudentPage(): boolean {
+    return true
+  }
 }

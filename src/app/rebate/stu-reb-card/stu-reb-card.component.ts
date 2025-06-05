@@ -6,6 +6,7 @@ import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class StuRebCardComponent implements OnInit {
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/rebate-admin","/studentcard"];
   @Input() public approval_state: string = "accepted";
+  @Input() public toggle: boolean; // used to toggle the view of the card
   @Output() public updateList = new EventEmitter();
 
   constructor(private dialog:MatDialog,private data_service:StudentdataService, private auth_service:AuthService, private router: Router, public auth:AuthService) { }
@@ -43,6 +45,7 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_reason = this.rebate_request.reason;
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
     this.p_rebate_days = this.noOfDays(this.rebate_request.start, this.rebate_request.end);
+    this.toggle = this.rebate_request.official;
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
@@ -116,7 +119,8 @@ export class StuRebCardComponent implements OnInit {
     })
   }
   isStudentPage() {
-    return this.auth.isStudent() && !this.on_admin_page;
+    // return this.auth.isStudent() && !this.on_admin_page;
+    return true;
   }
   noOfDays(start: string, end: string): string{
     let startDate = new Date(Date.parse(start));
@@ -124,6 +128,12 @@ export class StuRebCardComponent implements OnInit {
     let diff = Math.abs(endDate.getTime() - startDate.getTime());
     let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
     return diffDays.toString();
+  }
+  onToggleChange(event : MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    this.rebate_request.official = isChecked;
+    console.log('Toggle state:', this.toggle);
   }
 }
 

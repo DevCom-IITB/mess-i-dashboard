@@ -8,7 +8,7 @@ import { StudentdataService } from '../studentdata.service';
 import {saveAs} from 'file-saver-es';
 import { FilterService } from '../filter.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-rebate-admin',
@@ -23,11 +23,9 @@ export class RebateAdminComponent implements OnInit {
   currTab: String = "pending";
   CSV_fields : string[] = ["id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
   includeCSV:boolean = true;
-  range = new FormGroup({
-    start : new FormControl<Date | null>(null),
-    end : new FormControl<Date | null>(null)
-  });
   toggle: boolean = false;
+  startDate = new FormControl();
+  endDate = new FormControl();
 
   constructor(private filter_service:FilterService, private data_service:StudentdataService,private auth:AuthService,private dialog:MatDialog, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -51,12 +49,12 @@ export class RebateAdminComponent implements OnInit {
           room: 'A-101',
           card_status: true
         },
-        fullname: 'Ganesh Preetham Vulise',
+        fullname: 'Ganesh Preetham Vulise1',
         roll: 'CS21B001',
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: false,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -76,7 +74,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -96,7 +94,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -116,7 +114,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -138,7 +136,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -158,7 +156,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -178,7 +176,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -198,7 +196,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -220,7 +218,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -240,7 +238,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -260,7 +258,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -280,7 +278,7 @@ export class RebateAdminComponent implements OnInit {
         start: '2025-04-01',
         end: '2025-04-05',
         rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
+        official: true,
         reason: 'Medical Leave',
         comment: 'Hospitalized for 5 days',
         request_date: '2025-03-29',
@@ -319,5 +317,18 @@ export class RebateAdminComponent implements OnInit {
     const isChecked = event.checked;
     this.toggle = isChecked;
     console.log('Toggle state:', this.toggle);
+  }
+  getDateRange() {
+    return {
+      startDate: this.startDate.value.toISOString().split('T')[0], // Format to YYYY-MM-DD
+      endDate: this.endDate.value.toISOString().split('T')[0]
+    };
+  }
+  applyDateFilter() {
+    const range = this.getDateRange();
+    console.log('Date Range:', range);
+    
+    // Use the range for your logic
+    this.initialiseWithFilter(range);
   }
 }

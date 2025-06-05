@@ -68,13 +68,16 @@
   background-color: inherit;
   color: goldenrod;
 }
+.ng-star-inserted{
+  text-align: center;
+}
 @media screen and (max-width: 431px) {
   #stud-table{
     color: #ffffff;
   }
-  .csv-btn{
+  /* .csv-btn{
     display: none;
-  }
+  } */
   .first-column{
     color: #ffce5d;
   }

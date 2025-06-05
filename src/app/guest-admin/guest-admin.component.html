@@ -1,32 +1,52 @@
-<!-- <app-app-bar [suffix]="app_bar_suffix"></app-app-bar> -->
 <div class="container">
+  <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
   <div>
-    <h1 style="border-bottom:3px solid #ffc42b;">Guest Admin</h1>
+    <h1 style="border-bottom:3px solid #ffc42b;" id="heading">Guest Admin</h1>
     <form #guest_data="ngForm" (ngSubmit)="getGuestList(guest_data)" class="form-inline">
+      <input type="hidden" name="selectedMeal" [ngModel]="currTab">
+      <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('breakfast', guest_data)" [value]="meal[0]">Breakfast</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('lunch', guest_data)" [value]="meal[1]">Lunch</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="submit" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('snacks', guest_data)" [value]="meal[2]">Snacks</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateTab('dinner', guest_data)" [value]="meal[3]">Dinner</button>
+        </li>
+      </ul>
       <div class="input-group mb-3">
         <input class="form-control" type="date" name="date" ngModel>
+        <div class="mobile-csv-download">
+          CSV <img src="..\assets\IconSet\Icon=Download.svg" alt="">
+        </div>
         <select *ngIf="isAdmin" class="form-select" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
-          <option value="" disabled selected>Select Hostel</option>
+          <option value="" selected>Select Hostel</option>
           <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
             <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
           </ng-container>   
           <option *ngIf="allowedHostels[20]" value="H20">H20</option>
           <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
         </select>      
-        <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
+        <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel id="meal_dropdown">
           <option value="" disabled selected>Select Meal</option>
           <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
         </select> 
-        <button type="submit">GET</button>
+        <button type="submit" id="get-button">GET</button>
       </div>
     </form>
   </div>
-  
   <hr>
 
   <div>
-    <app-table-component *ngIf="isHistoryEmpty(guestHistory['body'])"  [data]="guestHistory"></app-table-component>
+    <app-table-component *ngIf="isHistoryEmpty(guestHistory['body'])"  [data]="guestHistory" id="table"></app-table-component>
     <p  *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
+    <div class="guest-cards">
+      <app-guest-card *ngFor="let info of guestCardData; let i=index" [data]="info" [date]="'2025-05-15'" [meal]="'Dinner'"></app-guest-card>
+    </div>
   </div>
 
 </div>

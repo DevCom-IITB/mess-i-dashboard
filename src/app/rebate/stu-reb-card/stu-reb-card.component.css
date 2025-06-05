@@ -1,3 +1,5 @@
+/* Please note that there is considerable amount of in-line css for this card */
+/* In-line css is used when there had to be different css for same id elements */
 *{
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0%;
@@ -90,45 +92,83 @@
     font-size: 16px
 }
 .rebate-action-btn{
-    color: #ffc24b;
+    color: #28272b;
     background-color: white;
     border-color: white;
-    margin-left: -12px;
+    /* margin-left: -12px; */
+    font-weight: 600;
+    font-size: 16px;
 }
-.button-style{
-    background-color: #ffc659;
-    border-color: #ffc659;
-    border-radius: 122rem;
-    color: white;
-    height: max-content;
-    font-weight: bold;
+.action-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+.action-container button{
+    height: 48px;
+    border-radius: 50px;
+    background-color: #ffce5d;
+}
+#rebate-doc-div{
+    width: 100%;
+}
+#rebate-doc-div button{
+    padding-left: 0px;
 }
 #rebate-action-container{
     margin: 0.5rem 0rem;
 }
-#rebate-doc-div button{
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.15rem;
-}
-.action-container button{
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.15rem;
+#rebate-accepted-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .row{
-    font-size: 14px;
-    font-weight: 600;;
+    font-size: 16px;
+    font-weight: 600;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#reason-txt{
+    width: fit-content;
+}
+#official-toggle-container{
+    display: flex;
+    width: fit-content;
+    gap: 4px;
 }
 p{
     margin: 0px;
 }
-button{
-    display: none;
-}
 .comment{
     font-size: 18px;
     font-weight: 700;
+    margin-top: 10px;
+}
+#toggle-not{
+    color: #28272b;
+    font-weight: 700;
+}
+:host ::ng-deep .mdc-switch__track::after{
+    padding: 2px;
+    background-color: #ffc24b !important;
+}
+:host ::ng-deep .mdc-switch__track::before{
+    background-color: #ffffff !important;
+    border: 2px solid black;
+}
+:host ::ng-deep .mdc-switch__icons{
+    background-color: black !important;
+    border-radius: 50px;
+    margin: 0px;
+}
+:host ::ng-deep .mdc-switch__ripple::after{
+    background-color: #ffc24b !important;
 }
 @media screen and (max-width: 431px){
     .small-italics{

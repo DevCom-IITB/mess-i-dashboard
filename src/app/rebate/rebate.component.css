@@ -2,7 +2,6 @@
     min-height: 100vh;
     height:max-content;
     padding: 4%;
-
     background-color: #FFFCF4;
 }
 #header-container{
@@ -15,11 +14,27 @@
     background-color: #28282b;
     color: white;
     border: 0px;
-    border-radius: 4px;
-    float:right;    
+    border-radius: 4px;   
     height: max-content;
     margin: auto 0px;
+    float: right;
 }
 #new-request-btn:hover{
     background-color: #FFC42B;
+}
+#rebate-list{
+    position: relative;
+}
+#btn-box{
+    display: flex;
+    justify-content: right;
+}
+@media screen and (max-width: 431px){
+    .main-container{
+        padding-top: 0%;
+        background-color: #28272c;
+    }
+    .page-title, #new-request-btn{
+        display: none;
+    }
 }

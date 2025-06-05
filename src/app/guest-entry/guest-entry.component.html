@@ -1,9 +1,10 @@
 <div class="container">
+  <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
   <div>
     <h1 style="border-bottom:3px solid #ffc42b">Guest Entry</h1>
     <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/apply-guest-entry']">New Request</button>
   </div>
-  <hr>
+  <hr> 
   <div class="guest" >
     <h2>{{guest.name}}-{{guest.id}}-{{guest.hostel}} </h2>
   </div>
@@ -30,4 +31,7 @@
       </tbody>
     </table>
   </div>
+  <ng-container *ngFor="let guest of guest_data">
+    <app-guest-card [date]="'2025-06-06'" [meal]="'Dinner'" [data]="card_data"></app-guest-card>
+  </ng-container>
 </div>

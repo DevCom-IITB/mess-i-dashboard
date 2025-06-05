@@ -15,6 +15,7 @@ export class TableComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   getCSV(){

@@ -20,6 +20,9 @@
 #device-container{
     margin-top: 24px;
 }
+.student-card{
+    display: none;
+}
 @media screen and (max-width: 431px){
     .main-container{
         padding-top: 0%;
@@ -31,5 +34,45 @@
     }
     #pending-rebates-container h1{
         display: none;
+    }
+    .student-card{
+        width: 100%;
+        height: fit-content;
+        display: block;
+        background-color: #ffffff;
+        padding: 14px 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    .student-title{
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+    }
+    .student-button-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+    }
+    .button-left{
+        width: 41vw;
+        height: 48px;
+        border: 2px solid #ffce5d;
+        border-radius: 50px;
+        background-color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .button-right{
+        width: 41vw;
+        height: 48px;
+        border: none;
+        border-radius: 50px;
+        background-color: #ffce5d;
+        font-size: 16px;
+        font-weight: 600;
     }
 }

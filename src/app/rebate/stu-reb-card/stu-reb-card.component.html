@@ -1,6 +1,7 @@
 <div id="maindiv" class="rebate-card-container">
   <div id="indicator">
-    <span class="small-italics" id="received-on">Recieved on {{ p_request_recieved }}</span>
+    <span class="small-italics" id="received-on" *ngIf="isStudentPage()">Applied on {{ p_request_recieved }}</span>
+    <span class="small-italics" id="received-on" *ngIf="!isStudentPage()">Recieved on {{ p_request_recieved }}</span>
     <span
         *ngIf="approval_state == 'pending'"
         id="rebate-status-indicator"
@@ -17,35 +18,46 @@
         ><img src="../../assets/RebateIcons/rebate-status-rejected.svg" alt="Rejected"></span
       >
     </div>
-  <div id="stud-details-container">
+  <div id="stud-details-container" *ngIf="!isStudentPage()">
     <span id="fullname">{{ rebate_request.fullname }} </span>
   </div>
 
-  <div id="stud-sub-details-container">
+  <div id="stud-sub-details-container" *ngIf="!isStudentPage()">
     <span id="rollNo">{{ rebate_request.roll }}</span>
     <span id="roomNo">Room:{{ rebate_request.room }} </span>
   </div>
 
   <div id="rebate-duration-container">
-    <span id="rebate-duration-start">{{ p_rebate_start }}</span> <img src="../../assets/IconSet/Icon=DoubleArrow.svg" alt="arrow"> <span id="rebate-duration-end">{{ p_rebate_end }}</span>
+    <span id="rebate-duration-start" *ngIf="!isStudentPage()">{{ p_rebate_start }}</span> <img src="../../assets/IconSet/Icon=DoubleArrow.svg" alt="arrow" *ngIf="!isStudentPage()"> <span id="rebate-duration-end" *ngIf="!isStudentPage()">{{ p_rebate_end }}</span>
+    <span id="rebate-duration-start" *ngIf="isStudentPage()" style="font-size: 20px; font-weight: 700;">{{ p_rebate_start }}</span> <img src="../../assets/IconSet/Icon=DoubleArrow.svg" alt="arrow" *ngIf="isStudentPage()"> <span id="rebate-duration-end" *ngIf="isStudentPage()" style="font-size: 20px; font-weight: 700;">{{ p_rebate_end }}</span>
     <br />
   </div>
   <div id="days">
     <span id="noOfDays">{{ p_rebate_days }} days </span><span id="both-inclusive">(Both inclusive)</span>
   </div>
   <div class="row">
-    <p>{{ p_rebate_reason }}</p>
+    <p id="reason-txt" *ngIf="!isStudentPage()">{{ p_rebate_reason }}</p>
+    <p id="reason-txt" *ngIf="isStudentPage()" style="font-size: 18px;">{{ p_rebate_reason }}</p>
+    <div id="official-toggle-container" *ngIf="approval_state != 'rejected'">
+      <p *ngIf="!rebate_request.official" id="toggle-not">NOT </p><p>Official</p>
+      <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)" *ngIf="approval_state == 'pending'"></mat-slide-toggle>
+    </div>
   </div>
   <div *ngIf="p_rebate_comment != ''" class="comment">
     <p>Comment: {{ p_rebate_comment }}</p>
   </div>
-  <div id="rebate-doc-div">
+  <div id="rebate-doc-div" *ngIf="approval_state != 'rejected'">
     <button
       class="btn btn-light rebate-action-btn"
       (click)="downloadRebateDoc()"
       *ngIf="rebate_request.official"
     >
-      Download Rebate Doc
+    Official
+      <img
+        src="../../assets/IconSet/Icon=Download.svg"
+        alt="Download Icon"
+        class="download-icon"
+      />
     </button>
   </div>
   <div
@@ -59,7 +71,7 @@
       
       *ngIf="isStudentPage()"
     >
-      Make Amendments
+      Modify Rebate
     </button>
     <button
       class="btn btn-light rebate-action-btn"
@@ -67,15 +79,14 @@
       
       *ngIf="isStudentPage()"
     >
-      Cancel your rebate
+      Cancel Rebate
     </button>
   </div>
   <div
-    id="rebate-accepted-container"
+    class="action-container"
     *ngIf="approval_state == 'accepted'"
     style="display: flex"
   >
-  <div class="action-container">
     <button
       class="btn btn-light rebate-action-btn"
       (click)="updateAcceptedRebate(p_rebate_start, p_rebate_end)"
@@ -84,8 +95,6 @@
     >
       Shrink Duration
     </button>
-
-  </div>
   </div>
 </div>
 

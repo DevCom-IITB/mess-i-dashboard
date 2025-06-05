@@ -101,7 +101,8 @@
     }
     :host ::ng-deep .mat-mdc-text-field-wrapper{
         background-color: #ffffff !important;
-        border-radius: 10px;
+        border-radius: 50px 10px 10px 50px;
+        padding: 0px 0px 0px 20px;
     }
     :host ::ng-deep .mat-mdc-form-field-bottom-align{
         display: none !important;
@@ -110,15 +111,15 @@
         display: flex;
     }
     #official-toggle-container{
-        width: 110px;
+        width: 120px;
         height: 56px;
         z-index: 0;
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 10px 50px 50px 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 4px;
     }
     #official-toggle-container p{
         margin-bottom: 0px;

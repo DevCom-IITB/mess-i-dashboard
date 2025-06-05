@@ -13,10 +13,13 @@ import { GuestdataService } from '../guestdata.service';
 export class GuestAdminComponent implements OnInit {
 
   app_bar_suffix: string = "Guest Booking";
+  currTab: string = 'breakfast';
   allowedHostels:boolean[] = new Array<boolean>(22);
   guestHistory:any = {exists:true, loaded:false};
+  meal: Array<string> = ['breakfast', 'lunch', 'snacks', 'dinner'];
   headers = ['Token No.','Roll No.','Name','Hostel']
-  isAdmin = false;
+  guestCardData: any[] = []; // list of lists
+  isAdmin = true;
 
   constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -27,30 +30,13 @@ export class GuestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGuestHostel()
-    this.guestHistory ={
-      exists: true,
-      loaded: true,
-      headers: this.headers,
-      body: [
-        {
-          token: "Token No.1",
-          roll: "Roll No.1",
-          name: "Ganesh Preetham Vulise",
-          hostel: "H16"
-        },
-        {
-          token: "Token No.2",
-          roll: "Roll No.1",
-          name: "Ganesh Preetham Vulise",
-          hostel: "H16"
-        }
-      ]
+    this.getGuestList({form: {value: {meal: 'dinner', date: '2025-05-15'}}});
     }
-  }
 
   getGuestHostel(){
     this.guestService.getGuestHostels().then((res:any)=>{
-      for(let i=1; i<this.allowedHostels.length; i++){
+      // for(let i=1; i<this.allowedHostels.length; i++){
+      for(let i=1; i<36; i++){
         this.allowedHostels[i] = false;
         if(res.includes(`H${i}`)){
           this.allowedHostels[i] = true;
@@ -84,24 +70,35 @@ export class GuestAdminComponent implements OnInit {
 
 
   getGuestList(data:any){
+    console.log(data.form.value)
+    if (data.form.value['meal'] == ''){
+      data.form.value['meal'] = data.form.value['selectedMeal'];
+    }
+    console.log(data.form.value);
     this.guestHistory={}
     if (data.form.value.date && data.form.value.meal) {
       this.guestService.getGuestHostelData(data.form.value.hostel,this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
+          this.guestCardData = this.guestHistory.body;
+          console.log(this.guestCardData)
         }).catch((res)=>{
           this.guestHistory = this.cleanData({})
           console.log(this.guestHistory)
 
         });
     }else{
-    }
-    
+    } 
   }
 
   isHistoryEmpty(history:any){
     return history !== undefined || !history?.length;
   }
-
+  updateTab(tabName: string, data: any): void {
+    this.currTab = tabName;
+    // This would typically fetch data based on the selected tab
+    console.log(`Tab changed to: ${tabName}`);
+    // For now, we're using the data already loaded in initialise()
+  }
 }

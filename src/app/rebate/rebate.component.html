@@ -1,8 +1,12 @@
 <div class="main-container">
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
     <div id="header-container">
         <h1 class="page-title">Rebates</h1>
+    </div>
+    <div id="btn-box">
         <button id="new-request-btn" class="btn btn-primary" [routerLink]="['/applyrebate']">New Request</button>
     </div>
-
-    <app-rebate-list [showFilter]="false" [getRebates]="getRebates"></app-rebate-list>
+    <div id="rebate-list">
+        <app-rebate-list [showFilter]="false" [getRebates]="getRebates"></app-rebate-list>
+    </div>
 </div>
