@@ -124,25 +124,63 @@ export class PlotlyService {
     );
   }
 
-  plotHeatmap(title: string, div_identifier: string, x: string[], z: number[][], colors: string[], y: string[]){
+  plotHeatmap(title: string, div_identifier: string, x: string[], z: number[][], colors: string[], y: string[], maxCols: number = 7) {
+    // Reshape data into grid with max 7 columns per row
+    const reshapedZ = [];
+    const reshapedLabels = [];
+    const dateLabels = [];
+    
+    for (let mealIdx = 0; mealIdx < z.length; mealIdx++) {
+      const mealData = z[mealIdx];
+      const rowsNeeded = Math.ceil(mealData.length / maxCols);
+      
+      for (let rowNum = 0; rowNum < rowsNeeded; rowNum++) {
+        const rowData = [];
+        const rowDates = [];
+        
+        for (let col = 0; col < maxCols; col++) {
+          const dataIdx = rowNum * maxCols + col;
+          if (dataIdx < mealData.length) {
+            rowData.push(mealData[dataIdx]);
+            rowDates.push(x[dataIdx]);
+          } else {
+            rowData.push(null);  // Empty cell
+            rowDates.push("");   // No date
+          }
+        }
+        
+        reshapedZ.push(rowData);
+        dateLabels.push(rowDates);
+        
+        // Label rows with meal name + row number if multiple rows
+        if (rowsNeeded === 1) {
+          reshapedLabels.push(y[mealIdx]);
+        } else {
+          reshapedLabels.push(`${y[mealIdx]} (${rowNum + 1}/${rowsNeeded})`);
+        }
+      }
+    }
+    
+    // Create color scale as before
     let num_colors = colors.length;
     let cs = [[0, 'rgb(225,225,225)'], [0.99/(num_colors+0.99), 'rgb(225,225,225)']];
-    for(let i=0;i<num_colors;i++){
+    for (let i = 0; i < num_colors; i++) {
       cs.push([(i+0.99)/(num_colors+0.99), colors[i]]);
       cs.push([(i+1.99)/(num_colors+0.99), colors[i]]);
     }
-    let data = [
-      {
-        z: z,
-        hoverongaps: true,
-        hoverinfo:'x',
-        type: 'heatmap',
-        showscale: false,
-        xgap: 1,
-        ygap: 1,
-        colorscale: cs
-      }
-    ];
+    
+    // Create the plot data
+    const data = [{
+      z: reshapedZ,
+      type: 'heatmap',
+      colorscale: cs,
+      showscale: false,
+      xgap: 1,
+      ygap: 1,
+      hoverinfo: 'text',
+      text: dateLabels
+    }];
+    
     interface Annotation {
       x: number;
       y: number;
@@ -158,33 +196,50 @@ export class PlotlyService {
         opacity: number;
       };
     }
+    const totalWidth = maxCols * 40;
+    const totalHeight = reshapedZ.length * 40;
+    // Set up layout with custom labels
     const layout = {
       title: title,
-      annotations:[] as Annotation[],
-      xaxis: { },
-      yaxis: {
-        tickvals: [], // Remove y-axis tick values
-        scaleanchor: 'x'
-      }
+      width: totalWidth + 100,
+      height: totalHeight + 100,
+      annotations: [] as Annotation[],
+      xaxis: { showticklabels: false },
+      yaxis: { tickvals: [], scaleanchor: 'x' }
     };
-    for (let i = 0; i < data[0].z.length; i++) {
-      const annotation = {
-        x: 0.5, // X-coordinate at the center of the heatmap
+    
+    // Add row labels
+    for (let i = 0; i < reshapedLabels.length; i++) {
+      layout.annotations.push({
+        x: -0.1,
         y: i,
         xref: 'paper',
         yref: 'y',
-        text: y[i], // Row label text
+        text: reshapedLabels[i],
         showarrow: false,
-        font: {
-          size: 15,
-          color:"black",
-          family: 'monospace', // serif, sans-serif, monospace, Arial, Times New Roman, Courier New
-          weight: 'bold',
-          opacity: 1 
-        }
-      };
-      layout.annotations.push(annotation);
+        font: { size: 15, color: "black", family: 'monospace', weight: 'bold', opacity: 1 }
+      });
     }
+    
+    // Add date labels to cells
+    let noOfRows = dateLabels.length;
+    console.log("Datelabels:",dateLabels);
+    for (let row = 0; row < dateLabels.length; row++) {
+      for (let col = 0; col < dateLabels[row].length; col++) {
+        if (dateLabels[row][col]) {
+          layout.annotations.push({
+            x: col,
+            y: row,
+            text: dateLabels[row][col],
+            showarrow: false,
+            font: { size: 10, color: "black", family: 'monospace', weight: 'bold', opacity: 1  },
+            xref: 'x',
+            yref: 'y'
+          });
+        }
+      }
+    }
+    
     const config = { 
       responsive: true,
       scrollZoom: false,
