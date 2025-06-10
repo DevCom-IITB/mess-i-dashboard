@@ -492,6 +492,7 @@ export class StudentdataService {
 
   async getStudentStats(roll:string,year:string,month:string){
     let url = this.baseurl.concat("/student-stats/",year,'/',month,'?roll=',roll);
+    console.log(url);
     return new Promise((resolve, reject) => {
       this.http.get(url, { headers:{'x-access-token':this.auth.getToken(),'rejectUnauthorized':'false' },withCredentials:true })
       .subscribe((res)=> { resolve(res); }, (e)=>{ reject({}) })

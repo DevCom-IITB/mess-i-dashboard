@@ -38,7 +38,8 @@ export class StatisticsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAdminHostel();
-    this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
+    // this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
+    this.hostel_selectable = this.roll_selectable = true;
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
@@ -92,18 +93,26 @@ export class StatisticsComponent implements OnInit {
     return res;
   }
 
-  async plotData(data: any){
-    let num =  new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
-    this.noOfDays = Array(num).fill(1).map((x,i) => (i + 1).toString());
-    this.noOfDays2 = Array(num).fill(1).map((x,i) => (`${data.form.value.year}-${data.form.value.month}-${i+1}`));
-
-    this.hostelmessHistory = {exists:true, loaded:false};
-    this.studentmessHistory = {exists:true, loaded:false};
+  async plotData(data: any) {
+    // Setup
+    let num = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
+    this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
+    this.noOfDays2 = Array(num).fill(1).map((x, i) => (`${data.form.value.year}-${data.form.value.month}-${i+1}`));
+    
+    this.hostelmessHistory = {exists: true, loaded: false};
+    this.studentmessHistory = {exists: true, loaded: false};
     this.selectedMonth = parseInt(data.form.value.month);
     this.selectedYear = parseInt(data.form.value.year);
-    console.log("Selected Month:", this.selectedMonth, "Selected Year:", this.selectedYear);
-    await this.plotHostelData(data);
-    await this.plotStudentData(data);
+    console.log("Selected Month:", this.selectedMonth);
+    console.log("Selected Year:", this.selectedYear);
+    try {
+      // Wait for hostel data first
+      await this.plotHostelData(data);
+      // Only then proceed with student data
+      await this.plotStudentData(data);
+    } catch (error) {
+      console.error("Error plotting data:", error);
+    }
   }
 
 
@@ -130,24 +139,46 @@ export class StatisticsComponent implements OnInit {
     return mp;
   }
 
-  genStudentPlotData(history: any){
+  genStudentPlotData(history: any) {
+    console.log("History:", history);
     let orged_data = this.dictifyStudentData(history);
-    if(Array.from(orged_data.keys() as Iterable<any>).length == 0) return {exists:false, loaded:true};
+    console.log("Orged Data:", orged_data);
+    
+    if (Array.from(orged_data.keys() as Iterable<any>).length == 0) {
+      return {exists: false, loaded: true};
+    }
+    
     let hz = Array.from(orged_data.values() as Iterable<number[]>);
-    let sms = hz.map((subarray) => subarray.reduce((acc,value) => acc+(value>0?1:0), 0));
-    let nzidx = sms.map((value, index) => (value>0?index:-1)).filter((value) => value>=0);
-    let utilization = sms.map((value, index) => {let sum = this.hostelmessHistory.meal_counts[index];return (sum>0?value/sum:'-');});
-
+    let sms = hz.map((subarray) => subarray.reduce((acc, value) => acc + (value > 0 ? 1 : 0), 0));
+    let nzidx = sms.map((value, index) => (value > 0 ? index : -1)).filter((value) => value >= 0);
+    
+    // Check if hostelmessHistory is available and initialized
+    if (!this.hostelmessHistory || !this.hostelmessHistory.meal_counts || !this.hostelmessHistory.labels) {
+      console.error("hostelmessHistory not fully initialized");
+      return {exists: false, loaded: true, error: "Hostel data not loaded"};
+    }
+    
+    // Safe utilization calculation
+    let utilization = sms.map((value, index) => {
+      if (!this.hostelmessHistory.meal_counts[index]) return '-';
+      let sum = this.hostelmessHistory.meal_counts[index];
+      return (sum > 0 ? value/sum : '-');
+    });
+    
+    console.log("Non-zero indices:", nzidx);
+    
     let res = {
       heatmapz: nzidx.map((value) => [0].concat(hz[value])),
       sums: nzidx.map((value) => sms[value]),
-      meals: nzidx.map((value) => this.hostelmessHistory.labels[value]),
-      colors: nzidx.map((value) => this.COLORS_RGB[value]),
+      meals: nzidx.map((value) => this.hostelmessHistory.labels[value] || `Meal ${value}`),
+      colors: nzidx.map((value) => this.COLORS_RGB[value] || this.COLORS_RGB[0]),
       util: nzidx.map((value) => utilization[value]),
-      available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value]),
+      available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value] || 0),
       exists: true,
       loaded: true
     };
+    
+    console.log("Student Plot Data:", res);
     return res;
   }
 
@@ -166,9 +197,13 @@ export class StatisticsComponent implements OnInit {
 
   async plotStudentData(data: any){    
     if (data.form.value.year&&data.form.value.month) {
-      this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
+      // this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
+      this.service.getStudentStats("22B0433",data.form.value.year,data.form.value.month).then((res)=>
       {
+        console.log("Student Stats Data:", res);
         this.studentmessHistory = this.genStudentPlotData(res);
+        console.log("console data...");
+        // console.log(this.studentmessHistory);
         this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, this.studentmessHistory.colors, this.studentmessHistory.meals);
         this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
       }).catch((res)=>{
@@ -178,6 +213,7 @@ export class StatisticsComponent implements OnInit {
     }
   }
   isStudentPage() {
-    return this.auth.isStudent() && !this.on_admin_page;
+    // return this.auth.isStudent() && !this.on_admin_page;
+    return true;
   }
 }

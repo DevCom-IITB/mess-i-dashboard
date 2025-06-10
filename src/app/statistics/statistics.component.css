@@ -84,7 +84,6 @@ li.text-stats-item {
 .chart-container::-webkit-scrollbar-thumb:hover {
   background: #ffb400;
 }
-
 @media (min-width: 320px) {
   div#pie-textual-container {
     flex-direction: column;
@@ -126,6 +125,10 @@ li.text-stats-item {
   h1 {
     display: none;
   }
+  .form-inline{
+    display: flex;
+    gap: 10px;
+  }
   .chart-container {
     width: 92vw !important;
     overflow-x: auto;
@@ -136,18 +139,31 @@ li.text-stats-item {
   hr{
     color: white;
   }
+  .form-inline{
+    gap: 10px;
+  }
   select.form-select{
-    width: 75px !important;
+    width: 75px;
     height: 42px;
     border-radius: 16.67px !important;
     border-width: 1.39px;
     padding: 8px 12px;
     border-color: #ffce5d;
-    background-color: #28272b;
-    color: #ffce5d;
+    background-color: #28272b !important;
+    color: #ffce5d !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23FFC42B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
+  }
+  input.form-control{
+    width: 75px;
+    height: 42px;
+    border-radius: 16.67px !important;
+    border-width: 1.39px;
+    padding: 8px 12px;
+    border-color: #ffce5d;
+    background-color: #28272b !important;
+    color: #ffce5d !important;
   }
 }
