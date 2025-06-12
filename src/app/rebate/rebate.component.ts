@@ -19,12 +19,12 @@ export class RebateComponent implements OnInit {
   app_bar_suffix: string = 'Rebates';
 
   constructor(public data_service:StudentdataService,private auth:AuthService, private router:Router) {
-    // if(!this.auth.isLoggedIn()){
-    //   this.router.navigate(['login'])
-    // }
-    // if(!this.auth.isStudent() ){
-    //   this.router.navigate(['landing'])
-    // }
+    if(!this.auth.isLoggedIn()){
+      this.router.navigate(['login'])
+    }
+    if(!this.auth.isStudent() ){
+      this.router.navigate(['landing'])
+    }
   }
 
   

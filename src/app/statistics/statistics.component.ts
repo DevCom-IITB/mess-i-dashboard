@@ -10,13 +10,14 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
-  hostel_selectable: boolean = true;
-  roll_selectable: boolean = true;
+  hostel_selectable: boolean = false;
+  roll_selectable: boolean = false;
   allowedHostels:boolean[] = new Array<boolean>(22);
   hostelmessHistory:any = {exists:true, loaded:false};
   studentmessHistory:any = {exists:true, loaded:false};
   noOfDays:any;
   noOfDays2:any;
+  data_copy:any;
   selectedMonth: number;
   selectedYear: number;
   app_bar_suffix: string = "Statistics";
@@ -38,8 +39,7 @@ export class StatisticsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAdminHostel();
-    // this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
-    this.hostel_selectable = this.roll_selectable = true;
+    this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
@@ -95,6 +95,7 @@ export class StatisticsComponent implements OnInit {
 
   async plotData(data: any) {
     // Setup
+    this.data_copy = data;
     let num = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month), 0).getDate();
     this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
     this.noOfDays2 = Array(num).fill(1).map((x, i) => (`${data.form.value.year}-${data.form.value.month}-${i+1}`));
@@ -103,8 +104,6 @@ export class StatisticsComponent implements OnInit {
     this.studentmessHistory = {exists: true, loaded: false};
     this.selectedMonth = parseInt(data.form.value.month);
     this.selectedYear = parseInt(data.form.value.year);
-    console.log("Selected Month:", this.selectedMonth);
-    console.log("Selected Year:", this.selectedYear);
     try {
       // Wait for hostel data first
       await this.plotHostelData(data);
@@ -140,9 +139,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   genStudentPlotData(history: any) {
-    console.log("History:", history);
     let orged_data = this.dictifyStudentData(history);
-    console.log("Orged Data:", orged_data);
     
     if (Array.from(orged_data.keys() as Iterable<any>).length == 0) {
       return {exists: false, loaded: true};
@@ -165,8 +162,6 @@ export class StatisticsComponent implements OnInit {
       return (sum > 0 ? value/sum : '-');
     });
     
-    console.log("Non-zero indices:", nzidx);
-    
     let res = {
       heatmapz: nzidx.map((value) => [0].concat(hz[value])),
       sums: nzidx.map((value) => sms[value]),
@@ -177,8 +172,6 @@ export class StatisticsComponent implements OnInit {
       exists: true,
       loaded: true
     };
-    
-    console.log("Student Plot Data:", res);
     return res;
   }
 
@@ -197,14 +190,12 @@ export class StatisticsComponent implements OnInit {
 
   async plotStudentData(data: any){    
     if (data.form.value.year&&data.form.value.month) {
-      // this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
-      this.service.getStudentStats("22B0433",data.form.value.year,data.form.value.month).then((res)=>
+      this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
+      // this.service.getStudentStats("22B0433",data.form.value.year,data.form.value.month).then((res)=>
       {
-        console.log("Student Stats Data:", res);
         this.studentmessHistory = this.genStudentPlotData(res);
-        console.log("console data...");
         // console.log(this.studentmessHistory);
-        this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, this.studentmessHistory.colors, this.studentmessHistory.meals);
+        this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
         this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
       }).catch((res)=>{
         console.log(res)
@@ -212,8 +203,27 @@ export class StatisticsComponent implements OnInit {
       });
     }
   }
+
+  updateHeatMap(meal: number) {
+    // Update the heatmap based on the selected meal
+    if (this.studentmessHistory.exists && this.studentmessHistory.loaded) {
+      this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, this.data_copy.form.value.month, this.data_copy.form.value.year, meal);
+    }
+  }
+
+  async showHeatMapButtons() {
+    const buttons = document.getElementById("myTab");
+    if (buttons) {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      if(this.studentmessHistory.exists){
+        buttons.style.display = "flex";
+      }
+      else if (!this.studentmessHistory.exists){
+        buttons.style.display = "none";
+      }
+    }
+  }
   isStudentPage() {
-    // return this.auth.isStudent() && !this.on_admin_page;
-    return true;
+    return this.auth.isStudent() && !this.on_admin_page;
   }
 }

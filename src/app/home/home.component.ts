@@ -12,6 +12,8 @@ import { StudentdataService } from '../studentdata.service';
 export class HomeComponent implements OnInit {
   app_bar_suffix : string = "Home";
   public pending_rebates: RebateRequest[] = new Array();
+  public on_admin_page:boolean ;
+  private adminRoutes: string[] = ["/home"];
   mobile_cards: any = [
     {
       title: 'Rebates',
@@ -63,7 +65,7 @@ export class HomeComponent implements OnInit {
     }];
   date:string;
 
-  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router,private auth:AuthService) { 
   }
 
   ngOnInit(): void {
@@ -72,6 +74,7 @@ export class HomeComponent implements OnInit {
     if(!this.auth_service.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
   }
 
   async initialise(){
@@ -103,6 +106,6 @@ export class HomeComponent implements OnInit {
     this.router.navigate([card.redirect]);
   }
   isStudentPage(): boolean {
-    return true
+    return this.auth.isStudent() && !this.on_admin_page;
   }
 }

@@ -1,6 +1,11 @@
 <div class="container-fluid">
     <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
-    <h1> <img src="..\assets\IconSet\Icon=BackArrow.svg" alt="back-arrow" role="button" (click)="goBack()"> Student Data</h1>
+    <div id="header-container">
+        <h1> <img src="..\assets\IconSet\Icon=BackArrow.svg" alt="back-arrow" role="button" (click)="goBack()"> Student Data</h1>
+        <div id="csv-download-container" role="button" (click)="downloadCSV()">
+        CSV <img src="\assets\IconSet\Icon=Download.svg" alt="downlaod-icon">
+        </div>
+    </div>
     <div style="justify-content:center ;">
         <div id="studentcard" >
             <div id="pfp-div">
@@ -47,17 +52,17 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
             <div id="range-date-container"> <!-- Only for mobile view -->
                 <mat-form-field id="range-date">
-                    <mat-label>Enter a date range</mat-label>
+                    <!-- <mat-label>Enter a date range</mat-label> -->
                     <mat-date-range-input [rangePicker]="rangePicker">
-                        <input matStartDate placeholder="Start date"/>
-                        <input matEndDate placeholder="End date"/>
+                        <input matStartDate placeholder="Start date" [formControl]="startDate"/>
+                <input matEndDate placeholder="End date" [formControl]="endDate"/>
                     </mat-date-range-input>
                     <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
                     <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
                     <mat-date-range-picker #rangePicker>
                         <mat-date-range-picker-actions>
                         <button mat-button matDateRangePickerCancel>Cancel</button>
-                        <button mat-raised-button matDateRangePickerApply>Apply</button>
+                        <button mat-raised-button matDateRangePickerApply (click)="applyDateFilter()">Apply</button>
                         </mat-date-range-picker-actions>
                     </mat-date-range-picker>
                 </mat-form-field>

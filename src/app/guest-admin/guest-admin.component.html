@@ -20,9 +20,7 @@
       </ul>
       <div class="input-group mb-3">
         <input class="form-control" type="date" name="date" ngModel>
-        <div class="mobile-csv-download">
-          CSV <img src="..\assets\IconSet\Icon=Download.svg" alt="">
-        </div>
+        
         <select *ngIf="isAdmin" class="form-select" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
           <option value="" selected>Select Hostel</option>
           <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
@@ -30,7 +28,10 @@
           </ng-container>   
           <option *ngIf="allowedHostels[20]" value="H20">H20</option>
           <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
-        </select>      
+        </select>
+        <div class="mobile-csv-download">
+          CSV <img src="..\assets\IconSet\Icon=Download.svg" alt="">
+        </div>     
         <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel id="meal_dropdown">
           <option value="" disabled selected>Select Meal</option>
           <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>

@@ -95,18 +95,21 @@ button:hover{
     .input-group{
         width: 92vw;
         margin-bottom: 4px !important;
+        display: flex;
+        gap: 10px;
     }
     .form-control{
-        margin-left: 0px !important;
+        margin: 0px !important;
         background-color: #ffffff !important;
         border: none !important;
-        border-radius: 8px !important;
+        padding: 6px 18px !important;
+        border-radius: 50px 8px 8px 50px !important;
         height: 42px !important;
     }
     .mobile-csv-download{
         background-color: #ffffff;
         font-weight: 600;
-        border-radius: 8px !important;
+        border-radius: 8px 50px 50px 8px !important;
         padding: 14px 12px;
         position: relative;
         /* left: 10vw; */
@@ -114,5 +117,19 @@ button:hover{
         justify-content: center;
         align-items: center;
         height: 42px;
+    }
+    .form-select{
+        /* width: 75px; */
+        height: 42px;
+        border-radius: 8px !important;
+        border-width: 1.39px;
+        padding: 8px 12px;
+        border-color: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #28272c !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2328272C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 16px 12px;
     }
 }

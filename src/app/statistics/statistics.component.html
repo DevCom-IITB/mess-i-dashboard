@@ -21,7 +21,7 @@
           <option value="" disabled selected>Year</option>
           <option *ngFor="let year of [0,1,2,3,4,5,6,7,8,9]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
         </select>
-        <button type="submit">GET</button>
+        <button type="submit" id="get-button" (click)="showHeatMapButtons()">GET</button>
       </div>
     </form>
   </div>
@@ -34,6 +34,21 @@
     <!-- <app-meal-calender></app-meal-calender> -->
     <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
     <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateHeatMap(4)">Breakfast</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateHeatMap(3)">Lunch</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="submit" role="tab" aria-controls="contact" aria-selected="false" (click)="updateHeatMap(2)">Snacks</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateHeatMap(1)">Dinner</button>
+      </li>
+    </ul>
+    <hr>
     <div id="pie-textual-container" *ngIf="studentmessHistory.exists">
       <div id="pie"></div>
       <div id="textual-stats" *ngIf="studentmessHistory.loaded">

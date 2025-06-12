@@ -1,4 +1,7 @@
+import { sanitizeIdentifier } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { tick } from '@angular/core/testing';
+import { MatDateRangeInput } from '@angular/material/datepicker';
 declare let Plotly: any;
 
 @Injectable({
@@ -124,27 +127,55 @@ export class PlotlyService {
     );
   }
 
-  plotHeatmap(title: string, div_identifier: string, x: string[], z: number[][], colors: string[], y: string[], maxCols: number = 7) {
+  plotHeatmap(title: string, div_identifier: string, x: string[], z: number[][], colors: string[], y: string[], month:string, year:string, mealId: number = 4, maxCols: number = 7) {
+    // the input month is taken as 1-indexed, so we need to convert it to 0-indexed for Date object
+    // Sort dates chronologically
+    const firstDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+    console.log("First Date:", firstDate.toDateString());
+    const startDay = firstDate.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday. This is also the number of days of padding squares before the start of the month
+    console.log("Start Day:", startDay, " 0 is sunday");
+
+
+    const dateMap = x.map((date, index) => ({date, index}))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      
+    const sortedX = dateMap.map(item => item.date);
+    const sortedZ = z.map(mealRow => dateMap.map(item => mealRow[item.index]));
+    sortedX.unshift(...Array(startDay-1).fill("")); // Add empty strings for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+    sortedZ.forEach(mealRow => mealRow.unshift(...Array(startDay-1).fill(0))); // Add zeros for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+    
+    // Now use sortedX and sortedZ instead of x and z
+    // Rest of the function remains the same but use sortedX and sortedZ
+    
     // Reshape data into grid with max 7 columns per row
     const reshapedZ = [];
     const reshapedLabels = [];
     const dateLabels = [];
     
-    for (let mealIdx = 0; mealIdx < z.length; mealIdx++) {
-      const mealData = z[mealIdx];
+    for (let mealIdx = 0; mealIdx < sortedZ.length; mealIdx++) {
+      const mealData = sortedZ[mealIdx];
       const rowsNeeded = Math.ceil(mealData.length / maxCols);
       
       for (let rowNum = 0; rowNum < rowsNeeded; rowNum++) {
         const rowData = [];
         const rowDates = [];
+
+        // let pad = 0;
+        // if (reshapedZ.length === 0 && dateLabels.length === 0) {
+        //   pad = startDay;
+        //   for(let i = 0; i < pad; i++) {
+        //     rowData.push(0);
+        //     rowDates.push("");
+        // }
+        // }
         
         for (let col = 0; col < maxCols; col++) {
           const dataIdx = rowNum * maxCols + col;
           if (dataIdx < mealData.length) {
             rowData.push(mealData[dataIdx]);
-            rowDates.push(x[dataIdx]);
+            rowDates.push(sortedX[dataIdx]);
           } else {
-            rowData.push(null);  // Empty cell
+            rowData.push(0);  // Empty cell
             rowDates.push("");   // No date
           }
         }
@@ -160,25 +191,40 @@ export class PlotlyService {
         }
       }
     }
-    
+    console.log("Reshaped Z:", reshapedZ);
+    console.log("Reshaped Labels:", reshapedLabels);
     // Create color scale as before
+
+    let screen_width = window.innerWidth;
+    let bg_color = 'rgba(40, 39, 43, 1)';
+    let text_color = 'rgb(255, 206, 93)';
+    let heatmap_color = 'rgba(255, 255, 255, 1)'
+    if (screen_width >= 431) {
+      bg_color = 'rgba(255, 252, 244, 1)';
+      text_color = 'black';
+      heatmap_color = 'rgba(225, 225, 225, 1)';
+    }
+
     let num_colors = colors.length;
-    let cs = [[0, 'rgb(225,225,225)'], [0.99/(num_colors+0.99), 'rgb(225,225,225)']];
+    let cs = [[0, heatmap_color], [0.99/(num_colors+0.99), 'rgb(225,225,225)']];
     for (let i = 0; i < num_colors; i++) {
       cs.push([(i+0.99)/(num_colors+0.99), colors[i]]);
       cs.push([(i+1.99)/(num_colors+0.99), colors[i]]);
     }
-    
+    let reversed_reshapedZ = reshapedZ.reverse();
+    let reversed_dateLabels = dateLabels.reverse();
+    console.log("Reversed Reshaped Z:", reversed_reshapedZ);
     // Create the plot data
+    // I reversed the array beacuse..., dont reverse the array and see how it is applied and you will know why
     const data = [{
-      z: reshapedZ,
+      z: reversed_reshapedZ.slice(5*mealId, 5*mealId+5),
       type: 'heatmap',
       colorscale: cs,
       showscale: false,
       xgap: 1,
       ygap: 1,
       hoverinfo: 'text',
-      text: dateLabels
+      text: reversed_dateLabels.slice(5*mealId, 5*mealId+5)
     }];
     
     interface Annotation {
@@ -196,35 +242,66 @@ export class PlotlyService {
         opacity: number;
       };
     }
-    const totalWidth = maxCols * 40;
-    const totalHeight = reshapedZ.length * 40;
+    const totalWidth = maxCols * 45;
+    const totalHeight = reshapedZ.length * 9;
+
     // Set up layout with custom labels
+    const weekdayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const layout = {
-      title: title,
-      width: totalWidth + 100,
-      height: totalHeight + 100,
+      title:{
+        text: "Meal Calendar",
+        font: {
+          size: 20,
+          color: text_color,
+          family: 'Open Sans',
+          weight: 'bold',
+          opacity: 1
+        }
+      },
+      width: totalWidth + 80,
+      height: totalHeight + 80,
+      margin: { t: 70, b: 10, l: 10, r: 10 },
       annotations: [] as Annotation[],
-      xaxis: { showticklabels: false },
-      yaxis: { tickvals: [], scaleanchor: 'x' }
+      xaxis: {
+        showticklabels: true,
+        tickvals: Array.from({ length: maxCols }, (_, i) => i),
+        ticktext: weekdayLabels.splice(0, maxCols),
+        tickfont: {
+          color: "rgb(255, 206, 93)",
+          size: 14,
+          family: 'Open Sans',
+        },
+        side: 'top',
+        showline: false,
+        zeroline: false
+      },
+      yaxis: {
+        tickvals: [],
+        scaleanchor: 'x',
+        showline: false,
+        zeroline: false
+      },
+      paper_bgcolor: bg_color,
+      plot_bgcolor: bg_color,
     };
     
     // Add row labels
-    for (let i = 0; i < reshapedLabels.length; i++) {
-      layout.annotations.push({
-        x: -0.1,
-        y: i,
-        xref: 'paper',
-        yref: 'y',
-        text: reshapedLabels[i],
-        showarrow: false,
-        font: { size: 15, color: "black", family: 'monospace', weight: 'bold', opacity: 1 }
-      });
-    }
+    // let reversed_reshapedLabels = reshapedLabels.reverse();
+    // for (let i = 0; i < reshapedLabels.length; i++) {
+    //   layout.annotations.push({
+    //     x: -0.1,
+    //     y: i,
+    //     xref: 'paper',
+    //     yref: 'y',
+    //     text: reversed_reshapedLabels[i],
+    //     showarrow: false,
+    //     font: { size: 15, color: "black", family: 'monospace', weight: 'bold', opacity: 1 }
+    //   });
+    // }
     
     // Add date labels to cells
-    let noOfRows = dateLabels.length;
     console.log("Datelabels:",dateLabels);
-    for (let row = 0; row < dateLabels.length; row++) {
+    for (let row = 0; row < dateLabels.length/5; row++) {
       for (let col = 0; col < dateLabels[row].length; col++) {
         if (dateLabels[row][col]) {
           layout.annotations.push({
@@ -232,7 +309,7 @@ export class PlotlyService {
             y: row,
             text: dateLabels[row][col],
             showarrow: false,
-            font: { size: 10, color: "black", family: 'monospace', weight: 'bold', opacity: 1  },
+            font: { size: 12, color: "black", family: 'Open Sans', weight: '500', opacity: 1  },
             xref: 'x',
             yref: 'y'
           });
@@ -260,23 +337,46 @@ export class PlotlyService {
   }
   plotPie(plotDiv:string, z:number[], _labels: string[], _colors: string[]){
     // for()
+    let screen_width = window.innerWidth;
+    let bg_color = 'rgba(40, 39, 43, 1)';
+    let text_color = 'rgb(255, 206, 93)';
+    if (screen_width >= 431) {
+      bg_color = 'rgba(255, 252, 244, 1)';
+      text_color = 'black';
+    }
+
     var data = [{
+      title: {
+        text: "Meal Utilization",
+        font: {
+          size: 20,
+          color: text_color,
+          family: 'Open Sans',
+          weight: 'bold',
+          opacity: 1
+        }
+      },
       type: "pie",
       values: z,
       labels: _labels,
       textinfo: "label+value",
+      textfont: {
+        family: 'Open Sans',
+      },
       // textposition: "outside",
       insidetextorientation: "horizontal",
       marker: { colors: _colors },
       hoverinfo:'none',
-      automargin: true
+      automargin: true,
     }]
     
     var layout = {
       height: 400,
       width: 400,
-      margin: {"t": 0, "b": 0, "l": 0, "r": 0},
-      showlegend: false
+      margin: {"t": 10, "b": 0, "l": 0, "r": 0},
+      showlegend: false,
+      paper_bgcolor: bg_color,
+      plot_bgcolor: bg_color,
     }
     const config = { 
       responsive: true,

@@ -319,9 +319,14 @@ export class RebateAdminComponent implements OnInit {
     console.log('Toggle state:', this.toggle);
   }
   getDateRange() {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const start: Date = this.startDate.value;
+    const end: Date = this.endDate.value;
+
+    // Use local time getters to get IST date parts
     return {
-      startDate: this.startDate.value.toISOString().split('T')[0], // Format to YYYY-MM-DD
-      endDate: this.endDate.value.toISOString().split('T')[0]
+      startDate: `${start.getFullYear()}-${pad(start.getMonth() + 1)}-${pad(start.getDate())}`,
+      endDate: `${end.getFullYear()}-${pad(end.getMonth() + 1)}-${pad(end.getDate())}`
     };
   }
   applyDateFilter() {

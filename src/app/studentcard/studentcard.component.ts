@@ -5,6 +5,7 @@ import { StudentdataService } from '../studentdata.service';
 import { StuRebateDialogComponent } from '../components/stu-rebate-dialog/stu-rebate-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RebateRequest } from '../interfaces';
+import { FormGroup, FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -29,6 +30,8 @@ export class StudentcardComponent implements OnInit {
   rejected_rebates: RebateRequest[] = new Array();
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','  Egg  ','Fruit']
   toggle: boolean = false;
+  startDate = new FormControl();
+  endDate = new FormControl();
 
   constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog, private router: Router) {
    }
@@ -233,5 +236,34 @@ export class StudentcardComponent implements OnInit {
     const isChecked = event.checked;
     this.toggle = isChecked;
     console.log('Toggle state:', this.toggle);
+  }
+  initialiseWithFilter(dateRange: any): void {
+    console.log('Filter applied:', dateRange);
+    // In a real app, this would filter the data based on date range
+    // For now, just use the same dummy data
+    this.initialise();
+  }
+  
+  getDateRange() {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const start: Date = this.startDate.value;
+    const end: Date = this.endDate.value;
+
+    // Use local time getters to get IST date parts
+    return {
+      startDate: `${start.getFullYear()}-${pad(start.getMonth() + 1)}-${pad(start.getDate())}`,
+      endDate: `${end.getFullYear()}-${pad(end.getMonth() + 1)}-${pad(end.getDate())}`
+    };
+  }
+  applyDateFilter() {
+    const range = this.getDateRange();
+    console.log('Date Range:', range);
+    
+    // Use the range for your logic
+    this.initialiseWithFilter(range);
+  }
+
+  downloadCSV(){
+    // This function will handle the CSV download logic
   }
 }

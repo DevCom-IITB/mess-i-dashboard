@@ -34,19 +34,18 @@ select.form-select {
   border-width: 2px;
   background-color: #fff8e8;
 }
-button {
+#get-button {
   background-color: #28282b;
   color: white;
   border: 0px;
   border-radius: 4px;
 }
-button:hover {
+#get-button:hover {
   background-color: #ffc42b;
   color: #28272b;
 }
 div#pie-textual-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -84,6 +83,10 @@ li.text-stats-item {
 .chart-container::-webkit-scrollbar-thumb:hover {
   background: #ffb400;
 }
+#myTab{
+  display: none;
+  border-bottom: none;
+}
 @media (min-width: 320px) {
   div#pie-textual-container {
     flex-direction: column;
@@ -116,7 +119,7 @@ li.text-stats-item {
     padding-top: 0%;
     background-color: #28272b;
   }
-  button {
+  #get-button {
     color: #ffce5d;
     background-color: #28272b;
     border: 1.67px solid #ffce5d;
@@ -165,5 +168,56 @@ li.text-stats-item {
     border-color: #ffce5d;
     background-color: #28272b !important;
     color: #ffce5d !important;
+  }
+  .nav-item{
+    width: fit-content;
+  }
+  .nav-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17.14vw;
+    height: 50px;
+    border-radius: 50px;
+    padding: 4px 19px 4px 19px;
+    margin: 0px 8px;
+    border: none;
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: "Open Sans";
+    font-weight: 500;
+    color: #5f6368;
+    transition: all 0.15s ease-in-out;
+  }
+  .btn-box button.active{
+    background-color: #ffce5d;
+    color: #28272c;
+    width: 20.76vw;
+    font-size: 14.4px;
+    font-weight: 600;
+    transition: all 0.15s ease-in-out;
+  }
+  #myTab{
+    margin: 8px 0px 16px !important;
+    display: none;
+    border-bottom: none;
+    height: 50px;
+    justify-content: center;
+  }
+  #pie-textual-container {
+    width: 100%;
+    display: block !important;
+    /* overflow-x: hidden; */
+  }
+  #pie{
+    width: 100% !important;
+  }
+  #textual-stats {
+    position: relative;
+    left: 0%;
+    top: 20%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }

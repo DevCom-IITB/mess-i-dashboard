@@ -19,18 +19,19 @@ export class GuestAdminComponent implements OnInit {
   meal: Array<string> = ['breakfast', 'lunch', 'snacks', 'dinner'];
   headers = ['Token No.','Roll No.','Name','Hostel']
   guestCardData: any[] = []; // list of lists
-  isAdmin = true;
+  isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
 
   constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
     this.isAdmin = auth.isAdmin()
+    // this.isAdmin = true;
   }
 
   ngOnInit(): void {
     this.getGuestHostel()
-    this.getGuestList({form: {value: {meal: 'dinner', date: '2025-05-15'}}});
+    this.getGuestList({});
     }
 
   getGuestHostel(){
@@ -70,7 +71,9 @@ export class GuestAdminComponent implements OnInit {
 
 
   getGuestList(data:any){
-    console.log(data.form.value)
+    if(data.form.value['date'] == ''){
+      alert("Please select a date");
+    }
     if (data.form.value['meal'] == ''){
       data.form.value['meal'] = data.form.value['selectedMeal'];
     }
