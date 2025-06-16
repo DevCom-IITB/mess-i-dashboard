@@ -51,7 +51,6 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DeviceListComponent } from './device-list/device-list.component';
-import { MealCalenderComponent } from './meal-calender/meal-calender.component';
 import { GuestCardComponent } from './components/guest-card/guest-card.component';
 
 
@@ -103,7 +102,6 @@ export const MY_DATE_FORMATS = {
         HomeCardComponent,
         RebateCardComponent,
         DeviceListComponent,
-        MealCalenderComponent,
         GuestCardComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,

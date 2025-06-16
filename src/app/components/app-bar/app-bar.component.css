@@ -13,11 +13,6 @@
     z-index: 2;
     margin-bottom: 12px;
 }
-#menu{
-    position: absolute;
-    right: 5%;
-
-}
 #title{
     font-weight: 600;
     font-size: 24px;
@@ -37,9 +32,8 @@
     color: #BEBEBE
 }
 #home-icon{
-    position: relative;
-    left: 75vw;
-    align-items: center;
+    position: absolute;
+    right: 5%;
 }
 @media screen and (min-width: 431px){
     .container{

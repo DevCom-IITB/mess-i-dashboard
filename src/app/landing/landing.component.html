@@ -1,5 +1,7 @@
 <div class="container">
+    <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
     <h1>Welcome To Mess-I :)</h1>
+    <button id="mobile-redirect-home" (click)="goToHome()">Go to Home Page</button>
     <div class="section">
         <div class="section-info rebate-info">
             <h2>For Rebate Application</h2>
