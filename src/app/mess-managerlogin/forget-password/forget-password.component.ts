@@ -40,4 +40,8 @@ export class ForgetPasswordComponent implements OnInit {
       );
   }
   // Add comments or section headers here if needed
+
+  goBack() {
+    window.history.back();
+  }
 }

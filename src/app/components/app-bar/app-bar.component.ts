@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-app-bar',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppBarComponent {
   @Input() suffix: string ;
-  constructor(private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
   toggleMenu(): void {
     this.router.navigate(['/list']);
   }

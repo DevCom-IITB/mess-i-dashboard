@@ -10,13 +10,18 @@ import { Router } from '@angular/router';
 export class LandingComponent implements OnInit {
   app_bar_suffix: string = 'Landing Page';
 
-  constructor(private auth:AuthService, private router:Router) {
+  constructor(public auth:AuthService, private router:Router) {
   }
 
   ngOnInit(): void {
   }
 
   goToHome(): void {
-    this.router.navigate(['/home']);
+    if (this.auth.logged_in) {
+      this.router.navigate(['/home']);
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 }

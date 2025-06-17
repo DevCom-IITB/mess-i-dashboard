@@ -140,6 +140,7 @@ a{
   button{
     background-color: #FFC42B;
     color: #28282B;
+    font-weight: 600;
     border: 0px;
   }
   .heading2 p{
@@ -170,5 +171,11 @@ a{
   #logo-container{
     display: flex;
     justify-content: center;
+  }
+  #back-arrow{
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    cursor: pointer;
   }
 }
