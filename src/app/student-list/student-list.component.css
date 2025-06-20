@@ -105,7 +105,7 @@ h2{
 #stud-cards{
   display: none;
 }
-#csv-download-container, #official-toggle-container{
+#csv-download-container, #inactive-toggle-container{
   display: none;
 }
 @media screen and (max-width: 431px){
@@ -157,7 +157,12 @@ h2{
     height: 43px;
     position: static;
   }
-  #official-toggle-container{
+  #csv-download-container:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+  }
+  #inactive-toggle-container{
       width: 120px;
       height: 43px;
       z-index: 0;
@@ -169,7 +174,7 @@ h2{
       gap: 10px;
       /* padding: 10px !important; */
   }
-  #official-toggle-container p{
+  #inactive-toggle-container p{
       margin-bottom: 0px;
       font-family: "Open Sans";
       font-size: 14px;

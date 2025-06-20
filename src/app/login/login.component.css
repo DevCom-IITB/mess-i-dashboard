@@ -10,7 +10,7 @@
 a{
     color: #28282B;
     font-size: larger;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0 !important;
     background-color: #FFC42B;
     padding-right: 2rem;
@@ -95,6 +95,9 @@ a.btn:hover{
     }
 }
 @media screen and (max-width : 430px) {
+    *{
+        font-style: "Open Sans", sans-serif !important;
+    }
     .img-fluid{
         display: block;
         justify-content: center;

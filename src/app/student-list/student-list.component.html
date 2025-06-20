@@ -5,7 +5,7 @@
     <div class="search-main-area">
       <input type="search" class="form-control nosubmit" [(ngModel)]="searchText" placeholder="Name/Roll number" aria-label="search" aria-describedby="search by roll" (keyup)="search($event)">
     </div>
-    <div id="official-toggle-container"> <!-- Only for mobile view -->
+    <div id="inactive-toggle-container"> <!-- Only for mobile view -->
         <p>Inactive</p>
         <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
     </div>

@@ -117,7 +117,7 @@ a{
   margin-right: -55%;
   color: #28282B;
 }
-.img3-fluid {
+.img3-fluid, #back-arrow {
   display: none;
 }
 
