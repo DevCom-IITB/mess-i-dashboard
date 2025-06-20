@@ -163,7 +163,7 @@ h2{
     transition: all 0.2s ease-in-out;
   }
   #inactive-toggle-container{
-      width: 120px;
+      width: 27.9vw;
       height: 43px;
       z-index: 0;
       background-color: #ffffff;
@@ -179,6 +179,8 @@ h2{
       font-family: "Open Sans";
       font-size: 14px;
       font-weight: 600;
+      position: relative;
+      left: 1vw;
   }
   :host ::ng-deep .mdc-switch__track::after{
       padding: 2px;

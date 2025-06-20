@@ -13,7 +13,7 @@ import { GuestdataService } from '../guestdata.service';
 export class GuestAdminComponent implements OnInit {
 
   app_bar_suffix: string = "Guest Booking";
-  currTab: string = 'breakfast';
+  currTab: string = 'empty';
   allowedHostels:boolean[] = new Array<boolean>(22);
   guestHistory:any = {exists:true, loaded:false};
   meal: Array<string> = ['breakfast', 'lunch', 'snacks', 'dinner'];
@@ -84,6 +84,9 @@ export class GuestAdminComponent implements OnInit {
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
+          if(this.isHistoryEmpty(this.guestHistory)){
+            this.guestHistory = [null]
+          }
           this.guestCardData = this.guestHistory.body;
           console.log(this.guestCardData)
         }).catch((res)=>{

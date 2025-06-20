@@ -132,4 +132,8 @@ button:hover{
         background-position: right 0.75rem center;
         background-size: 16px 12px;
     }
+    #no-guest-indicator{
+        display: flex;
+        color: #ffffff;
+    }
 }

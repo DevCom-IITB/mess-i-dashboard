@@ -19,20 +19,7 @@ export class StudentListComponent implements OnInit {
   @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   // studentImageMap = new Map();
   //studentInfoList_array = [];
-  studentInfoList : any =[
-  ["24B1243",{
-    fullname: "Ganesh Preetham Vulise",
-    hostel: "16",
-    room: "A-908",
-    mess_allowed: true,
-  }],
-  ["24B1248",{
-    fullname: "Arkapally Sai Druvan Teja",
-    hostel: "Hostel 1",
-    room: "000",
-    mess_allowed: false,
-  }]
-  ];
+  studentInfoList : any =[];
   temp : any;
   errMsg = "";
   // isImageLoading:any;

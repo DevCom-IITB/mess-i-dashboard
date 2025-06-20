@@ -64,23 +64,23 @@ li.text-stats-item {
     overflow-x: auto;
 }
 
-.chart-container::-webkit-scrollbar {
+.chart-container::-webkit-scrollbar, #pie::-webkit-scrollbar {
   height: 8px;
   display: block;
 }
 
-.chart-container::-webkit-scrollbar-track {
+.chart-container::-webkit-scrollbar-track, #pie::-webkit-scrollbar-track {
   background: #f0f0f0;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
 
-.chart-container::-webkit-scrollbar-thumb {
+.chart-container::-webkit-scrollbar-thumb, #pie::-webkit-scrollbar-thumb {
   background: #ffce5d;
   border-radius: 4px;
 }
 
-.chart-container::-webkit-scrollbar-thumb:hover {
+.chart-container::-webkit-scrollbar-thumb:hover, #pie::-webkit-scrollbar-thumb:hover {
   background: #ffb400;
 }
 #myTab{
@@ -211,6 +211,7 @@ li.text-stats-item {
   }
   #pie{
     width: 100% !important;
+    overflow-x: auto;
   }
   #textual-stats {
     position: relative;

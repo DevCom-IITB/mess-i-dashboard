@@ -66,7 +66,8 @@ p.tgl{
 .test{
   display: flex;
   align-items: flex-start;
-  padding-left: 0%
+  padding-left: 0%;
+  margin-bottom: 1vh;
 }
 .form-select{
   margin: 2vh;
@@ -161,7 +162,7 @@ border-radius: 50000px;
 .reb-button:hover {
   background-color: #2980b9; /* Change to your preferred hover color */
 }
-#myTab, #myTabContent{
+#myTab, #myTabContent, #csv-download-container{
   display: none;
 }
 #desktop-table {
@@ -265,6 +266,8 @@ border-radius: 50000px;
   #myTab{
     display: flex;
     border-bottom: 3px solid #ffce5d;
+    position: relative;
+    top: 4vh;
   }
   ul{
     margin-bottom: 16px;
@@ -272,6 +275,8 @@ border-radius: 50000px;
   #myTabContent{
     display: block;
     padding-top: 2%;
+    position: relative;
+    top: 4vh;
   }
   .nav-link{
     border: none;

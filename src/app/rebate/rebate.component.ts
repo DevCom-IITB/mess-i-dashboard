@@ -23,7 +23,7 @@ export class RebateComponent implements OnInit {
       this.router.navigate(['login'])
     }
     if(!this.auth.isStudent() ){
-      this.router.navigate(['landing'])
+      // this.router.navigate(['landing'])
     }
   }
 

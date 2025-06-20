@@ -184,15 +184,14 @@ export class PlotlyService {
         dateLabels.push(rowDates);
         
         // Label rows with meal name + row number if multiple rows
-        if (rowsNeeded === 1) {
-          reshapedLabels.push(y[mealIdx]);
-        } else {
-          reshapedLabels.push(`${y[mealIdx]} (${rowNum + 1}/${rowsNeeded})`);
-        }
+        // if (rowsNeeded === 1) {
+        //   reshapedLabels.push(y[mealIdx]);
+        // } else {
+        //   reshapedLabels.push(`${y[mealIdx]} (${rowNum + 1}/${rowsNeeded})`);
+        // }
       }
     }
     console.log("Reshaped Z:", reshapedZ);
-    console.log("Reshaped Labels:", reshapedLabels);
     // Create color scale as before
 
     let screen_width = window.innerWidth;

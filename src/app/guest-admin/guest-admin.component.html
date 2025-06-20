@@ -41,11 +41,11 @@
     </form>
   </div>
   <hr>
-
   <div>
     <app-table-component *ngIf="isHistoryEmpty(guestHistory['body'])"  [data]="guestHistory" id="table"></app-table-component>
     <p  *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
     <div class="guest-cards">
+      <p *ngIf="guestCardData[0] == null && currTab != 'empty'" id="no-guest-indicator">No Guest</p>
       <app-guest-card *ngFor="let info of guestCardData; let i=index" [data]="info" [date]="'2025-05-15'" [meal]="'Dinner'"></app-guest-card>
     </div>
   </div>
