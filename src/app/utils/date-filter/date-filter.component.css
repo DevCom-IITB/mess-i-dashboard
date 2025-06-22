@@ -1,56 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
-#form-container{
-    display: grid;
+
+#form-container {
+    display: flex;
+    flex-direction: column;
     gap: 1em;
-    grid-auto-rows: minmax(60px, auto);
-    grid-template-columns: repeat(10, 1fr); 
-    color: #ffc42b;
+    color: #28272c;
     background-color: transparent;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
-#from-date-container{
-    grid-row: 1;
-    grid-column: 1/2;
-}
-#to-date-container{
-    grid-row: 1;
-    grid-column: 2/3;
-}
-#officalFilter{
-    grid-row: 1;
-    grid-column: 3/4;
-}
-#main-heading{
-    padding-top: .5rem;
-    margin-bottom: 0px;
+#filter-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%;
+    position: relative;
 }
 
-.button-style{
+#left-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#range-date-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    position: relative;
+    
+}
+#range-date {
+    width: 265px;
+    border: none;
+    border-radius: 8px;
+    height: 56px;
+}
+
+#calender-icon {
+    position: absolute;
+    bottom: 14.91px;
+    right: -40px;
+    z-index: 1;
+    size: scale(2);
+}
+
+#calender-icon:hover {
+    cursor: pointer;
+}
+
+#official-toggle-container {
+    width: 120px;
+    height: 56px;
+    z-index: 0;
+    background-color: #ffffff;
+    border-radius: 10px 50px 50px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: solid 2px #ffc24b;
+}
+
+#official-toggle-container p {
+    margin-bottom: 0px;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#official-toggle {
+    display: flex;
+}
+
+.filter-actions-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    align-items: center;
+}
+
+.filter-actions-container button {
+    border-radius: 120rem;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#filter-btn, #reset-btn, #csv-down {
     background-color: #ffc659;
     border-color: #ffc659;
+    color: #28272c;
     border-radius: 120rem;
-    margin-top: 2.4em; 
-    padding-right: 24px;
-    padding-left: 24px;
-    height: max-content;
+    padding: 8px 16px;
     font-weight: bold;
+    font-size: 14px;
 }
 
-#confirm-btn {
-    grid-row: 1;
-    grid-column: 6/7;
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+    background-color: #ffffff !important;
+    border-radius: 50px 10px 10px 50px;
+    padding: 0px 0px 0px 20px;
+    border: solid 2px #ffc24b;
+    height: 56px; 
+    display: flex;
+    align-items: center;
 }
 
-#reset-btn {
-    grid-row: 1;
-    grid-column: 8/9;
+:host ::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none !important;
 }
 
-#csv-down {
-    grid-row: 1;
-    grid-column: 10/11;
+:host ::ng-deep .mat-start-date, .mat-end-date {
+    font-size: 12px;
 }
-@media screen and (max-width: 431px){
-    *{
-        font-family: "Open Sans", sans-serif;
-    }
+
+:host ::ng-deep .mdc-switch__track::after {
+    padding: 2px;
+    background-color: #ffc24b !important;
+}
+
+:host ::ng-deep .mdc-switch__track::before {
+    background-color: #ffffff !important;
+}
+
+:host ::ng-deep .mdc-switch__icons {
+    background-color: black !important;
+    border-radius: 50px;
+    margin: 0px;
+}
+
+:host ::ng-deep .mdc-switch__ripple::after {
+    background-color: #ffc24b !important;
+}
+:host ::ng-deep .mdc-line-ripple {
+    display: none !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-underline {
+    display: none !important;
+}
+:host ::ng-deep .mat-mdc-form-field-flex {
+    height: 52px;
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+    border-bottom: none !important;
+}
+
+:host ::ng-deep .mat-mdc-input-element {
+    margin-top: 0;
+}
+
+:host ::ng-deep .mat-date-range-input {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }

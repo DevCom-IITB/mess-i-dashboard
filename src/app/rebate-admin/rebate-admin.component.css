@@ -23,6 +23,22 @@
     display: none;
 }
 
+.nav-tabs .nav-link {
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 600; 
+    font-size: 16px; 
+    color: #28272c; 
+    transition: all 0.2s ease;
+}
+.nav-tabs .nav-link.active {
+    color: #28272c; 
+    font-weight: 700; 
+}
+.nav-tabs .nav-link:hover:not(.active) {
+    color: #444;
+    background-color: rgba(255, 196, 75, 0.1); 
+}
+
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;

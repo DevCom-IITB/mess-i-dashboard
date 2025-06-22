@@ -3,19 +3,19 @@
     <div class="btn-box"> <!-- Only for mobile view -->
         <ul class="nav nav-tabs mb-2" id="myTab2" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('pending')">Pending</button>
+                <button class="nav-link active" id="home-tab2" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('pending')">Pending</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('accepted')">Accepted</button>
+                <button class="nav-link" id="profile-tab2" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('accepted')">Accepted</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
+                <button class="nav-link" id="contact-tab2" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
             </li>
         </ul>
     </div> 
-    <div id="range-date-container"> <!-- Only for mobile view -->
+    <!-- Mobile filter section -->
+    <div id="range-date-container">
         <mat-form-field id="range-date">
-            <!-- <mat-label>Enter a date range</mat-label> -->
             <mat-date-range-input [rangePicker]="rangePicker">
                 <input matStartDate placeholder="Start date" [formControl]="startDate"/>
                 <input matEndDate placeholder="End date" [formControl]="endDate"/>
@@ -29,16 +29,18 @@
                 </mat-date-range-picker-actions>
             </mat-date-range-picker>
         </mat-form-field>
-        <div id="official-toggle-container"> <!-- Only for mobile view -->
+        <div id="official-toggle-container">
             <p>Official</p>
             <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
         </div>
     </div>
     <div class="filter-actions-container">
         <button id="mobile-clear-btn" class="btn btn-secondary" (click)="clearFilters()">
-            Clear
+            Reset
         </button>
     </div>
+    
+    <!-- Desktop header and tabs -->
     <h1 id="page-title" style="border-bottom:3px solid #ffc42b;">Rebates</h1>
     <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -51,22 +53,24 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
         </li>
     </ul>
-    <app-date-filter id="date-filter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)" (onClearFilter)="clearFilters()"></app-date-filter>
-    <div class="tab-content" id="myTabContent" >
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
-        <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
-            <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)" *ngIf="!toggle || (toggle && p_rebate.official)"></app-pd-rebate-card>
+    
+    <!-- Desktop filter -->
+    <app-date-filter id="date-filter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
+                <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)" *ngIf="!toggle || (toggle && p_rebate.official)"></app-pd-rebate-card>
+            </div>
         </div>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
-        <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
-            <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" *ngIf="!toggle || (toggle && a_rebate.official)"></app-stu-reb-card>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
+                <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" *ngIf="!toggle || (toggle && a_rebate.official)"></app-stu-reb-card>
+            </div>
         </div>
-    </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div class="rebate-card-container" *ngFor="let r_rebate of rejected_rebates">
-            <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected" *ngIf="!toggle || (toggle && r_rebate.official)"></app-stu-reb-card>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="rebate-card-container" *ngFor="let r_rebate of rejected_rebates">
+                <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected" *ngIf="!toggle || (toggle && r_rebate.official)"></app-stu-reb-card>
+            </div>
         </div>
-    </div>
     </div> 
 </div>
