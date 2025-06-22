@@ -145,78 +145,10 @@ export class StudentdataService {
     });
   }
 
-
   async getStudentRebates(){
     // const base = "http://localhost:5000/api"
     // return this.getAllRebatesFromUrl(base.concat("/rebates/student"));
-    // return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/student"));
-    return {"pending_rebates":[
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ],
-    "accepted_rebates" : [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ],
-    "rejected_rebates" : [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: 'Dr. Smith',
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ]
-  }
+    return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/student"));
   }
   async getAdminRebates(){
     return this.getAllRebatesFromUrl(this.baseurl.concat("/rebates/admin"));

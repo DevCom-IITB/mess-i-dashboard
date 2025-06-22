@@ -13,6 +13,7 @@
     font-weight: 200;
 }
 .rebate-card-container{
+    margin-top: -1rem;
     margin-bottom: 24px;
 }
 #myTabContent{
@@ -27,11 +28,49 @@
 #official-toggle-container{
     display: none;
 }
+.filter-actions-container {
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    justify-content: flex-end;
+}
+#mobile-clear-btn {
+    background-color: #fffcf4;
+    border-color: #fffcf4;
+    border-radius: 120rem;
+    padding: 8px 16px;
+    font-size: 14px;
+    width: fit-content;
+    color:#28272c;
+    font-size: 'Open Sans', sans-serif;
+    font-weight: 600;
+    margin-top: auto;
+    margin-bottom: auto;
+}
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
         padding: 0% 4%;
     }
+
+    .filter-actions-container {
+        display: flex;
+        justify-content: flex-end; 
+        width: 100%;
+        margin-top: 16px;
+        margin-bottom: 10px;
+    }
+    
+    #mobile-clear-btn {
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: #28272c;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
     .rebate-card-container{
         position: relative;
         top: 1vh;
@@ -89,6 +128,7 @@
         border-radius: 8px;
         display: block;
     }
+    
     #calender-icon{
         position: absolute;
         bottom: 1.6vh;
@@ -129,7 +169,7 @@
     }
     #range-date-container{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         gap: 10px;
         position: relative;

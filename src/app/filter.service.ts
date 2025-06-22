@@ -11,6 +11,24 @@ export class FilterService {
   CSV_fields : string[] = ["fullname","room","id","roll","start", "end", "rebate_docname","official","comment","reason","request_date"];
   constructor() { }
 
+  normalizeToddMMyyyyFormat(dateStr: string): string {
+    // Skip if already in DD-MM-YYYY format
+    if (dateStr.match(/^\d{2}-\d{2}-\d{4}$/)) {
+      return dateStr;
+    }
+    
+    // Handle MM-DD-YYYY format
+    try {
+      const parts = dateStr.split('-');
+      if (parts.length === 3) {
+        return `${parts[1]}-${parts[0]}-${parts[2]}`;
+      }
+      return dateStr; 
+    } catch (e) {
+      console.error("Error normalizing date:", e);
+      return dateStr;
+    }
+  }
 
   booleanify (value?: any): boolean{
     const truthy: string[] = [
@@ -32,10 +50,15 @@ export class FilterService {
   }
   // populateRebatesMonthFilter(start:Date,end:Date): void{
   checkFilterOnRebate(from_date:Date,to_date:Date,official:boolean,elem:RebateRequest): boolean{
-    var start_date = elem.start.split('-')
-    var end_date = elem.end.split('-')
-    var elem_date = new Date(parseInt(start_date[2],10),parseInt(start_date[1],10)-1,parseInt(start_date[0],10))
-    var elem_date_end = new Date(parseInt(end_date[2],10),parseInt(end_date[1],10)-1,parseInt(end_date[0],10))
+    const normalizedStart = this.normalizeToddMMyyyyFormat(elem.start);
+    const normalizedEnd = this.normalizeToddMMyyyyFormat(elem.end);
+    
+    var start_date = normalizedStart.split('-')
+    var end_date = normalizedEnd.split('-')
+    
+    var elem_date = new Date(parseInt(start_date[2], 10), parseInt(start_date[1], 10)-1, parseInt(start_date[0], 10))
+    var elem_date_end = new Date(parseInt(end_date[2], 10), parseInt(end_date[1], 10)-1, parseInt(end_date[0], 10))
+    
     if(isNaN(from_date.getDate()) && isNaN(to_date.getDate())){
       if (official) {
         if(this.booleanify(elem.official)){
@@ -85,17 +108,40 @@ export class FilterService {
       }
     }
   }
- populateRebatesMonthFilter(res:any,from_filter:string,to_filter:string, official:boolean,rebates : {pending_rebates:RebateRequest[],accepted_rebates:RebateRequest[],rejected_rebates:RebateRequest[]}): void{
-    var from_date = new Date(Date.parse(from_filter))
-    var to_date = new Date(Date.parse(to_filter))
-    rebates.pending_rebates.splice(0,rebates.pending_rebates.length)
-    rebates.accepted_rebates.splice(0,rebates.accepted_rebates.length)
-    rebates.rejected_rebates.splice(0,rebates.rejected_rebates.length)
-    this.filterRebates(res.accepted_rebate,rebates.accepted_rebates,from_date,to_date,official);
-    this.filterRebates(res.pending_rebate,rebates.pending_rebates,from_date,to_date,official);
-    this.filterRebates(res.rejected_rebate,rebates.rejected_rebates,from_date,to_date,official);
-
+ populateRebatesMonthFilter(res:any, from_filter:string, to_filter:string, official:boolean, rebates: {pending_rebates:RebateRequest[], accepted_rebates:RebateRequest[], rejected_rebates:RebateRequest[]}) {
+  let from_date, to_date;
+  try {
+    // Parse DD-MM-YYYY format
+    const parseDate = (dateStr: string) => {
+      if (!dateStr || dateStr === "NONE") return new Date(NaN); 
+      
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return new Date(NaN);
+      return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+    };
+    
+    from_date = parseDate(from_filter);
+    to_date = parseDate(to_filter);
+    
+    console.log("Parsed filter dates:", {
+      fromString: from_filter,
+      toString: to_filter,
+      fromDate: from_date,
+      toDate: to_date
+    });    
+    // Clear existing arrays
+    rebates.pending_rebates.splice(0, rebates.pending_rebates.length);
+    rebates.accepted_rebates.splice(0, rebates.accepted_rebates.length);
+    rebates.rejected_rebates.splice(0, rebates.rejected_rebates.length);
+    
+    this.filterRebates(res.accepted_rebate, rebates.accepted_rebates, from_date, to_date, official);
+    this.filterRebates(res.pending_rebate, rebates.pending_rebates, from_date, to_date, official);
+    this.filterRebates(res.rejected_rebate, rebates.rejected_rebates, from_date, to_date, official);
+    
+  } catch (e) {
+    console.error("Error parsing dates for filter:", e);
   }
+}
 
   get_entry_in_request(req:RebateRequest,key:String){
     switch(key) { 
@@ -116,7 +162,8 @@ export class FilterService {
          break; 
       } 
       case "request_date": { 
-        return req.request_date.replace(","," ")
+        const requestDate = req.request_date.replace(",", " ");
+        return this.normalizeToddMMyyyyFormat(requestDate);
          break; 
       } 
       case "reason": { 

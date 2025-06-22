@@ -1,15 +1,5 @@
 <div id="main-container" class="main-container">
     <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
-        <div id="pending-rebates-container" class="pending-rebates-container" *ngIf="auth_service.isRebate()">
-            <h1 style="border-bottom:3px solid #FFC42B;">Pending Rebates</h1>
-            <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll" *ngIf="pending_rebates.length>0">
-                <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
-                    <app-pd-rebate-card [rebate_request]="reb_req" (updateList)="updateList($event)"></app-pd-rebate-card>
-                </div>
-            </div>
-            <!-- <h4 style="font-weight:lighter;" *ngIf="pending_rebates.length==0"> All rebates are resolved</h4> -->
-        </div>
-
         <div id="device-container">
             <h1 style="border-bottom:3px solid #FFC42B;">Devices</h1>
             <ng-container *ngFor="let device of devices">

@@ -89,11 +89,28 @@ export class PdRebateCardComponent implements OnInit {
     return `${all[0]} ${this.numToMonth[parseInt(all[1])-1]} ${all[2]}`;
   }
 
-  noOfDays(start: string, end: string): string{
-    let startDate = new Date(Date.parse(start));
-    let endDate = new Date(Date.parse(end));
+  noOfDays(start: string, end: string): string {
+  try {
+    const convertToDateObj = (dateStr: string) => {
+      const [day, month, year] = dateStr.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    };
+    
+    let startDate = convertToDateObj(start);
+    let endDate = convertToDateObj(end);
+    
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.log("Invalid date conversion:", start, end);
+      return "0";
+    }
+    
     let diff = Math.abs(endDate.getTime() - startDate.getTime());
-    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
+    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24));
+    
     return diffDays.toString();
+  } catch (e) {
+    console.error("Error calculating days:", e, "for dates:", start, end);
+    return "0";
   }
+}
 }
