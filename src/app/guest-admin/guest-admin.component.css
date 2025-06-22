@@ -45,16 +45,24 @@ button:hover{
 .nav-link{
     color: black;
 }
-.mobile-csv-download{
+.mobile-csv-download, .guest-cards, #myTab, #no-guest-indicator-mobile{
     display: none;
+}
+#no-guest-indicator-desktop{
+    display: flex;
+    color: #28272C;
+    font-weight: 600;
 }
 @media screen and (max-width: 431px){
     .container{
-        padding-top: 0%;
+        padding: 0% 2%;
         background-color: #28272c;
     }
-    #heading, hr, #table, #meal_dropdown, #get-button{
+    #heading, hr, #table, #meal_dropdown, #get-button, #no-guest-indicator-desktop{
         display: none;
+    }
+    .guest-cards{
+        display: block;
     }
     .nav-item{
         width: fit-content;
@@ -63,11 +71,11 @@ button:hover{
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 17.14vw;
+        width: 20.76vw;
         height: 50px;
         border-radius: 50px;
         padding: 4px 19px 4px 19px;
-        margin: 0px 8px;
+        /* margin: 0px 8px; */
         border: none;
         background-color: #ffffff;
         font-size: 12px;
@@ -79,21 +87,21 @@ button:hover{
     .btn-box button.active{
         background-color: #ffce5d;
         color: #28272c;
-        width: 20.76vw;
         font-size: 14.4px;
         font-weight: 600;
         transition: all 0.15s ease-in-out;
     }
     #myTab{
+        width: 100%;
         margin: 8px 0px 16px !important;
         display: flex;
         border-bottom: none;
         height: 50px;
-        justify-content: center;
+        justify-content: space-between;
     }
     /* All the importants are added because they have a diff css designed in their component acc to desktop view */
     .input-group{
-        width: 92vw;
+        width: 100%;
         margin-bottom: 4px !important;
         display: flex;
         gap: 10px;
@@ -132,7 +140,7 @@ button:hover{
         background-position: right 0.75rem center;
         background-size: 16px 12px;
     }
-    #no-guest-indicator{
+    #no-guest-indicator-mobile{
         display: flex;
         color: #ffffff;
     }

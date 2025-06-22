@@ -41,10 +41,10 @@
     <div class="filter-tab-container">
         <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('pending')">Rebates</button>
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('rebates')">Rebates</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('accepted')">Meals</button>
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('meals')">Meals</button>
             </li>
         </ul>
     </div>
@@ -61,7 +61,7 @@
                     <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
                     <mat-date-range-picker #rangePicker>
                         <mat-date-range-picker-actions>
-                        <button mat-button matDateRangePickerCancel>Cancel</button>
+                        <button mat-button matDateRangePickerCancel (click)="clearFilters()">Clear</button>
                         <button mat-raised-button matDateRangePickerApply (click)="applyDateFilter()">Apply</button>
                         </mat-date-range-picker-actions>
                     </mat-date-range-picker>

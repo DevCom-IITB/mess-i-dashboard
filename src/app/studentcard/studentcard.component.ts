@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { RebateRequest } from '../interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { FilterService } from '../filter.service';
+import { saveAs } from 'file-saver-es';
 
 @Component({
   selector: 'app-studentcard',
@@ -24,7 +26,7 @@ export class StudentcardComponent implements OnInit {
   date = new Date();
   studentImage:any;
   isImageLoading:any;
-  currTab: string = 'pending';
+  currTab: string = 'rebates';
   pending_rebates: RebateRequest[] = new Array();
   accepted_rebates: RebateRequest[] = new Array();
   rejected_rebates: RebateRequest[] = new Array();
@@ -33,7 +35,7 @@ export class StudentcardComponent implements OnInit {
   startDate = new FormControl();
   endDate = new FormControl();
 
-  constructor(private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog, private router: Router) {
+  constructor(private filter_service: FilterService, private route: ActivatedRoute, private service: StudentdataService, private dialog:MatDialog, private router: Router) {
    }
 
   ngOnInit(): void {
@@ -42,72 +44,13 @@ export class StudentcardComponent implements OnInit {
     this.initialise();
   }
   initialise(): void {
-    this.pending_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: false,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
-    this.accepted_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
-    this.rejected_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
+
+    this.service.getAdminRebatesRoll(this.rollNumber).then((res:any) => {
+      this.pending_rebates = res.pending_rebate;
+      this.accepted_rebates = res.accepted_rebate;
+      this.rejected_rebates = res.rejected_rebate;
+    }).catch((e)=>
+    console.log(e))
   }
 
   async fetch_student(rollNum: any){
@@ -143,14 +86,14 @@ export class StudentcardComponent implements OnInit {
         }
     })
     // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-    this.service.getAdminRebatesRoll(roll).then((res:any) => {
-        this.dialog.open(StuRebateDialogComponent,{
-        data:{accepted_rebates : res.accepted_rebate,
-              rejected_rebates: res.rejected_rebate,
-              pendeing_rebates: res.pending_rebate}
-    })
-    }).catch((e)=>
-    console.log(e))
+    // this.service.getAdminRebatesRoll(roll).then((res:any) => {
+    //     this.dialog.open(StuRebateDialogComponent,{
+    //     data:{accepted_rebates : res.accepted_rebate,
+    //           rejected_rebates: res.rejected_rebate,
+    //           pendeing_rebates: res.pending_rebate}
+    // })
+    // }).catch((e)=>
+    // console.log(e))
 
   }
 
@@ -238,11 +181,23 @@ export class StudentcardComponent implements OnInit {
     this.toggle = isChecked;
     console.log('Toggle state:', this.toggle);
   }
-  initialiseWithFilter(dateRange: any): void {
-    console.log('Filter applied:', dateRange);
-    // In a real app, this would filter the data based on date range
-    // For now, just use the same dummy data
-    this.initialise();
+  getRebates = () => this.service.getAdminRebates();
+
+  async initialiseWithFilter(event:any){
+    console.log("Filter dates:", {
+      from: event[0],
+      to: event[1], 
+      official: event[2]
+    });
+    
+    this.getRebates().then((res:any) => {            
+      this.filter_service.populateRebatesMonthFilter(
+        res, event[0], event[1], event[2],
+        {pending_rebates:this.pending_rebates, accepted_rebates:this.accepted_rebates, rejected_rebates:this.rejected_rebates}
+      );
+    }).catch((e) => {
+      console.log(e);
+    });
   }
   
   getDateRange() {
@@ -260,11 +215,36 @@ export class StudentcardComponent implements OnInit {
     const range = this.getDateRange();
     console.log('Date Range:', range);
     
-    // Use the range for your logic
-    this.initialiseWithFilter(range);
+    if (!range.startDate || !range.endDate) {
+      console.log("Invalid date range");
+      return;
+    }
+    
+    // Pass startDate, endDate, and official flag
+    this.initialiseWithFilter([range.startDate, range.endDate, this.toggle]);
+  }
+
+  clearFilters() {
+    this.startDate.reset();
+    this.endDate.reset();
+    this.toggle = false;
+    this.initialise();
+    
+    console.log("Filters cleared");
   }
 
   downloadCSV(){
-    // This function will handle the CSV download logic
+    if(this.currTab == "rebates"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:this.pending_rebates,accepted_rebates:this.accepted_rebates,rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
+      saveAs(blob,"rebates_pending.csv");
+      console.log("CSV downloaded for pending rebates");
+    }
+    else if(this.currTab == "meals" && this.mess_data){
+      this.filter_service.downloadTableAsCSV(this.mess_data);
+      console.log("CSV downloaded for meal data");
+    }
+    else if(this.currTab == "meals" && !this.mess_data){
+      alert("No meal data available to download");
+    }
   }
 }

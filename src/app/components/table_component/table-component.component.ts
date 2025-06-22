@@ -19,6 +19,7 @@ export class TableComponentComponent implements OnInit {
   }
 
   getCSV(){
+    console.log(this.data.body);
     let csv = this.data.headers.join(',');
     csv += '\n';
     this.data.body.forEach((row:any) => {

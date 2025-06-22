@@ -25,7 +25,7 @@
 }
 @media screen and (max-width: 431px){
     .main-container{
-        padding-top: 0%;
+        padding: 0% 2%;
         background-color:#28282B;
         min-height: 100%;
     }

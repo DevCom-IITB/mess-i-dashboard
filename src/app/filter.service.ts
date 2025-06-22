@@ -261,4 +261,21 @@ export class FilterService {
     return csv;
 
   }
+  downloadTableAsCSV(data: any){
+    let csv = data.headers.join(',');
+    csv += '\n';
+    data.body.forEach((row:any) => {
+      csv += row.join(',');
+      csv+= '\n';
+    })
+    if("footer" in data){
+      csv += data.footer.join(',');
+    }
+    csv+= '\n';
+    const anchor = document.createElement('a');
+    anchor.href = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
+    anchor.target = '_blank';
+    anchor.download = 'data.csv';
+    anchor.click();
+  }
 }

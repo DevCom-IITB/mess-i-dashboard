@@ -13,22 +13,13 @@
     font-weight: 200;
 }
 .rebate-card-container{
-    margin-top: -1rem;
     margin-bottom: 24px;
 }
 #myTabContent{
     padding-top: 1em 4%;
+    margin: 24px 0px;
 }
-#myTab2{
-    display: none;
-}
-#range-date{
-    display: none;
-}
-#official-toggle-container{
-    display: none;
-}
-.filter-actions-container {
+.filter-actions-container, #myTab2,#range-date, #official-toggle-container{
     display: none;
 }
 

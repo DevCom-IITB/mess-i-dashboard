@@ -201,7 +201,7 @@ border-radius: 50000px;
     margin: 0px;
   }
   .container-fluid{
-    padding: 0% 4%;
+    padding: 0% 2%;
     background-color: #28272c;
   }
   h1{
@@ -267,7 +267,7 @@ border-radius: 50000px;
     display: flex;
     border-bottom: 3px solid #ffce5d;
     position: relative;
-    top: 4vh;
+    /* top: 4vh; */
   }
   ul{
     margin-bottom: 16px;
@@ -276,12 +276,12 @@ border-radius: 50000px;
     display: block;
     padding-top: 2%;
     position: relative;
-    top: 4vh;
+    /* top: 4vh; */
   }
   .nav-link{
     border: none;
     background-color: #ffffff;
-    width: 46vw;
+    width: 48vw;
     height: 36px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -301,7 +301,7 @@ border-radius: 50000px;
     margin-bottom: 18px;
   }
   #range-date{
-      width: 265px;
+      width: 73.6vw;
       border: none;
       border-radius: 50px 10px 10px 50px;
       display: block;
@@ -349,10 +349,8 @@ border-radius: 50000px;
   #range-date-container{
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 10px;
-      position: relative;
-      top: 0vh;
       margin-bottom: 1vh;
   }
   :host ::ng-deep .mdc-switch__track::after{

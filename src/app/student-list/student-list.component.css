@@ -88,8 +88,7 @@ h2{
   
 }
 #main{
-  padding: 4%;
-  padding-top: 0%;
+  padding: 0% 2%;
 }
 
 .student-list-table-container{
@@ -135,21 +134,21 @@ h2{
   #stud-cards{
     display: flex;
     flex-direction: column;
-    width: 92vw;
+    width: 100%;
     position: relative;
   }
   .search-main-area{
-    width: 46.5vw;
+    width: 48vw;
     background-color: #ffffff ;
     display: block;
-    border-radius: 8px;
+    border-radius: 50px 10px 10px 50px;
     position: static;
   }
   #csv-download-container{
     font-family: "Open Sans";
     font-weight: 600;
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px 50px 50px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,7 +162,7 @@ h2{
     transition: all 0.2s ease-in-out;
   }
   #inactive-toggle-container{
-      width: 27.9vw;
+      width: 28.5vw;
       height: 43px;
       z-index: 0;
       background-color: #ffffff;

@@ -116,7 +116,7 @@ li.text-stats-item {
     font-family: "Open Sans", sans-serif !important;
   }
   .container {
-    padding-top: 0%;
+    padding: 0% 2% 2% 2%;
     background-color: #28272b;
   }
   #get-button {
