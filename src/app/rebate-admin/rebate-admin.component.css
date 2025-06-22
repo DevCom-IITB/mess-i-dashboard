@@ -29,24 +29,9 @@
     display: none;
 }
 .filter-actions-container {
-    display: flex;
-    margin-top: 16px;
-    margin-bottom: 0px;
-    justify-content: flex-end;
+    display: none;
 }
-#mobile-clear-btn {
-    background-color: #fffcf4;
-    border-color: #fffcf4;
-    border-radius: 120rem;
-    padding: 8px 16px;
-    font-size: 14px;
-    width: fit-content;
-    color:#28272c;
-    font-size: 'Open Sans', sans-serif;
-    font-weight: 600;
-    margin-top: auto;
-    margin-bottom: auto;
-}
+
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
@@ -62,14 +47,18 @@
     }
     
     #mobile-clear-btn {
-        background-color: #ffffff;
-        border-color: #ffffff;
-        color: #28272c;
+        background-color: #fffcf4;
+        border-color: #fffcf4;
+        border-radius: 120rem;
         padding: 8px 16px;
-        border-radius: 50px;
-        font-weight: 600;
         font-size: 14px;
-    }
+        width: fit-content;
+        color:#28272c;
+        font-size: 'Open Sans', sans-serif;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+}
     
     .rebate-card-container{
         position: relative;

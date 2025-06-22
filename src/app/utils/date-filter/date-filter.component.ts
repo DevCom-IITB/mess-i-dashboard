@@ -13,7 +13,6 @@ export class DateFilterComponent implements OnInit {
   @Output() onReset: EventEmitter<any> = new EventEmitter()
   @Output() onDownloadCSV: EventEmitter<any> = new EventEmitter()
   @Input() includeCSV:boolean;
-  @Output() onClearFilter: EventEmitter<any> = new EventEmitter()
   // @Output() public from_filterChange = new EventEmitter<string>();
   // @Output() public to_filterChange= new EventEmitter<string>();
 
@@ -24,14 +23,6 @@ export class DateFilterComponent implements OnInit {
   }
 
   reset(){
-    this.onReset.emit();
-  }
-
-  clearFilter() {
-    this.from_filter = "NONE";
-    this.to_filter = "NONE";
-    this.officialFilter = false;
-    this.onClearFilter.emit()
     this.onReset.emit();
   }
 

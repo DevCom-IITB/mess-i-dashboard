@@ -35,20 +35,6 @@
     font-weight: bold;
 }
 
-#clear-btn {
-    grid-row: 1;
-    grid-column: 4/5;
-    background-color: #6c757d;
-    border-color: #6c757d;
-    border-radius: 120rem;
-    margin-top: 2.4em; 
-    padding-right: 24px;
-    padding-left: 24px;
-    height: max-content;
-    display: inline-block;
-    visibility: visible; 
-}
-
 #confirm-btn {
     grid-row: 1;
     grid-column: 6/7;
