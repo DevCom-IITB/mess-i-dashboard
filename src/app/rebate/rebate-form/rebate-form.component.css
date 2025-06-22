@@ -128,6 +128,7 @@
     #range-date-container{
         display: flex;
         justify-content: space-between;
+        gap: 10px;
     }
     #range-date{
         width: 265px;
@@ -137,7 +138,7 @@
     }
     #calender-icon{
         position: absolute;
-        bottom: 1.6vh;
+        bottom: 14.91px;
         right: -40px;
         z-index: 1;
         size: scale(2);
@@ -152,6 +153,9 @@
     }
     :host ::ng-deep .mat-mdc-form-field-bottom-align{
         display: none !important;
+    }
+    :host ::ng-deep .mat-end-date, .mat-start-date{
+        font-size: 12px ;
     }
     #days-notice{
         display: flex;

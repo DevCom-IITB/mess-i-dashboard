@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate([card.redirect]);
   }
   isStudentPage(): boolean {
-    // return this.auth.isStudent() && !this.on_admin_page;
-    return true;
+    return this.auth.isStudent() && !this.on_admin_page;
+    // return true;
   }
 }

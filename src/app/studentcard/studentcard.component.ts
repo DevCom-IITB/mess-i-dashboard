@@ -143,14 +143,14 @@ export class StudentcardComponent implements OnInit {
         }
     })
     // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-    // this.service.getAdminRebatesRoll(roll).then((res:any) => {
-    //     this.dialog.open(StuRebateDialogComponent,{
-    //     data:{accepted_rebates : res.accepted_rebate,
-    //           rejected_rebates: res.rejected_rebate,
-    //           pendeing_rebates: res.pending_rebate}
-    // })
-    // }).catch((e)=>
-    // console.log(e))
+    this.service.getAdminRebatesRoll(roll).then((res:any) => {
+        this.dialog.open(StuRebateDialogComponent,{
+        data:{accepted_rebates : res.accepted_rebate,
+              rejected_rebates: res.rejected_rebate,
+              pendeing_rebates: res.pending_rebate}
+    })
+    }).catch((e)=>
+    console.log(e))
 
   }
 
