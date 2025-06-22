@@ -37,280 +37,113 @@ export class RebateAdminComponent implements OnInit {
     this.initialise();
   }
 
-  initialise(): void {
-    // // Populate with dummy data
-    this.pending_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise1',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: false,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
-    this.accepted_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
-    this.rejected_rebates = [
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'Ganesh Preetham Vulise',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      },
-      {
-        id: 'REB001',
-        student: {
-          id: 'S12345',
-          name: 'John Doe 2',
-          hostel: 'Brahmaputra',
-          room: 'A-101',
-          card_status: true
-        },
-        fullname: 'John Doe 2',
-        roll: 'CS21B001',
-        start: '2025-04-01',
-        end: '2025-04-05',
-        rebate_docname: 'medical_certificate.pdf',
-        official: true,
-        reason: 'Medical Leave',
-        comment: 'Hospitalized for 5 days',
-        request_date: '2025-03-29',
-        room: 'A-101'
-      }
-    ];
-   }
-
-  updateTab(tabName: string): void {
-    this.currTab = tabName;
-    // This would typically fetch data based on the selected tab
-    console.log(`Tab changed to: ${tabName}`);
-    // For now, we're using the data already loaded in initialise()
+  openDialog(roll:any) :void {
+    this.dialog.open(StuRebateDialogComponent,{
+    data:{
+      roll: roll
+        }
+    })
   }
 
-  updateList(event: any): void {
-    // This would typically refresh data after an update
-    console.log('Update requested', event);
-    this.initialise();
+  setDialogValues(rebates:any) :void{
+    const dialogRef = this.dialog.open(StuRebateDialogComponent,{
+      data:{accepted_rebates : rebates}
+    })
   }
 
-  initialiseWithFilter(dateRange: any): void {
-    console.log('Filter applied:', dateRange);
-    // In a real app, this would filter the data based on date range
-    // For now, just use the same dummy data
-    this.initialise();
+  clearFilters() {
+      this.startDate.reset();
+      this.endDate.reset();
+      this.toggle = false;
+      this.initialise();
+      
+      console.log("Filters cleared");
+    }
+    
+  async getStudentRebates(roll:any,rebates: any){
+    await this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
+      rebates = (res.pending_rebate);
+    }).catch((e)=>
+    console.log(e))
   }
 
-  downloadCSV(): void {
-    console.log('Download CSV requested');
-    // This would export the current data as CSV
-    alert('CSV download would start here in a real implementation');
+  updateTab(tab:String){
+    this.currTab = tab;
+    console.log(this.currTab)
+  }
+
+  getRebates = () => this.data_service.getAdminRebates();
+  async initialise(){
+    this.data_service.getAdminRebates().then((res)=>{
+      console.log(res);
+      this.populateRebates(res);
+    }).catch((e)=>{
+      //FIXME: Remove the console log, maybe log somewhere else
+        console.log(e);
+    });
+  }
+
+  updateList(rebateID: any){
+    window.location.reload();
+  }
+  
+  populateRebates(response: any): void{
+    const normalizeRebateDates = (rebates: any[]) => {
+      if (!rebates) return [];
+      
+      return rebates.map(rebate => {
+        const normalizedRebate = {...rebate};
+        
+        // Check if request_date exists and is in MM-DD-YYYY format
+        if (normalizedRebate.request_date && 
+            normalizedRebate.request_date.match(/^\d{2}-\d{2}-\d{4}$/)) {
+          const parts = normalizedRebate.request_date.split('-');
+          normalizedRebate.request_date = `${parts[1]}-${parts[0]}-${parts[2]}`;
+        }
+        
+        return normalizedRebate;
+      });
+    };
+    
+    this.pending_rebates = normalizeRebateDates(response.pending_rebate);
+    this.accepted_rebates = normalizeRebateDates(response.accepted_rebate);
+    this.rejected_rebates = normalizeRebateDates(response.rejected_rebate);
+  
+  }
+
+  async initialiseWithFilter(event:any){
+    console.log("Filter dates:", {
+      from: event[0],
+      to: event[1], 
+      official: event[2]
+    });
+    
+    this.getRebates().then((res:any) => {            
+      this.filter_service.populateRebatesMonthFilter(
+        res, event[0], event[1], event[2],
+        {pending_rebates:this.pending_rebates, accepted_rebates:this.accepted_rebates, rejected_rebates:this.rejected_rebates}
+      );
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+
+    
+
+   downloadCSV(){
+    // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
+    if(this.currTab == "pending"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:this.pending_rebates,accepted_rebates:[],rejected_rebates:[]})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
+    else if(this.currTab == "accepted"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:this.accepted_rebates,rejected_rebates:[]})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
+    else if(this.currTab == "rejected"){
+      var blob = new Blob([this.filter_service.makeCSV({pending_rebates:[],accepted_rebates:[],rejected_rebates:this.rejected_rebates})],{type:'text/csv'});
+      saveAs(blob,"rebates.csv");
+    }
   }
 
   onToggleChange(event : MatSlideToggleChange): void {
@@ -322,18 +155,30 @@ export class RebateAdminComponent implements OnInit {
     const pad = (n: number) => n.toString().padStart(2, '0');
     const start: Date = this.startDate.value;
     const end: Date = this.endDate.value;
+    
+    if (!start || !end) {
+      return {
+        startDate: null,
+        endDate: null
+      };
+    }
 
-    // Use local time getters to get IST date parts
+    // Convert to DD-MM-YYYY format
     return {
-      startDate: `${start.getFullYear()}-${pad(start.getMonth() + 1)}-${pad(start.getDate())}`,
-      endDate: `${end.getFullYear()}-${pad(end.getMonth() + 1)}-${pad(end.getDate())}`
+      startDate: `${pad(start.getDate())}-${pad(start.getMonth() + 1)}-${start.getFullYear()}`,
+      endDate: `${pad(end.getDate())}-${pad(end.getMonth() + 1)}-${end.getFullYear()}`
     };
   }
   applyDateFilter() {
     const range = this.getDateRange();
     console.log('Date Range:', range);
     
-    // Use the range for your logic
-    this.initialiseWithFilter(range);
+    if (!range.startDate || !range.endDate) {
+      console.log("Invalid date range");
+      return;
+    }
+    
+    // Pass startDate, endDate, and official flag
+    this.initialiseWithFilter([range.startDate, range.endDate, this.toggle]);
   }
 }

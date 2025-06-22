@@ -29,10 +29,15 @@
                 </mat-date-range-picker-actions>
             </mat-date-range-picker>
         </mat-form-field>
-    <div id="official-toggle-container"> <!-- Only for mobile view -->
-        <p>Official</p>
-        <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
+        <div id="official-toggle-container"> <!-- Only for mobile view -->
+            <p>Official</p>
+            <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
+        </div>
     </div>
+    <div class="filter-actions-container">
+        <button id="mobile-clear-btn" class="btn btn-secondary" (click)="clearFilters()">
+            Clear
+        </button>
     </div>
     <h1 id="page-title" style="border-bottom:3px solid #ffc42b;">Rebates</h1>
     <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
@@ -46,7 +51,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('rejected')">Rejected</button>
         </li>
     </ul>
-    <app-date-filter id="date-filter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)"></app-date-filter>
+    <app-date-filter id="date-filter" (onReset)="initialise()" [includeCSV]="includeCSV" (onDownloadCSV)="downloadCSV()" (onApplyFilter)="initialiseWithFilter($event)" (onClearFilter)="clearFilters()"></app-date-filter>
     <div class="tab-content" id="myTabContent" >
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
         <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">

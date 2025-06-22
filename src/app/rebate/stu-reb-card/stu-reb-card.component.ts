@@ -83,12 +83,12 @@ export class StuRebCardComponent implements OnInit {
   }
 
   updateAcceptedRebate(startDate: string, endDate: string){
-    // let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    //let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
     let rebate_id : string = this.rebate_request.id;
     // initialise a pop out of duration box with the rebate data
     this.dialog.open( DurationBoxComponent,{
     data:{
-          // roll: roll,
+          roll: this.rebate_request.roll,
           id : rebate_id,
           reason : this.rebate_request.reason,
           start_date: this.rebate_request.start,
@@ -119,16 +119,34 @@ export class StuRebCardComponent implements OnInit {
     })
   }
   isStudentPage() {
-    // return this.auth.isStudent() && !this.on_admin_page;
-    return true;
+    return this.auth.isStudent() && !this.on_admin_page;
   }
-  noOfDays(start: string, end: string): string{
-    let startDate = new Date(Date.parse(start));
-    let endDate = new Date(Date.parse(end));
+  noOfDays(start: string, end: string): string {
+  try {
+    // Convert DD-MM-YYYY to a format JavaScript can parse
+    const convertToDateObj = (dateStr: string) => {
+      const [day, month, year] = dateStr.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    };
+    
+    let startDate = convertToDateObj(start);
+    let endDate = convertToDateObj(end);
+    
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.log("Invalid date conversion:", start, end);
+      return "0";
+    }
+    
     let diff = Math.abs(endDate.getTime() - startDate.getTime());
-    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
+    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24));
+    
+    console.log(`Start: ${startDate}, End: ${endDate}, Diff days: ${diffDays}`);
     return diffDays.toString();
+  } catch (e) {
+    console.error("Error calculating days:", e, "for dates:", start, end);
+    return "0";
   }
+}
   onToggleChange(event : MatSlideToggleChange): void {
     const isChecked = event.checked;
     this.toggle = isChecked;

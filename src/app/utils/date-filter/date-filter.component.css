@@ -3,7 +3,7 @@
     display: grid;
     gap: 1em;
     grid-auto-rows: minmax(60px, auto);
-    grid-template-columns: repeat(6, .6fr) 1.5fr;
+    grid-template-columns: repeat(10, 1fr); 
     color: #ffc42b;
     background-color: transparent;
 }
@@ -23,10 +23,7 @@
     padding-top: .5rem;
     margin-bottom: 0px;
 }
-#confirm-btn{
-    grid-row: 1;
-    grid-column: 4/5;
-}
+
 .button-style{
     background-color: #ffc659;
     border-color: #ffc659;
@@ -37,13 +34,20 @@
     height: max-content;
     font-weight: bold;
 }
-#reset-btn{
+
+#confirm-btn {
     grid-row: 1;
-    grid-column: 5/6;
+    grid-column: 6/7;
 }
-#csv-down{
+
+#reset-btn {
     grid-row: 1;
-    grid-column: 7/8;
+    grid-column: 8/9;
+}
+
+#csv-down {
+    grid-row: 1;
+    grid-column: 10/11;
 }
 @media screen and (max-width: 431px){
     *{
