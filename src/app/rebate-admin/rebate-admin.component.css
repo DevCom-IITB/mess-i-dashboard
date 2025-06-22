@@ -17,7 +17,7 @@
     margin-bottom: 24px;
 }
 #myTabContent{
-    padding-top: 1em;
+    padding-top: 1em 4%;
 }
 #myTab2{
     display: none;
@@ -35,7 +35,7 @@
 @media screen and (max-width: 431px){
     .main-container{
         background-color: #28272c;
-        padding: 0% 4%;
+        padding: 0 2%;
     }
 
     .filter-actions-container {
@@ -43,7 +43,7 @@
         justify-content: flex-end; 
         width: 100%;
         margin-top: 16px;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
     }
     
     #mobile-clear-btn {
@@ -63,6 +63,8 @@
     .rebate-card-container{
         position: relative;
         top: 1vh;
+        margin-left: auto;
+        margin-right: auto;
     }
     #page-title{
         display: none;
@@ -73,43 +75,58 @@
     #myTab2{
         display: flex;
         border-bottom: none;
+        width: 100%;
+        padding: 0; 
+        margin: 0;
     }
     #date-filter{
         display: none;
     }
-    .nav-link{
+    .nav-link {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 94px;
+        width: 100% !important;
+        min-width: 0;
         height: 50px;
         border-radius: 50px;
-        padding: 4px 19px 4px 19px;
-        margin: 0px 15px;
+        padding: 4px 4px; 
+        margin: 0; 
+        margin-top: 4px;
         border: none;
         background-color: #ffffff;
         font-family: "Open Sans";
         font-weight: 500;
         color: #5f6368;
         transition: all 0.15s ease-in-out;
+        font-size: 14px;  
+        white-space: nowrap;  
     }
-    .btn-box{
+    .nav-item {
+        width: 33.33%; 
         display: flex;
         justify-content: center;
+        padding: 0 4px;  
+    }
+    
+    .btn-box{
+        display: flex;
+        justify-content: space-between;
         align-items: center;
         margin-top: 12px;
         width: 100%;
         height: 42px;
         position: relative;
         top: 0.5vh;
+        padding:0 8px;
     }
-    .btn-box button.active{
+    .btn-box button.active {
         background-color: #ffce5d;
         color: #28272c;
-        width: 112.8px;
-        font-size: 16.8px;
         font-weight: 600;
+        font-size: 16px; 
         transition: all 0.15s ease-in-out;
+        width: 100% !important;
     }
     #range-date{
         width: 265px;

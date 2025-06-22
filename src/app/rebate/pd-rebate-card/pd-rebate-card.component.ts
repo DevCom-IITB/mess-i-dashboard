@@ -38,14 +38,15 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   acceptRebate(){
-    this.data_service.acceptRebate(this.rebate_request.id,this.rebate_request.roll,this.card_comment).then(
+    this.data_service.acceptRebate(this.rebate_request.id, this.rebate_request.roll, this.card_comment).then(
       (res) => {
+        window.alert(`Rebate for ${this.rebate_request.fullname} has been accepted successfully.`);
         this.updateList.emit(this.rebate_request.id);
       }
     ).catch(
-      (e) =>{
+      (e) => {
         console.log(e);
-        alert("Error occured while accepting rebate");
+        window.alert("Error occurred while accepting rebate");
       }
     )
   }
@@ -68,14 +69,15 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   rejectRebate(){
-    this.data_service.rejectRebate(this.rebate_request.id,this.rebate_request.roll, this.card_comment).then(
+    this.data_service.rejectRebate(this.rebate_request.id, this.rebate_request.roll, this.card_comment).then(
       (res) => {
+        window.alert(`Rebate for ${this.rebate_request.fullname} has been rejected.`);
         this.updateList.emit(this.rebate_request.id);
       }
     ).catch(
-      (e) =>{
+      (e) => {
         console.log(e);
-        alert("Error occured while accepting rebate");
+        window.alert("Error occurred while rejecting rebate");
       }
     )
   }
