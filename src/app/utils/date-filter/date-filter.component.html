@@ -1,14 +1,28 @@
 <div id="form-container">
-    <div id="from-date-container"> 
-        <app-input-field label="From" inputType="calender" [(inputModel)]="from_filter"></app-input-field>
+    <div id="filter-controls-row">
+        <div id="left-controls">
+            <mat-form-field id="range-date">
+                <mat-date-range-input [rangePicker]="rangePicker">
+                    <input matStartDate placeholder="Start date" [formControl]="startDate"/>
+                    <input matEndDate placeholder="End date" [formControl]="endDate"/>
+                </mat-date-range-input>
+                <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
+                <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
+                <mat-date-range-picker #rangePicker>
+                    <mat-date-range-picker-actions>
+                        <button mat-button matDateRangePickerCancel>Cancel</button>
+                        <button mat-raised-button matDateRangePickerApply (click)="applyDateRange()">Apply</button>
+                    </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+            </mat-form-field>
+            <div id="official-toggle-container">
+                <p>Official</p>
+                <mat-slide-toggle id="official-toggle" [(ngModel)]="officialFilter" (change)="onToggleChange($event)"></mat-slide-toggle>
+            </div>
+        </div>
+        <div class="filter-actions-container">
+            <button id="reset-btn" class="btn btn-primary" (click)="reset()">Reset</button>
+            <button *ngIf="includeCSV" id="csv-down" class="btn btn-primary" (click)="downloadCSVbtn()">Download CSV</button>
+        </div>
     </div>
-    <div id="to-date-container">
-        <app-input-field label="To" inputType="calender" [(inputModel)]="to_filter"></app-input-field>
-    </div>
-    <div id="offcialFilter">
-        <app-checkbox [(inputModel)]="officialFilter" label="official"></app-checkbox>
-    </div>
-    <button id="confirm-btn" class="btn btn-primary button-style" (click)="submit()">Filter</button>
-    <button id="reset-btn" class="btn btn-primary button-style" (click)="reset()">Reset</button>
-    <button *ngIf="includeCSV" id="csv-down" class="btn btn-primary button-style" (click)="downloadCSVbtn()">Download CSV</button>
 </div>

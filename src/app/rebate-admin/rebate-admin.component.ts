@@ -52,13 +52,18 @@ export class RebateAdminComponent implements OnInit {
   }
 
   clearFilters() {
-      this.startDate.reset();
-      this.endDate.reset();
-      this.toggle = false;
-      this.initialise();
-      
-      console.log("Filters cleared");
-    }
+    console.log("Clearing all filters");
+    this.startDate.reset();
+    this.endDate.reset();
+    this.toggle = false;
+    
+    // Clear arrays
+    this.pending_rebates.splice(0, this.pending_rebates.length);
+    this.accepted_rebates.splice(0, this.accepted_rebates.length);
+    this.rejected_rebates.splice(0, this.rejected_rebates.length);
+    
+    this.initialise();
+  }
     
   async getStudentRebates(roll:any,rebates: any){
     await this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
@@ -111,24 +116,39 @@ export class RebateAdminComponent implements OnInit {
   
   }
 
-  async initialiseWithFilter(event:any){
-    console.log("Filter dates:", {
+  async initialiseWithFilter(event: any) {
+    console.log("Filter applied with values:", {
       from: event[0],
       to: event[1], 
       official: event[2]
     });
     
-    this.getRebates().then((res:any) => {            
+    this.pending_rebates.splice(0, this.pending_rebates.length);
+    this.accepted_rebates.splice(0, this.accepted_rebates.length);
+    this.rejected_rebates.splice(0, this.rejected_rebates.length);
+    
+    try {
+      const res = await this.getRebates();
+      console.log("Got rebates data for filtering:", res);
+      
       this.filter_service.populateRebatesMonthFilter(
         res, event[0], event[1], event[2],
-        {pending_rebates:this.pending_rebates, accepted_rebates:this.accepted_rebates, rejected_rebates:this.rejected_rebates}
+        {
+          pending_rebates: this.pending_rebates, 
+          accepted_rebates: this.accepted_rebates, 
+          rejected_rebates: this.rejected_rebates
+        }
       );
-    }).catch((e) => {
-      console.log(e);
-    });
+      
+      console.log("After filtering:", {
+        pending: this.pending_rebates.length,
+        accepted: this.accepted_rebates.length,
+        rejected: this.rejected_rebates.length
+      });
+    } catch (e) {
+      console.error("Error fetching rebates for filtering:", e);
+    }
   }
-
-    
 
    downloadCSV(){
     // https://stackoverflow.com/questions/51487689/angular-5-how-to-export-data-to-csv-file
@@ -171,12 +191,19 @@ export class RebateAdminComponent implements OnInit {
   }
   applyDateFilter() {
     const range = this.getDateRange();
-    console.log('Date Range:', range);
+    console.log('Mobile Date Range:', range);
     
     if (!range.startDate || !range.endDate) {
-      console.log("Invalid date range");
+      console.log("Invalid mobile date range");
       return;
     }
+    
+    console.log("Applying mobile filter:", range.startDate, range.endDate, this.toggle);
+    
+    // Clear existing rebates
+    this.pending_rebates.splice(0, this.pending_rebates.length);
+    this.accepted_rebates.splice(0, this.accepted_rebates.length);
+    this.rejected_rebates.splice(0, this.rejected_rebates.length);
     
     // Pass startDate, endDate, and official flag
     this.initialiseWithFilter([range.startDate, range.endDate, this.toggle]);

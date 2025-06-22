@@ -104,7 +104,6 @@ export class RebateFormComponent implements OnInit {
       dayCountDiv.innerHTML = this.dayCount;
       dayCountDiv.style.color = '#28272c';
     }
-    // Use the range for your logic
   }
   noOfDays(start: string, end: string): string{
     let startDate = new Date(Date.parse(start));
