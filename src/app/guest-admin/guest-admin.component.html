@@ -29,7 +29,7 @@
           <option *ngIf="allowedHostels[20]" value="H20">H20</option>
           <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
         </select>
-        <div class="mobile-csv-download">
+        <div class="mobile-csv-download" role="button" (click)="downloadCSV(guestHistory)">
           CSV <img src="..\assets\IconSet\Icon=Download.svg" alt="">
         </div>     
         <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel id="meal_dropdown">

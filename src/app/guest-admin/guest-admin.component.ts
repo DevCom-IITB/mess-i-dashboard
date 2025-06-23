@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { GuestdataService } from '../guestdata.service';
-import { StudentdataService } from '../studentdata.service';
+import { FilterService } from '../filter.service';
 // import { exists } from 'fs';
 // import { exists } from 'fs';
 
@@ -22,7 +22,7 @@ export class GuestAdminComponent implements OnInit {
   guestCardData: any[] = []; // list of lists
   isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
 
-  constructor(private data_service:StudentdataService, private auth:AuthService, private guestService:GuestdataService, private router:Router) {
+  constructor(private filter_service:FilterService, private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
@@ -85,10 +85,6 @@ export class GuestAdminComponent implements OnInit {
         {
           let history = res;
           this.guestHistory = this.cleanData(history);
-          if(this.isHistoryEmpty(this.guestHistory)){
-            this.guestHistory = [null]
-            console.log("No data found for the selected date and meal.");
-          }
           this.guestCardData = this.guestHistory.body;
           console.log("Guest Card Data:")
           console.log(this.guestCardData)
@@ -111,7 +107,13 @@ export class GuestAdminComponent implements OnInit {
     // For now, we're using the data already loaded in initialise()
   }
 
-  downloadCSV() {
-    if(this.isHistoryEmpty(this.guestHistory['body'])){}
+  downloadCSV(data:any) {
+    if(data.loaded){
+      console.log("Data to download:", data);
+      this.filter_service.downloadTableAsCSV(data);
+    }
+    else{
+      alert("No data to download");
+    }
   }
 }
