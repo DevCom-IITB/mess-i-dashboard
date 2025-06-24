@@ -33,21 +33,20 @@ export class GuestEntryComponent implements OnInit {
   legel_date=[this.date1,this.date2,this.date3]
 
   constructor(private auth:AuthService, private router:Router, private guestService:GuestdataService, private datePipe:DatePipe) { 
-    // if (!this.auth.isLoggedIn()){
-    //   this.router.navigate(['login'])
-    // }if (!this.auth.isSSOLogin()){
-    //   this.router.navigate(['landing'])
-    // }
+    if (!this.auth.isLoggedIn()){
+      this.router.navigate(['login'])
+    }if (!this.auth.isSSOLogin()){
+      this.router.navigate(['landing'])
+    }
   }
 
   ngOnInit(): void {
-    this.fetch_guest("23B2287");
-    // this.fetch_guest(this.auth.getRoll());
+    this.fetch_guest(this.auth.getRoll());
     // this.getGuestDetail()
     console.log(this.guest_data)
   }
 
-  async fetch_guest(rollNum: any = "23B2287"){
+  async fetch_guest(rollNum: any){
     if(this.guestService.guestCache.has(rollNum)){
       this.guest = this.guestService.guestCache.get(rollNum);
     }else{
@@ -95,7 +94,7 @@ export class GuestEntryComponent implements OnInit {
     let history = await Promise.all(promises);
     this.guest_data=this.cleanData(history);
     this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
-    console.log(this.guest_data);
+    console.log('guest data:',this.guest_data);
   }
 
   updateList(){

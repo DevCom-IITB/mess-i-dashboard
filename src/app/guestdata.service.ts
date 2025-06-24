@@ -103,7 +103,8 @@ export class GuestdataService {
   }
   //Give info about the guest
   async getGuestDetail(roll:string){
-    let url = this.baseurl.concat("/get-guest-info/",roll);
+    // let url = this.baseurl.concat("/get-guest-info/",roll);
+    let url = this.baseurl.concat("/get-guest-info/",'23B2287');
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{

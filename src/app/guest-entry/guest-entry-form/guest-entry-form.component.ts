@@ -39,7 +39,7 @@ export class GuestEntryFormComponent implements OnInit {
   ngOnInit(): void {
     this.getGuestHostel()
     this.fetch_guest(this.auth.getRoll())
-    this.notAVL = true;
+    // this.notAVL = true;
   }
 
   async search(evt:Event){

@@ -104,7 +104,7 @@
 }
 @media screen and (max-width: 431px) {
     .main-container{
-        padding: 0% 4% 4% 4%;
+        padding: 2%;
         padding-top: 0%;
     }
     #desktop-title, i, #from-date-container, #to-date-container, #desktop-toggle{
@@ -222,6 +222,11 @@
         color: #28272c;
         font-size: 18px;
         font-weight: 600;
+    }
+    #confirm-btn:hover{
+        background-color: #28272c;
+        color: #ffce5d;
+        border: 2px solid #ffce5d;
     }
     .notice{
         font-size: 12px;

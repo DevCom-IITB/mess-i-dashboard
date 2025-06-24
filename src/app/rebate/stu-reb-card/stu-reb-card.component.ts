@@ -120,6 +120,7 @@ export class StuRebCardComponent implements OnInit {
   }
   isStudentPage() {
     return this.auth.isStudent() && !this.on_admin_page;
+    // return true;
   }
   noOfDays(start: string, end: string): string {
   try {
@@ -152,6 +153,15 @@ export class StuRebCardComponent implements OnInit {
     this.toggle = isChecked;
     this.rebate_request.official = isChecked;
     console.log('Toggle state:', this.toggle);
+  }
+
+  isBeforeRebateStart(): boolean {
+    if (!this.rebate_request?.start) return false;
+    const [day, month, year] = this.rebate_request.start.split('-').map(Number);
+    const rebateStart = new Date(year, month - 1, day);
+    const today = new Date();
+    
+    return today < rebateStart;
   }
 }
 

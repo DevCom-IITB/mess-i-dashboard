@@ -91,7 +91,7 @@
       class="btn btn-light rebate-action-btn"
       (click)="updateAcceptedRebate(p_rebate_start, p_rebate_end)"
       
-      *ngIf="isStudentPage()"
+      *ngIf="isStudentPage() && isBeforeRebateStart()"
     >
       Shrink Duration
     </button>

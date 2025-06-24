@@ -51,11 +51,19 @@ export class RebateFormComponent implements OnInit {
 
   async submitRebate(){
     this.roll_no = this.auth.roll_no;
-    this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
+    if(!this.rebateStart || !this.rebateEnd){
+      const dateRange = this.getDateRange();
+      this.rebateStart = dateRange.startDate;
+      this.rebateEnd = dateRange.endDate;
+    }
+    // this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
+    console.log("Rebate dates:",this.rebateStart," End:",this.rebateEnd);
+    this.service.postRebate('200020038',this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
     .then((res)=>{
       alert("Rebate successfully added")
       this.router.navigate(['/rebate']);
     }).catch((res)=>{
+      console.error(res);
       alert(JSON.parse(res.error).error);
     });
   }
@@ -90,9 +98,21 @@ export class RebateFormComponent implements OnInit {
     return rollNo+'_'+startDate+'_'+endDate;
   }
   getDateRange() {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const start: Date = this.startDate.value;
+    const end: Date = this.endDate.value;
+    
+    if (!start || !end) {
+      return {
+        startDate: '',
+        endDate: ''
+      };
+    }
+
+    // Convert to DD-MM-YYYY format
     return {
-      startDate: this.startDate.value.toISOString().split('T')[0], // Format to YYYY-MM-DD
-      endDate: this.endDate.value.toISOString().split('T')[0]
+      startDate: `${pad(start.getDate())}-${pad(start.getMonth() + 1)}-${start.getFullYear()}`,
+      endDate: `${pad(end.getDate())}-${pad(end.getMonth() + 1)}-${end.getFullYear()}`
     };
   }
   applyDateRange() {
@@ -105,9 +125,15 @@ export class RebateFormComponent implements OnInit {
       dayCountDiv.style.color = '#28272c';
     }
   }
-  noOfDays(start: string, end: string): string{
-    let startDate = new Date(Date.parse(start));
-    let endDate = new Date(Date.parse(end));
+  noOfDays(start: string , end: string): string{
+    if (!start || !end) {
+      return '';
+    }
+    const [startDay, startMonth, startYear] = start.split('-').map(Number);
+    const [endDay, endMonth, endYear] = end.split('-').map(Number);
+    const startDate = new Date(startYear, startMonth - 1, startDay);
+    const endDate = new Date(endYear, endMonth - 1, endDay);
+
     let diff = Math.abs(endDate.getTime() - startDate.getTime());
     let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
     return diffDays.toString();

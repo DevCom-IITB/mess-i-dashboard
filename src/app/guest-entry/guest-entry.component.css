@@ -23,7 +23,8 @@ border-top: 2px #FFC42B solid;
 }
 @media screen and (max-width: 431px) {
     .container{
-        padding: 0% 4% 4% 4%;
+        padding: 2%;
+        padding-top: 0%;
         background-color: #28272c;
     }
     h1, #new-request-btn, hr, .guest, .table{
