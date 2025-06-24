@@ -20,7 +20,7 @@
 #device-container{
     margin-top: 24px;
 }
-.student-card{
+.student-card, #mobile-logout-btn{
     display: none;
 }
 @media screen and (max-width: 431px){
@@ -74,5 +74,23 @@
         background-color: #ffce5d;
         font-size: 16px;
         font-weight: 600;
+    }
+    #mobile-logout-btn{
+        display: block;
+        margin-top: 12px;
+    }
+    #mobile-logout-btn button{
+        width: 100%;
+        height: 48px;
+        color: #ffce5d;
+        border: 2px solid #ffce5d;
+        border-radius: 50px;
+        background-color: #28272c;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    #mobile-logout-btn button:hover{
+        background-color: #ffce5d;
+        color: #28272c;
     }
 }

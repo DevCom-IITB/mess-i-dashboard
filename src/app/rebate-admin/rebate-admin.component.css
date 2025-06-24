@@ -27,7 +27,7 @@
     font-family: 'Open Sans', sans-serif; 
     font-weight: 600; 
     font-size: 16px; 
-    color: #28272c; 
+    color: #bebebe; 
     transition: all 0.2s ease;
 }
 .nav-tabs .nav-link.active {
@@ -65,7 +65,7 @@
         font-weight: 600;
         margin-top: auto;
         margin-bottom: auto;
-}
+    }
     
     .rebate-card-container{
         position: relative;

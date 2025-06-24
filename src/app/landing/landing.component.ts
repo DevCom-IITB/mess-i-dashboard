@@ -24,4 +24,26 @@ export class LandingComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  logout(){
+    this.auth.logoutUser().subscribe(
+      (response) => {
+        this.auth.logged_in=false;
+        this.auth.token="";
+        sessionStorage.removeItem("mess-i-token")
+        sessionStorage.removeItem("mess-i-admin")
+        sessionStorage.removeItem("mess-i-staff")
+        sessionStorage.removeItem("mess-i-roll")
+        sessionStorage.removeItem("mess-i-student")
+        sessionStorage.removeItem("mess-i-rebate")
+        sessionStorage.removeItem("mess-i-sso")
+        this.auth.navigateToLogin();
+      },
+      (error) => {
+        // Print error message
+        console.error('Error occurred while logging out and calling API:', error);
+      }
+    );
+  
+  }
 }

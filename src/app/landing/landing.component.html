@@ -6,7 +6,7 @@
             <span *ngIf="auth.isLoggedIn()">Go to Home Page</span>
             <span *ngIf="!auth.isLoggedIn()">LogIn</span>
         </button>
-        <button class="mobile-landing-page-btn" *ngIf="auth.isLoggedIn()">LogOut</button>
+        <button class="mobile-landing-page-btn" *ngIf="auth.isLoggedIn()" (click)="logout()">LogOut</button>
     </div>
     <div class="section">
         <div class="section-info rebate-info">
