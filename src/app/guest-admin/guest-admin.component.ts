@@ -32,10 +32,11 @@ export class GuestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGuestHostel()
-    this.getGuestList({});
+    // this.getGuestList({});
     }
 
   getGuestHostel(){
+    console.log("Fetching allowed hostels for guest booking...");
     this.guestService.getGuestHostels().then((res:any)=>{
       // for(let i=1; i<this.allowedHostels.length; i++){
       for(let i=1; i<36; i++){
@@ -47,6 +48,7 @@ export class GuestAdminComponent implements OnInit {
           this.allowedHostels[21] = true;
         }
       }
+      console.log("Allowed hostels for guest booking:", this.allowedHostels);
     }).catch((res) =>{
       console.log(res)
     })
@@ -65,6 +67,7 @@ export class GuestAdminComponent implements OnInit {
         body.push(guest)
       }
       let res={headers:this.headers,body:body,exists:true, loaded:true}
+      console.log("Cleaned Data:", res);
       return res;
     }
     return {}
@@ -81,7 +84,8 @@ export class GuestAdminComponent implements OnInit {
     console.log(data.form.value);
     this.guestHistory={}
     if (data.form.value.date && data.form.value.meal) {
-      this.guestService.getGuestHostelData(data.form.value.hostel,this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
+      // this.guestService.getGuestHostelData(data.form.value.hostel,this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
+      this.guestService.getGuestHostelData("H34",this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
         {
           let history = res;
           this.guestHistory = this.cleanData(history);

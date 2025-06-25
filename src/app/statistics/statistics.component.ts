@@ -191,7 +191,7 @@ export class StatisticsComponent implements OnInit {
   async plotStudentData(data: any){    
     if (data.form.value.year&&data.form.value.month) {
       this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
-      // this.service.getStudentStats("22B0433",data.form.value.year,data.form.value.month).then((res)=>
+      // this.service.getStudentStats("24B9999",data.form.value.year,data.form.value.month).then((res)=>
       {
         this.studentmessHistory = this.genStudentPlotData(res);
         // console.log(this.studentmessHistory);

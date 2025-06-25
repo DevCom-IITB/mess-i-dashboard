@@ -56,9 +56,9 @@ export class RebateFormComponent implements OnInit {
       this.rebateStart = dateRange.startDate;
       this.rebateEnd = dateRange.endDate;
     }
-    // this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
-    console.log("Rebate dates:",this.rebateStart," End:",this.rebateEnd);
-    this.service.postRebate('200020038',this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
+    console.log(this.rebateStart,this.rebateEnd);
+    this.service.postRebate(this.roll_no,this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
+    // this.service.postRebate('200020038',this.reason,this.resolveDateFormat(this.rebateStart),this.resolveDateFormat(this.rebateEnd),this.isOfficialRebate,this.officialRebateFile)
     .then((res)=>{
       alert("Rebate successfully added")
       this.router.navigate(['/rebate']);

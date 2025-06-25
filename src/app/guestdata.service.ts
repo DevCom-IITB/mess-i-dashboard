@@ -68,6 +68,7 @@ export class GuestdataService {
     hostel = "H34"
     console.log(hostel, date, meal);
     let url = this.baseurl.concat("/hostel-info/", date, "/", meal);
+    console.log("Hi");
     return new Promise((resolve, reject) => {
       this.http.get(url, {
         headers: {
