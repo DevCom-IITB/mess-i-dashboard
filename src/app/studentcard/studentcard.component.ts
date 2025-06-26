@@ -240,7 +240,7 @@ export class StudentcardComponent implements OnInit {
       console.log("CSV downloaded for pending rebates");
     }
     else if(this.currTab == "meals" && this.mess_data){
-      this.filter_service.downloadTableAsCSV(this.mess_data);
+      this.filter_service.downloadTableAsCSV(this.mess_data, `${this.rollNumber}_meal_data.csv`);
       console.log("CSV downloaded for meal data");
     }
     else if(this.currTab == "meals" && !this.mess_data){

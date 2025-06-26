@@ -120,6 +120,7 @@ li.text-stats-item {
     background-color: #28272b;
   }
   #get-button {
+    height: 42px;
     color: #ffce5d;
     background-color: #28272b;
     border: 1.67px solid #ffce5d;
@@ -220,5 +221,8 @@ li.text-stats-item {
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  .input-group{
+    height: fit-content;
   }
 }

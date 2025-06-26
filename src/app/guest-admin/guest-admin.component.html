@@ -46,7 +46,7 @@
     <p *ngIf="guestCardData[0] == null && currTab != 'empty'" id="no-guest-indicator-desktop">No Guest</p>
     <div class="guest-cards">
       <p *ngIf="guestCardData[0] == null && currTab != 'empty'" id="no-guest-indicator-mobile">No Guest</p>
-      <app-guest-card *ngFor="let info of guestCardData; let i=index" [data]="info" [date]="'2025-05-15'" [meal]="'Dinner'"></app-guest-card>
+      <app-guest-card *ngFor="let info of guestCardData; let i=index" [data]="info" [date]="formData.date" [meal]="formData.meal"></app-guest-card>
     </div>
   </div>
 

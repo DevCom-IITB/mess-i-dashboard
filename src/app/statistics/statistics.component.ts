@@ -40,7 +40,9 @@ export class StatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.getAdminHostel();
     this.hostel_selectable = this.roll_selectable = this.auth.isAdmin();
+    // this.hostel_selectable = this.roll_selectable = true;
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    // this.on_admin_page = true;
   }
 
   getAdminHostel(){

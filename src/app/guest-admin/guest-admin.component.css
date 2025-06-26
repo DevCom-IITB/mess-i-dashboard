@@ -126,13 +126,13 @@ button:hover{
         background-color: #ffffff !important;
         border: none !important;
         padding: 6px 18px !important;
-        border-radius: 50px 8px 8px 50px !important;
+        border-radius: 50px 16px 16px 50px !important;
         height: 42px !important;
     }
     .mobile-csv-download{
         background-color: #ffffff;
         font-weight: 600;
-        border-radius: 8px 50px 50px 8px !important;
+        border-radius: 16px 50px 50px 16px !important;
         padding: 14px 12px;
         position: relative;
         /* left: 10vw; */
@@ -154,6 +154,9 @@ button:hover{
         background-repeat: no-repeat;
         background-position: right 0.75rem center;
         background-size: 16px 12px;
+    }
+    #hostel_dropdown{
+        margin: 0%;
     }
     #no-guest-indicator-mobile{
         display: flex;

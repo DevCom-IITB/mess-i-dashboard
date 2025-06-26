@@ -22,7 +22,7 @@ export class StudentListComponent implements OnInit {
   studentInfoList : any =[];
   temp : any;
   errMsg = "";
-  // isImageLoading:any;
+  isImageLoading:any;
   entriesPerPage = 9;
   searchText = this.stateService.SearchText;
   totalEntry = 105;

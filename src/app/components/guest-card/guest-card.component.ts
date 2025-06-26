@@ -24,6 +24,7 @@ export class GuestCardComponent implements OnInit {
     this.dayOfWeek = this.weekdays[dateObj.getDay()];
     console.log(this.dayOfWeek);
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    console.log("Guest Meal: ", this.meal)
   }
 
   constructor(private auth_service:AuthService, private router: Router, public auth:AuthService) {

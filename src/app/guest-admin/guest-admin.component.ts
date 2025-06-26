@@ -21,6 +21,7 @@ export class GuestAdminComponent implements OnInit {
   headers = ['Token No.','Roll No.','Name','Hostel']
   guestCardData: any[] = []; // list of lists
   isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
+  formData: any;
 
   constructor(private filter_service:FilterService, private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -81,6 +82,7 @@ export class GuestAdminComponent implements OnInit {
     if (data.form.value['meal'] == ''){
       data.form.value['meal'] = data.form.value['selectedMeal'];
     }
+    this.formData = data.form.value;
     console.log(data.form.value);
     this.guestHistory={}
     if (data.form.value.date && data.form.value.meal) {
@@ -114,7 +116,7 @@ export class GuestAdminComponent implements OnInit {
   downloadCSV(data:any) {
     if(data.loaded){
       console.log("Data to download:", data);
-      this.filter_service.downloadTableAsCSV(data);
+      this.filter_service.downloadTableAsCSV(data, "guest_data.csv");
     }
     else{
       alert("No data to download");

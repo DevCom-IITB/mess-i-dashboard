@@ -463,7 +463,6 @@ export class StudentdataService {
   } 
   async getDevices(){
     let url = this.baseurl.concat("/devices");
-    console.log(url)
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{

@@ -261,7 +261,7 @@ export class FilterService {
     return csv;
 
   }
-  downloadTableAsCSV(data: any){
+  downloadTableAsCSV(data: any, fileName: string = 'data.csv') {
     let csv = data.headers.join(',');
     csv += '\n';
     data.body.forEach((row:any) => {
@@ -275,7 +275,7 @@ export class FilterService {
     const anchor = document.createElement('a');
     anchor.href = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
     anchor.target = '_blank';
-    anchor.download = 'data.csv';
+    anchor.download = fileName;
     anchor.click();
   }
 }

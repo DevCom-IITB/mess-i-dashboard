@@ -88,7 +88,7 @@ h2{
   
 }
 #main{
-  padding: 0% 2%;
+  padding: 0% 2% 2% 2%;
 }
 
 .student-list-table-container{
@@ -141,14 +141,14 @@ h2{
     width: 48vw;
     background-color: #ffffff ;
     display: block;
-    border-radius: 50px 10px 10px 50px;
+    border-radius: 50px 16px 16px 50px;
     position: static;
   }
   #csv-download-container{
     font-family: "Open Sans";
     font-weight: 600;
     background-color: #ffffff;
-    border-radius: 10px 50px 50px 10px;
+    border-radius: 16px 50px 50px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,12 +166,11 @@ h2{
       height: 43px;
       z-index: 0;
       background-color: #ffffff;
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      /* padding: 10px !important; */
   }
   #inactive-toggle-container p{
       margin-bottom: 0px;
@@ -196,5 +195,15 @@ h2{
   }
   :host ::ng-deep .mdc-switch__ripple::after{
       background-color: #ffc24b !important;
+  }
+  #student-list-footer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%;
+    background-color:#28272c;
+  }
+  .col-lg-3, .col-lg-9{
+    width: fit-content;
   }
 }

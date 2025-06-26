@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   app_bar_suffix : string = "Home";
   public pending_rebates: RebateRequest[] = new Array();
   public on_admin_page:boolean ;
-  private adminRoutes: string[] = ["/home"];
+  public isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
+  private adminRoutes: string[] = [];
   mobile_cards: any = [
     {
       title: 'Rebates',
@@ -75,6 +76,8 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['login'])
     }
     this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    this.isAdmin = this.auth.isAdmin();
+    // this.on_admin_page = false;
   }
 
   async initialise(){
