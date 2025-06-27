@@ -55,6 +55,7 @@ export class AuthService {
       this.is_sso_login = true;
 
       this.roll_no = res.roll;
+      // this.roll_no = "24B0000";
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("mess-i-roll",res.roll);
       sessionStorage.setItem("mess-i-sso",this.is_sso_login.toString());
@@ -154,6 +155,7 @@ export class AuthService {
   }
   getRoll(){
     return this.roll_no;
+    // return '24B0000'; // For testing purposes, returning a static roll number
   }
   
 

@@ -14,7 +14,7 @@ export class GuestEntryComponent implements OnInit {
   
   guest:any;
   guest_detail:any;
-  guest_data:any = [["1","H34","2025-06-06","Dinner",true],["1","H34","2025-06-06","Dinner",true],["1","H34","2025-06-06","Dinner",true]];
+  guest_data:any = [];
   name:string;
   hostel:string;
   card_data:any[] = ['1', '24B1243', 'Ganesh Preetham Vulise', 'H34', false];
@@ -42,7 +42,8 @@ export class GuestEntryComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetch_guest(this.auth.getRoll());
-    // this.getGuestDetail()
+    // this.fetch_guest("24B0000");
+    this.getGuestDetail()
     console.log(this.guest_data)
   }
 
@@ -93,7 +94,7 @@ export class GuestEntryComponent implements OnInit {
     let promises = this.legel_date.map(date => this.guestService.getGuestData(this.auth.getRoll(),date));
     let history = await Promise.all(promises);
     this.guest_data=this.cleanData(history);
-    this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
+    // this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
     console.log('guest data:',this.guest_data);
   }
 

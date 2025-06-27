@@ -33,7 +33,7 @@ export class GuestAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGuestHostel()
-    // this.getGuestList({});
+    this.getGuestList({});
     }
 
   getGuestHostel(){

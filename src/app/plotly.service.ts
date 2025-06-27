@@ -131,9 +131,7 @@ export class PlotlyService {
     // the input month is taken as 1-indexed, so we need to convert it to 0-indexed for Date object
     // Sort dates chronologically
     const firstDate = new Date(parseInt(year), parseInt(month) - 1, 1);
-    console.log("First Date:", firstDate.toDateString());
     const startDay = firstDate.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday. This is also the number of days of padding squares before the start of the month
-    console.log("Start Day:", startDay, " 0 is sunday");
 
 
     const dateMap = x.map((date, index) => ({date, index}))
@@ -191,7 +189,6 @@ export class PlotlyService {
         // }
       }
     }
-    console.log("Reshaped Z:", reshapedZ);
     // Create color scale as before
 
     let screen_width = window.innerWidth;
@@ -212,7 +209,6 @@ export class PlotlyService {
     }
     let reversed_reshapedZ = reshapedZ.reverse();
     let reversed_dateLabels = dateLabels.reverse();
-    console.log("Reversed Reshaped Z:", reversed_reshapedZ);
     // Create the plot data
     // I reversed the array beacuse..., dont reverse the array and see how it is applied and you will know why
     const data = [{

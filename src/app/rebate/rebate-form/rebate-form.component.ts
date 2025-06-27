@@ -51,6 +51,7 @@ export class RebateFormComponent implements OnInit {
 
   async submitRebate(){
     this.roll_no = this.auth.roll_no;
+    // this.roll_no = "24B0000";
     if(!this.rebateStart || !this.rebateEnd){
       const dateRange = this.getDateRange();
       this.rebateStart = dateRange.startDate;
@@ -111,8 +112,8 @@ export class RebateFormComponent implements OnInit {
 
     // Convert to DD-MM-YYYY format
     return {
-      startDate: `${pad(start.getDate())}-${pad(start.getMonth() + 1)}-${start.getFullYear()}`,
-      endDate: `${pad(end.getDate())}-${pad(end.getMonth() + 1)}-${end.getFullYear()}`
+      startDate: `${pad(start.getFullYear())}-${pad(start.getMonth() + 1)}-${start.getDate()}`,
+      endDate: `${pad(end.getFullYear())}-${pad(end.getMonth() + 1)}-${end.getDate()}`
     };
   }
   applyDateRange() {
@@ -129,10 +130,10 @@ export class RebateFormComponent implements OnInit {
     if (!start || !end) {
       return '';
     }
-    const [startDay, startMonth, startYear] = start.split('-').map(Number);
-    const [endDay, endMonth, endYear] = end.split('-').map(Number);
-    const startDate = new Date(startYear, startMonth - 1, startDay);
-    const endDate = new Date(endYear, endMonth - 1, endDay);
+    // const [startDay, startMonth, startYear] = start.split('-').map(Number);
+    // const [endDay, endMonth, endYear] = end.split('-').map(Number);
+    const startDate = new Date(start.toString());
+    const endDate = new Date(end.toString());
 
     let diff = Math.abs(endDate.getTime() - startDate.getTime());
     let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24)); 
