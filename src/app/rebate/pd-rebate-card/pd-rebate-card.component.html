@@ -28,16 +28,16 @@
         </button>
     </div>
     <div id="rebate-action-container">
-        <div id="rebate-comment-container" class="row">
-            <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" id="comment-inp"></app-input-field>
-        </div>
-        <div id="rebate-decision-container" class="review-rebate-actions">
-            <button class="acc-rej" (click)="rejectRebate()" id="reject-btn">
-                Reject
-            </button>
-            <button class="acc-rej" (click)="acceptRebate()" id="accept-btn">
-                Accept
-            </button>
-        </div>
+    <div id="rebate-comment-container" class="row" *ngIf="isAdmin()">
+        <app-input-field inputType="text" label="Comment" [(inputModel)]="card_comment" id="comment-inp"></app-input-field>
     </div>
+    <div id="rebate-decision-container" class="review-rebate-actions" *ngIf="isAdmin()">
+        <button class="acc-rej" (click)="rejectRebate()" id="reject-btn">
+            Reject
+        </button>
+        <button class="acc-rej" (click)="acceptRebate()" id="accept-btn">
+            Accept
+        </button>
+    </div>
+</div>
 </div>

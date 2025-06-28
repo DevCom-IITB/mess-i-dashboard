@@ -31,5 +31,6 @@ export class RebateComponent implements OnInit {
   ngOnInit(): void {
   }
   getRebates = () => this.data_service.getStudentRebates();
+
 }
 

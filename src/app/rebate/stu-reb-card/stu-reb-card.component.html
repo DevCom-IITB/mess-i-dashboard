@@ -77,7 +77,7 @@
       class="btn btn-light rebate-action-btn"
       (click)="deleteRebate()"
       
-      *ngIf="isStudentPage()"
+      *ngIf="isStudentPage() && isBeforeRebateStart()"
     >
       Cancel Rebate
     </button>
@@ -94,6 +94,14 @@
       *ngIf="isStudentPage() && isBeforeRebateStart()"
     >
       Shrink Duration
+    </button>
+    <button
+      class="btn btn-light rebate-action-btn"
+      (click)="deleteRebate()"
+      
+      *ngIf="isStudentPage() && isBeforeRebateStart()"
+    >
+      Cancel Rebate
     </button>
   </div>
 </div>

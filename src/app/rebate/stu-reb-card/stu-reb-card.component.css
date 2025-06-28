@@ -154,6 +154,20 @@ p{
     font-weight: 700;
     margin-top: 10px;
 }
+.rebate-action-btn {
+  display: inline-block !important;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.action-container {
+  display: flex !important;
+  gap: 10px;
+  margin-top: 10px;
+  visibility: visible !important;
+}
 #toggle-not{
     color: #28272b;
     font-weight: 700;
