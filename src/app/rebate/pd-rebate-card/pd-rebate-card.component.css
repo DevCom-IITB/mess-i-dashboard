@@ -151,6 +151,35 @@
     font-family: "Open Sans";
     width: auto;
 }
+#student-actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 10px;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+}
+
+#student-actions-container .rebate-action-btn {
+    height: 48px; 
+    border-radius: 50px;
+    background-color: #ffce5d;
+    color: #28272b;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    min-width: 120px; 
+    white-space: nowrap;
+    padding: 0 15px;
+}
+
+#student-actions-container .rebate-action-btn:hover:not(.btn-danger) {
+    background-color: #28272b;
+    color: #ffce5d;
+    transition: all 0.2s ease;
+}
+
 *{
     font-family: 'Open Sans', sans-serif;
 }

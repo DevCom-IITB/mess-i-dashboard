@@ -39,5 +39,13 @@
             Accept
         </button>
     </div>
+    <div id="student-actions-container" class="review-rebate-actions" *ngIf="!isAdmin()">
+            <button class="btn btn-light rebate-action-btn" (click)="shrinkDuration()">
+                Shrink Duration
+            </button>
+            <button class="btn btn-danger rebate-action-btn" (click)="deleteRebate()">
+                Cancel Rebate
+            </button>
+        </div>
 </div>
 </div>

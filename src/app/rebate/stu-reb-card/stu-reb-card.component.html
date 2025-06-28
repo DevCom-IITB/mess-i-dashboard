@@ -61,27 +61,29 @@
     </button>
   </div>
   <div
-    class="action-container"
-    *ngIf="approval_state == 'pending'"
-    style="display: flex"
+  class="action-container"
+  *ngIf="approval_state === 'pending'"
+  style="display: flex; gap: 10px;"
+>
+  <button
+    class="btn btn-light rebate-action-btn"
+    (click)="updateRebateData(p_rebate_reason, p_rebate_start, p_rebate_end)"
   >
-    <button
-      class="btn btn-light rebate-action-btn"
-      (click)="updateRebateData(p_rebate_reason, p_rebate_start, p_rebate_end)"
-      
-      *ngIf="isStudentPage()"
-    >
-      Modify Rebate
-    </button>
-    <button
-      class="btn btn-light rebate-action-btn"
-      (click)="deleteRebate()"
-      
-      *ngIf="isStudentPage() && isBeforeRebateStart()"
-    >
-      Cancel Rebate
-    </button>
-  </div>
+    Modify Rebate
+  </button>
+  <button
+    class="btn btn-light rebate-action-btn"
+    (click)="updateAcceptedRebate(p_rebate_start, p_rebate_end)"
+  >
+    Shrink Duration
+  </button>
+  <button
+    class="btn btn-danger rebate-action-btn"
+    (click)="deleteRebate()"
+  >
+    Cancel Rebate
+  </button>
+</div>
   <div
     class="action-container"
     *ngIf="approval_state == 'accepted'"

@@ -46,7 +46,15 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
     this.p_rebate_days = this.noOfDays(this.rebate_request.start, this.rebate_request.end);
     this.toggle = this.rebate_request.official;
-    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    this.on_admin_page = this.adminRoutes.some(route => this.router.url.includes(route));
+    
+    console.log({
+    approval_state: this.approval_state,
+    is_student: this.auth.isStudent(),
+    on_admin_page: this.on_admin_page,
+    is_student_page: this.isStudentPage(),
+    current_url: this.router.url
+  });
   }
 
   readableDate(inp: Date): string{
@@ -155,13 +163,28 @@ export class StuRebCardComponent implements OnInit {
     console.log('Toggle state:', this.toggle);
   }
 
+  isOnMobile(): boolean {
+    return window.innerWidth <= 431;
+  }
+
+  // Update isBeforeRebateStart() to always return true on mobile
   isBeforeRebateStart(): boolean {
-    if (!this.rebate_request?.start) return false;
-    const [day, month, year] = this.rebate_request.start.split('-').map(Number);
-    const rebateStart = new Date(year, month - 1, day);
-    const today = new Date();
+    if (this.isOnMobile()) {
+      return true;
+    }
     
-    return today < rebateStart;
+    // Original logic for desktop
+    if (!this.rebate_request?.start) return false;
+    
+    try {
+      const [day, month, year] = this.rebate_request.start.split('-').map(Number);
+      const rebateStart = new Date(year, month - 1, day);
+      const today = new Date();
+      return today < rebateStart;
+    } catch (e) {
+      console.error('Error parsing date:', e);
+      return true; // Default to showing buttons if there's an error
+    }
   }
 }
 

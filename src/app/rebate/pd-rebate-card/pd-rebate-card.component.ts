@@ -5,6 +5,8 @@ import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { StuRebateDialogComponent } from 'src/app/components/stu-rebate-dialog/stu-rebate-dialog.component';
 import { AuthService } from 'src/app/auth.service';
+import { Router, NavigationExtras } from '@angular/router';
+import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.component';
 
 @Component({
   selector: 'app-pd-rebate-card',
@@ -25,7 +27,12 @@ export class PdRebateCardComponent implements OnInit {
   public rebate_status: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  constructor(private data_service: StudentdataService, private dialog: MatDialog, private auth: AuthService) { }
+  constructor(
+  private data_service: StudentdataService, 
+  private dialog: MatDialog, 
+  public auth: AuthService,
+  private router: Router
+) { }
 
   ngOnInit(): void {
     let rr = new Date(Date.parse(this.rebate_request.request_date));
@@ -82,9 +89,47 @@ export class PdRebateCardComponent implements OnInit {
       }
     )
   }
-  
+
   isAdmin(): boolean {
-  return !this.auth.isStudent();
+    return !this.auth.isStudent();
+  }
+
+  updateRebateData() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        id: this.rebate_request.id,
+        reason: this.rebate_request.reason,
+        startDate: this.rebate_request.start,
+        endDate: this.rebate_request.end,
+        isUpdate: true,
+        official: this.rebate_request.official,
+        rebate_docname: this.rebate_request.rebate_docname,
+      }
+    };
+    this.router.navigate(['/applyrebate'], navigationExtras);
+  }
+
+  shrinkDuration() {
+    this.dialog.open(DurationBoxComponent, {
+      data: {
+        roll: this.rebate_request.roll,
+        id: this.rebate_request.id,
+        reason: this.rebate_request.reason,
+        start_date: this.rebate_request.start,
+        end_date: this.rebate_request.end,
+        official: this.rebate_request.official,
+      }
+    });
+  }
+
+  deleteRebate() {
+    this.data_service.deleteRebate(this.auth.getRoll(), this.rebate_request.id).then((res) => {
+      alert("Rebate has been cancelled");
+      this.updateList.emit(this.rebate_request.id);
+    }).catch((e) => {
+      alert("Error occurred while cancelling the rebate");
+      console.log(e);
+    });
   }
 
   readableDate(inp: Date): string{
