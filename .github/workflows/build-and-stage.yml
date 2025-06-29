@@ -2,8 +2,7 @@ name: 🚀 Build and Deploy to Staging
 
 on:
   push:
-    branches:
-      - [develop]
+    branches: [develop]
 
 jobs:
   build-and-stage:
