@@ -30,3 +30,40 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media screen and (max-width: 431px) {
+    .main-container, .container {
+        padding: 6% 8% 3% 8% !important; 
+    }
+    
+    #navbar-fixed,
+    #mobile-navbar,
+    #container-nav-items,
+    .box-style {
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    app-app-bar .container {
+        padding: 0 6% !important; /* Maintain app-bar padding */
+    }
+    
+    .main-container, .container {
+        margin-top: 87px; /* 75px height + 12px margin */
+    }
+    
+    app-home .main-container{
+        padding: 6% 8% 3% 8% !important;
+    }
+    app-rebate > .main-container,
+    app-rebate-admin > .main-container,
+    app-guest-admin > .main-container,
+    app-statistics > .container,
+    app-guest-entry > .container,
+    app-student-list > .container,
+    app-mess-bill > .container,
+    app-overview > .container {
+        padding: 1% 7% 3% 7% !important;
+    }
+}

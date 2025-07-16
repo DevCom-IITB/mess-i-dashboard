@@ -28,6 +28,7 @@
         padding: 0% 2%;
         background-color:#28282B;
         min-height: 100%;
+        margin-top: 70px;
     }
     #device-container{
         display: none;
@@ -41,7 +42,7 @@
         display: block;
         background-color: #ffffff;
         padding: 14px 12px;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         border-radius: 10px;
     }
     .student-title{
