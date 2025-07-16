@@ -32,6 +32,6 @@
     </table>
   </div>
   <ng-container *ngFor="let guest of guest_data">
-    <app-guest-card [date]="guest[2]" [meal]="guest[3]" [data]="guest"></app-guest-card>
-  </ng-container>
+    <app-guest-card [date]="guest[2]" [meal]="guest[3]" [data]="guest" (updateList)="updateList()"></app-guest-card>
+</ng-container>
 </div>

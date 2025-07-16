@@ -15,6 +15,12 @@
         </div>
     </div>
     <div class="cancel-booking" *ngIf="isStudentPage()">
-        <app-guest-status-button [meal]="meal" [date]="date" [guestHostel]="'H34'" [guestStatus]="data[4] == true"></app-guest-status-button>
+        <app-guest-status-button 
+            [meal]="meal" 
+            [date]="date" 
+            [guestHostel]="data[1]" 
+            [guestStatus]="data[4] == true"
+            (updateList)="onUpdateList()">
+        </app-guest-status-button>
     </div>
 </div>

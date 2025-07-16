@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ export class GuestCardComponent implements OnInit {
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/guest-admin"];
   roll_no: string;
+  @Output() updateList = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.date_split = this.date.split('-').map(part => parseInt(part, 10));
@@ -48,5 +49,8 @@ export class GuestCardComponent implements OnInit {
   }
   makeInt(num: string): number {
     return parseInt(num, 10);
+  }
+  onUpdateList() {
+    this.updateList.emit();
   }
 }

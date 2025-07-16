@@ -46,6 +46,7 @@ export class GuestEntryComponent implements OnInit {
     this.getGuestDetail()
     console.log(this.guest_data)
   }
+  
 
   async fetch_guest(rollNum: any){
     if(this.guestService.guestCache.has(rollNum)){
@@ -97,6 +98,7 @@ export class GuestEntryComponent implements OnInit {
     // this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
     console.log('guest data:',this.guest_data);
   }
+  
 
   updateList(){
     this.getGuestDetail()

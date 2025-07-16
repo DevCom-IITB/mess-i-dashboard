@@ -18,6 +18,7 @@
     height: max-content;
     margin: auto 0px;
     float: right;
+    display: block; 
 }
 #new-request-btn:hover{
     background-color: #FFC42B;
@@ -35,7 +36,7 @@
         padding-top: 0%;
         background-color: #28272c;
     }
-    .page-title, #new-request-btn{
+    .page-title{
         display: none;
     }
 }

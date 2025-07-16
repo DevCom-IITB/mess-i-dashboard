@@ -36,15 +36,18 @@
 .align-self-center{
   align-self: center;
 }
+.desktop-only {
+  display: block;
+}
 .mobile-only{
   display: none;
 }
 @media screen and (max-width: 431px){
-  /* .desktop-only{
-    display: none;
-  } */
-  .mobile-only{
-    display: none;
+   .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: block !important;
   }
   .desktop-only button{
     display: flex;
@@ -58,6 +61,24 @@
     border-radius: 50px;
     border: 2px solid #ffce5d;
   }
+  .mobile-only button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 180px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
   .mode-active, .mode-inactive, .align-items-center{
     display: none;
   }
