@@ -15,33 +15,7 @@ export class HomeComponent implements OnInit {
   public on_admin_page:boolean ;
   public isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
   private adminRoutes: string[] = [];
-  mobile_cards: any = [
-    {
-      title: 'Rebates',
-      redirect: '/rebate-admin',
-      description: 'Review applications for rebates'
-    },
-    {
-      title: 'Guest List',
-      redirect: '/guest-admin',
-      description: 'Meal coupons for your hostel'
-    },
-    {
-      title: "Students' List",
-      redirect: '/list',
-      description: 'List of students and their details'
-    },
-    {
-      title: 'Statistics',
-      redirect: '/statistics',
-      description: 'Watch your meals consumption'
-    },
-    {
-      title: 'Devices',
-      redirect: '/device-list',
-      description: 'List of connected devices'
-    },
-  ];
+  mobile_cards: any[] = [];
   devices:any = [
     {
       hostel: 'Brahmaputra',
@@ -66,7 +40,39 @@ export class HomeComponent implements OnInit {
     }];
   date:string;
 
-  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router,private auth:AuthService) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router,private auth:AuthService) {
+    this.mobile_cards = [
+    {
+      title: 'Rebates',
+      redirect: '/rebate-admin',
+      description: 'Review applications for rebates',
+      display : auth_service.isRebate()
+    },
+    {
+      title: 'Guest List',
+      redirect: '/guest-admin',
+      description: 'Meal coupons for your hostel',
+      display : auth_service.isStaff()
+    },
+    {
+      title: "Students' List",
+      redirect: '/list',
+      description: 'List of students and their details',
+      display : auth_service.isStaff()
+    },
+    {
+      title: 'Statistics',
+      redirect: '/statistics',
+      description: 'Watch your meals consumption',
+      display : auth_service.isStudent() || auth_service.isStaff()
+    },
+    {
+      title: 'Devices',
+      redirect: '/device-list',
+      description: 'List of connected devices',
+      display : auth_service.isStaff()
+    },
+  ]; 
   }
 
   ngOnInit(): void {
