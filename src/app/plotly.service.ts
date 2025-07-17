@@ -332,10 +332,9 @@ export class PlotlyService {
 
   }
   plotPie(plotDiv:string, z:number[], _labels: string[], _colors: string[]){
-    // for()
     let screen_width = window.innerWidth;
     let bg_color = 'rgba(40, 39, 43, 1)';
-    let text_color = 'rgb(255, 206, 93)';
+    let text_color = 'rgb(128, 128, 128)';
     if (screen_width >= 431) {
       bg_color = 'rgba(255, 252, 244, 1)';
       text_color = 'black';
@@ -358,27 +357,32 @@ export class PlotlyService {
       textinfo: "label+value",
       textfont: {
         family: 'Open Sans',
+        color: text_color
       },
-      // textposition: "outside",
       insidetextorientation: "horizontal",
       marker: { colors: _colors },
       hoverinfo:'none',
-      automargin: true,
+      automargin: false,
     }]
     
     var layout = {
       height: 400,
-      width : screen_width >= 431 ? 400 : 330,
-      margin: {"t": 10, "b": 0, "l": 0, "r": 0},
+      width: screen_width >= 431 ? 400 : 350,
+      margin: {"t": 50, "b": 20, "l": 20, "r": 20}, 
       showlegend: false,
       paper_bgcolor: bg_color,
       plot_bgcolor: bg_color,
+      autosize: false 
     }
+    
     const config = { 
-      responsive: true,
+      responsive: false,
       scrollZoom: false,
-      displaylogo : false,
+      displaylogo: false,
+      displayModeBar: false, 
+      staticPlot: true 
     };
-    Plotly.newPlot(plotDiv, data, layout,config)
+    
+    Plotly.react(plotDiv, data, layout, config);
   }
 }
