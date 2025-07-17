@@ -156,6 +156,7 @@ p{
   display: inline-block !important;
   margin-right: 8px;
   margin-bottom: 8px;
+  padding: 0px;
   visibility: visible !important;
   opacity: 1 !important;
 }
