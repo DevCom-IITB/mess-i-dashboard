@@ -39,4 +39,17 @@
     .page-title{
         display: none;
     }
+    #new-request-btn{
+        width: 100%;
+        margin: 0px;
+        font-weight: 600;
+        border: 2px solid #ffce5d;
+        color: #ffce5d;
+        background-color: #28272c;
+        border-radius: 50px;
+    }
+    #new-request-btn:hover{
+        background-color: #ffce5d;
+        color: #28272c;
+    }
 }
