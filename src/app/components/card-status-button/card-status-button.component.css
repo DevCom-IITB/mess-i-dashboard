@@ -55,6 +55,9 @@
     height: fit-content;
     width: fit-content;
   }
+  .px-1{
+    margin: 0px;
+  }
   .col{
     display: none;
   }

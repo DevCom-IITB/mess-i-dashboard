@@ -27,7 +27,7 @@
     .main-container{
         padding: 0% 2%;
         background-color:#28282B;
-        min-height: 100%;
+        min-height: fit-content;
         margin-top: 70px;
     }
     #device-container{

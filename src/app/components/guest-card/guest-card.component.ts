@@ -44,8 +44,8 @@ export class GuestCardComponent implements OnInit {
   }
   
   isStudentPage() {
-    // return this.auth.isStudent() && !this.on_admin_page;
-    return true;
+    return this.auth.isStudent() && !this.on_admin_page;
+    // return true;
   }
   makeInt(num: string): number {
     return parseInt(num, 10);

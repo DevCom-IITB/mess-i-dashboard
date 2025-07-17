@@ -108,6 +108,10 @@ h2{
   display: none;
 }
 @media screen and (max-width: 431px){
+  #main{
+    position: relative;
+    top: 85px;
+  }
   .student-list-table-container{
     background-color: #28272c;
     padding-top: 0%;

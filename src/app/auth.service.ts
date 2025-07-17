@@ -84,7 +84,7 @@ export class AuthService {
       this.is_admin = false;
       this.is_rebate = true;
       this.is_staff = true;
-      this.is_student = true;
+      this.is_student = false;
       this.is_sso_login = false;
       this.token = 'null'
 

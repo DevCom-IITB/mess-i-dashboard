@@ -10,7 +10,7 @@
     position: relative;
 }
 .container{
-    padding: 0px;
+    padding: 0px !important;
     margin-top: 10px;
     border: none;
 }

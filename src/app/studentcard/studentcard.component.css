@@ -172,6 +172,10 @@ border-radius: 50000px;
   *{
     font-family: "Open Sans", "sans-serif";
   }
+  .container-fluid{
+    position: relative;
+    top: 85px;
+  }
   #rollno1,#desktop-get-btn,#desktop-date-picker,.reb-button,#desktop-table{
     display: none;
   }
@@ -260,6 +264,7 @@ border-radius: 50000px;
     left: 4px;
   }
   .test{
+    height: 20px;
     position: relative;
     bottom: 30px;
   }
