@@ -253,7 +253,8 @@ export class PlotlyService {
           opacity: 1
         }
       },
-      width: totalWidth + 80,
+      // width: totalWidth + 80,
+      width : screen_width >= 431 ? totalWidth + 80 : 330,
       height: totalHeight + 80,
       margin: { t: 70, b: 10, l: 10, r: 10 },
       annotations: [] as Annotation[],
@@ -367,7 +368,7 @@ export class PlotlyService {
     
     var layout = {
       height: 400,
-      width: 400,
+      width : screen_width >= 431 ? 400 : 330,
       margin: {"t": 10, "b": 0, "l": 0, "r": 0},
       showlegend: false,
       paper_bgcolor: bg_color,

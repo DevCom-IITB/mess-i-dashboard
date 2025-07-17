@@ -225,4 +225,8 @@ li.text-stats-item {
   .input-group{
     height: fit-content;
   }
+  #student_data, #pie{
+    display: flex;
+    justify-content: center;
+  }
 }
