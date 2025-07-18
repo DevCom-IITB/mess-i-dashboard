@@ -46,31 +46,31 @@ export class HomeComponent implements OnInit {
       title: 'Rebates',
       redirect: '/rebate-admin',
       description: 'Review applications for rebates',
-      display : auth_service.isRebate()
+      role:'rebate'
     },
     {
       title: 'Guest List',
       redirect: '/guest-admin',
       description: 'Meal coupons for your hostel',
-      display : auth_service.isStaff()
+      role:'staff'
     },
     {
       title: "Students' List",
       redirect: '/list',
       description: 'List of students and their details',
-      display : auth_service.isStaff()
+      role:'staff'
     },
-    {
+    /* {
       title: 'Statistics',
       redirect: '/statistics',
       description: 'Watch your meals consumption',
-      display : auth_service.isStudent() || auth_service.isStaff()
-    },
+      role: 'studentOrStaff'
+    },*/
     {
       title: 'Devices',
       redirect: '/device-list',
       description: 'List of connected devices',
-      display : auth_service.isStaff()
+      role: 'staff'
     },
   ]; 
   }
@@ -106,6 +106,14 @@ export class HomeComponent implements OnInit {
     this.pending_rebates = this.pending_rebates.filter((reb) =>{
       return reb.id != rebateID;
     })
+  }
+  shouldDisplay(role: string): boolean {
+    switch (role) {
+      case 'rebate': return this.auth_service.isRebate();
+      case 'staff': return this.auth_service.isStaff();
+      case 'studentOrStaff': return this.auth_service.isStudent() || this.auth_service.isStaff();
+      default: return false;
+    }
   }
 
   populateRebates(response: any): void{

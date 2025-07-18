@@ -6,15 +6,14 @@
                 <app-devices [device]="device"></app-devices>
             </ng-container>
         </div>
-        <ng-container *ngFor="let card of mobile_cards"> <!-- Only for mobile view -->
-            <div *ngIf="!isStudentPage()">
-                <app-home-card [app_bar_suffix]="app_bar_suffix" [card]="card" (click)="redirect(card)" *ngIf="card.display"></app-home-card>
-            <!-- app-home-card is used in home page and student-list page -->
-             </div>
-        </ng-container>
+        <ng-container *ngFor="let card of mobile_cards">
+            <div *ngIf="shouldDisplay(card.role)">
+                <app-home-card [app_bar_suffix]="app_bar_suffix" [card]="card" (click)="redirect(card)"></app-home-card>
+            </div>
+            </ng-container>        
         <div class="student-card" *ngIf="isStudentPage()">
             <div class="student-title">
-                Rebate <img src="..\assets\IconSet\Icon=Info.svg" alt="">
+                Rebate <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
             </div>
             <div class="student-title-description">
                 Going away? Apply and save money.
@@ -30,7 +29,7 @@
         </div>
         <div class="student-card" *ngIf="auth_service.isLoggedIn() && auth_service.isSSOLogin()">
             <div class="student-title">
-                Guest Booking <img src="..\assets\IconSet\Icon=Info.svg" alt="">
+                Guest Booking <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
             </div>
             <div class="student-title-description">
                 Pre-book meals for your guests.
@@ -46,7 +45,7 @@
         </div>
         <div class="student-card" *ngIf="isStudentPage()">
             <div class="student-title">
-                Statistics <img src="..\assets\IconSet\Icon=Info.svg" alt="">
+                Statistics <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
             </div>
             <div class="student-title-description">
                 Watch you meals consumption.

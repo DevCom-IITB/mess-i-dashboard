@@ -42,8 +42,10 @@
         display: block;
         background-color: #ffffff;
         padding: 14px 12px;
-        margin-bottom: 16px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         border-radius: 10px;
+        position: relative;
     }
     .student-title{
         font-size: 24px;
@@ -59,7 +61,7 @@
         padding-top: 12px;
     }
     .button-left{
-        width: 41vw;
+        width: 38vw;
         height: 48px;
         border: 2px solid #ffce5d;
         border-radius: 50px;
@@ -68,7 +70,7 @@
         font-weight: 600;
     }
     .button-right{
-        width: 41vw;
+        width: 38vw;
         height: 48px;
         border: none;
         border-radius: 50px;

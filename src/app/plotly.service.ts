@@ -50,7 +50,8 @@ export class PlotlyService {
       text_color = 'black';
     }
     const layout = {
-      width: 1000,
+      //width: 1000,
+      autosize: true,
       // title: title,
       paper_bgcolor: bg_color,
       plot_bgcolor: bg_color,
@@ -117,7 +118,7 @@ export class PlotlyService {
         'resetScale'
       ],
     };
-    Plotly.newPlot(div_identifier,initialTrace, layout,config);
+    Plotly.newPlot(div_identifier,initialTrace, layout,config,{responsive: true});
     Plotly.animate(div_identifier, 
     { data: trace },
     {
@@ -254,7 +255,8 @@ export class PlotlyService {
         }
       },
       // width: totalWidth + 80,
-      width : screen_width >= 431 ? totalWidth + 80 : 330,
+      //width : screen_width >= 431 ? totalWidth + 80 : 330,
+      autosize:true,
       height: totalHeight + 80,
       margin: { t: 70, b: 10, l: 10, r: 10 },
       annotations: [] as Annotation[],
