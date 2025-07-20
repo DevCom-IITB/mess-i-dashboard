@@ -34,7 +34,7 @@
     <!-- <app-meal-calender></app-meal-calender> -->
     <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
     <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists">
-      <app-meal-calender [calendarData] = 'dates' [activeDays] = 'heatmapValues' [mealId] = 'heatmapMeal' id="meal-calendar"></app-meal-calender>
+      <app-meal-calender [calendarData] = 'dates' [activeDays] = 'heatmapValues' [mealId] = 'heatmapMeal' [selectedMonth]="selectedMonth" [selectedYear]="selectedYear" id="meal-calendar"></app-meal-calender>
     </div>
     <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">

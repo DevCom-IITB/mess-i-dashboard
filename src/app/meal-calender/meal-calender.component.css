@@ -45,6 +45,21 @@
 .empty {
   background-color: transparent;
 }
+h2{
+  width: fit-content;
+  color: rgb(128,128,128);
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  margin: 0px;
+}
+#month-year {
+  width: fit-content;
+  color: rgb(128,128,128);
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+}
 @media (max-width: 431px){
     .calendar{
         background-color: #28272c;

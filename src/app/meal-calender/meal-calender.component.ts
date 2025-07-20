@@ -11,6 +11,10 @@ export class MealCalenderComponent implements OnInit, OnChanges {
   @Input() calendarData: string[][];
   @Input() activeDays: number[][];
   @Input() mealId: number;
+  @Input() selectedMonth: number;
+  @Input() selectedYear: number;
+
+  months: string[] = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   calendarDates: string[][] = [];
   mealTaken: number[][] = [];

@@ -1,5 +1,6 @@
 <div class="wrapper">
   <div class="calendar">
+    <h2>Meal Calendar</h2><span id="month-year"> {{ months[selectedMonth] }},{{ selectedYear }}</span>
     <div class="row header">
       <div *ngFor="let day of weekDays">{{ day }}</div>
     </div>
