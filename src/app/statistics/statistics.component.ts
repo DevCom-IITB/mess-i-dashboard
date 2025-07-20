@@ -202,18 +202,21 @@ export class StatisticsComponent implements OnInit {
         // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
         this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
 
+
         const firstDate = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month) - 1, 1);
         const startDay = firstDate.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday. This is also the number of days of padding squares before the start of the month
-
 
         const dateMap = this.noOfDays.map((date: string, index: number) => ({date, index}))
           .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
           
         const sortedX = dateMap.map((item: any) => item.date);
         const sortedZ = this.studentmessHistory.heatmapz.map((mealRow: any) => dateMap.map((item: any) => mealRow[item.index]));
+
         sortedX.unshift(...Array(startDay-1).fill("")); // Add empty strings for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
         sortedZ.forEach((mealRow: any) => mealRow.unshift(...Array(startDay-1).fill(0))); // Add zeros for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+        
         this.reshapeData(sortedX, sortedZ, 0);
+
         let calendarElement = document.getElementById('meal-calendar');
         if (calendarElement) {
           calendarElement.style.display = "block";

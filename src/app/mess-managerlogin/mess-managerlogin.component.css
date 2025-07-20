@@ -125,6 +125,8 @@ a{
   .container {
     flex-direction: column;
     padding: 0px ;
+    background-color: #28272c;
+    margin: 0px;
   }
   .left-frame {
     display: none;
