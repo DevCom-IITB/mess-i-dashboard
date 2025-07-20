@@ -29,7 +29,9 @@ export class StatisticsComponent implements OnInit {
   COLORS_RGB = ['rgb(252, 80, 149)', 'rgb(252, 154, 80)', 'rgb(206, 252, 80)', 'rgb(252, 226, 80)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)'];
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/statistics"];
-
+  dates: string[][];
+  heatmapValues: number[][];
+  heatmapMeal: number = 0;
 
 
   constructor(private plot:PlotlyService,private service:StudentdataService,private auth:AuthService, private router:Router) { 
@@ -197,8 +199,26 @@ export class StatisticsComponent implements OnInit {
       {
         this.studentmessHistory = this.genStudentPlotData(res);
         // console.log(this.studentmessHistory);
-        this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
+        // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
         this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
+
+        const firstDate = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month) - 1, 1);
+        const startDay = firstDate.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday. This is also the number of days of padding squares before the start of the month
+
+
+        const dateMap = this.noOfDays.map((date: string, index: number) => ({date, index}))
+          .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          
+        const sortedX = dateMap.map((item: any) => item.date);
+        const sortedZ = this.studentmessHistory.heatmapz.map((mealRow: any) => dateMap.map((item: any) => mealRow[item.index]));
+        sortedX.unshift(...Array(startDay-1).fill("")); // Add empty strings for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+        sortedZ.forEach((mealRow: any) => mealRow.unshift(...Array(startDay-1).fill(0))); // Add zeros for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+        this.reshapeData(sortedX, sortedZ, 0);
+        let calendarElement = document.getElementById('meal-calendar');
+        if (calendarElement) {
+          calendarElement.style.display = "block";
+        }
+
       }).catch((res)=>{
         console.log(res)
         this.studentmessHistory = {exists:false, loaded:true};
@@ -209,7 +229,8 @@ export class StatisticsComponent implements OnInit {
   updateHeatMap(meal: number) {
     // Update the heatmap based on the selected meal
     if (this.studentmessHistory.exists && this.studentmessHistory.loaded) {
-      this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, this.data_copy.form.value.month, this.data_copy.form.value.year, meal);
+      // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, this.data_copy.form.value.month, this.data_copy.form.value.year, meal);
+      this.heatmapMeal = meal;
     }
   }
 
@@ -227,5 +248,50 @@ export class StatisticsComponent implements OnInit {
   }
   isStudentPage() {
     return this.auth.isStudent() && !this.on_admin_page;
+  }
+
+  reshapeData(sortedX: string[], sortedZ: number[][], mealId: number): void {
+    const reshapedZ = [];
+    const dateLabels = [];
+    
+    for (let mealIdx = 0; mealIdx < sortedZ.length; mealIdx++) {
+      const mealData = sortedZ[mealIdx];
+      const rowsNeeded = Math.ceil(mealData.length / 7);
+      
+      for (let rowNum = 0; rowNum < rowsNeeded; rowNum++) {
+        const rowData = [];
+        const rowDates = [];
+
+        // let pad = 0;
+        // if (reshapedZ.length === 0 && dateLabels.length === 0) {
+        //   pad = startDay;
+        //   for(let i = 0; i < pad; i++) {
+        //     rowData.push(0);
+        //     rowDates.push("");
+        // }
+        // }
+        
+        for (let col = 0; col < 7; col++) {
+          const dataIdx = rowNum * 7 + col;
+          if (dataIdx < mealData.length) {
+            rowData.push(mealData[dataIdx]);
+            rowDates.push(sortedX[dataIdx]);
+          } else {
+            rowData.push(0);  // Empty cell
+            rowDates.push("");   // No date
+          }
+        }
+        
+        reshapedZ.push(rowData);
+        dateLabels.push(rowDates);
+        
+      }
+    }
+    this.dates = dateLabels; // Remove the last row if it is empty
+    this.heatmapValues = reshapedZ
+  
+
+    console.log("testing dates", this.dates);
+    console.log("testing heatmapValues", this.heatmapValues);
   }
 }

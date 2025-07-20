@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="calendar">
+    <div class="row header">
+      <div *ngFor="let day of weekDays">{{ day }}</div>
+    </div>
+
+    <div class="row" *ngFor="let week of calendarDates; let i = index">
+      <div
+        *ngFor="let day of week; let j = index"
+        [ngClass]="{
+          'active': isActive(i, j),
+          'empty': day === ''
+        }">
+        {{ day }}
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -145,10 +145,9 @@ export class PlotlyService {
     
     // Now use sortedX and sortedZ instead of x and z
     // Rest of the function remains the same but use sortedX and sortedZ
-    
+    console.log(sortedZ);
     // Reshape data into grid with max 7 columns per row
     const reshapedZ = [];
-    const reshapedLabels = [];
     const dateLabels = [];
     
     for (let mealIdx = 0; mealIdx < sortedZ.length; mealIdx++) {
@@ -298,7 +297,6 @@ export class PlotlyService {
     // }
     
     // Add date labels to cells
-    console.log("Datelabels:",dateLabels);
     for (let row = 0; row < dateLabels.length/5; row++) {
       for (let col = 0; col < dateLabels[row].length; col++) {
         if (dateLabels[row][col]) {
@@ -368,8 +366,8 @@ export class PlotlyService {
     }]
     
     var layout = {
-      height: 400,
-      width: screen_width >= 431 ? 400 : 350,
+      height: screen_width >= 431 ? 400 : 310,
+      width: screen_width >= 431 ? 400 : 310,
       margin: {"t": 50, "b": 20, "l": 20, "r": 20}, 
       showlegend: false,
       paper_bgcolor: bg_color,

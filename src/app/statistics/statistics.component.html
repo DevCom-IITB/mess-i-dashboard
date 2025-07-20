@@ -33,19 +33,21 @@
     <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
     <!-- <app-meal-calender></app-meal-calender> -->
     <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
-    <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists">
+      <app-meal-calender [calendarData] = 'dates' [activeDays] = 'heatmapValues' [mealId] = 'heatmapMeal' id="meal-calendar"></app-meal-calender>
+    </div>
     <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateHeatMap(4)">Breakfast</button>
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateHeatMap(0)">Breakfast</button>
       </li>
       <li class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateHeatMap(3)">Lunch</button>
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateHeatMap(1)">Lunch</button>
       </li>
       <li class="nav-item" role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="submit" role="tab" aria-controls="contact" aria-selected="false" (click)="updateHeatMap(2)">Snacks</button>
       </li>
       <li class="nav-item" role="presentation">
-          <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateHeatMap(1)">Dinner</button>
+          <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateHeatMap(3)">Dinner</button>
       </li>
     </ul>
     <hr>

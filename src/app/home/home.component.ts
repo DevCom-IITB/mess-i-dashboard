@@ -60,12 +60,12 @@ export class HomeComponent implements OnInit {
       description: 'List of students and their details',
       role:'staff'
     },
-    /* {
+    {
       title: 'Statistics',
       redirect: '/statistics',
       description: 'Watch your meals consumption',
       role: 'studentOrStaff'
-    },*/
+    },
     {
       title: 'Devices',
       redirect: '/device-list',

@@ -87,6 +87,9 @@ li.text-stats-item {
   display: none;
   border-bottom: none;
 }
+#meal-calendar {
+  display: none;
+}
 @media (min-width: 320px) {
   div#pie-textual-container {
     flex-direction: column;
