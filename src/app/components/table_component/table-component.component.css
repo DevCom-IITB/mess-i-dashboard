@@ -81,4 +81,7 @@
   .first-column{
     color: #ffce5d;
   }
+  .csv-btn {
+    display: none !important;
+  }
 }

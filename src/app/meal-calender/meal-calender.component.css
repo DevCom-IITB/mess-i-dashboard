@@ -71,4 +71,20 @@ h2{
         background: transparent;
         color: #ffce5d;
     }
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0; 
+    }
+    .calendar {
+        margin: 0 auto;
+        width: fit-content;
+        min-width: 0;
+        padding-left: 8px;  
+        padding-right: 8px;  
+        box-sizing: border-box;
+    }
 }

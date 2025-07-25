@@ -49,11 +49,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         padding: 0 6% !important; /* Maintain app-bar padding */
     }
     
-    .main-container, .container {
+    .main-container, .container, .main {
         margin-top: 87px; /* 75px height + 12px margin */
     }
     
     app-rebate > .main-container,
+    app-device-list > .main,
     app-rebate-admin > .main-container,
     app-guest-admin > .main-container,
     app-statistics > .container,

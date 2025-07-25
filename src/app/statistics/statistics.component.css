@@ -119,7 +119,7 @@ li.text-stats-item {
     font-family: "Open Sans", sans-serif !important;
   }
   .container {
-    padding: 0% 2% 2% 2%;
+    padding: 0% 0% 2% 0%;
     background-color: #28272b;
   }
   #get-button {
@@ -132,25 +132,23 @@ li.text-stats-item {
   h1 {
     display: none;
   }
-  .form-inline{
-    display: flex;
-    gap: 10px;
-  }
   .chart-container {
-    width: 92vw !important;
-    overflow-x: auto;
-  }  
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important; 
+    margin: 0 auto !important;
+    overflow-x: visible !important;
+    box-sizing: border-box;
+    padding: 0;
+  }
   #display-data{
     color: #ffffff;
   }
   hr{
     color: white;
   }
-  .form-inline{
-    gap: 10px;
-  }
   select.form-select{
-    width: 75px;
     height: 42px;
     border-radius: 16.67px !important;
     border-width: 1.39px;
@@ -164,7 +162,6 @@ li.text-stats-item {
     background-size: 16px 12px;
   }
   input.form-control{
-    width: 75px;
     height: 42px;
     border-radius: 16.67px !important;
     border-width: 1.39px;
@@ -197,10 +194,24 @@ li.text-stats-item {
     background-color: #ffce5d;
     color: #28272c;
     width: 20.76vw;
-    font-size: 14.4px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.15s ease-in-out;
   }
+  .btn-box .nav-link {
+    font-size: 10px !important;
+  }
+  .btn-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px; 
+  }
+  .btn-box .nav-link {
+    margin: 0px 2px !important; 
+    padding: 4px 10px !important; 
+  }
+  
   #myTab{
     margin: 8px 0px 16px !important;
     display: none;
@@ -231,5 +242,44 @@ li.text-stats-item {
   #student_data, #pie{
     display: flex;
     justify-content: center;
+  }
+  .form-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  .input-row-1, .input-row-2 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .input-row-1 {
+    margin-bottom: 4px;
+  }
+  .input-row-2 {
+    margin-bottom: 8px;
+  }
+  .form-select, .form-control, #get-button {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media screen and (min-width: 432px) {
+  .form-inline {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
+  .input-row-1, .input-row-2 {
+    display: contents;
   }
 }

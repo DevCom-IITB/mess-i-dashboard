@@ -140,6 +140,9 @@ h2{
     flex-direction: column;
     width: 100%;
     position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
   }
   .search-main-area{
     width: 48vw;
@@ -200,14 +203,23 @@ h2{
   :host ::ng-deep .mdc-switch__ripple::after{
       background-color: #ffc24b !important;
   }
-  #student-list-footer{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    width: 100%;
-    background-color:#28272c;
+  #stud-cards ::ng-deep .container {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
   }
-  .col-lg-3, .col-lg-9{
-    width: fit-content;
+  #student-list-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 30px;
+    background-color: #28272c;
+    margin-top: 10px;
+  }
+  .col-lg-9, .col-lg-3 {
+    width: auto;
+    padding: 0;
+    box-sizing: border-box;
   }
 }

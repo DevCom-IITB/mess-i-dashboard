@@ -183,6 +183,7 @@ export class StatisticsComponent implements OnInit {
     if (data.form.value.year&&data.form.value.month) {
       await this.service.getHostelStats(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>{
         this.hostelmessHistory = this.genHostelPlotData(res);
+        console.log(this.hostelmessHistory);
         this.plot.plotMultiline("Hostel Statistics", "mess_data", this.hostelmessHistory.x, this.hostelmessHistory.y, this.hostelmessHistory.labels);
         // this.plot.plotHeatmap("Hostel Meal Distribution", "hostel_heatmap", this.noOfDays, this.hostelmessHistory.heatmapz, this.hostelmessHistory.colors, this.hostelmessHistory.labels);
       }).catch((res)=>{
@@ -193,41 +194,45 @@ export class StatisticsComponent implements OnInit {
   }
 
   async plotStudentData(data: any){    
-    if (data.form.value.year&&data.form.value.month) {
-      this.service.getStudentStats(this.roll_selectable ? data.form.value.roll : this.auth.roll_no,data.form.value.year,data.form.value.month).then((res)=>
-      // this.service.getStudentStats("22B0433",data.form.value.year,data.form.value.month).then((res)=>
-      {
-        this.studentmessHistory = this.genStudentPlotData(res);
-        // console.log(this.studentmessHistory);
-        // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
-        this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
+  if (data.form.value.year && data.form.value.month) {
+    this.service.getStudentStats(
+      this.roll_selectable ? data.form.value.roll : this.auth.roll_no,
+      data.form.value.year,
+      data.form.value.month
+    ).then((res) => {
+      this.studentmessHistory = this.genStudentPlotData(res);
 
+      // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
+      this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
 
-        const firstDate = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month) - 1, 1);
-        const startDay = firstDate.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday. This is also the number of days of padding squares before the start of the month
+      const firstDate = new Date(parseInt(data.form.value.year), parseInt(data.form.value.month) - 1, 1);
+      const startDay = firstDate.getDay();
 
-        const dateMap = this.noOfDays.map((date: string, index: number) => ({date, index}))
-          .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
-          
-        const sortedX = dateMap.map((item: any) => item.date);
-        const sortedZ = this.studentmessHistory.heatmapz.map((mealRow: any) => dateMap.map((item: any) => mealRow[item.index]));
-
-        sortedX.unshift(...Array(startDay-1).fill("")); // Add empty strings for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
-        sortedZ.forEach((mealRow: any) => mealRow.unshift(...Array(startDay-1).fill(0))); // Add zeros for padding at the start. The -1 is to show heatmap like its starting from monday and not from sunday
+      const dateMap = this.noOfDays.map((date: string, index: number) => ({date, index}))
+        .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
         
-        this.reshapeData(sortedX, sortedZ, 0);
+      const sortedX = dateMap.map((item: any) => item.date);
+      const sortedZ = this.studentmessHistory.heatmapz.map((mealRow: any) => dateMap.map((item: any) => mealRow[item.index]));
 
-        let calendarElement = document.getElementById('meal-calendar');
-        if (calendarElement) {
-          calendarElement.style.display = "block";
-        }
+      const padLength = Math.max(0, startDay - 1);
+      if (padLength > 0) {
+        sortedX.unshift(...Array(padLength).fill(""));
+        sortedZ.forEach((mealRow: any) => mealRow.unshift(...Array(padLength).fill(0)));
+      }
 
-      }).catch((res)=>{
-        console.log(res)
-        this.studentmessHistory = {exists:false, loaded:true};
-      });
-    }
+      this.reshapeData(sortedX, sortedZ, 0);
+
+      let calendarElement = document.getElementById('meal-calendar');
+      if (calendarElement) {
+        calendarElement.style.display = "block";
+      }
+
+    }).catch((res) => {
+      console.log("Error in getStudentStats:", res);
+      this.studentmessHistory = {exists:false, loaded:true};
+    });
   }
+}
 
   updateHeatMap(meal: number) {
     // Update the heatmap based on the selected meal
