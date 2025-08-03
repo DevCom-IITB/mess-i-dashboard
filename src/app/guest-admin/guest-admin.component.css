@@ -44,22 +44,32 @@ button:hover{
 
 .table th:nth-child(1),
 .table td:nth-child(1) {
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
+  width: 8%;
+  min-width: 60px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 15%;
+  min-width: 80px;
 }
 
 .table th:nth-child(3),
 .table td:nth-child(3) {
-  width: 500px;
-  min-width: 500px;
+  width: 40%;
+  min-width: 150px;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 12%;
+  min-width: 70px;
 }
 
 .table th:nth-child(5),
 .table td:nth-child(5) {
-  width: 350px;
-  min-width: 350px;
-  max-width: 350px;
+  width: 25%;
+  min-width: 200px;
 }
 
 .table th:nth-child(1),
