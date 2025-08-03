@@ -51,7 +51,7 @@
         <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
       </div>
       <div *ngIf="row[6]" class="text-danger mt-2">
-              <small><strong>Warning: {{ row[7] }} excessive no-shows</strong></small>
+              <small><strong>Note: {{ row[7] }} excessive no-shows</strong></small>
             </div>
       </td>
     </tr>
