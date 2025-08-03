@@ -233,4 +233,16 @@ export class GuestdataService {
     return differenceDays;
   }
 
+  updatePaymentStatus(data: any) {
+    const url = this.baseurl.concat("/update-payment-status");
+    return new Promise((resolve, reject) => {
+      this.http.post(url, data, 
+        { headers: { 'x-access-token': this.auth.getToken(), 'rejectUnauthorized': 'false' }, withCredentials: true }
+      ).subscribe(
+        (res) => { resolve(res); }, 
+        (e) => { reject(e); }
+      );
+    });
+  }
+
 }
