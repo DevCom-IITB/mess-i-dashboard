@@ -25,38 +25,41 @@
 
   <div>
     <div *ngIf="isHistoryEmpty(guestHistory['body'])">
+      <div class="d-flex justify-content-end mb-2">
+      <button (click)="getCSV()" class="csv-btn">CSV</button>
+    </div>
     <table class="table">
-  <thead>
+    <thead>
+        <tr>
+          <th *ngFor="let header of guestHistory.headers">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+    <ng-container *ngFor="let row of guestHistory.body">
       <tr>
-        <th *ngFor="let header of guestHistory.headers">{{ header }}</th>
+        <td *ngFor="let cell of row.slice(0, 4)">{{ cell }}</td>
+        <td>
+          <div *ngIf="row[5] === 'no_show'" class="text-danger">
+            <strong>Didn't Show Up</strong>
+          </div>
+          <div *ngIf="row[5] === 'paid'" class="text-success">
+            <strong>Paid</strong>
+          </div>
+          
+          <div *ngIf="row[5] === 'unpaid'">
+          <button *ngIf="isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid', currentFormData.hostel)">Paid</button>
+          <button *ngIf="isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show', currentFormData.hostel)">Didn't Show Up</button>
+          
+          <button *ngIf="!isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid')">Paid</button>
+          <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
+        </div>
+        <div *ngIf="row[6]" class="text-danger mt-2">
+                <small><strong>Note: {{ row[7] }} excessive no-shows</strong></small>
+              </div>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-  <ng-container *ngFor="let row of guestHistory.body">
-    <tr>
-      <td *ngFor="let cell of row.slice(0, 4)">{{ cell }}</td>
-      <td>
-        <div *ngIf="row[5] === 'no_show'" class="text-danger">
-          <strong>Didn't Show Up</strong>
-        </div>
-        <div *ngIf="row[5] === 'paid'" class="text-success">
-          <strong>Paid</strong>
-        </div>
-        
-        <div *ngIf="row[5] === 'unpaid'">
-        <button *ngIf="isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid', currentFormData.hostel)">Paid</button>
-        <button *ngIf="isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show', currentFormData.hostel)">Didn't Show Up</button>
-        
-        <button *ngIf="!isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid')">Paid</button>
-        <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
-      </div>
-      <div *ngIf="row[6]" class="text-danger mt-2">
-              <small><strong>Note: {{ row[7] }} excessive no-shows</strong></small>
-            </div>
-      </td>
-    </tr>
-  </ng-container>
-</tbody>
+    </ng-container>
+  </tbody>
   </table>
   </div>
     <p  *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
