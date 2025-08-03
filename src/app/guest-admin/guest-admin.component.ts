@@ -124,5 +124,49 @@ export class GuestAdminComponent implements OnInit {
       alert("Failed to update status");
     });
   }
+
+  getCSV() {
+    if (!this.isHistoryEmpty(this.guestHistory['body'])) {
+      return;
+    }
+    let csv = this.guestHistory.headers.join(',');
+    csv += '\n';
+    
+    this.guestHistory.body.forEach((row: any) => {
+      const rowData = row.slice(0, 4);
+      
+      let statusText = "";
+      if (row[5] === 'paid') {
+        statusText = "Paid";
+      } else if (row[5] === 'no_show') {
+        statusText = "Didn't Show Up";
+      } else {
+        statusText = "Unpaid";
+      }
+      
+      rowData.push(statusText);
+      
+      if (row[6]) {
+        statusText += ` (${row[7]} excessive no-shows)`;
+      }
+      
+      csv += rowData.join(',');
+      csv += '\n';
+    });
+    
+    const anchor = document.createElement('a');
+    anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    anchor.target = '_blank';
+    let fileName = 'guest-list';
+    if (this.currentFormData) {
+      const date = this.currentFormData.date || '';
+      const meal = this.currentFormData.meal || '';
+      const hostel = this.currentFormData.hostel || '';
+      fileName = `guest-list-${hostel}-${date}-${meal}.csv`;
+    }
+    
+    anchor.download = fileName;
+    anchor.click();
+  }
       
 }
