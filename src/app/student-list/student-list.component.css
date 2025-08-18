@@ -136,6 +136,7 @@ h2{
     background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
   }
   #stud-cards{
+    order:1;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -162,6 +163,7 @@ h2{
     width: 15vw;
     height: 43px;
     position: static;
+    font-size: 3.5vw;
   }
   #csv-download-container:hover{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -182,7 +184,7 @@ h2{
   #inactive-toggle-container p{
       margin-bottom: 0px;
       font-family: "Open Sans";
-      font-size: 14px;
+      font-size: 3.5vw;
       font-weight: 600;
       position: relative;
       left: 1vw;
@@ -208,6 +210,7 @@ h2{
     margin-bottom: 5px !important;
   }
   #student-list-footer {
+    order: 2;
     display: flex;
     flex-direction: row;
     align-items: center;

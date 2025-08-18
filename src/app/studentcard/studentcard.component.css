@@ -238,7 +238,7 @@ border-radius: 50000px;
     text-align: left;
   }
   #name{
-    font-size: 16px;
+    font-size: 4vw;
     font-weight: 700;
   }
   .space{
@@ -257,6 +257,7 @@ border-radius: 50000px;
   #studrollno,.rollno,#hostel,#studhostel{
     margin-bottom: 0;
     padding-bottom: 0;
+    font-size: 3.75vw;
   }
   #studrollno{
     position: relative;
@@ -310,14 +311,14 @@ border-radius: 50000px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     font-family: "Open Sans", "sans-serif";
-    font-size: 16px;
+    font-size: 5vw !important;
     color: #000000;
     font-weight: 600;
   }
   .nav-link.active{
     background-color: #ffce5d;
     font-family: "Open Sans", "sans-serif";
-    font-size: 16px;
+    font-size: 5vw;
     color: #000000;
     font-weight: 600;
   }
@@ -348,7 +349,7 @@ border-radius: 50000px;
       display: none !important;
   }
   :host ::ng-deep .mat-start-date, .mat-end-date{
-    font-size: 12px;
+    font-size: 3vw;
   }
   #official-toggle{
       display: flex;
@@ -367,7 +368,7 @@ border-radius: 50000px;
   #official-toggle-container p{
       margin-bottom: 0px;
       font-family: "Open Sans";
-      font-size: 14px;
+      font-size: 3.5vw;
       font-weight: 600;
   }
   #range-date-container{
@@ -410,9 +411,13 @@ border-radius: 50000px;
     width: 15vw;
     height: 32px;
     position: static;
+    font-size: 3.5vw;
   }
   #header-container{
     display: flex;
     justify-content: space-between;
+  }
+  .btn{
+    font-size:4vw;
   }
 }

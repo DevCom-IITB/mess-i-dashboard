@@ -95,3 +95,20 @@
         display: none;
     }
 }
+@media screen and (max-width: 431px){
+    #title{
+        font-size: 6vw;
+    }
+    #desc{
+        font-size: 3.5vw;
+    }
+    #name{
+        font-size: 4vw;
+    }
+    #rollNumber{
+        font-size: 3.5vw;
+    }
+    #roomNumber{
+        font-size: 3.5vw;
+    }
+}

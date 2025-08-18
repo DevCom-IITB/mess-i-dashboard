@@ -47,6 +47,7 @@
         color: #ffce5d;
         background-color: #28272c;
         border-radius: 50px;
+        font-size: 4.5vw;
     }
     #new-request-btn:hover{
         background-color: #ffce5d;

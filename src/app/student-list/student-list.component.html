@@ -39,7 +39,13 @@
       </tbody>
     </table>
   </div>
-
+  <div id="stud-cards">
+      <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
+        <app-home-card [app_bar_suffix]="app_bar_suffix" [stud]="stud" role="button" (click)="displayStudData(indexOfelemnet)"  *ngIf="!toggle || (toggle && !stud[1].mess_allowed)"></app-home-card>
+        <!-- The ngIf boolean logic is used to implement the functioning of toggle -->
+        <!-- app-home-card is used in home page and student-list page -->
+      </ng-container>
+    </div>
   <div id="student-list-footer" class="row">
     <div class="col-lg-3">
       <p>{{entryNumber}}-{{entryNumber+entriesPerPage-1}}</p>
@@ -57,13 +63,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div id="stud-cards">
-    <ng-container *ngFor="let stud of studentInfoList; let indexOfelemnet=index;">
-      <app-home-card [app_bar_suffix]="app_bar_suffix" [stud]="stud" role="button" (click)="displayStudData(indexOfelemnet)"  *ngIf="!toggle || (toggle && !stud[1].mess_allowed)"></app-home-card>
-      <!-- The ngIf boolean logic is used to implement the functioning of toggle -->
-      <!-- app-home-card is used in home page and student-list page -->
-    </ng-container>
-  </div>
+  </div> 
 </div>

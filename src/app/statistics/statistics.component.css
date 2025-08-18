@@ -184,7 +184,7 @@ li.text-stats-item {
     margin: 0px 8px;
     border: none;
     background-color: #ffffff;
-    font-size: 12px;
+    font-size: 3vw;
     font-family: "Open Sans";
     font-weight: 500;
     color: #5f6368;
@@ -194,12 +194,12 @@ li.text-stats-item {
     background-color: #ffce5d;
     color: #28272c;
     width: 20.76vw;
-    font-size: 12px;
+    font-size: 3vw;
     font-weight: 600;
     transition: all 0.15s ease-in-out;
   }
   .btn-box .nav-link {
-    font-size: 10px !important;
+    font-size: 2.75vw !important;
   }
   .btn-box {
     display: flex;
