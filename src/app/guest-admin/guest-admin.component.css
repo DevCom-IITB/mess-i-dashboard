@@ -42,10 +42,51 @@ button{
 button:hover{
     background-color: #FFC42B;
 }
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 8%;
+  min-width: 60px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 15%;
+  min-width: 80px;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 40%;
+  min-width: 150px;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 12%;
+  min-width: 70px;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: 25%;
+  min-width: 200px;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  text-align: center;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  text-align: center;
+  vertical-align: middle;
+}
 .nav-link{
     color: black;
 }
-.mobile-csv-download, .guest-cards, #myTab, #no-guest-indicator-mobile{
+.mobile-csv-download, #myTab, #no-guest-indicator-mobile{
     display: none;
 }
 #no-guest-indicator-desktop{
@@ -53,16 +94,107 @@ button:hover{
     color: #28272C;
     font-weight: 600;
 }
+
+.guest-cards {
+    display: none;
+}
+
+.guest-card {
+    border: 1px solid #ffffff;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.guest-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.token-number {
+    font-weight: bold;
+    color: #28272c;
+    font-size: 14px;
+}
+
+.hostel-badge {
+    background-color: #ffce5d;
+    color: #28272c;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.guest-card-body {
+    padding: 15px;
+}
+
+.guest-info {
+    margin-bottom: 15px;
+}
+
+.guest-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #28272c;
+}
+
+.guest-roll {
+    color: #666;
+    font-size: 14px;
+}
+
+.guest-actions {
+    margin-top: 12px;
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.status-paid {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+}
+
+.status-noshow {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.excessive-warning {
+    margin-top: 10px;
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
 @media screen and (max-width: 431px){
     .container{
         padding: 0% 2%;
         background-color: #28272c;
     }
-    #heading, hr, #table, #meal_dropdown, #get-button, #no-guest-indicator-desktop{
+    #heading, hr, #table, #meal_dropdown, #get-button, #no-guest-indicator-desktop, .desktop-table-container, .csv-btn{
         display: none;
     }
     .guest-cards{
-        display: block;
+        display: block !important;
     }
     .nav-item{
         width: fit-content;
@@ -75,7 +207,6 @@ button:hover{
         height: 50px;
         border-radius: 50px;
         padding: 4px 19px 4px 19px;
-        /* margin: 0px 8px; */
         border: none;
         background-color: #ffffff;
         font-size: 12px;
@@ -114,7 +245,6 @@ button:hover{
         height: 50px;
         justify-content: space-between;
     }
-    /* All the importants are added because they have a diff css designed in their component acc to desktop view */
     .input-group{
         width: 100%;
         margin-bottom: 4px !important;
@@ -135,14 +265,12 @@ button:hover{
         border-radius: 16px 50px 50px 16px !important;
         padding: 14px 12px;
         position: relative;
-        /* left: 10vw; */
         display: flex;
         justify-content: center;
         align-items: center;
         height: 42px;
     }
     .form-select{
-        /* width: 75px; */
         height: 42px;
         border-radius: 8px !important;
         border-width: 1.39px;

@@ -65,7 +65,6 @@ export class GuestdataService {
   }
   // Give data of particular hostel
   async getGuestHostelData(hostel: string, date: string, meal: string) {
-    hostel = "H34"
     console.log(hostel, date, meal);
     let url = this.baseurl.concat("/hostel-info/", date, "/", meal);
     console.log("Hi");
@@ -236,6 +235,18 @@ export class GuestdataService {
     const differenceMillis = endDate.getTime() - startDate.getTime();
     const differenceDays = Math.ceil(differenceMillis / (1000 * 60 * 60 * 24));
     return differenceDays;
+  }
+
+  updatePaymentStatus(data: any) {
+    const url = this.baseurl.concat("/update-payment-status");
+    return new Promise((resolve, reject) => {
+      this.http.post(url, data, 
+        { headers: { 'x-access-token': this.auth.getToken(), 'rejectUnauthorized': 'false' }, withCredentials: true }
+      ).subscribe(
+        (res) => { resolve(res); }, 
+        (e) => { reject(e); }
+      );
+    });
   }
 
 }

@@ -19,9 +19,8 @@ export class GuestAdminComponent implements OnInit {
   guestHistory:any = {exists:true, loaded:false};
   meal: Array<string> = ['breakfast', 'lunch', 'snacks', 'dinner'];
   headers = ['Token No.','Roll No.','Name','Hostel']
-  guestCardData: any[] = []; // list of lists
-  isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
-  formData: any;
+  isAdmin = false;
+  currentFormData: any = null;
 
   constructor(private filter_service:FilterService, private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -55,62 +54,140 @@ export class GuestAdminComponent implements OnInit {
     })
   }
 
-  cleanData(history:any){
-    if(Object.keys(history).length){
-      let body=[];
-      for(let key in history["data"]["guests"]){
+  cleanData(history: any) {
+    if (Object.keys(history).length) {
+      let body = [];
+      for (let key in history["data"]["guests"]) {
         let rollNo = Object.keys(history["data"]["guests"][key])[0]
-        let guest=[]
-        guest.push(history["data"]["guests"][key][rollNo]["index"])
-        guest.push(rollNo)
-        guest.push(history["data"]["guests"][key][rollNo]["fullname"])
-        guest.push(history["data"]["guests"][key][rollNo]["hostel"])
+        let guest = []
+        guest.push(history["data"]["guests"][key][rollNo]["index"]) // Token no
+        guest.push(rollNo) // Roll no
+        guest.push(history["data"]["guests"][key][rollNo]["fullname"]) // Name
+        guest.push(history["data"]["guests"][key][rollNo]["hostel"]) // Hostel
+        guest.push(key) // Guest ID
+        guest.push(history["data"]["guests"][key][rollNo]["payment_status"] || "unpaid")
+        // Payment status
+        guest.push(history["data"]["guests"][key][rollNo]["excessive_no_shows"] || false)
+        guest.push(history["data"]["guests"][key][rollNo]["no_show_count"] || 0)
+        
         body.push(guest)
       }
-      let res={headers:this.headers,body:body,exists:true, loaded:true}
-      console.log("Cleaned Data:", res);
+      this.headers = ['Token No.', 'Roll No.', 'Name', 'Hostel', 'Actions'];
+      let res = { headers: this.headers, body: body }
       return res;
     }
     return {}
   }
-
-
-  getGuestList(data:any){
-    if(data.form.value['date'] == ''){
-      alert("Please select a date");
-    }
-    if (data.form.value['meal'] == ''){
-      data.form.value['meal'] = data.form.value['selectedMeal'];
-    }
-    this.formData = data.form.value;
-    console.log(data.form.value);
-    this.guestHistory={}
+  
+  getGuestList(data: any) {
+    this.currentFormData = data.form.value;
+    this.guestHistory = {}
     if (data.form.value.date && data.form.value.meal) {
-      // this.guestService.getGuestHostelData(data.form.value.hostel,this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
-      this.guestService.getGuestHostelData("H34",this.guestService.resolveDateFormat(data.form.value.date),data.form.value.meal).then((res)=>
-        {
-          let history = res;
-          this.guestHistory = this.cleanData(history);
-          this.guestCardData = this.guestHistory.body;
-          console.log("Guest Card Data:")
-          console.log(this.guestCardData)
-        }).catch((res)=>{
-          this.guestHistory = this.cleanData({})
-          console.log(this.guestHistory)
-
-        });
-    }else{
-    } 
+      this.guestService.getGuestHostelData(
+        data.form.value.hostel,
+        this.guestService.resolveDateFormat(data.form.value.date),
+        data.form.value.meal
+      ).then((res) => {
+        let history = res;
+        this.guestHistory = this.cleanData(history);
+      }).catch((res) => {
+        this.guestHistory = this.cleanData({})
+        console.log(this.guestHistory)
+      });
+    }
   }
 
   isHistoryEmpty(history:any){
-    return history !== undefined || !history?.length;
+    return history !== undefined && history?.length > 0;
+  }
+  
+  updatePaymentStatus(roll: string, status: string, hostelParam?: string) {
+    if (!this.currentFormData) {
+      alert("No form data available. Please search again.");
+      return;
+    }
+
+    const date = this.guestService.resolveDateFormat(this.currentFormData.date);
+    const meal = this.currentFormData.meal;
+    const data: any = {
+      roll: roll,
+      date: date,
+      meal: meal,
+      payment_status: status
+    };
+    
+    if (this.isAdmin && hostelParam) {
+      data.guesthostel = hostelParam;
+    }
+
+    this.guestService.updatePaymentStatus(data).then((res: any) => {
+      if (this.guestHistory && this.guestHistory.body) {
+        for (let row of this.guestHistory.body) {
+          if (row[1] === roll) {
+            row[5] = status;
+          }
+        }
+      }
+      
+      alert(`Status updated to: ${status}`);
+    }).catch((err) => {
+      console.error("Error updating payment status:", err);
+      alert("Failed to update status");
+    });
+  }
+
+  getCSV() {
+    if (!this.isHistoryEmpty(this.guestHistory['body'])) {
+      return;
+    }
+    let csv = this.guestHistory.headers.join(',');
+    csv += '\n';
+    
+    this.guestHistory.body.forEach((row: any) => {
+      const rowData = row.slice(0, 4);
+      
+      let statusText = "";
+      if (row[5] === 'paid') {
+        statusText = "Paid";
+      } else if (row[5] === 'no_show') {
+        statusText = "Didn't Show Up";
+      } else {
+        statusText = "Unpaid";
+      }
+      
+      rowData.push(statusText);
+      
+      if (row[6]) {
+        statusText += ` (${row[7]} excessive no-shows)`;
+      }
+      
+      csv += rowData.join(',');
+      csv += '\n';
+    });
+    
+    const anchor = document.createElement('a');
+    anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    anchor.target = '_blank';
+    let fileName = 'guest-list';
+    if (this.currentFormData) {
+      const date = this.currentFormData.date || '';
+      const meal = this.currentFormData.meal || '';
+      const hostel = this.currentFormData.hostel || '';
+      fileName = `guest-list-${hostel}-${date}-${meal}.csv`;
+    }
+    
+    anchor.download = fileName;
+    anchor.click();
   }
   updateTab(tabName: string, data: any): void {
     this.currTab = tabName;
-    // This would typically fetch data based on the selected tab
-    console.log(`Tab changed to: ${tabName}`);
-    // For now, we're using the data already loaded in initialise()
+    if (data.form) {
+      data.form.value.meal = tabName;
+      this.getGuestList(data);
+      console.log(`Tab changed to: ${tabName}, fetching data for ${tabName}`);
+    } else {
+      console.log(`Tab changed to: ${tabName}, but no form data available`);
+    }
   }
 
   downloadCSV(data:any) {
@@ -122,4 +199,5 @@ export class GuestAdminComponent implements OnInit {
       alert("No data to download");
     }
   }
+      
 }

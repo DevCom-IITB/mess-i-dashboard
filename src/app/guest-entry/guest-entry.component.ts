@@ -70,13 +70,18 @@ export class GuestEntryComponent implements OnInit {
     }
   }
 
-  cleanData(history:any){
-    let body=[];
-    for(let i=0; i<3;i++){
-      if ( Object.keys(history[i]["data"]).length ){
-        for(let key in history[i]["data"]){
-          let booking=[];
-          let withdrawable=this.guestService.withdrawValidity(key,i);
+  cleanData(history: any) {
+    let body = [];
+    for (let i = 0; i < 3; i++) {
+      if (Object.keys(history[i]["data"]).length) {
+        for (let key in history[i]["data"]) {
+          if (history[i]["data"][key]["payment_status"] === 'paid' || 
+              history[i]["data"][key]["payment_status"] === 'no_show') {
+            continue; 
+          }
+          
+          let booking = [];
+          let withdrawable = this.guestService.withdrawValidity(key, i);
           booking.push(history[i]["data"][key]["index"])
           booking.push(history[i]["data"][key]["guesthostel"])
           booking.push(this.legel_date[i])
