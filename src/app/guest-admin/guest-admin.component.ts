@@ -48,7 +48,7 @@ export class GuestAdminComponent implements OnInit {
           this.allowedHostels[21] = true;
         }
       }
-      console.log("Allowed hostels for guest booking:", this.allowedHostels);
+      //console.log("Allowed hostels for guest booking:", this.allowedHostels);
     }).catch((res) =>{
       console.log(res)
     })
@@ -106,9 +106,25 @@ export class GuestAdminComponent implements OnInit {
       alert("No form data available. Please search again.");
       return;
     }
+    
+    if (!this.currentFormData.date) {
+      alert("Please select a date first.");
+      return;
+    }
+    
+    if (!this.currentFormData.meal) {
+      if (this.currTab && this.currTab !== 'empty') {
+        this.currentFormData.meal = this.currTab;
+      } else {
+        alert("Please select a meal type first.");
+        return;
+      }
+    }
 
     const date = this.guestService.resolveDateFormat(this.currentFormData.date);
     const meal = this.currentFormData.meal;
+    console.log("Updating payment status with:", { roll, date, meal, status });
+    
     const data: any = {
       roll: roll,
       date: date,
@@ -187,6 +203,12 @@ export class GuestAdminComponent implements OnInit {
       console.log(`Tab changed to: ${tabName}, fetching data for ${tabName}`);
     } else {
       console.log(`Tab changed to: ${tabName}, but no form data available`);
+      // Ensure currentFormData is updated even if form data is not available
+      if (this.currentFormData) {
+        this.currentFormData.meal = tabName;
+      } else {
+        this.currentFormData = { meal: tabName };
+      }
     }
   }
 

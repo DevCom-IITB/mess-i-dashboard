@@ -58,7 +58,7 @@
         border-color: #fffcf4;
         border-radius: 120rem;
         padding: 8px 16px;
-        font-size: 14px;
+        font-size: 3.5vw;
         width: fit-content;
         color:#28272c;
         font-size: 'Open Sans', sans-serif;
@@ -106,8 +106,16 @@
         font-weight: 500;
         color: #5f6368;
         transition: all 0.15s ease-in-out;
-        font-size: 14px;  
+        font-size: 4vw;  
         white-space: nowrap;  
+    }
+    .nav-tabs .nav-link.inactive {
+        font-size: 4vw; 
+    }
+    
+    .nav-tabs .nav-link,
+    .nav-tabs .nav-link.active {
+        font-size: 4vw !important;
     }
     .nav-item {
         width: 33.33%; 
@@ -131,7 +139,7 @@
         background-color: #ffce5d;
         color: #28272c;
         font-weight: 600;
-        font-size: 16px; 
+        font-size: 4vw; 
         transition: all 0.15s ease-in-out;
         width: 100% !important;
     }
@@ -177,7 +185,7 @@
     #official-toggle-container p{
         margin-bottom: 0px;
         font-family: "Open Sans";
-        font-size: 14px;
+        font-size: 3.5vw;
         font-weight: 600;
     }
     #range-date-container{

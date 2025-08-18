@@ -116,9 +116,8 @@ button:hover{
 }
 
 .token-number {
-    font-weight: bold;
-    color: #28272c;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 24px;
 }
 
 .hostel-badge {

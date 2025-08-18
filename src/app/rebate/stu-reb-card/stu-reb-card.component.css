@@ -197,4 +197,34 @@ p{
     .rebate-card-container{
         padding: 14px 12px;
     }
+    #received-on{
+        font-size: 3.5vw;
+        }
+        #fullname{
+        font-size: 6vw;
+    }
+    #rebate-duration-start,#rebate-duration-end{
+        font-size: 4vw;
+    }
+    #rollNo,#roomNo{
+        font-size: 4vw;
+    }
+    #noOfDays{
+        font-size: 4vw;
+    }
+    #both-inclusive{
+        font-size: 4vw;
+    }
+    .rebate-action-btn{
+        font-size: 4vw;
+    }
+    .row{
+        font-size: 4vw;
+    }
+    .comment{
+        font-size: 4.5vw;
+    }
+    .rebate-card-container{
+        min-width: 80vw;
+    }
 }
