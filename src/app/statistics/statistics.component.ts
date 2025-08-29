@@ -32,6 +32,7 @@ export class StatisticsComponent implements OnInit {
   dates: string[][];
   heatmapValues: number[][];
   heatmapMeal: number = 0;
+  messHistory: any = {exists:true, loaded:false};
 
 
   constructor(private plot:PlotlyService,private service:StudentdataService,private auth:AuthService, private router:Router) { 
@@ -97,6 +98,33 @@ export class StatisticsComponent implements OnInit {
     return res;
   }
 
+  cleanData(history:any){
+    let body = [];
+    let foot = [0,0,0,0,0,0,0];
+    for(let j=0;j<this.noOfDays.length;j++){
+      if(!(this.noOfDays[j] in history)){
+        body.push([this.noOfDays[j],'-','-','-','-','-','-','-'])
+      }else{
+        let day = [this.noOfDays[j]];
+        for(let k=1;k<this.headers.length;k++){
+          if(this.headers[k] in history[this.noOfDays[j]]){
+            day.push(history[this.noOfDays[j]][this.headers[k]]);
+            foot[k-1]+=history[this.noOfDays[j]][this.headers[k]];
+          }else{
+            day.push('-');
+          }
+        }
+        body.push(day);
+      }
+    }
+    let footer = ["Total"];
+    for(let i=0;i<foot.length;i++){
+      footer.push(foot[i].toString());
+    }
+    let res = {headers:this.headers,body:body,footer:footer}
+    return res;
+  }
+
   async plotData(data: any) {
     // Setup
     this.data_copy = data;
@@ -104,6 +132,16 @@ export class StatisticsComponent implements OnInit {
     this.noOfDays = Array(num).fill(1).map((x, i) => (i + 1).toString());
     this.noOfDays2 = Array(num).fill(1).map((x, i) => (`${data.form.value.year}-${data.form.value.month}-${i+1}`));
     
+    this.service.getMonthlyMessdata(data.form.value.hostel,data.form.value.year,data.form.value.month).then((res)=>
+      {
+        let history = res;
+        this.messHistory = this.cleanData(history);
+       
+      }).catch((res)=>{
+        console.log(res)
+        this.messHistory = this.cleanData({})
+      });
+
     this.hostelmessHistory = {exists: true, loaded: false};
     this.studentmessHistory = {exists: true, loaded: false};
     this.selectedMonth = parseInt(data.form.value.month);
