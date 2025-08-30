@@ -269,6 +269,10 @@ li.text-stats-item {
     flex: 1 1 0;
     min-width: 0;
   }
+  .table-container {
+    width: 100% !important;
+    overflow-x: auto;
+  }
 }
 
 @media screen and (min-width: 432px) {
