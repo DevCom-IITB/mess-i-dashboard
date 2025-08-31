@@ -159,6 +159,8 @@ p{
   padding: 0px;
   visibility: visible !important;
   opacity: 1 !important;
+  padding-left:2vw;
+  padding-right: 2vw;
 }
 
 .action-container {

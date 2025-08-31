@@ -31,8 +31,8 @@
   <div id="display-data">
     <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
     <div class="chart-container" id="mess_data" *ngIf="hostelmessHistory.exists"></div>
-    <div class="table-container">
-      <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>
+    <div class="table-container mobile-only-table" *ngIf="auth.isStaff() && messHistory">
+      <app-table-component [data]="messHistory"></app-table-component>
     </div>
     <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
     <!-- <app-meal-calender></app-meal-calender> -->

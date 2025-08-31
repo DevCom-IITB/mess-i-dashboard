@@ -42,7 +42,7 @@ export class StatisticsComponent implements OnInit {
   messHistory: any = {exists:true, loaded:false};
 
 
-  constructor(private plot:PlotlyService,private service:StudentdataService,private auth:AuthService, private router:Router) { 
+  constructor(private plot:PlotlyService,private service:StudentdataService,public auth:AuthService, private router:Router) { 
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
