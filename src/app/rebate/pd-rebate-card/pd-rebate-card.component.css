@@ -1,22 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 .pd-rebate-card-container{
     min-width: 330px;
-    padding: 12px 36px;
+    padding: 14px 12px;
     border-radius: 12px;
     box-shadow: 6px 6px 50px -40px;
     background-color: white;
+    position: relative;
 }
-#stud-details-container{
+#stud-name{
+    font-size: 18px;
     margin: 12px 0px;
     font-size: 1.75rem;
     font-weight: 700;
 }
 #stud-sub-details-container{
     margin: 12px 0px;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-#rebate-duration-container{
+#room-no{
+    flex: 1;
+    text-align: right;
+}
+#rebate-duration-container {
+    font-size: 16px;
+    font-weight: 600;
     margin: 12px 0px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#start-date {
+    flex: 1;
+    text-align: left;
+}
+#arrow-mark {
+    position: static; 
+    margin: 0 15px; 
+}
+#end-date {
+    flex: 1;
+    position: static;
+    text-align: right;
 }
 #rebate-duration{
     font-size: 1rem;
@@ -43,19 +73,113 @@
 }
 #rebate-decision-container{
     margin: 0.5rem 0rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 #rebate-decision-container button{
     margin-right: 1rem;
-    font-weight: bold;
     font-size: 1.15rem;
 }
 #rebate-comment-container{
     padding: 0px 12px;
 }
-#rebate-comment-input{
-    border-radius: 100vh;
+#comment-inp{
+    position: relative;
+    bottom: 0.8vh;
 }
 .row{
     word-break: break-all;
     white-space: normal;
+}
+.acc-rej{
+    height: 48px;
+    width: 132px;
+    border-radius: 50px;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    color: #28272c;
+}
+#reject-btn{
+    border-color: #ffc24b;
+    background-color: white;
+    border: 2px solid #ffc24b;
+}
+#accept-btn{
+    border: 2px solid #ffc35d;
+    background-color: #ffc35d;
+}
+#reason{
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    position: relative;
+    left: 0px;
+    font-size: 14px;
+    font-weight: 600;
+}
+#nobold{
+    font-weight: 400;
+    font-size: 16px;
+    color: #28272c;
+}
+#noofdays{
+    font-size: 16px;
+    font-weight: 600;
+    color: #28272c;
+}
+#days{
+    position: relative;
+    bottom: 10px;
+}
+#rebate-status-indicator{
+    position: absolute;
+    right: 12px;
+}
+#rebate-reason-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#official{
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Open Sans";
+    width: auto;
+}
+#student-actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 10px;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+}
+
+#student-actions-container .rebate-action-btn {
+    height: 48px; 
+    border-radius: 50px;
+    background-color: #ffce5d;
+    color: #28272b;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    min-width: 120px; 
+    white-space: nowrap;
+    padding: 0 15px;
+}
+
+#student-actions-container .rebate-action-btn:hover:not(.btn-danger) {
+    background-color: #28272b;
+    color: #ffce5d;
+    transition: all 0.2s ease;
+}
+
+*{
+    font-family: 'Open Sans', sans-serif;
 }

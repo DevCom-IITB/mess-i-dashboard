@@ -30,3 +30,45 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media screen and (max-width: 431px) {
+    .main-container, .container {
+        padding: 15px 25px 10px 25px !important; 
+    }
+    
+    #navbar-fixed,
+    #mobile-navbar,
+    #container-nav-items,
+    .box-style {
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    app-app-bar .container {
+        padding: 0 6% !important; /* Maintain app-bar padding */
+    }
+    
+    .main-container, .container, .main {
+        margin-top: 87px; /* 75px height + 12px margin */
+    }
+    
+    app-rebate > .main-container,
+    app-device-list > .main,
+    app-rebate-admin > .main-container,
+    app-guest-admin > .main-container,
+    app-statistics > .container,
+    app-guest-entry > .container,
+    app-student-list > .container,
+    app-mess-bill > .container,
+    app-overview > .container {
+        padding: 10px 25px 10px 25px !important;
+    } 
+    .info-icon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 22px;
+    height: 22px;
+}
+}

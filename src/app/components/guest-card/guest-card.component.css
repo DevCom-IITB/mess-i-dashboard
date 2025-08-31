@@ -1,0 +1,44 @@
+.card-container{
+    width: 100%;
+    height: fit-content;
+    margin-top: 15px;
+    background-color: #ffffff;
+    padding: 14px 12px;
+    border-radius: 10px;
+}
+.guest-data img{
+    margin-right: 4px;
+}
+.roll-no, .name, .date{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 8px;
+    display: flex;
+}
+ .hostel, .meal{
+    font-size: 16px;
+    font-weight: 600;
+ }
+.hostel-meal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 8px;
+}
+.token-no{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.cancel-booking{
+    width: 100%;
+    padding: 16px 12px 0px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 431px) {
+    .card-container{
+        display: none;
+    }    
+}

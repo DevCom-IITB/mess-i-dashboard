@@ -65,7 +65,9 @@ export class GuestdataService {
   }
   // Give data of particular hostel
   async getGuestHostelData(hostel: string, date: string, meal: string) {
+    console.log(hostel, date, meal);
     let url = this.baseurl.concat("/hostel-info/", date, "/", meal);
+    console.log("Hi");
     return new Promise((resolve, reject) => {
       this.http.get(url, {
         headers: {
@@ -102,6 +104,7 @@ export class GuestdataService {
   //Give info about the guest
   async getGuestDetail(roll:string){
     let url = this.baseurl.concat("/get-guest-info/",roll);
+    // let url = this.baseurl.concat("/get-guest-info/",'24B0000');
     return new Promise((resolve,reject)=>
     {
       this.http.get(url,{
@@ -165,6 +168,7 @@ export class GuestdataService {
   //Remove/withdraw the guest-entry
   async removeGuest(guestHostel:string,meal:string,date:string){
     let url = this.baseurl.concat("/guest-entry/",this.auth.getRoll(),'/',date,'/',meal,'/',guestHostel);
+    // let url = this.baseurl.concat("/guest-entry/","24B0000",'/',date,'/',meal,'/',guestHostel);
     return new Promise((resolve,reject)=>{
       this.http.delete(url,{headers:{
         'x-access-token':this.auth.getToken(),

@@ -1,3 +1,9 @@
+/* Please note that there is considerable amount of in-line css for this card */
+/* In-line css is used when there had to be different css for same id elements */
+*{
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0%;
+}
 .maindiv {
     position: relative;
 }
@@ -11,72 +17,218 @@
 }
 .rebate-card-container{
     min-width: 330px;
-    padding: 12px 36px;
+    padding: 14px 12px;
     border-radius: 12px;
     box-shadow: 6px 6px 50px -40px;
     background-color: white;
+}
+#received-on{
+    font-size: 14px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+#indicator{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#rebate-status-indicator{
+    flex: 1;
+    text-align: right;
 }
 #stud-details-container{
     margin: 12px 0px;
     font-size: 1.75rem;
     font-weight: 700;
 }
+#fullname{
+    font-size: 23px;
+    font-weight: 700;
+    width: 100%;
+}
 #stud-sub-details-container{
-    font-size: 1.25rem;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 #rebate-duration-container{
-    margin: 12px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0px 0px;
 }
-#rebate-duration{
-    font-size: 1rem;
+#rebate-duration-start,#rebate-duration-end{
+    font-size: 16px;
+    font-weight: 600;
+    width: 45%;
+}
+#rebate-duration-end{
+    flex: 1;
+    text-align: right;
+}
+#rebate-duration-container img{
+    display: block;
+    align-self: center;
+}
+#days{
+    margin-bottom: 12px
+}
+#rollNo,#roomNo{
+    font-size: 16px;
     font-weight: 600;
 }
-.small-italics{
-    font-size: 0.75rem;
-    font-style: italic;
+#roomNo{
+    flex: 1;
+    position: static;
+    text-align: right;
+}
+#noOfDays{
+    font-size: 16px;
+    font-weight: 600;
+}
+#both-inclusive{
+    font-size: 16px
 }
 .rebate-action-btn{
-    color: #ffc24b;
+    color: #28272b;
     background-color: white;
-    border-color: white;
-    margin-left: -12px;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
 }
-.button-style{
-    background-color: #ffc659;
-    border-color: #ffc659;
-    border-radius: 122rem;
-    color: white;
-    height: max-content;
-    font-weight: bold;
-}
-#rebate-status-indicator{
+.action-container{
     display: flex;
     align-items: center;
     justify-content: center;
-    float: right;
-    height: 2.3rem;
-    width: 8rem;
-    border-radius: 12px;
-    vertical-align: middle;
-    text-align: center;
-    font-size:1.3rem;
-    font-weight: 400;
+    gap: 20px;
+    margin-top: 10px;
+}
+.action-container button{
+    height: 48px;
+    border-radius: 50px;
+    background-color: #ffce5d;
+}
+#rebate-doc-div{
+    width: 100%;
+}
+#rebate-doc-div button{
+    padding-left: 0px;
 }
 #rebate-action-container{
     margin: 0.5rem 0rem;
 }
-#rebate-doc-div button{
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.15rem;
-}
-.action-container button{
-    margin-right: 1rem;
-    font-weight: bold;
-    font-size: 1.15rem;
+#rebate-accepted-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .row{
-    word-break: break-all;
-    white-space: normal;
+    font-size: 16px;
+    font-weight: 600;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#reason-txt{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#official-toggle-container{
+    display: flex;
+    width: fit-content;
+    gap: 4px;
+}
+p{
+    margin: 0px;
+}
+.comment{
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.rebate-action-btn {
+  display: inline-block !important;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 0px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  padding-left:2vw;
+  padding-right: 2vw;
+}
+
+.action-container {
+  display: flex !important;
+  gap: 10px;
+  margin-top: 10px;
+  visibility: visible !important;
+}
+#toggle-not{
+    color: #28272b;
+    font-weight: 700;
+}
+:host ::ng-deep .mdc-switch__track::after{
+    padding: 2px;
+    background-color: #ffc24b !important;
+}
+:host ::ng-deep .mdc-switch__track::before{
+    background-color: #ffffff !important;
+    border: 2px solid black;
+}
+:host ::ng-deep .mdc-switch__icons{
+    background-color: black !important;
+    border-radius: 50px;
+    margin: 0px;
+}
+:host ::ng-deep .mdc-switch__ripple::after{
+    background-color: #ffc24b !important;
+}
+@media screen and (max-width: 431px){
+    .small-italics{
+        font-style: normal;
+    }
+    #student-details-container{
+        margin: 12px 0px;
+    }
+    .rebate-card-container{
+        padding: 14px 12px;
+    }
+    #received-on{
+        font-size: 3.5vw;
+        }
+        #fullname{
+        font-size: 6vw;
+    }
+    #rebate-duration-start,#rebate-duration-end{
+        font-size: 4vw;
+    }
+    #rollNo,#roomNo{
+        font-size: 4vw;
+    }
+    #noOfDays{
+        font-size: 4vw;
+    }
+    #both-inclusive{
+        font-size: 4vw;
+    }
+    .rebate-action-btn{
+        font-size: 3.5vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+    .row{
+        font-size: 4vw;
+    }
+    .comment{
+        font-size: 4.5vw;
+    }
+    .rebate-card-container{
+        min-width: 80vw;
+    }
 }

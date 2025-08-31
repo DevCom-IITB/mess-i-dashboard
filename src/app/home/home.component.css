@@ -20,3 +20,83 @@
 #device-container{
     margin-top: 24px;
 }
+.student-card, #mobile-logout-btn{
+    display: none;
+}
+@media screen and (max-width: 431px){
+    .main-container{
+        padding: 0% 2%;
+        background-color:#28282B;
+        min-height: fit-content;
+        margin-top: 70px;
+    }
+    #device-container{
+        display: none;
+    }
+    #pending-rebates-container h1{
+        display: none;
+    }
+    .student-card{
+        width: 100%;
+        height: fit-content;
+        display: block;
+        background-color: #ffffff;
+        padding: 14px 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        position: relative;
+    }
+    .student-title{
+        font-size: 6vw;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+    }
+    .student-title-description{
+        font-size: 3.5vw;
+    }
+    .student-button-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+    }
+    .button-left{
+        width: 38vw;
+        height: 48px;
+        border: 2px solid #ffce5d;
+        border-radius: 50px;
+        background-color: #ffffff;
+        font-size: 3.75vw;
+        font-weight: 600;
+    }
+    .button-right{
+        width: 38vw;
+        height: 48px;
+        border: none;
+        border-radius: 50px;
+        background-color: #ffce5d;
+        font-size: 3.75vw;
+        font-weight: 600;
+    }
+    #mobile-logout-btn{
+        display: block;
+        margin-top: 12px;
+    }
+    #mobile-logout-btn button{
+        width: 100%;
+        height: 48px;
+        color: #ffce5d;
+        border: 2px solid #ffce5d;
+        border-radius: 50px;
+        background-color: #28272c;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    #mobile-logout-btn button:hover{
+        background-color: #ffce5d;
+        color: #28272c;
+    }
+}

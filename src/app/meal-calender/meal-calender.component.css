@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600&display=swap');
+*{
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+.calendar {
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+  gap: 1px;
+  background-color: #fffcf4;
+  padding: 10px;
+  color: white;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  gap: 1px;
+}
+
+.row div {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e4e2;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.header div {
+  background: transparent;
+  color: #ffce5d;
+}
+
+.row div.active {
+  background-color: #ffce5d;
+}
+
+.empty {
+  background-color: transparent;
+}
+h2{
+  width: fit-content;
+  color: rgb(128,128,128);
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  margin: 0px;
+}
+#month-year {
+  width: fit-content;
+  color: rgb(128,128,128);
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+}
+@media (max-width: 431px){
+    .calendar{
+        background-color: #28272c;
+    }
+    .row div{
+        background-color: #ffffff;
+    }
+    .header div {
+        background: transparent;
+        color: #ffce5d;
+    }
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0; 
+    }
+    .calendar {
+        margin: 0 auto;
+        width: fit-content;
+        min-width: 0;
+        padding-left: 8px;  
+        padding-right: 8px;  
+        box-sizing: border-box;
+    }
+}

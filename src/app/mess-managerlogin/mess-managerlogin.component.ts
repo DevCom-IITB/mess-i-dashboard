@@ -21,4 +21,7 @@ export class MessManagerloginComponent implements OnInit {
     this.authService.loginMessManager(username, password);
   }
 
+  goBack(): void {
+    window.history.back();
+  }
 }

@@ -1,11 +1,9 @@
 <div class="input-field-wrapper" [ngStyle]="{'background-color': bgColor}">
-    <span class="input-field-label" [ngStyle]="{'background-color': bgColor}">{{ label }}</span>
-    <div class="input-field-container" [ngStyle]="{'background-color': bgColor}">
+    <span [ngClass]="{'hide-input-field-label': label != 'Comment', 'input-field-label': true}" [ngStyle]="{'background-color': bgColor}">{{ label }}</span>
+    <div [ngClass]="{'mobile-input-field-container': label != 'Comment', 'input-field-container': true}" [ngStyle]="{'background-color': bgColor}">
         <div class="show-text" *ngIf="inputType == 'show_text'" >{{text_to_show}}</div>
-        <input class="input-field" *ngIf="inputType == 'text'" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)" >
+        <input [ngClass]="{'mobile-input-field': label == 'Reason for rebate', 'input-field': true}" *ngIf="inputType == 'text'" type="text" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)" >
         <input class="input-field" *ngIf="inputType == 'calender'" type="date" [ngStyle]="{'background-color': bgColor}" [(ngModel)]="inputModel" (ngModelChange)="inputChange($event)">
         <input class="input-field input-file-field" accept="application/pdf" *ngIf="inputType == 'file'" type="file" [ngStyle]="{'background-color': bgColor}" (change)="emitFile($event)" (ngModelChange)="inputChange($event)">
     </div>
 </div>
-
-

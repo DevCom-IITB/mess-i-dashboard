@@ -14,12 +14,14 @@ export class GuestEntryComponent implements OnInit {
   
   guest:any;
   guest_detail:any;
-  guest_data:any;
+  guest_data:any = [];
   name:string;
   hostel:string;
+  card_data:any[] = ['1', '24B1243', 'Ganesh Preetham Vulise', 'H34', false];
 
   history:any;
   errMsg = "";
+  app_bar_suffix: string = 'Guest Bookings';
 
   day1 = new Date();
   temp_day = new Date();
@@ -39,9 +41,12 @@ export class GuestEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetch_guest(this.auth.getRoll())
+    this.fetch_guest(this.auth.getRoll());
+    // this.fetch_guest("24B0000");
     this.getGuestDetail()
+    console.log(this.guest_data)
   }
+  
 
   async fetch_guest(rollNum: any){
     if(this.guestService.guestCache.has(rollNum)){
@@ -87,14 +92,18 @@ export class GuestEntryComponent implements OnInit {
       }
     }
     return body
+    // return [["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
   }
   
   async getGuestDetail(){
-    this.guest_data={}
+    this.guest_data=[];
     let promises = this.legel_date.map(date => this.guestService.getGuestData(this.auth.getRoll(),date));
     let history = await Promise.all(promises);
-    this.guest_data=this.cleanData(history)
+    this.guest_data=this.cleanData(history);
+    // this.guest_data=[["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true],["1","H34","20205-06-06","Dinner",true]]
+    console.log('guest data:',this.guest_data);
   }
+  
 
   updateList(){
     this.getGuestDetail()

@@ -1,0 +1,6 @@
+<div class="main">
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
+    <ng-container *ngFor="let device of devices">
+        <app-devices [device]="device"></app-devices> 
+    </ng-container>   
+</div>

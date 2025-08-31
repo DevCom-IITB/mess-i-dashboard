@@ -28,7 +28,7 @@ export interface RebateRequest{
     request_date: string,
     reason: string,
     comment: string;
-    official: string;
+    official: boolean;
     rebate_docname:string;
     fullname: string,
     room: string,

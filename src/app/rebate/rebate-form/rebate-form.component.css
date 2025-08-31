@@ -57,7 +57,7 @@
     color: #FFC42B;
 }
 .info-button::after {
-    content: "Choose if you have received an official permission letter";
+    content: "Choose if you have official permission letter";
     position: absolute;
     background-color: #28282b;
     color: white;
@@ -68,10 +68,11 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s;
-    bottom: 100%;
-    right: 100%;
-    transform: translateY(-8px) translateX(325px);
+    bottom: 0%;
+    right: 200%;
+    transform: translateY(-28px) translateX(285px);
     z-index: 5;
+    text-align: center;
 }
 .info-button:hover::after {
     visibility: visible;
@@ -97,4 +98,150 @@
 }
 #confirm-btn:hover{
     background-color: #28282b;
+}
+#duration-label, #range-date-container, #noOfDays, #reason-label, #days-notice, #official-toggle-container, #current-document-label{
+    display: none;
+}
+@media screen and (max-width: 431px) {
+    .main-container{
+        padding: 2%;
+        padding-top: 0%;
+    }
+    #desktop-title, i, #from-date-container, #to-date-container, #desktop-toggle{
+        display: none;
+    }
+    #mobile-toggle{
+        display: block;
+    }
+    #duration-label, #reason-label, #current-document-label{
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffce5d;
+    }
+    #reason-label{
+        width: 100%;
+        padding-left: 15px;
+        margin-bottom: 3px;
+    }
+    #is-official-rebate {
+        width: 100%;
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        padding-left: 0;
+    }
+    .info-button{
+        background-color: #28272c;
+    }
+    #range-date-container{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    #range-date{
+        width: 265px;
+        border: none;
+        border-radius: 8px;
+        display: block;
+    }
+    #calender-icon{
+        position: absolute;
+        bottom: 14.91px;
+        right: -40px;
+        z-index: 1;
+        size: scale(2);
+    }
+    #calender-icon:hover{
+        cursor: pointer;
+    }
+    :host ::ng-deep .mat-mdc-text-field-wrapper{
+        background-color: #ffffff !important;
+        border-radius: 50px 10px 10px 50px;
+        padding: 0px 0px 0px 20px;
+    }
+    :host ::ng-deep .mat-mdc-form-field-bottom-align{
+        display: none !important;
+    }
+    :host ::ng-deep .mat-end-date, .mat-start-date{
+        font-size: 12px ;
+    }
+    #days-notice{
+        display: flex;
+        justify-content: right;
+        color: #bebebe;
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    #noOfDays{
+        height: 56px;
+        width: 29vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 10px 50px 50px 10px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #bebebe;
+    }
+    #form-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #rebate-reason-container{
+        width: 100%;
+    }
+    #official-toggle-container{
+        width: 163px;
+        height: 56px;
+        z-index: 0;
+        background-color: #ffffff;
+        color: #28272c;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-left: 0;
+    }
+    #official-toggle-container p{
+        margin-bottom: 0px;
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-weight: 600;
+    }
+    :host ::ng-deep .mdc-switch__track::after{
+        padding: 2px;
+        background-color: #ffc24b !important;
+    }
+    :host ::ng-deep .mdc-switch__track::before{
+        background-color: #ffffff !important;
+        border: 2px solid black;
+    }
+    :host ::ng-deep .mdc-switch__icons{
+        background-color: black !important;
+        border-radius: 50px;
+        margin: 0px;
+    }
+    :host ::ng-deep .mdc-switch__ripple::after{
+        background-color: #ffc24b !important;
+    }
+    #confirm-btn{
+        width: 100%;
+        height: 56px;
+        color: #28272c;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    #confirm-btn:hover{
+        background-color: #28272c;
+        color: #ffce5d;
+        border: 2px solid #ffce5d;
+    }
+    .notice{
+        font-size: 12px;
+        color: #bebebe;
+    }
 }

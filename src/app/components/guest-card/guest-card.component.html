@@ -1,0 +1,26 @@
+<div class="card-container">
+    <div class="token-no">
+        Token No. {{ data[0] }}
+    </div>
+    <div class="guest-data">
+        <span class="name" *ngIf="!isStudentPage()"> <img src="..\assets\IconSet\Icon=Avatar.svg" alt="profile"> {{ data[1] }}</span>
+        <span class="roll-no" *ngIf="!isStudentPage()"> <img src="..\assets\IconSet\Icon=Id.svg" alt="Name"> {{ data[2] }}</span>
+        <span class="roll-no" *ngIf="isStudentPage()"> <img src="..\assets\IconSet\Icon=Id.svg" alt="Name"> {{ roll_no }}</span>
+        <span class="date" *ngIf="!isStudentPage()"> <img src="..\assets\IconSet\Icon=Guest_calendar.svg" alt="Date"> {{ dayOfWeek }}, {{ months[date_split[1]] }} {{ date_split[2] }}, {{ date_split[0] }}</span>
+        <span class="date" *ngIf="isStudentPage()"> <img src="..\assets\IconSet\Icon=Guest_calendar.svg" alt="Date"> {{ dayOfWeek }}, {{ months[stud_date_arr[1]*1] }} {{ stud_date_arr[0] }}, {{ stud_date_arr[2] }}</span>
+        <div class="hostel-meal">
+            <span class="hostel" *ngIf="!isStudentPage()"> <img src="..\assets\IconSet\Icon=Hostel.svg" alt="Hostel"> Hostel {{ data[3] }}</span>
+            <span class="hostel" *ngIf="isStudentPage()"> <img src="..\assets\IconSet\Icon=Hostel.svg" alt="Hostel"> Hostel {{ data[1] }}</span>
+            <span class="meal"> <img src="..\assets\IconSet\Icon=Food-Dish.svg" alt="Hostel"> {{ meal }}</span>
+        </div>
+    </div>
+    <div class="cancel-booking" *ngIf="isStudentPage()">
+        <app-guest-status-button 
+            [meal]="meal" 
+            [date]="date" 
+            [guestHostel]="data[1]" 
+            [guestStatus]="data[4] == true"
+            (updateList)="onUpdateList()">
+        </app-guest-status-button>
+    </div>
+</div>

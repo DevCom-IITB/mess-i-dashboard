@@ -6,6 +6,7 @@ import { RebateRequest } from 'src/app/interfaces';
 import { StudentdataService } from 'src/app/studentdata.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DurationBoxComponent } from 'src/app/utils/duration-box/duration-box.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class StuRebCardComponent implements OnInit {
   public p_request_recieved: string;
   public p_rebate_start: string;
   public p_rebate_end: string;
+  public p_rebate_days: string;
   public p_rebate_reason: string;
   public p_rebate_comment: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -25,7 +27,8 @@ export class StuRebCardComponent implements OnInit {
   // @Input() public isApproved: boolean = false;
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/rebate-admin","/studentcard"];
-  @Input() public approval_state: string = "pending";
+  @Input() public approval_state: string = "accepted";
+  @Input() public toggle: boolean; // used to toggle the view of the card
   @Output() public updateList = new EventEmitter();
 
   constructor(private dialog:MatDialog,private data_service:StudentdataService, private auth_service:AuthService, private router: Router, public auth:AuthService) { }
@@ -41,7 +44,17 @@ export class StuRebCardComponent implements OnInit {
     this.p_rebate_reason = "";
     this.p_rebate_reason = this.rebate_request.reason;
     this.p_rebate_comment = this.rebate_request?.comment ?? "";
-    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    this.p_rebate_days = this.noOfDays(this.rebate_request.start, this.rebate_request.end);
+    this.toggle = this.rebate_request.official;
+    this.on_admin_page = this.adminRoutes.some(route => this.router.url.includes(route));
+    
+    console.log({
+    approval_state: this.approval_state,
+    is_student: this.auth.isStudent(),
+    on_admin_page: this.on_admin_page,
+    is_student_page: this.isStudentPage(),
+    current_url: this.router.url
+  });
   }
 
   readableDate(inp: Date): string{
@@ -78,12 +91,12 @@ export class StuRebCardComponent implements OnInit {
   }
 
   updateAcceptedRebate(startDate: string, endDate: string){
-    // let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
+    //let rebate_id: string = this.generateRebateID(startDate,endDate,this.auth_service.getRoll());
     let rebate_id : string = this.rebate_request.id;
     // initialise a pop out of duration box with the rebate data
     this.dialog.open( DurationBoxComponent,{
     data:{
-          // roll: roll,
+          roll: this.rebate_request.roll,
           id : rebate_id,
           reason : this.rebate_request.reason,
           start_date: this.rebate_request.start,
@@ -115,7 +128,63 @@ export class StuRebCardComponent implements OnInit {
   }
   isStudentPage() {
     return this.auth.isStudent() && !this.on_admin_page;
+    // return true;
+  }
+  noOfDays(start: string, end: string): string {
+  try {
+    // Convert DD-MM-YYYY to a format JavaScript can parse
+    const convertToDateObj = (dateStr: string) => {
+      const [day, month, year] = dateStr.split('-').map(Number);
+      return new Date(year, month - 1, day);
+    };
+    
+    let startDate = convertToDateObj(start);
+    let endDate = convertToDateObj(end);
+    
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.log("Invalid date conversion:", start, end);
+      return "0";
+    }
+    
+    let diff = Math.abs(endDate.getTime() - startDate.getTime());
+    let diffDays = 1 + Math.ceil(diff / (1000 * 3600 * 24));
+    
+    console.log(`Start: ${startDate}, End: ${endDate}, Diff days: ${diffDays}`);
+    return diffDays.toString();
+  } catch (e) {
+    console.error("Error calculating days:", e, "for dates:", start, end);
+    return "0";
+  }
+}
+  onToggleChange(event : MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    this.rebate_request.official = isChecked;
+    console.log('Toggle state:', this.toggle);
   }
 
+  isOnMobile(): boolean {
+    return window.innerWidth <= 431;
+  }
+
+  // Update isBeforeRebateStart() to always return true on mobile
+  isBeforeRebateStart(): boolean {
+    if (this.isOnMobile()) {
+      return true;
+    }
+    
+    // Original logic for desktop
+    if (!this.rebate_request?.start) return false;
+    
+    try {
+      const [day, month, year] = this.rebate_request.start.split('-').map(Number);
+      const rebateStart = new Date(year, month - 1, day);
+      const today = new Date();
+      return today < rebateStart;
+    } catch (e) {
+      console.error('Error parsing date:', e);
+      return true; // Default to showing buttons if there's an error
+    }
+  }
 }
 

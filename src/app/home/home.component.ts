@@ -10,35 +10,48 @@ import { StudentdataService } from '../studentdata.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  app_bar_suffix : string = "Home";
   public pending_rebates: RebateRequest[] = new Array();
-  devices:any;
-  // devices = [
-  //   {
-  //     hostel: 'Hostel A',
-  //     id: 123,
-  //     sync: '2024-08-15 10:00 AM',
-  //     version: '1.0.3',
-  //     cards: ['Card1', 'Card2', 'Card3']
-  //   },
-  //   {
-  //     hostel: 'Hostel B',
-  //     id: 456,
-  //     sync: '2024-08-15 10:05 AM',
-  //     version: '1.0.4',
-  //     cards: ['Card4', 'Card5', 'Card6']
-  //   },
-  //   {
-  //     hostel: 'Hostel C',
-  //     id: 789,
-  //     sync: '2024-08-15 10:10 AM',
-  //     version: '1.0.5',
-  //     cards: ['Card7', 'Card8', 'Card9']
-  //   }
-  // ];
+  public on_admin_page:boolean ;
+  public isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
+  private adminRoutes: string[] = [];
+  mobile_cards: any[] = [];
+  devices:any[] = [];
   date:string;
 
-  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router) { 
+  constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router,private auth:AuthService) {
+    this.mobile_cards = [
+    {
+      title: 'Rebates',
+      redirect: '/rebate-admin',
+      description: 'Review applications for rebates',
+      role:'rebate'
+    },
+    {
+      title: 'Guest List',
+      redirect: '/guest-admin',
+      description: 'Meal coupons for your hostel',
+      role:'staff'
+    },
+    {
+      title: "Students' List",
+      redirect: '/list',
+      description: 'List of students and their details',
+      role:'staff'
+    },
+    {
+      title: 'Statistics',
+      redirect: '/statistics',
+      description: 'Watch your meals consumption',
+      role: this.auth_service.isStaff() ? 'staff' : 'student'
+    },
+    {
+      title: 'Devices',
+      redirect: '/device-list',
+      description: 'List of connected devices',
+      role: 'staff'
+    },
+  ]; 
   }
 
   ngOnInit(): void {
@@ -47,6 +60,9 @@ export class HomeComponent implements OnInit {
     if(!this.auth_service.isLoggedIn()){
       this.router.navigate(['login'])
     }
+    this.on_admin_page = this.adminRoutes.some(sub => this.router.url.startsWith(sub));
+    this.isAdmin = this.auth.isAdmin();
+    // this.on_admin_page = false;
   }
 
   async initialise(){
@@ -59,10 +75,15 @@ export class HomeComponent implements OnInit {
   
 
     this.data_service.getDevices().then((res)=>{
+    if (Array.isArray(res)) {
       this.devices = res;
-    }).catch((e)=>{
-      console.log(e);
-    });
+    } else {
+      console.error('Expected devices to be an array but got:', res);
+      this.devices = []; 
+    }
+  }).catch((e)=>{
+    console.log(e);
+  });
   }
 
   updateList(rebateID: any){
@@ -70,30 +91,45 @@ export class HomeComponent implements OnInit {
       return reb.id != rebateID;
     })
   }
+  shouldDisplay(role: string): boolean {
+    switch (role) {
+      case 'rebate': return this.auth_service.isRebate();
+      case 'staff': return this.auth_service.isStaff();
+      case 'studentOrStaff': return this.auth_service.isStudent() || this.auth_service.isStaff();
+      default: return false;
+    }
+  }
 
   populateRebates(response: any): void{
     this.pending_rebates = response;
-  } 
+  }
+  redirect(card:any): void{
+    this.router.navigate([card.redirect]);
+  }
+  isStudentPage(): boolean {
+    return this.auth.isStudent() && !this.on_admin_page;
+    // return true;
+  }
 
-  // dummyInitialise(): void{
-  //   this.pending_rebates.push({
-  //     student:{
-  //       id: "22b0045",
-  //       name: "Student1",
-  //     } as Student,
-  //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
-  //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),
-  //     rebate_duration_end: new Date(Date.UTC(2022, 11, 29, 11, 23, 22)),
-  //   } as RebateRequest);
-  //   this.pending_rebates.push({
-  //     student:{
-  //       id: "22b0433",
-  //       name: "Student2",
-  //     } as Student,
-  //     recieve_date: new Date(Date.UTC(2022, 12, 28, 11, 23, 22)),
-  //     rebate_duration_start: new Date(Date.UTC(2022, 10, 25, 11, 23, 22)),
-  //     rebate_duration_end: new Date(Date.UTC(2022, 11, 29, 11, 23, 22)),
-  //   } as RebateRequest);
-  // }
-
+  logout(){
+    this.auth.logoutUser().subscribe(
+      (response) => {
+        this.auth.logged_in=false;
+        this.auth.token="";
+        sessionStorage.removeItem("mess-i-token")
+        sessionStorage.removeItem("mess-i-admin")
+        sessionStorage.removeItem("mess-i-staff")
+        sessionStorage.removeItem("mess-i-roll")
+        sessionStorage.removeItem("mess-i-student")
+        sessionStorage.removeItem("mess-i-rebate")
+        sessionStorage.removeItem("mess-i-sso")
+        this.auth.navigateToLogin();
+      },
+      (error) => {
+        // Print error message
+        console.error('Error occurred while logging out and calling API:', error);
+      }
+    );
+  
+  }
 }

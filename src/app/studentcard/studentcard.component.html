@@ -1,28 +1,34 @@
-<div style="background-color:#FFFCF4; min-height: 100vh;" class="container-fluid">
-    <h1>Student Data</h1>
+<div class="container-fluid">
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
+    <div id="header-container">
+        <h1> <img src="..\assets\IconSet\Icon=BackArrow.svg" alt="back-arrow" role="button" (click)="goBack()"> Student Data</h1>
+        <div id="csv-download-container" role="button" (click)="downloadCSV()">
+        CSV <img src="\assets\IconSet\Icon=Download.svg" alt="downlaod-icon">
+        </div>
+    </div>
     <div style="justify-content:center ;">
         <div id="studentcard" >
-            <div>
+            <div id="pfp-div">
                 <img class="img-fluid rounded-start" [src]="studentImage" alt="Place image title" *ngIf="!isImageLoading">
             </div>
             <div class="cardcontainer">
-                <h5 id="name">{{student.name}}</h5>
+                <span id="name">{{ student.name }}</span>
                 <div class="rollnohostel">
                     <div id="rollandhostel">
-                        <p id="rollno">Roll no:</p> 
+                        <!-- <p class="rollno" id="rollno1">Roll no:</p> -->
+                        <p class="rollno" id="rollno2">Roll no.</p> 
                         <p id="hostel" style="margin-top:0px;"> Hostel, Room no:<p>
                     </div>                                      
                     <div class="space"> 
-                        <p id="studrollno">{{student.id}}</p>
-                        <p>Hostel {{student.hostel}} {{student.room}} </p>
+                        <p id="studrollno">{{ student.id }}</p>
+                        <p id="studhostel">Hostel {{ student.hostel }} {{ student.room }} </p>
                     </div>
                 </div>
-                <br> 
                 <div class="test">
-                  <p class="tgl">Status of the card: </p> 
+                  <p class="tgl">Card Status: </p> 
                   <app-card-status-button [rollNumber]="rollNumber" [cardStatus]="student.card_status" ></app-card-status-button>
                 </div>
-                <div>
+                <div id="prev-button-container">
                   <button class="reb-button" (click)="openDialog(rollNumber)">
                     Prev Rebates
                   </button>
@@ -31,9 +37,69 @@
         </div>
     </div>
     <br>
-    
-    <form #data="ngForm" (ngSubmit)="getMonthData(data)" class="form-inline">
-        <div class="input-group mb-6" style="max-width: 80%; ;">
+    <div class="filter-tab-container">
+        <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('rebates')">Rebates</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('meals')">Meals</button>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+            <div id="range-date-container"> 
+                <mat-form-field id="range-date">
+                    <!-- <mat-label>Enter a date range</mat-label> -->
+                    <mat-date-range-input [rangePicker]="rangePicker">
+                        <input matStartDate placeholder="Start date" [formControl]="startDate"/>
+                <input matEndDate placeholder="End date" [formControl]="endDate"/>
+                    </mat-date-range-input>
+                    <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
+                    <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
+                    <mat-date-range-picker #rangePicker>
+                        <mat-date-range-picker-actions>
+                        <button mat-button matDateRangePickerCancel (click)="clearFilters()">Clear</button>
+                        <button mat-raised-button matDateRangePickerApply (click)="applyDateFilter()">Apply</button>
+                        </mat-date-range-picker-actions>
+                    </mat-date-range-picker>
+                </mat-form-field>
+                <div id="official-toggle-container"> <!-- Only for mobile view -->
+                    <p>Official</p>
+                    <mat-slide-toggle id="official-toggle" [(ngModel)]="toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
+                </div>
+            </div>
+            <div class="rebate-card-container" *ngFor="let p_rebate of pending_rebates">
+                <app-pd-rebate-card [rebate_request]="p_rebate" (updateList)="updateList($event)" *ngIf="!toggle || (toggle && p_rebate.official)"></app-pd-rebate-card>
+            </div>
+            <div class="rebate-card-container" *ngFor="let a_rebate of accepted_rebates">
+                <app-stu-reb-card [rebate_request]="a_rebate" approval_state="accepted" *ngIf="!toggle || (toggle && a_rebate.official)"></app-stu-reb-card>
+            </div>
+            <div class="rebate-card-container" *ngFor="let r_rebate of rejected_rebates">
+                <app-stu-reb-card [rebate_request]="r_rebate" approval_state="rejected" *ngIf="!toggle || (toggle && r_rebate.official)"></app-stu-reb-card>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" >
+            <form #mobileData="ngForm" (ngSubmit)="getMonthData(mobileData)" class="form-inline">
+                <div class="input-group mb-6" style="max-width: 80%; ;">
+                    <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
+                        <option value="" disabled selected>Month</option>
+                        <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
+                    </select>
+                    <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
+                        <option value="" disabled selected>Year</option>
+                        <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Get</button>
+                </div>
+            </form>
+            <app-table-component *ngIf="mess_data" [data]="mess_data" id="mobile-table"></app-table-component>
+        </div>
+    </div> 
+
+    <form #desktopData="ngForm" (ngSubmit)="getMonthData(desktopData)" class="form-inline">
+        <div class="input-group mb-6" id="desktop-date-picker">
             <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
                 <option value="" disabled selected>Select a Month</option>
                 <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
@@ -42,8 +108,8 @@
                 <option value="" disabled selected>Select a Year</option>
                 <option *ngFor="let year of [0,1,2]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
             </select>
-            <button type="submit" class="btn btn-primary">Get</button>
+            <button type="submit" class="btn btn-primary" id="desktop-get-btn">Get</button>
         </div>
     </form>
-    <app-table-component *ngIf="mess_data" [data]="mess_data"></app-table-component>
+    <app-table-component *ngIf="mess_data" [data]="mess_data" id="desktop-table"></app-table-component>
 </div>

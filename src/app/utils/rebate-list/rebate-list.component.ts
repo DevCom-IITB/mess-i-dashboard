@@ -40,7 +40,7 @@ export class RebateListComponent implements OnInit {
       this.populateRebates(res);
     }).catch((e)=>{
       //FIXME: Remove the console log, maybe log somewhere else
-      // console.log(e);
+      console.log(e);
     });
   }
 
@@ -64,7 +64,6 @@ export class RebateListComponent implements OnInit {
   populateRebates(response: any): void{
     this.pending_rebates = response.pending_rebate;
     this.accepted_rebates = response.accepted_rebate;
-    // console.log(this.accepted_rebates);
     this.rejected_rebates = response.rejected_rebate;
   }
 
