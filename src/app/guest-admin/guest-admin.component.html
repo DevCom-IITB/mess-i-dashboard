@@ -122,7 +122,8 @@
       </div>
       
     </div>
-    <p  *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
+    <p id="no-guest-indicator-desktop" *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
+    <p id="no-guest-indicator-mobile" *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
   </div>
 
 </div>

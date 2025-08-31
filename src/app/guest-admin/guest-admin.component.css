@@ -208,7 +208,7 @@ button:hover{
         padding: 4px 19px 4px 19px;
         border: none;
         background-color: #ffffff;
-        font-size: 12px;
+        font-size: 1.5vw;
         font-family: "Open Sans";
         font-weight: 500;
         color: #5f6368;
@@ -217,7 +217,7 @@ button:hover{
     .nav-tabs .nav-link {
         font-family: 'Open Sans', sans-serif; 
         font-weight: 600; 
-        font-size: 16px; 
+        font-size: 3.5vw; 
         color: #bebebe; 
         transition: all 0.2s ease;
     }
@@ -232,7 +232,7 @@ button:hover{
     .btn-box button.active{
         background-color: #ffce5d;
         color: #28272c;
-        font-size: 14.4px;
+        font-size: 3.5vw;
         font-weight: 600;
         transition: all 0.15s ease-in-out;
     }
@@ -288,5 +288,23 @@ button:hover{
     #no-guest-indicator-mobile{
         display: flex;
         color: #ffffff;
+    }
+    form.form-inline {
+        display: flex;
+        flex-direction: column;
+    }
+    .input-group.mb-3 {
+        order: 1; 
+        margin-bottom: 16px !important;
+    }
+    ul.nav-tabs#myTab {
+        order: 2;
+    }
+    .input-group.mb-3 {
+        margin-top: 8px;
+    }
+    ul.nav-tabs#myTab {
+        margin-top: 8px !important;
+        margin-bottom: 16px !important;
     }
 }

@@ -83,6 +83,7 @@ export class GuestAdminComponent implements OnInit {
     this.currentFormData = data.form.value;
     this.guestHistory = {}
     if (data.form.value.date && data.form.value.meal) {
+      console.log("Fetching guest list for:", data.form.value);
       this.guestService.getGuestHostelData(
         data.form.value.hostel,
         this.guestService.resolveDateFormat(data.form.value.date),
