@@ -118,7 +118,7 @@ export class PlotlyService {
         'resetScale'
       ],
     };
-    Plotly.newPlot(div_identifier,initialTrace, layout,config,{responsive: true});
+    Plotly.newPlot(div_identifier,initialTrace, layout,config);
     Plotly.animate(div_identifier, 
     { data: trace },
     {
