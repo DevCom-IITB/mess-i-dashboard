@@ -16,28 +16,7 @@ export class HomeComponent implements OnInit {
   public isAdmin: boolean = false; // Assuming admin status is determined by the AuthService
   private adminRoutes: string[] = [];
   mobile_cards: any[] = [];
-  devices:any = [
-    {
-      hostel: 'Brahmaputra',
-      id: '001',
-      sync: '2025-04-22 14:30',
-      version: '2.1.5',
-      cards: 42
-    },
-    {
-      hostel: 'Siang',
-      id: '002',
-      sync: '2025-04-22 15:45',
-      version: '2.1.5',
-      cards: 37
-    },
-    {
-      hostel: 'Umiam',
-      id: '003',
-      sync: '2025-04-22 10:15',
-      version: '2.1.4',
-      cards: 53
-    }];
+  devices:any[] = [];
   date:string;
 
   constructor(private data_service:StudentdataService, public auth_service: AuthService, private router: Router,private auth:AuthService) {
@@ -64,7 +43,7 @@ export class HomeComponent implements OnInit {
       title: 'Statistics',
       redirect: '/statistics',
       description: 'Watch your meals consumption',
-      role: 'studentOrStaff'
+      role: this.auth_service.isStaff() ? 'staff' : 'student'
     },
     {
       title: 'Devices',
@@ -96,10 +75,15 @@ export class HomeComponent implements OnInit {
   
 
     this.data_service.getDevices().then((res)=>{
+    if (Array.isArray(res)) {
       this.devices = res;
-    }).catch((e)=>{
-      console.log(e);
-    });
+    } else {
+      console.error('Expected devices to be an array but got:', res);
+      this.devices = []; 
+    }
+  }).catch((e)=>{
+    console.log(e);
+  });
   }
 
   updateList(rebateID: any){
