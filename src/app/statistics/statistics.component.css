@@ -161,9 +161,16 @@ li.text-stats-item {
     align-items: center !important;
     width: 100% !important; 
     margin: 0 auto !important;
-    overflow-x: visible !important;
+    overflow-x: auto !important;
     box-sizing: border-box;
     padding: 0;
+    max-width: 100vw;
+  }
+  
+  #mess_data .js-plotly-plot, 
+  #student_data .js-plotly-plot {
+    max-width: 100%;
+    min-width: 300px; 
   }
   #display-data{
     color: #ffffff;
