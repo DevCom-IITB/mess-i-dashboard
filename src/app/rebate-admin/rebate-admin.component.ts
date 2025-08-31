@@ -208,4 +208,23 @@ export class RebateAdminComponent implements OnInit {
     // Pass startDate, endDate, and official flag
     this.initialiseWithFilter([range.startDate, range.endDate, this.toggle]);
   }
+  
+  hasOfficialRebates(rebates: RebateRequest[]): boolean {
+    if (!rebates || rebates.length === 0) {
+      return false;
+    }
+    return rebates.some(rebate => rebate && rebate.official === true);
+  }
+
+  shouldShowNoPendingMessage(): boolean {
+    return this.pending_rebates.length === 0 || (this.toggle && !this.hasOfficialRebates(this.pending_rebates));
+  }
+
+  shouldShowNoAcceptedMessage(): boolean {
+    return this.accepted_rebates.length === 0 || (this.toggle && !this.hasOfficialRebates(this.accepted_rebates));
+  }
+
+  shouldShowNoRejectedMessage(): boolean {
+    return this.rejected_rebates.length === 0 || (this.toggle && !this.hasOfficialRebates(this.rejected_rebates));
+  }
 }

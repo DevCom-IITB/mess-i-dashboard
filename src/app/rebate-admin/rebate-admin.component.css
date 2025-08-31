@@ -38,6 +38,17 @@
     color: #444;
     background-color: rgba(255, 196, 75, 0.1); 
 }
+.no-rebates-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 16px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-family: "Open Sans";
+    font-weight: 600;
+}
 
 @media screen and (max-width: 431px){
     .main-container{
@@ -212,5 +223,17 @@
     }
     :host ::ng-deep .mdc-switch__ripple::after{
         background-color: #ffc24b !important;
+    }
+    .no-rebates-message {
+        margin: 10px 0;
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        padding-left: auto;
+        padding-right: auto;
+        font-size: 3.5vw;
+    }
+    .no-rebates-message p{
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 }
