@@ -156,21 +156,26 @@ li.text-stats-item {
     display: none;
   }
   .chart-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important; 
-    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
     overflow-x: auto !important;
-    box-sizing: border-box;
-    padding: 0;
-    max-width: 100vw;
+    padding: 0 !important;
+    margin: 0 auto !important;
   }
   
   #mess_data .js-plotly-plot, 
-  #student_data .js-plotly-plot {
-    max-width: 100%;
-    min-width: 300px; 
+  #student_data .js-plotly-plot,
+  .chart-container .js-plotly-plot,
+  .chart-container .plot-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .chart-container svg,
+  #mess_data svg,
+  #student_data svg {
+    width: 100% !important;
+    max-width: 100% !important;
   }
   #display-data{
     color: #ffffff;
