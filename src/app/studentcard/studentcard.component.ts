@@ -79,22 +79,22 @@ export class StudentcardComponent implements OnInit {
   }
 
   openDialog(roll:any) :void {
-    console.log(roll)
-    this.dialog.open(StuRebateDialogComponent,{
-    data:{
-      roll: roll
+    console.log(roll);
+    this.service.getAdminRebatesRoll(roll).then((res:any) => {
+      this.dialog.open(StuRebateDialogComponent, {
+        data: {
+          accepted_rebates: res.accepted_rebate,
+          rejected_rebates: res.rejected_rebate,
+          pending_rebates: res.pending_rebate,  
+          roll: roll 
         }
-    })
-    // this.data_service.getAdminRebatesRoll(roll).then((res:any) => {
-    // this.service.getAdminRebatesRoll(roll).then((res:any) => {
-    //     this.dialog.open(StuRebateDialogComponent,{
-    //     data:{accepted_rebates : res.accepted_rebate,
-    //           rejected_rebates: res.rejected_rebate,
-    //           pendeing_rebates: res.pending_rebate}
-    // })
-    // }).catch((e)=>
-    // console.log(e))
-
+      });
+    }).catch((e) => {
+      console.log("Error fetching rebate data:", e);
+      this.dialog.open(StuRebateDialogComponent, {
+        data: { roll: roll }
+      });
+    });
   }
 
 
