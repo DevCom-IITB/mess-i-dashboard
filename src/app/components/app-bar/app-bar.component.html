@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="left-section">
+        <img src="././assets/IconSet/Icon=LogoIcon.svg" alt="logo" id="logo">
+        <div class="title-section">
+            <span id="title">Mess-i</span>
+            <span id="suffix">{{ suffix }}</span>
+        </div>
+    </div>
+    
+    <img src="././assets/IconSet/Icon=HomeIcon.svg" alt="home" id="home-icon" role="button" (click)="goToHome()" *ngIf="auth.isLoggedIn()">
+</div>

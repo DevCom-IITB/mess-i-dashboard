@@ -1,0 +1,57 @@
+.container {
+    background-color: #28282B;
+    color:#FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    box-shadow: 0 4px 4px 0px #202020;
+    z-index: 1000;
+    margin: 0;
+    padding: 0 600%; /* This creates space from screen edges */
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+#logo{
+    flex-shrink: 0;
+}
+
+.title-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#title{
+    font-weight: 600;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    line-height: 1.2;
+}
+
+#suffix{
+    font-size: 12px;
+    color: #BEBEBE;
+    margin-top: 2px;
+}
+
+#home-icon{
+    flex-shrink: 0; 
+}
+
+@media screen and (min-width: 431px){
+    .container{
+        display: none
+    }
+}

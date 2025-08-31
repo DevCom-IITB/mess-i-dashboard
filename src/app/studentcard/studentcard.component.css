@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 .rollnohostel{
   margin-top:1rem;
   display:flex;
@@ -58,12 +59,15 @@ p.tgl{
   margin-left: 6vh;
 }
 .container-fluid{
+  min-height: 100vh;
+  background-color:#FFFCF4;
   padding: 4%;
 }
 .test{
   display: flex;
   align-items: flex-start;
-  padding-left: 0%
+  padding-left: 0%;
+  margin-bottom: 1vh;
 }
 .form-select{
   margin: 2vh;
@@ -76,9 +80,9 @@ p.tgl{
   z-index: 2;
   text-align: center;
   text-decoration: none;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   cursor: pointer;
-  margin-top: 12px;
+  /* margin-top: 12px; */
   user-select: none;
   height: 36px;
   border: 1px solid transparent;
@@ -148,13 +152,272 @@ border-radius: 50000px;
 }
 .reb-button {
   padding: 10px 16px;
-  background-color: #FFC42B; /* Change to your preferred background color */
-  color: #28282B; /* Text color */
+  background-color: #FFC42B;
+  color: #28282B; 
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Smooth hover effect */
+  transition: background-color 0.3s; 
 }
 .reb-button:hover {
-  background-color: #2980b9; /* Change to your preferred hover color */
+  background-color: #2980b9; 
+}
+#myTab, #myTabContent, #csv-download-container{
+  display: none;
+}
+#desktop-table {
+    display: block;
+}
+@media screen and (max-width: 431px){
+  *{
+    font-family: "Open Sans", "sans-serif";
+  }
+  .container-fluid{
+    position: relative;
+    top: 85px;
+  }
+  #rollno1,#desktop-get-btn,#desktop-date-picker,.reb-button,#desktop-table{
+    display: none;
+  }
+  .form-inline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-select{
+    background-color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px !important;
+    margin: 0px;
+  }
+  .input-group{
+    width: 92vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px !important;
+  }
+  .btn-primary{
+    color: #28272c;
+    background-color: #ffffff;
+    border-radius: 8px !important;
+    height: 40px;
+    margin: 0px;
+  }
+  .container-fluid{
+    padding: 0% 2%;
+    background-color: #28272c;
+  }
+  h1{
+    font-family: "Open Sans", "sans-serif";
+    color: #ffce5d;
+  }
+  #pfp-div{
+    width: 110px !important;
+    height: 110px;
+  }
+  #pfp-div img{
+    width: 110px !important;
+    height: 110px !important;
+  }
+  #studentcard{
+    max-width: 100vw;
+    display: flex;
+    background-color: #FFF8E8;
+    padding: 0%;
+    margin: 0%;
+    color: #ffffff ;
+    background-color: #28272c;
+  }
+  .cardcontainer{
+    margin-left: 0vh;
+    padding-left: 2vw;
+    height: 110px;
+    width: 200px;
+    flex: 1;
+    text-align: left;
+  }
+  #name{
+    font-size: 4vw;
+    font-weight: 700;
+  }
+  .space{
+    margin: 0%;
+    padding: 0%;
+    position: relative;
+    bottom: 6px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+  #rollandhostel{
+    position: relative;
+    bottom: 6px;
+    color: #ffffff;
+  }
+  #studrollno,.rollno,#hostel,#studhostel{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 3.75vw;
+  }
+  #studrollno{
+    position: relative;
+    right: 62px;
+  }
+  #studhostel{
+    position: relative;
+    left: 4px;
+  }
+  .rollnohostel {
+  margin-top: 0.5rem; 
+}
+  .test {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    top:-20px;
+    height: auto;
+    position: static;
+    margin-top: 0px;
+    margin-bottom: 0.2vh;
+  }
+  app-card-status-button, .status-button {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    /* If needed, add: */
+    display: flex;
+    align-items: center;
+  }
+  #myTab{
+    display: flex;
+    border-bottom: 3px solid #ffce5d;
+    position: relative;
+    /* top: 4vh; */
+  }
+  ul{
+    margin-bottom: 16px;
+  }
+  #myTabContent{
+    display: block;
+    padding-top: 2%;
+    position: relative;
+    /* top: 4vh; */
+  }
+  .nav-link{
+    border: none;
+    background-color: #ffffff;
+    width: 48vw;
+    height: 36px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-family: "Open Sans", "sans-serif";
+    font-size: 5vw !important;
+    color: #000000;
+    font-weight: 600;
+  }
+  .nav-link.active{
+    background-color: #ffce5d;
+    font-family: "Open Sans", "sans-serif";
+    font-size: 5vw;
+    color: #000000;
+    font-weight: 600;
+  }
+  .rebate-card-container{
+    margin-bottom: 18px;
+  }
+  #range-date{
+      width: 73.6vw;
+      border: none;
+      border-radius: 50px 10px 10px 50px;
+      display: block;
+  }
+  #calender-icon{
+      position: absolute;
+      bottom: 14.91px;
+      right: -40px;
+      z-index: 1;
+      size: scale(2);
+  }
+  #calender-icon:hover{
+      cursor: pointer;
+  }
+  :host ::ng-deep .mat-mdc-text-field-wrapper{
+      background-color: #ffffff !important;
+      border-radius: 50px 10px 10px 50px;
+  }
+  :host ::ng-deep .mat-mdc-form-field-bottom-align{
+      display: none !important;
+  }
+  :host ::ng-deep .mat-start-date, .mat-end-date{
+    font-size: 3vw;
+  }
+  #official-toggle{
+      display: flex;
+  }
+  #official-toggle-container{
+      width: 110px;
+      height: 56px;
+      z-index: 0;
+      background-color: #ffffff;
+      border-radius: 10px 50px 50px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+  }
+  #official-toggle-container p{
+      margin-bottom: 0px;
+      font-family: "Open Sans";
+      font-size: 3.5vw;
+      font-weight: 600;
+  }
+  #range-date-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 1vh;
+  }
+  :host ::ng-deep .mdc-switch__track::after{
+      padding: 2px;
+      background-color: #ffc24b !important;
+  }
+  :host ::ng-deep .mdc-switch__track::before{
+      background-color: #ffffff !important;
+      border: 2px solid black;
+  }
+  :host ::ng-deep .mdc-switch__icons{
+      background-color: black !important;
+      border-radius: 50px;
+      margin: 0px;
+  }
+  :host ::ng-deep .mdc-switch__ripple::after{
+      background-color: #ffc24b !important;
+  }
+  #mobile-table{
+    margin-top: 18px;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+  #csv-download-container{
+    font-family: "Open Sans";
+    font-weight: 600;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 32px;
+    position: static;
+    font-size: 3.5vw;
+  }
+  #header-container{
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn{
+    font-size:4vw;
+  }
 }

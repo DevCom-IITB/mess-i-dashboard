@@ -1,5 +1,13 @@
 <div class="container">
+    <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
     <h1>Welcome To Mess-I :)</h1>
+    <div id="btn-div">
+        <button class="mobile-landing-page-btn" (click)="goToHome()">
+            <span *ngIf="auth.isLoggedIn()">Go to Home Page</span>
+            <span *ngIf="!auth.isLoggedIn()">LogIn</span>
+        </button>
+        <button class="mobile-landing-page-btn" *ngIf="auth.isLoggedIn()" (click)="logout()">LogOut</button>
+    </div>
     <div class="section">
         <div class="section-info rebate-info">
             <h2>For Rebate Application</h2>

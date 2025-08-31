@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { GuestdataService } from '../guestdata.service';
+import { FilterService } from '../filter.service';
+// import { exists } from 'fs';
+// import { exists } from 'fs';
 
 @Component({
   selector: 'app-guest-admin',
@@ -10,26 +13,33 @@ import { GuestdataService } from '../guestdata.service';
 })
 export class GuestAdminComponent implements OnInit {
 
+  app_bar_suffix: string = "Guest Booking";
+  currTab: string = 'empty';
   allowedHostels:boolean[] = new Array<boolean>(22);
   guestHistory:any = {exists:true, loaded:false};
+  meal: Array<string> = ['breakfast', 'lunch', 'snacks', 'dinner'];
   headers = ['Token No.','Roll No.','Name','Hostel']
   isAdmin = false;
   currentFormData: any = null;
 
-  constructor(private auth:AuthService, private guestService:GuestdataService, private router:Router) {
+  constructor(private filter_service:FilterService, private auth:AuthService, private guestService:GuestdataService, private router:Router) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
     }
     this.isAdmin = auth.isAdmin()
+    // this.isAdmin = true;
   }
 
   ngOnInit(): void {
     this.getGuestHostel()
-  }
+    this.getGuestList({});
+    }
 
   getGuestHostel(){
+    console.log("Fetching allowed hostels for guest booking...");
     this.guestService.getGuestHostels().then((res:any)=>{
-      for(let i=1; i<this.allowedHostels.length; i++){
+      // for(let i=1; i<this.allowedHostels.length; i++){
+      for(let i=1; i<36; i++){
         this.allowedHostels[i] = false;
         if(res.includes(`H${i}`)){
           this.allowedHostels[i] = true;
@@ -38,6 +48,7 @@ export class GuestAdminComponent implements OnInit {
           this.allowedHostels[21] = true;
         }
       }
+      //console.log("Allowed hostels for guest booking:", this.allowedHostels);
     }).catch((res) =>{
       console.log(res)
     })
@@ -72,6 +83,7 @@ export class GuestAdminComponent implements OnInit {
     this.currentFormData = data.form.value;
     this.guestHistory = {}
     if (data.form.value.date && data.form.value.meal) {
+      console.log("Fetching guest list for:", data.form.value);
       this.guestService.getGuestHostelData(
         data.form.value.hostel,
         this.guestService.resolveDateFormat(data.form.value.date),
@@ -95,9 +107,25 @@ export class GuestAdminComponent implements OnInit {
       alert("No form data available. Please search again.");
       return;
     }
+    
+    if (!this.currentFormData.date) {
+      alert("Please select a date first.");
+      return;
+    }
+    
+    if (!this.currentFormData.meal) {
+      if (this.currTab && this.currTab !== 'empty') {
+        this.currentFormData.meal = this.currTab;
+      } else {
+        alert("Please select a meal type first.");
+        return;
+      }
+    }
 
     const date = this.guestService.resolveDateFormat(this.currentFormData.date);
     const meal = this.currentFormData.meal;
+    console.log("Updating payment status with:", { roll, date, meal, status });
+    
     const data: any = {
       roll: roll,
       date: date,
@@ -167,6 +195,32 @@ export class GuestAdminComponent implements OnInit {
     
     anchor.download = fileName;
     anchor.click();
+  }
+  updateTab(tabName: string, data: any): void {
+    this.currTab = tabName;
+    if (data.form) {
+      data.form.value.meal = tabName;
+      this.getGuestList(data);
+      console.log(`Tab changed to: ${tabName}, fetching data for ${tabName}`);
+    } else {
+      console.log(`Tab changed to: ${tabName}, but no form data available`);
+      // Ensure currentFormData is updated even if form data is not available
+      if (this.currentFormData) {
+        this.currentFormData.meal = tabName;
+      } else {
+        this.currentFormData = { meal: tabName };
+      }
+    }
+  }
+
+  downloadCSV(data:any) {
+    if(data.loaded){
+      console.log("Data to download:", data);
+      this.filter_service.downloadTableAsCSV(data, "guest_data.csv");
+    }
+    else{
+      alert("No data to download");
+    }
   }
       
 }

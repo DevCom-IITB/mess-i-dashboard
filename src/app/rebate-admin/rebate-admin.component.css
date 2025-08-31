@@ -16,5 +16,216 @@
     margin-bottom: 24px;
 }
 #myTabContent{
-    padding-top: 1em;
+    padding-top: 1em 4%;
+    margin: 24px 0px;
+}
+.filter-actions-container, #myTab2,#range-date, #official-toggle-container{
+    display: none;
+}
+
+.nav-tabs .nav-link {
+    font-family: 'Open Sans', sans-serif; 
+    font-weight: 600; 
+    font-size: 16px; 
+    color: #bebebe; 
+    transition: all 0.2s ease;
+}
+.nav-tabs .nav-link.active {
+    color: #28272c; 
+    font-weight: 700; 
+}
+.nav-tabs .nav-link:hover:not(.active) {
+    color: #444;
+    background-color: rgba(255, 196, 75, 0.1); 
+}
+.no-rebates-message {
+    color: #ffffff;
+}
+
+@media screen and (max-width: 431px){
+    .main-container{
+        background-color: #28272c;
+        padding: 0 2%;
+    }
+
+    .filter-actions-container {
+        display: flex;
+        justify-content: flex-end; 
+        width: 100%;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+    
+    #mobile-clear-btn {
+        background-color: #fffcf4;
+        border-color: #fffcf4;
+        border-radius: 120rem;
+        padding: 8px 16px;
+        font-size: 3.5vw;
+        width: fit-content;
+        color:#28272c;
+        font-size: 'Open Sans', sans-serif;
+        font-weight: 600;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    
+    .rebate-card-container{
+        position: relative;
+        top: 1vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #page-title{
+        display: none;
+    }
+    #myTab{
+        display: none;
+    }
+    #myTab2{
+        display: flex;
+        border-bottom: none;
+        width: 100%;
+        padding: 0; 
+        margin: 0;
+    }
+    #date-filter{
+        display: none;
+    }
+    .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100% !important;
+        min-width: 0;
+        height: 50px;
+        border-radius: 50px;
+        padding: 4px 4px; 
+        margin: 0; 
+        margin-top: 4px;
+        border: none;
+        background-color: #ffffff;
+        font-family: "Open Sans";
+        font-weight: 500;
+        color: #5f6368;
+        transition: all 0.15s ease-in-out;
+        font-size: 4vw;  
+        white-space: nowrap;  
+    }
+    .nav-tabs .nav-link.inactive {
+        font-size: 4vw; 
+    }
+    
+    .nav-tabs .nav-link,
+    .nav-tabs .nav-link.active {
+        font-size: 4vw !important;
+    }
+    .nav-item {
+        width: 33.33%; 
+        display: flex;
+        justify-content: center;
+        padding: 0 4px;  
+    }
+    
+    .btn-box{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 12px;
+        width: 100%;
+        height: 42px;
+        position: relative;
+        top: 0.5vh;
+        padding:0 8px;
+    }
+    .btn-box button.active {
+        background-color: #ffce5d;
+        color: #28272c;
+        font-weight: 600;
+        font-size: 4vw; 
+        transition: all 0.15s ease-in-out;
+        width: 100% !important;
+    }
+    #range-date{
+        width: 265px;
+        border: none;
+        border-radius: 8px;
+        display: block;
+    }
+    
+    #calender-icon{
+        position: absolute;
+        bottom: 14.91px;
+        right: -40px;
+        z-index: 1;
+        size: scale(2);
+    }
+    #calender-icon:hover{
+        cursor: pointer;
+    }
+    :host ::ng-deep .mat-mdc-text-field-wrapper{
+        background-color: #ffffff !important;
+        border-radius: 50px 10px 10px 50px;
+        padding: 0px 0px 0px 20px;
+    }
+    :host ::ng-deep .mat-mdc-form-field-bottom-align{
+        display: none !important;
+    }
+    #official-toggle{
+        display: flex;
+    }
+    #official-toggle-container{
+        width: 120px;
+        height: 56px;
+        z-index: 0;
+        background-color: #ffffff;
+        border-radius: 10px 50px 50px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+    #official-toggle-container p{
+        margin-bottom: 0px;
+        font-family: "Open Sans";
+        font-size: 3.5vw;
+        font-weight: 600;
+    }
+    #range-date-container{
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        top: 1vh;
+        padding-top: 1vh;
+    }
+    :host ::ng-deep .mdc-switch__track::after{
+        padding: 2px;
+        background-color: #ffc24b !important;
+    }
+    :host ::ng-deep .mdc-switch__track::before{
+        background-color: #ffffff !important;
+        border: 2px solid black;
+    }
+    :host ::ng-deep .mdc-switch__icons{
+        background-color: black !important;
+        border-radius: 50px;
+        margin: 0px;
+    }
+    :host ::ng-deep .mdc-switch__ripple::after{
+        background-color: #ffc24b !important;
+    }
+    .no-rebates-message {
+        margin: 10px 0;
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        padding-left: auto;
+        padding-right: auto;
+        font-size: 3.5vw;
+    }
+    .no-rebates-message p{
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
 }

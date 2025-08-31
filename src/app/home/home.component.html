@@ -1,18 +1,63 @@
 <div id="main-container" class="main-container">
-    <div id="pending-rebates-container" class="pending-rebates-container" *ngIf="auth_service.isRebate()">
-        <h1 style="border-bottom:3px solid #FFC42B;">Pending Rebates</h1>
-        <div id="pd-rebate-cards-hscroll" class="pd-rebate-cards-hscroll" *ngIf="pending_rebates.length>0">
-            <div class="rebate-card-wrapper" *ngFor="let reb_req of pending_rebates">
-                <app-pd-rebate-card [rebate_request]="reb_req" (updateList)="updateList($event)"></app-pd-rebate-card>
+    <app-app-bar class="mobile-view" id="app-bar" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
+        <div id="device-container">
+            <h1 style="border-bottom:3px solid #FFC42B;">Devices</h1>
+            <ng-container *ngFor="let device of devices">
+                <app-devices [device]="device"></app-devices>
+            </ng-container>
+        </div>
+        <ng-container *ngFor="let card of mobile_cards">
+            <div *ngIf="shouldDisplay(card.role)">
+                <app-home-card [app_bar_suffix]="app_bar_suffix" [card]="card" (click)="redirect(card)"></app-home-card>
+            </div>
+            </ng-container>        
+        <div class="student-card" *ngIf="isStudentPage()">
+            <div class="student-title">
+                Rebate <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
+            </div>
+            <div class="student-title-description">
+                Going away? Apply and save money.
+            </div>
+            <div class="student-button-container">
+                <button class="button-left" (click)="redirect({redirect: '/rebate'})">
+                    Past Rebates
+                </button>
+                <button class="button-right" (click)="redirect({redirect: '/applyrebate'})">
+                    Apply Rebate
+                </button>                
             </div>
         </div>
-        <h4 style="font-weight:lighter;" *ngIf="pending_rebates.length==0"> All rebates are resolved</h4>
-    </div>
-
-    <div id="device-container">
-        <h1 style="border-bottom:3px solid #FFC42B;">Devices</h1>
-        <ng-container *ngFor="let device of devices">
-            <app-devices [device]="device"></app-devices>
-        </ng-container>
-    </div>
+        <div class="student-card" *ngIf="auth_service.isLoggedIn() && auth_service.isSSOLogin()">
+            <div class="student-title">
+                Guest Booking <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
+            </div>
+            <div class="student-title-description">
+                Pre-book meals for your guests.
+            </div>
+            <div class="student-button-container">
+                <button class="button-left" (click)="redirect({redirect: '/guest-entry'})">
+                    Past Bookings
+                </button>
+                <button class="button-right" (click)="redirect({redirect: '/apply-guest-entry'})">
+                    New Booking
+                </button>
+            </div>
+        </div>
+        <div class="student-card" *ngIf="isStudentPage()">
+            <div class="student-title">
+                Statistics <img class="info-icon" src="..\assets\IconSet\Icon=Info.svg" alt="">
+            </div>
+            <div class="student-title-description">
+                Watch you meals consumption.
+            </div>
+            <div class="student-button-container">
+                <button class="button-left" (click)="redirect({redirect: '/statistics'})">
+                    Check Statistics
+                </button>
+            </div>
+        </div>
+        <div id="mobile-logout-btn">
+            <button (click)="logout()">LogOut</button>
+        </div>
 </div>
+    

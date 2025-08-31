@@ -8,6 +8,7 @@ import { HostListener } from '@angular/core';
 import { Student } from '../interfaces';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-student-list',
@@ -18,16 +19,18 @@ export class StudentListComponent implements OnInit {
   @Output("UpdateNav") updateNav :EventEmitter<any> = new EventEmitter();
   // studentImageMap = new Map();
   //studentInfoList_array = [];
-  studentInfoList : any;
+  studentInfoList : any =[];
   temp : any;
   errMsg = "";
-  // isImageLoading:any;
+  isImageLoading:any;
   entriesPerPage = 9;
   searchText = this.stateService.SearchText;
   totalEntry = 105;
   entryNumber = 1;
   justAfterScrolling = true;
   subject = new Subject();
+  app_bar_suffix : string = "Student List";
+  toggle : boolean = false;
   
   constructor(private stateService: StateService,private service:StudentdataService,private auth:AuthService, private router:Router) {
     if(!this.auth.isLoggedIn()){
@@ -91,6 +94,14 @@ export class StudentListComponent implements OnInit {
     } as Student;
     this.service.put_student_in_cache(temp_student);
     this.router.navigate(['/studentcard'],{queryParams: {rollNum:this.studentInfoList[indexOfStudent][0]}})
+  }
+  downloadCSV(): void {
+    console.log("Download CSV function will be written afterwards");
+  }
+  onToggleChange(event : MatSlideToggleChange): void {
+    const isChecked = event.checked;
+    this.toggle = isChecked;
+    console.log('Toggle state:', this.toggle);
   }
 
 

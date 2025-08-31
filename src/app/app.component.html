@@ -8,7 +8,7 @@
       <img class="mess-i-logo" src="assets/mess-i-logo.png"> <!-- isme issues hai -->
       <a id="nav_home" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/home" >HOME</a>
       <a id="nav_student_list" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/list">STUDENTS' LIST</a>
-      <a id="nav_rebate" class="nav-link nav-items-style" role="button" *ngIf="auth.isStudent()" routerLink="/rebate">REBATES</a> 
+      <a id="nav_rebate" class="nav-link nav-items-style" role="button" *ngIf="isStudent" routerLink="/rebate">REBATES</a> 
       <a id="nav_rebate_admin" class="nav-link nav-items-style" *ngIf="auth.isRebate()" routerLink="/rebate-admin" >REBATES ADMIN</a>
       <a id="nav_guest_admin" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/guest-admin">GUEST ADMIN</a>
       <a id="nav_overview" class="nav-link nav-items-style" *ngIf="auth.isStaff()" routerLink="/overview" >MESS STATS</a>

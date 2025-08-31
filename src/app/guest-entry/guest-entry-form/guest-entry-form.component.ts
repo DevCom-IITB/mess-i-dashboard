@@ -22,6 +22,8 @@ export class GuestEntryFormComponent implements OnInit {
   meal: string='' ;
   date: string='' ;
 
+  app_bar_suffix: string = 'New Guest';
+
   constructor(private auth:AuthService,private router:Router, private guestService:GuestdataService) {
     if(!this.auth.isLoggedIn()){
       this.router.navigate(['login'])
@@ -37,6 +39,7 @@ export class GuestEntryFormComponent implements OnInit {
   ngOnInit(): void {
     this.getGuestHostel()
     this.fetch_guest(this.auth.getRoll())
+    // this.notAVL = true;
   }
 
   async search(evt:Event){

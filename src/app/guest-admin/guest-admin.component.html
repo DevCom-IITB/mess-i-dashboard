@@ -1,68 +1,129 @@
 <div class="container">
+  <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
   <div>
-    <h1 style="border-bottom:3px solid #ffc42b;">Guest Admin</h1>
+    <h1 style="border-bottom:3px solid #ffc42b;" id="heading">Guest Admin</h1>
     <form #guest_data="ngForm" (ngSubmit)="getGuestList(guest_data)" class="form-inline">
+      <input type="hidden" name="selectedMeal" [ngModel]="currTab">
+      <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateTab('breakfast', guest_data)" [value]="meal[0]">Breakfast</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateTab('lunch', guest_data)" [value]="meal[1]">Lunch</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="submit" role="tab" aria-controls="contact" aria-selected="false" (click)="updateTab('snacks', guest_data)" [value]="meal[2]">Snacks</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateTab('dinner', guest_data)" [value]="meal[3]">Dinner</button>
+        </li>
+      </ul>
       <div class="input-group mb-3">
         <input class="form-control" type="date" name="date" ngModel>
+        
         <select *ngIf="isAdmin" class="form-select" name="hostel" id="hostel_dropdown" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
-          <option value="" disabled selected>Select Hostel</option>
+          <option value="" selected>Select Hostel</option>
           <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
             <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
           </ng-container>   
           <option *ngIf="allowedHostels[20]" value="H20">H20</option>
           <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
-        </select>      
-        <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel>
+        </select>
+        <div class="mobile-csv-download" role="button" (click)="downloadCSV(guestHistory)">
+          CSV <img src="..\assets\IconSet\Icon=Download.svg" alt="">
+        </div>     
+        <select class="form-select" name="meal" aria-label="Select a meal" aria-placeholder="Select a meal" ngModel id="meal_dropdown">
           <option value="" disabled selected>Select Meal</option>
           <option *ngFor="let meal of ['Breakfast', 'Lunch', 'Snacks', 'Dinner']; let i=index" [value]="meal.toLowerCase()">{{meal}}</option>
         </select> 
-        <button type="submit">GET</button>
+        <button type="submit" id="get-button">GET</button>
       </div>
     </form>
   </div>
-  
   <hr>
-
   <div>
-    <div *ngIf="isHistoryEmpty(guestHistory['body'])">
+    <div *ngIf="isHistoryEmpty(guestHistory['body'])" id="guest-data-container">
       <div class="d-flex justify-content-end mb-2">
-      <button (click)="getCSV()" class="csv-btn">CSV</button>
-    </div>
-    <table class="table">
-    <thead>
-        <tr>
-          <th *ngFor="let header of guestHistory.headers">{{ header }}</th>
-        </tr>
-      </thead>
-      <tbody>
-    <ng-container *ngFor="let row of guestHistory.body">
-      <tr>
-        <td *ngFor="let cell of row.slice(0, 4)">{{ cell }}</td>
-        <td>
-          <div *ngIf="row[5] === 'no_show'" class="text-danger">
-            <strong>Didn't Show Up</strong>
-          </div>
-          <div *ngIf="row[5] === 'paid'" class="text-success">
-            <strong>Paid</strong>
+        <button (click)="getCSV()" class="csv-btn">CSV</button>
+      </div>
+      
+      <div class="desktop-table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let header of guestHistory.headers">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let row of guestHistory.body">
+              <tr>
+                <td *ngFor="let cell of row.slice(0, 4)">{{ cell }}</td>
+                <td>
+                  <div *ngIf="row[5] === 'no_show'" class="text-danger">
+                    <strong>Didn't Show Up</strong>
+                  </div>
+                  <div *ngIf="row[5] === 'paid'" class="text-success">
+                    <strong>Paid</strong>
+                  </div>
+                  
+                  <div *ngIf="row[5] === 'unpaid'">
+                  <button *ngIf="isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid', currentFormData.hostel)">Paid</button>
+                  <button *ngIf="isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show', currentFormData.hostel)">Didn't Show Up</button>
+                  
+                  <button *ngIf="!isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid')">Paid</button>
+                  <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
+                  </div>
+                  <div *ngIf="row[6]" class="text-danger mt-2">
+                    <small><strong>Note: {{ row[7] }} excessive no-shows</strong></small>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Card View - shown only on mobile -->
+      <div class="guest-cards">
+        <div class="guest-card" *ngFor="let row of guestHistory.body">
+          <div class="guest-card-header">
+            <span class="token-number">Token #{{ row[0] }}</span>
+            <span class="hostel-badge">{{ row[3] }}</span>
           </div>
           
-          <div *ngIf="row[5] === 'unpaid'">
-          <button *ngIf="isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid', currentFormData.hostel)">Paid</button>
-          <button *ngIf="isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show', currentFormData.hostel)">Didn't Show Up</button>
-          
-          <button *ngIf="!isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid')">Paid</button>
-          <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
-        </div>
-        <div *ngIf="row[6]" class="text-danger mt-2">
+          <div class="guest-card-body">
+            <div class="guest-info">
+              <div class="guest-name">{{ row[2] }}</div>
+              <div class="guest-roll">{{ row[1] }}</div>
+            </div>
+            
+            <div class="guest-actions">
+              <div *ngIf="row[5] === 'no_show'" class="status-tag status-noshow">
+                Didn't Show Up
+              </div>
+              <div *ngIf="row[5] === 'paid'" class="status-tag status-paid">
+                Paid
+              </div>
+              
+              <div *ngIf="row[5] === 'unpaid'" class="action-buttons">
+                <button *ngIf="isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid', currentFormData.hostel)">Paid</button>
+                <button *ngIf="isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show', currentFormData.hostel)">Didn't Show Up</button>
+                
+                <button *ngIf="!isAdmin" class="btn btn-success me-2" (click)="updatePaymentStatus(row[1], 'paid')">Paid</button>
+                <button *ngIf="!isAdmin" class="btn btn-danger" (click)="updatePaymentStatus(row[1], 'no_show')">Didn't Show Up</button>
+              </div>
+              
+              <div *ngIf="row[6]" class="excessive-warning">
                 <small><strong>Note: {{ row[7] }} excessive no-shows</strong></small>
               </div>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
-  </table>
-  </div>
-    <p  *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <p id="no-guest-indicator-desktop" *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
+    <p id="no-guest-indicator-mobile" *ngIf="!isHistoryEmpty(guestHistory['body'])">No Guest</p>
   </div>
 
 </div>

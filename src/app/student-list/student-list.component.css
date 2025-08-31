@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 .active-circle {
     width: 1em;
     margin-top: 0.3em;
@@ -62,19 +63,16 @@
   border-color: #FFC42B;
   border: 1px solid;
   text-align: center;
-
   height: 1.5rem;
   width: 1.5rem;
 }
 
-
 input.nosubmit{
   width: 100%;
   padding: 9px 4px 9px 30px;
-  
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+  background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
+  background-size: 16px 16px;
 }
-
 
 h2{
   font-family: "Oxygen",Arial, Helvetica, sans-serif;
@@ -89,14 +87,142 @@ h2{
   /* width: 100%; */
   
 }
-
+#main{
+  padding: 0% 2% 2% 2%;
+}
 
 .student-list-table-container{
-  padding: 4%;
-  
   background-color:#FFFCF4 ;
-  min-height: 100%;
+  height: max-content;
 }
 .search-main-area{
-  width: 100%;
+  background-color: #fffcf4;
+  position: relative;
+  left: 10%;
+  width: 80%;
+}
+#stud-cards{
+  display: none;
+}
+#csv-download-container, #inactive-toggle-container{
+  display: none;
+}
+@media screen and (max-width: 431px){
+  #main{
+    position: relative;
+    top: 85px;
+  }
+  .student-list-table-container{
+    background-color: #28272c;
+    padding-top: 0%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .table{
+    display: none;
+  }
+  h1{
+    display: none;
+  }
+  .row{
+    display: none;
+  }
+  input.nosubmit{
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    background: transparent url("../../assets/IconSet/Icon=Search.svg") no-repeat 6px center;
+  }
+  #stud-cards{
+    order:1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
+  }
+  .search-main-area{
+    width: 48vw;
+    background-color: #ffffff ;
+    display: block;
+    border-radius: 50px 16px 16px 50px;
+    position: static;
+  }
+  #csv-download-container{
+    font-family: "Open Sans";
+    font-weight: 600;
+    background-color: #ffffff;
+    border-radius: 16px 50px 50px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 43px;
+    position: static;
+    font-size: 3.5vw;
+  }
+  #csv-download-container:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+  }
+  #inactive-toggle-container{
+      width: 28.5vw;
+      height: 43px;
+      z-index: 0;
+      background-color: #ffffff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+  }
+  #inactive-toggle-container p{
+      margin-bottom: 0px;
+      font-family: "Open Sans";
+      font-size: 3.5vw;
+      font-weight: 600;
+      position: relative;
+      left: 1vw;
+  }
+  :host ::ng-deep .mdc-switch__track::after{
+      padding: 2px;
+      background-color: #ffc24b !important;
+  }
+  :host ::ng-deep .mdc-switch__track::before{
+      background-color: #ffffff !important;
+      border: 2px solid black;
+  }
+  :host ::ng-deep .mdc-switch__icons{
+      background-color: black !important;
+      border-radius: 50px;
+      margin: 0px;
+  }
+  :host ::ng-deep .mdc-switch__ripple::after{
+      background-color: #ffc24b !important;
+  }
+  #stud-cards ::ng-deep .container {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  #student-list-footer {
+    order: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 30px;
+    background-color: #28272c;
+    margin-top: 10px;
+  }
+  .col-lg-9, .col-lg-3 {
+    width: auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }

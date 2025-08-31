@@ -1,11 +1,37 @@
 <div class="main-container">
-    <span class="page-title">Rebate Application</span>
-    <br>
+    <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
+    <span class="page-title" id="desktop-title">Rebate Application</span>
+    <span id="duration-label">Duration</span>
 
     <div id="form-instructions"><i>Please fill all the information correctly.</i></div>
-
+    <div id="range-date-container">
+        <mat-form-field id="range-date">
+            <!-- <mat-label>Enter a date range</mat-label> -->
+            <mat-date-range-input [rangePicker]="rangePicker">
+                <input matStartDate placeholder="Start date" [formControl]="startDate"/>
+                <input matEndDate placeholder="End date" [formControl]="endDate"/>
+            </mat-date-range-input>
+            <img src=".\.\assets\IconSet\Icon=Calendar.svg" alt="calender-icon" id="calender-icon">
+            <mat-datepicker-toggle matIconSuffix [for]="rangePicker" style="opacity: 0;"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button matDateRangePickerApply (click)="applyDateRange()">Apply</button>
+                </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+        </mat-form-field>
+        <div id="noOfDays">
+            {{ dayCount }}
+        </div>
+    </div>
+    <div id="days-notice">
+        <span>*Both days inclusive</span>
+    </div>
     <div id="form-container">
         <div id="rebate-reason-container">
+            <span id="reason-label">
+                Reason
+            </span>
             <app-input-field label="Reason for rebate" inputType="text" [(inputModel)]="reason"></app-input-field>
         </div>
         <div id="from-date-container">
@@ -15,7 +41,11 @@
             <app-input-field label="Till" inputType="calender" [(inputModel)]="rebateEnd"></app-input-field>
         </div>
         <div id="is-official-rebate">
-            <app-checkbox label="Official" [(inputModel)]="isOfficialRebate"></app-checkbox>
+            <app-checkbox label="Official" [(inputModel)]="isOfficialRebate" id="desktop-toggle"></app-checkbox>
+            <div id="official-toggle-container"> <!-- Only for mobile view -->
+                <p>Official</p>
+                <mat-slide-toggle id="official-toggle" [(ngModel)]="mobile_toggle" (change)="onToggleChange($event)"></mat-slide-toggle>
+            </div>
             <div class="info-container">
                 <button class="info-button">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="grey" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 45.999 45.999" xml:space="preserve">
@@ -24,15 +54,24 @@
                                 <path d="M39.264,6.736c-8.982-8.981-23.545-8.982-32.528,0c-8.982,8.982-8.981,23.545,0,32.528c8.982,8.98,23.545,8.981,32.528,0 C48.245,30.281,48.244,15.719,39.264,6.736z M25.999,33c0,1.657-1.343,3-3,3s-3-1.343-3-3V21c0-1.657,1.343-3,3-3s3,1.343,3,3V33z M22.946,15.872c-1.728,0-2.88-1.224-2.844-2.735c-0.036-1.584,1.116-2.771,2.879-2.771c1.764,0,2.88,1.188,2.917,2.771 C25.897,14.648,24.746,15.872,22.946,15.872z"/>
                             </g>
                         </g>
-                    </svg>                    
+                    </svg>
+                    <img src="..\assets\IconSet\Icon=Info.svg" alt="info">                  
                 </button>
             </div>
         </div>        
         <div *ngIf="isOfficialRebate" id="file-for-official">
             <app-input-field label="Supporting Document" [callbackFunction]="handleOfficialRebateFileChange" inputType="file" ></app-input-field>
         </div>
-        <app-input-field *ngIf="isOfficialRebate && isUpdateRequest" id="current-file" label="Current Document" inputType="show_text" text_to_show = "{{rebate_docname}}"></app-input-field>
+        <div *ngIf="isOfficialRebate && isUpdateRequest">
+            <span id="current-document-label">Current Document</span>
+            <app-input-field id="current-file" label="Current Document" inputType="show_text" text_to_show = "{{rebate_docname}}"></app-input-field>
+        </div>
     </div>
     <button id="confirm-btn" class="btn btn-primary" *ngIf="!isUpdateRequest" (click)="submitRebate()">Submit</button>
     <button id="confirm-btn" class="btn btn-primary" *ngIf="isUpdateRequest"(click)="updateRebateData()">Update</button>
+    <div class="notice">
+        <span id="notice1">*Apply atleast 2 days before the rebate starts</span>
+        <br>
+        <span id="notice2">*Rebate can be availed for a duration upto 15 days per semester</span>
+    </div>
 </div>

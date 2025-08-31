@@ -40,7 +40,32 @@ import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-en
 import { LandingComponent } from './landing/landing.component';
 import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { HomeCardComponent } from './components/home-card/home-card.component';
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DeviceListComponent } from './device-list/device-list.component';
+import { GuestCardComponent } from './components/guest-card/guest-card.component';
+import { MealCalenderComponent } from './meal-calender/meal-calender.component';
 
+
+export const MY_DATE_FORMATS = {
+    parse: {
+      dateInput: 'DD/MM/YYYY',
+    },
+    display: {
+      dateInput: 'DD/MM/YYYY',
+      monthYearLabel: 'MMM YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'MMMM YYYY'
+    }
+  };
 
 @NgModule({ declarations: [
         AppComponent,
@@ -74,6 +99,12 @@ import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/for
         LandingComponent,
         MessManagerloginComponent,
         ForgetPasswordComponent,
+        AppBarComponent,
+        HomeCardComponent,
+        RebateCardComponent,
+        DeviceListComponent,
+        GuestCardComponent,
+        MealCalenderComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
@@ -82,5 +113,14 @@ import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/for
         MatDialogModule,
         ReactiveFormsModule,
         MatChipsModule,
-        ReactiveFormsModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi())] })
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSlideToggleModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
+            { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+            { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+        ] })
 export class AppModule { }

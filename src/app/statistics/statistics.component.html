@@ -1,37 +1,60 @@
 <div class="container">
+  <app-app-bar [suffix]="app_bar_suffix"></app-app-bar>
   <div>
     <h1 style="border-bottom:3px solid #ffc42b;">Trends</h1>
     <form #mess_data="ngForm" (ngSubmit)="plotData(mess_data)" class="form-inline">
-      <div class="input-group mb-3">
-        <input *ngIf="roll_selectable" type="text" class="form-control" name="roll" placeholder="Roll Number" aria-label="Roll Number" aria-describedby="basic-addon1" ngModel>
-        <select *ngIf="hostel_selectable" class="form-select" name="hostel" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
-          <option value="" selected>Select Hostel</option>
-          <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-            <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
-          </ng-container>    
-          <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
-        </select>
-        <select class="form-select" name="month" aria-label="Select a month" aria-placeholder="Select a month" ngModel>
-          <option value="" disabled selected>Select a Month</option>
-          <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
-        </select>
-        <select class="form-select" name="year" aria-label="Select a year" aria-placeholder="Select a year" ngModel>
-          <option value="" disabled selected>Select a Year</option>
-          <option *ngFor="let year of [0,1,2,3,4,5,6,7,8,9]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
-        </select>
-        <button type="submit">GET</button>
-      </div>
-    </form>
+  <div class="input-group input-row-1">
+    <input *ngIf="roll_selectable" type="text" class="form-control" name="roll" placeholder="Roll Number" aria-label="Roll Number" ngModel>
+    <select *ngIf="hostel_selectable" class="form-select" name="hostel" aria-label="Select a hostel" ngModel>
+      <option value="" selected>Select Hostel</option>
+      <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+        <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+      </ng-container>    
+      <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
+    </select>
   </div>
-
+  <div class="input-group input-row-2">
+    <select class="form-select" name="month" aria-label="Select a month" ngModel>
+      <option value="" disabled selected>Month</option>
+      <option *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']; let i=index" [value]="(i+1).toString()">{{month}}</option>
+    </select>
+    <select class="form-select" name="year" aria-label="Select a year" ngModel>
+      <option value="" disabled selected>Year</option>
+      <option *ngFor="let year of [0,1,2,3,4,5,6,7,8,9]" value="{{date.getFullYear()-year}}">{{date.getFullYear()-year}}</option>
+    </select>
+    <button type="submit" id="get-button" (click)="showHeatMapButtons()">GET</button>
+  </div>
+</form>
+  </div>
   <hr>
 
-  <div>
+  <div id="display-data">
     <h2 class="bold-ones" *ngIf="hostelmessHistory.loaded">Hostel Trends</h2>
     <div class="chart-container" id="mess_data" *ngIf="hostelmessHistory.exists"></div>
+    <div class="table-container mobile-only-table" *ngIf="auth.isStaff() && messHistory">
+      <app-table-component [data]="messHistory"></app-table-component>
+    </div>
     <div *ngIf="!hostelmessHistory.exists">No hostel trends found</div>
+    <!-- <app-meal-calender></app-meal-calender> -->
     <h2 class="bold-ones" *ngIf="studentmessHistory.loaded">Student Trends</h2>
-    <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists"></div>
+    <div class="chart-container" id="student_data" *ngIf="studentmessHistory.exists">
+      <app-meal-calender [calendarData] = 'dates' [activeDays] = 'heatmapValues' [mealId] = 'heatmapMeal' [selectedMonth]="selectedMonth" [selectedYear]="selectedYear" id="meal-calendar"></app-meal-calender>
+    </div>
+    <ul class="nav nav-tabs mb-2 btn-box" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="submit" role="tab" aria-controls="home" aria-selected="true" (click)="updateHeatMap(0)">Breakfast</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="submit" role="tab" aria-controls="profile" aria-selected="false" (click)="updateHeatMap(1)">Lunch</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="submit" role="tab" aria-controls="contact" aria-selected="false" (click)="updateHeatMap(2)">Snacks</button>
+      </li>
+      <li class="nav-item" role="presentation">
+          <button class="nav-link" id="dinner-tab" data-bs-toggle="tab" data-bs-target="#dinner" type="submit" role="tab" aria-controls="dinner" aria-selected="false" (click)="updateHeatMap(3)">Dinner</button>
+      </li>
+    </ul>
+    <hr>
     <div id="pie-textual-container" *ngIf="studentmessHistory.exists">
       <div id="pie"></div>
       <div id="textual-stats" *ngIf="studentmessHistory.loaded">

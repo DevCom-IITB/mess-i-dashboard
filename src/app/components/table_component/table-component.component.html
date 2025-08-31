@@ -13,8 +13,8 @@
     <tbody id="stud-table">
         <ng-container *ngFor="let row of data.body">
         <tr>
-        <ng-container *ngFor="let col of row">
-            <td>{{col}}</td>
+        <ng-container *ngFor="let col of row; let i = index">
+            <td [class.first-column]="i === 0">{{col}}</td>
         </ng-container>
         </tr>
         </ng-container>

@@ -2,7 +2,6 @@
     min-height: 100vh;
     height:max-content;
     padding: 4%;
-
     background-color: #FFFCF4;
 }
 #header-container{
@@ -15,11 +14,43 @@
     background-color: #28282b;
     color: white;
     border: 0px;
-    border-radius: 4px;
-    float:right;    
+    border-radius: 4px;   
     height: max-content;
     margin: auto 0px;
+    float: right;
+    display: block; 
 }
 #new-request-btn:hover{
     background-color: #FFC42B;
+}
+#rebate-list{
+    position: relative;
+}
+#btn-box{
+    display: flex;
+    justify-content: right;
+}
+@media screen and (max-width: 431px){
+    .main-container{
+        padding: 2%;
+        padding-top: 0%;
+        background-color: #28272c;
+    }
+    .page-title{
+        display: none;
+    }
+    #new-request-btn{
+        width: 100%;
+        margin: 0px;
+        font-weight: 600;
+        border: 2px solid #ffce5d;
+        color: #ffce5d;
+        background-color: #28272c;
+        border-radius: 50px;
+        font-size: 4.5vw;
+    }
+    #new-request-btn:hover{
+        background-color: #ffce5d;
+        color: #28272c;
+    }
 }

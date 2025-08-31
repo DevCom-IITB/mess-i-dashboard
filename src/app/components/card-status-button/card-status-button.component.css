@@ -36,3 +36,30 @@
 .align-self-center{
   align-self: center;
 }
+@media screen and (min-width: 431px){
+  img{
+    display: none;
+  }
+}
+@media screen and (max-width: 431px){
+  #green,#red{
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    padding: 0px;
+    position: relative;
+    right: 16px;
+    bottom: 4px;
+  }
+  button{
+    height: fit-content;
+    width: fit-content;
+  }
+  .px-1{
+    margin: 0px;
+    padding: 0px !important;
+  }
+  .col{
+    display: none;
+  }
+}

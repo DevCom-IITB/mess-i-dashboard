@@ -23,7 +23,18 @@ export class StuRebateDialogComponent implements OnInit {
     }
    }
 
-  getRebates = () => this.data_service.getAdminRebatesRoll(this.injected_data['roll'])
+  getRebates = () => {
+  //console.log('Fetching rebates for roll:', this.injected_data['roll']);
+  return this.data_service.getAdminRebatesRoll(this.injected_data['roll'])
+    .then(result => {
+      //console.log('Rebates fetched successfully:', result);
+      return result;
+    })
+    .catch(error => {
+      //console.error('Error fetching rebates:', error);
+      throw error;
+    });
+}
 
   ngOnInit(): void {
     this.dialogRef.updateSize('65%','80%')

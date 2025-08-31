@@ -72,7 +72,6 @@ export class OverviewComponent implements OnInit {
     }
     let res = {headers:this.headers,body:body,footer:footer}
     return res;
-    
   }
 
   async getMonthMessData(data: any){
