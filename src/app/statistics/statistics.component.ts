@@ -24,9 +24,16 @@ export class StatisticsComponent implements OnInit {
   date = new Date();
   headers = ['Day','Breakfast','Lunch','Snacks','Dinner','Milk','Egg','Fruit'];
   MEALS = ['Breakfast', 'Lunch', 'Snacks', 'Dinner', 'Milk', 'Egg', 'Fruit'];
-  COLORS = ['#fc5095', '#fc9a50', '#cefc50', '#fce250', '#87fc50', '#fc5350', '#50fca9'];
+  //COLORS = ['#fc5095', '#fc9a50', '#cefc50', '#fce250', '#87fc50', '#fc5350', '#50fca9'];
   // COLORS_RGB = ['rgb(251, 80, 148)', 'rgb(253, 155, 84)', 'rgb(206, 252, 81)', 'rgb(252, 226, 81)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)'];
-  COLORS_RGB = ['rgb(252, 80, 149)', 'rgb(252, 154, 80)', 'rgb(206, 252, 80)', 'rgb(252, 226, 80)', 'rgb(135, 252, 80)', 'rgb(252, 83, 80)', 'rgb(80, 252, 169)'];
+
+  COLORS_RGB = [  
+  'rgb(244, 211, 94)',   
+  'rgb(250, 240, 202)',  
+  'rgb(238, 150, 75)',   
+  'rgb(249, 87, 56)',    
+  'rgb(255, 196, 43)'
+];
   public on_admin_page:boolean ;
   private adminRoutes: string[] = ["/statistics"];
   dates: string[][];

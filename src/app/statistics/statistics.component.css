@@ -90,9 +90,26 @@ li.text-stats-item {
 #meal-calendar {
   display: none;
 }
+
+#pie {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
 @media (min-width: 320px) {
   div#pie-textual-container {
     flex-direction: column;
+  }
+  
+  #pie {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
   }
   /* #student_data {
     width: 600px;
@@ -219,23 +236,50 @@ li.text-stats-item {
     height: 50px;
     justify-content: center;
   }
+
+  h2.bold-ones {
+    margin-bottom: 25px !important; 
+  }
+
   #pie-textual-container {
     width: 100%;
-    display: block !important;
-    /* overflow-x: hidden; */
+    display: flex !important; 
+    flex-direction: column !important;
+    align-items: center;
   }
-  #pie{
-    width: 100% !important;
-    overflow-x: auto;
+  
+  #pie {
+    width: 90% !important;
+    height: auto !important;
+    min-height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto !important;
+    overflow-x: visible;
+    order: 1;
   }
+  
   #textual-stats {
     position: relative;
-    left: 0%;
-    top: 20%;
-    width: 100%;
+    width: 90% !important;
+    padding: 0 2rem 1rem 2rem; 
     overflow-x: hidden;
     overflow-y: auto;
+    margin-top: -10%;
+    order: 2;
   }
+
+  #textual-stats h3.bold-ones {
+    margin-top: 0; 
+    margin-bottom: 10px; 
+  }
+  
+  #textual-stats ul {
+    margin-top: 5px; 
+    padding-left: 20px; 
+  }
+  
   .input-group{
     height: fit-content;
   }
@@ -273,6 +317,8 @@ li.text-stats-item {
     width: 100% !important;
     overflow-x: auto;
   }
+
+  
 }
 
 @media screen and (min-width: 432px) {
@@ -285,5 +331,17 @@ li.text-stats-item {
   }
   .input-row-1, .input-row-2 {
     display: contents;
+  }
+  div#pie-textual-container {
+    flex-direction: row;
+  }
+  
+  #pie {
+    flex: 1;
+    max-width: 60%;
+  }
+  
+  #textual-stats {
+    flex: 1;
   }
 }
