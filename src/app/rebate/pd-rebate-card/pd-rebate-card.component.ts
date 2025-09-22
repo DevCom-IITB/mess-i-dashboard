@@ -26,7 +26,7 @@ export class PdRebateCardComponent implements OnInit {
   public card_comment: string;
   public rebate_status: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
+  public p_total_rebate_days: string = "0";
   constructor(
   private data_service: StudentdataService, 
   private dialog: MatDialog, 
@@ -43,6 +43,7 @@ export class PdRebateCardComponent implements OnInit {
     this.p_rebate_reason = this.rebate_request.reason;
     this.card_comment="";
     this.p_rebate_days= this.noOfDays(this.rebate_request.start, this.rebate_request.end);
+    this.calculateTotalRebateDays();
   }
 
   acceptRebate(){
@@ -91,7 +92,7 @@ export class PdRebateCardComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return !this.auth.isStudent();
+    return this.auth.isRebate();
   }
 
   updateRebateData() {
@@ -165,4 +166,21 @@ export class PdRebateCardComponent implements OnInit {
     return "0";
   }
 }
+
+  private async calculateTotalRebateDays(): Promise<void> {
+    try {
+      const res: any = await this.data_service.getAdminRebatesRoll(this.rebate_request.roll);
+      const acceptedRebates = res.accepted_rebate || [];
+      
+      let totalDays = 0;
+      acceptedRebates.forEach((rebate: any) => {
+        totalDays += parseInt(this.noOfDays(rebate.start, rebate.end));
+      });
+      
+      this.p_total_rebate_days = totalDays.toString();
+    } catch (error) {
+      console.error('Error calculating total rebate days:', error);
+      this.p_total_rebate_days = "0";
+    }
+  }
 }
