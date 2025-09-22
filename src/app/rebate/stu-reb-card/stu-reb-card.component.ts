@@ -23,6 +23,7 @@ export class StuRebCardComponent implements OnInit {
   public p_rebate_reason: string;
   public p_rebate_comment: string;
   private numToMonth: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  public p_total_rebate_days: string = "0"; 
   @Input() public rebate_request: RebateRequest;
   // @Input() public isApproved: boolean = false;
   public on_admin_page:boolean ;
@@ -55,6 +56,9 @@ export class StuRebCardComponent implements OnInit {
     is_student_page: this.isStudentPage(),
     current_url: this.router.url
   });
+  if (this.on_admin_page) {
+      this.calculateTotalRebateDays();
+    }
   }
 
   readableDate(inp: Date): string{
@@ -186,5 +190,22 @@ export class StuRebCardComponent implements OnInit {
       return true; // Default to showing buttons if there's an error
     }
   }
+  private async calculateTotalRebateDays(): Promise<void> {
+    try {
+      const res: any = await this.data_service.getAdminRebatesRoll(this.rebate_request.roll);
+      const acceptedRebates = res.accepted_rebate || [];
+      
+      let totalDays = 0;
+      acceptedRebates.forEach((rebate: any) => {
+        totalDays += parseInt(this.noOfDays(rebate.start, rebate.end));
+      });
+      
+      this.p_total_rebate_days = totalDays.toString();
+    } catch (error) {
+      console.error('Error calculating total rebate days:', error);
+      this.p_total_rebate_days = "0";
+    }
+  }
+
 }
 
