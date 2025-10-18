@@ -39,7 +39,7 @@
     background-color: rgba(255, 196, 75, 0.1); 
 }
 .no-rebates-message {
-    color: #ffffff;
+    color: #28272c;
 }
 
 @media screen and (max-width: 431px){
@@ -217,6 +217,7 @@
         background-color: #ffc24b !important;
     }
     .no-rebates-message {
+        color: #ffffff !important;
         margin: 10px 0;
         padding-top: 2vw;
         padding-bottom: 2vw;

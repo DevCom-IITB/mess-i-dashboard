@@ -35,6 +35,13 @@
   <div id="days">
     <span id="noOfDays">{{ p_rebate_days }} days </span><span id="both-inclusive">(Both inclusive)</span>
   </div>
+  <div class="rebate-taken-days" *ngIf="on_admin_page">
+    <div class="total-rebate-info">
+      <span class="label">Total Rebate Days Taken:</span>
+      <span class="total-days">{{p_total_rebate_days}} days</span>
+    </div>
+  </div>
+
   <div class="row">
     <p id="reason-txt" *ngIf="!isStudentPage()">{{ p_rebate_reason }}</p>
     <p id="reason-txt" *ngIf="isStudentPage()" style="font-size: 18px;">{{ p_rebate_reason }}</p>

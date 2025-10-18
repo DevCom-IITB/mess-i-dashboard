@@ -183,3 +183,27 @@
 *{
     font-family: 'Open Sans', sans-serif;
 }
+
+.rebate-taken-days {
+    margin: 12px 0px;
+    position: relative;
+    bottom: 10px;
+}
+
+.total-rebate-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-rebate-info .label {
+    font-weight: 600;
+    color: #28272c;
+    font-size: 16px;
+}
+
+.total-rebate-info .total-days {
+    font-weight: 600;
+    color: #28272c;
+    font-size: 16px;
+}

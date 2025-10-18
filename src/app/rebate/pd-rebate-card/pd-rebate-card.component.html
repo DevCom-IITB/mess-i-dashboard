@@ -21,6 +21,12 @@
     <div id="days">
         <span id="noofdays">{{ p_rebate_days }} days </span><span id="nobold">(both inclusive)</span>
     </div>
+    <div class="rebate-taken-days">
+        <div class="total-rebate-info">
+            <span class="label">Total Rebate Days Taken:</span>
+            <span class="total-days">{{p_total_rebate_days}} days</span>
+        </div>
+    </div>
     <div id="rebate-reason-container" class="row">
         <p id="reason">{{ p_rebate_reason }}</p>
         <button id="official" *ngIf="rebate_request.official" (click)="downloadRebateDoc()">
