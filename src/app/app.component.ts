@@ -33,6 +33,7 @@ export class AppComponent {
     this.navIdtoUrl.set("nav_guest_admin","/guest-admin")
     // this.navIdtoUrl.set("nav_mess_bill","/mess-bill")
     this.isStudent = this.auth.isStudent();
+    //console.log("is student: ",this.isStudent);
   }
 
   showNavbar() {
