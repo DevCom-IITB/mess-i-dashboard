@@ -32,7 +32,7 @@ import { DateFilterComponent } from './utils/date-filter/date-filter.component';
 import { RebateListComponent } from './utils/rebate-list/rebate-list.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
-import { StatisticsComponent } from './statistics/statistics.component';
+// import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
 import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
@@ -91,7 +91,7 @@ export const MY_DATE_FORMATS = {
         RebateListComponent,
         DurationBoxComponent,
         CardStatusButtonComponent,
-        StatisticsComponent,
+        // StatisticsComponent,
         GuestEntryComponent,
         GuestStatusButtonComponent,
         GuestAdminComponent,
