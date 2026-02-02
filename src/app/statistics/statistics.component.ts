@@ -196,7 +196,7 @@ export class StatisticsComponent implements OnInit {
     
     let hz = Array.from(orged_data.values() as Iterable<number[]>);
     let sms = hz.map((subarray) => subarray.reduce((acc, value) => acc + (value > 0 ? 1 : 0), 0));
-    let nzidx = sms.map((value, index) => (value > 0 ? index : -1)).filter((value) => value >= 0);
+    // let nzidx = sms.map((value, index) => (value > 0 ? index : -1)).filter((value) => value >= 0);
     
     // Check if hostelmessHistory is available and initialized
     if (!this.hostelmessHistory || !this.hostelmessHistory.meal_counts || !this.hostelmessHistory.labels) {
@@ -211,16 +211,39 @@ export class StatisticsComponent implements OnInit {
       return (sum > 0 ? value/sum : '-');
     });
     
+    let indices = [0, 1, 2, 3, 4]; // Always include first 5
+    
+    // Add Egg if non-zero
+    if (sms[5] > 0) {
+      indices.push(5);
+    }
+    // Add Fruit if non-zero
+    if (sms[6] > 0) {
+      indices.push(6);
+    }
+    
+    // let res = {
+    //   heatmapz: nzidx.map((value) => [0].concat(hz[value])),
+    //   sums: nzidx.map((value) => sms[value]),
+    //   meals: nzidx.map((value) => this.hostelmessHistory.labels[value] || `Meal ${value}`),
+    //   colors: nzidx.map((value) => this.COLORS_RGB[value] || this.COLORS_RGB[0]),
+    //   util: nzidx.map((value) => utilization[value]),
+    //   available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value] || 0),
+    //   exists: true,
+    //   loaded: true
+    // };
+
     let res = {
-      heatmapz: nzidx.map((value) => [0].concat(hz[value])),
-      sums: nzidx.map((value) => sms[value]),
-      meals: nzidx.map((value) => this.hostelmessHistory.labels[value] || `Meal ${value}`),
-      colors: nzidx.map((value) => this.COLORS_RGB[value] || this.COLORS_RGB[0]),
-      util: nzidx.map((value) => utilization[value]),
-      available_meals: nzidx.map((value) => this.hostelmessHistory.meal_counts[value] || 0),
+      heatmapz: indices.map((value) => (hz[value] || []).slice()),
+      sums: indices.map((value) => sms[value] || 0),
+      meals: indices.map((value) => this.hostelmessHistory.labels[value] || this.MEALS[value]),
+      colors: indices.map((value) => this.COLORS_RGB[value] || this.COLORS_RGB[0]),
+      util: indices.map((value) => utilization[value]),
+      available_meals: indices.map((value) => this.hostelmessHistory.meal_counts[value] || 0),
       exists: true,
       loaded: true
     };
+
     return res;
   }
 
