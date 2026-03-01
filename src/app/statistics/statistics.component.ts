@@ -270,6 +270,7 @@ export class StatisticsComponent implements OnInit {
     ).then((res) => {
       this.studentmessHistory = this.genStudentPlotData(res);
 
+      console.log("Student Mess History just before displaying pie:", this.studentmessHistory);
       // this.plot.plotHeatmap("Student Stats","student_data",this.noOfDays,this.studentmessHistory.heatmapz, ['#ffce5d'], this.studentmessHistory.meals, data.form.value.month, data.form.value.year);
       this.plot.plotPie("pie", this.studentmessHistory.sums, this.studentmessHistory.meals, this.studentmessHistory.colors);
 
@@ -282,7 +283,8 @@ export class StatisticsComponent implements OnInit {
       const sortedX = dateMap.map((item: any) => item.date);
       const sortedZ = this.studentmessHistory.heatmapz.map((mealRow: any) => dateMap.map((item: any) => mealRow[item.index]));
 
-      const padLength = Math.max(0, startDay - 1);
+      // const padLength = Math.max(0, startDay - 1);
+      const padLength = Math.max(0, (startDay + 6)%7);
       if (padLength > 0) {
         sortedX.unshift(...Array(padLength).fill(""));
         sortedZ.forEach((mealRow: any) => mealRow.unshift(...Array(padLength).fill(0)));
@@ -367,7 +369,7 @@ export class StatisticsComponent implements OnInit {
     this.heatmapValues = reshapedZ
   
 
-    console.log("testing dates", this.dates);
+    console.log("testing dates from stats comp", this.dates);
     console.log("testing heatmapValues", this.heatmapValues);
   }
 }
