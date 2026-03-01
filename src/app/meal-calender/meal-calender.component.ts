@@ -32,11 +32,17 @@ export class MealCalenderComponent implements OnInit, OnChanges {
     }
   }
 
+  private getCalendarRowsFromDate(year: number, month: number): number {
+    const first = new Date(year, month, 1);
+    const startDayMon = (first.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month, 0).getDate();
+    return Math.ceil((startDayMon + daysInMonth) / 7);
+  }
+
   private updateCalendarDates(): void {
-    const rows = this.calendarData.length / 5;
+    const rows = this.getCalendarRowsFromDate(this.selectedYear, this.selectedMonth);
     this.calendarDates = this.calendarData.slice(0, rows);
     this.mealTaken = this.activeDays.slice(this.mealId*rows, (this.mealId + 1) * rows);
-    console.log("checking mealTaken", this.mealTaken);
   }
 
   isActive(i: number, j: number): boolean {
