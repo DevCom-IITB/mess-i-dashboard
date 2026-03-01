@@ -21,10 +21,12 @@ export class AuthService {
   is_student:boolean;
   is_sso_login: boolean;
   roll_no:any;
+  username:any;
   baseurl = environment.backendURL;
   constructor(private http:HttpClient, private router:Router) { 
     this.token = sessionStorage.getItem("mess-i-token");
     this.roll_no = sessionStorage.getItem("mess-i-roll");
+    this.username = sessionStorage.getItem("mess-i-username");
     this.is_admin = JSON.parse(sessionStorage.getItem("mess-i-admin") ?? "false");
     this.is_staff = JSON.parse(sessionStorage.getItem("mess-i-staff") ?? "false");
     this.is_rebate = JSON.parse(sessionStorage.getItem("mess-i-rebate") ?? "false");
@@ -55,6 +57,7 @@ export class AuthService {
       this.is_sso_login = true;
 
       this.roll_no = res.roll;
+      this.username = res.username;
       // this.roll_no = "24B0000";
       sessionStorage.setItem("mess-i-token",res.token);
       sessionStorage.setItem("mess-i-roll",res.roll);
@@ -63,7 +66,7 @@ export class AuthService {
       sessionStorage.setItem("mess-i-staff",res.is_staff.toString());
       sessionStorage.setItem("mess-i-rebate",res.is_rebate.toString());
       sessionStorage.setItem("mess-i-student",res.is_student.toString());
-
+      sessionStorage.setItem("mess-i-username",res.username);
       this.router.navigate(['landing']);
     })
   }
@@ -144,6 +147,11 @@ export class AuthService {
   
   isRebate(){
     return (this.is_admin || this.is_rebate);
+  }
+
+  isDean(){
+    console.log("isDean called with username:", this.username);
+    return (this.username === "dean.sa" || this.username === "adean.sa" || this.username === "23B0608" || this.username === "23b0608" );
   }
 
   isSSOLogin() {
