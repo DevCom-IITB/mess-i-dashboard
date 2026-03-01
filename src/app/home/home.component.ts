@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       title: 'Statistics',
       redirect: '/statistics',
       description: 'Watch your meals consumption',
-      role: this.auth_service.isStaff() ? 'staff' : 'student'
+      role: this.auth_service.isStudent() ? 'student' : (this.auth_service.isDean() ? 'dean' : 'staff')
     },
     {
       title: 'Devices',
@@ -93,9 +93,10 @@ export class HomeComponent implements OnInit {
   }
   shouldDisplay(role: string): boolean {
     switch (role) {
+      case 'dean': return !this.auth_service.isDean();
       case 'rebate': return this.auth_service.isRebate();
       case 'staff': return this.auth_service.isStaff();
-      case 'studentOrStaff': return this.auth_service.isStudent() || this.auth_service.isStaff();
+      case 'studentOrStaff': return (this.auth_service.isStudent() || this.auth_service.isStaff()) ;
       default: return false;
     }
   }
