@@ -14,7 +14,7 @@ export class MessMenuUploadComponent implements OnInit {
   app_bar_suffix: string = "Mess Menu Upload";
   uploadForm: FormGroup;
   menus: any[] = [];
-  hostels: string[] = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19', 'H20']; // TODO: Update with actual hostel list or fetch from API
+  hostels: string[] = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19', 'Tansa']; // TODO: Update with actual hostel list or fetch from API
   isManager: boolean = false;
   userHostel: string = '';
   hostel_selectable: boolean = false;
@@ -23,6 +23,7 @@ export class MessMenuUploadComponent implements OnInit {
   messHistory: any = { exists: true, loaded: false };
   uploadType: string = '';
   sheetUrl: string = '';
+  selectedFile: File | null = null;
 
   constructor(
     public auth_service: AuthService,
@@ -60,17 +61,61 @@ export class MessMenuUploadComponent implements OnInit {
     });
   }
 
-  // TODO: Implement file upload logic 
-  // TODO: Add file validation and error handling
   onFileSelect(event: any): void {
     const file = event.target.files[0];
-    if (file) {
-      console.log('File selected:', file);
+    
+    if (!file) {
+      this.snackBar.open('No file selected', 'Close', { 
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+      return;
     }
+
+    // File type validation
+    const allowedExtensions = ['xlsx', 'xls'];
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    
+    if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+      this.selectedFile = null; 
+      this.snackBar.open('Only .xlsx and .xls files are allowed', 'Close', { 
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    // File size validation (max 10MB)
+    const maxSizeInMB = 10;
+    const fileSizeInMB = file.size / (1024 * 1024);
+    
+    if (fileSizeInMB > maxSizeInMB) {
+      this.selectedFile = null; 
+      this.snackBar.open(`File size exceeds ${maxSizeInMB}MB limit`, 'Close', { 
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    this.selectedFile = file;
+    this.snackBar.open(`File selected: ${file.name}`, 'Close', { 
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
   }
 
+
   onUpload(): void {
-    this.snackBar.open('Successful', 'Close', { 
+    this.snackBar.open('Upload Successful. Processing will begin soon.', 'Close', { 
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top'
