@@ -4,8 +4,8 @@
   <!-- TODO: Add submit functionality -->
   <form #data="ngForm" class="mess-form">
     <div class="selectors-row">
-      <select *ngIf="hostel_selectable" class="form-select" name="hostel" ngModel>
-        <option value="" selected>Select Hostel</option>
+      <select *ngIf="hostel_selectable" class="form-select" name="hostel" [(ngModel)]="selectedHostel">
+        <option value="" disabled selected>Select Hostel</option>
         <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
           <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
         </ng-container>
