@@ -1,39 +1,87 @@
-.container{
-    padding: 4%;
-    background-color: #FFFCF4; 
-    display: flex;
-    min-height: 100%;
+.container {
+  padding: 40px;
+  background-color: #FFFCF4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  border-bottom: 3px solid #ffc42b;
+  padding-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.mess-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Space between the rows */
+}
+
+/* Row 1: The Selectors side-by-side */
+.selectors-row {
+  display: flex;
+  flex-direction: row; /* Forces horizontal */
+  gap: 15px;
+  width: 100%;
+}
+
+.selectors-row select.form-select {
+  flex: 1; /* Makes both dropdowns take equal space on the same line */
+  padding: 12px;
+  border: 2px solid #FFC42B;
+  border-radius: 8px;
+  background-color: #FFF8E8;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Row 2: The Upload Area */
+.upload-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers input and button */
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 50px 20px;
+  border: 2px dashed #ffc42b;
+  border-radius: 12px;
+  background-color: #fffdf9;
+  margin-top: 10px;
+}
+
+/* Specific styling for the inputs in the bottom row */
+.sheet-input, .file-input {
+  width: 100%;
+  max-width: 500px; /* Limits width so it's not too long */
+  padding: 12px;
+  border: 2px solid #FFC42B;
+  border-radius: 8px;
+  background-color: #FFF8E8;
+}
+
+/* Button Styling */
+.btn-upload {
+  background-color: #28282B;
+  color: white;
+  border: none;
+  padding: 12px 60px; /* Wider button */
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-upload:hover {
+  background-color: #FFC42B;
+  color: #28282B;
+}
+
+/* Mobile: Stack the dropdowns only on small screens */
+@media (max-width: 600px) {
+  .selectors-row {
     flex-direction: column;
-}
-form{
-    margin-top: 1vw;
-}
-input.form-control{
-    margin-left: 2vh;
-    margin-right: 2vh;
-    border-color: #FFC42B;
-    border-width: 2px;
-    background-color:#FFF8E8;
-}
-.form-group{
-    margin-left: 3vh;
-    margin-right: 5vh;
-    border-color: #FFC42B;
-    border-width: 2px;   
-}
-select.form-select{
-    margin-left: 2vh;
-    margin-right: 2vh;
-    border-color: #FFC42B;
-    border-width: 2px;
-    background-color: #FFF8E8;
-}
-button{
-    background-color: #28282B;
-    color:white;
-    border:0px;
-    border-radius: 4px;
-}
-button:hover{
-    background-color: #FFC42B;
+  }
 }

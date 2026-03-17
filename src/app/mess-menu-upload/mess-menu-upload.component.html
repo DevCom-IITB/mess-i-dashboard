@@ -1,40 +1,43 @@
 <div class="container">
-    <h1 style="border-bottom:3px solid #ffc42b;">Mess Data</h1>
+  <h1>Upload Mess Menu</h1>
 
-    <!-- TODO: Add the ngSubmit function  -->
-    <form #data="ngForm" class="form-inline"> 
-      <div class="input-group mb-3">
-          <select *ngIf="hostel_selectable" class="form-select" name="hostel" aria-label="Select a hostel" aria-placeholder="Hostel Name" ngModel>
-            <option value="" selected>Select Hostel</option>
-            <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-              <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
-            </ng-container>    
-             <option *ngIf="allowedHostels[20]" value="H20">H20</option>
-            <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>    
-          </select>
-        <select class="form-select" name="upload" aria-label="Upload Type" aria-placeholder="Select Upload Type" [(ngModel)]="uploadType">
-          <option value="" disabled selected>Select Upload Type</option>
-          <option value="excel">Excel File Upload</option>
-          <option value="google_sheet">Google Sheet Link</option>
-        </select>
+  <!-- TODO: Add submit functionality -->
+  <form #data="ngForm" class="mess-form">
+    <div class="selectors-row">
+      <select *ngIf="hostel_selectable" class="form-select" name="hostel" ngModel>
+        <option value="" selected>Select Hostel</option>
+        <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+          <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+        </ng-container>
+        <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>
+      </select>
 
-        <!-- Excel Upload -->
-        <div *ngIf="uploadType === 'excel'">
-        <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" />
-        </div>
+      <select class="form-select" name="upload" [(ngModel)]="uploadType">
+        <option value="" disabled selected>Select Upload Type</option>
+        <option value="excel">Excel File Upload</option>
+        <option value="google_sheet">Google Sheet Link</option>
+      </select>
+    </div>
 
-        <!-- Google Sheet Link -->
-        <div *ngIf="uploadType === 'google_sheet'">
-        <input 
-            type="text" 
-            class="form-control" 
-            placeholder="Paste Google Sheet link"
-            [(ngModel)]="sheetUrl"
-            name="sheetUrl"
-        />
-        </div>
-        <button type="submit" >GET</button>
+    <div class="upload-row" *ngIf="uploadType">
+      
+      <!-- Excel Upload -->
+      <div *ngIf="uploadType === 'excel'" class="input-wrapper">
+        <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" />
       </div>
-    </form>
-    <app-table-component *ngIf="messHistory" [data]="messHistory"></app-table-component>
+
+      <!-- Google Sheet Link -->
+      <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper">
+        <input 
+          type="text" 
+          class="form-control sheet-input" 
+          placeholder="Paste Google Sheet link"
+          [(ngModel)]="sheetUrl"
+          name="sheetUrl"
+        />
+      </div>
+
+      <button type="submit" class="btn-upload">Upload Data</button>
+    </div>
+  </form>
 </div>
