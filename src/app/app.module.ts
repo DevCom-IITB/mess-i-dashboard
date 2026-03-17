@@ -34,6 +34,7 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
+import { MessMenuUploadComponent } from './mess-menu-upload/mess-menu-upload.component';
 import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
@@ -83,6 +84,7 @@ export const MY_DATE_FORMATS = {
         RebateCardComponent,
         StuRebCardComponent,
         RebateAdminComponent,
+        MessMenuUploadComponent,
         MessBillComponent,
         FormMessBillComponent,
         StuRebateDialogComponent,
