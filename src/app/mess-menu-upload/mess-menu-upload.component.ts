@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { StudentdataService } from '../studentdata.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mess-menu-upload',
@@ -27,7 +28,8 @@ export class MessMenuUploadComponent implements OnInit {
     public auth_service: AuthService,
     public router: Router,
     private data_service: StudentdataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     if (!this.auth_service.isLoggedIn() || !this.auth_service.isStaff()) {
       this.router.navigate(['login']);
@@ -66,4 +68,11 @@ export class MessMenuUploadComponent implements OnInit {
       console.log('File selected:', file);
     }
   }
-}
+
+  onUpload(): void {
+    this.snackBar.open('Successful', 'Close', { 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
+  }}
