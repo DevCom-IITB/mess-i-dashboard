@@ -66,12 +66,7 @@ export class MessMenuUploadComponent implements OnInit {
     const file = event.target.files[0];
     
     if (!file) {
-      this.snackBar.open('No file selected', 'Close', { 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
-      });
+      this.errorPopup('No file selected');
       return;
     }
 
@@ -81,12 +76,7 @@ export class MessMenuUploadComponent implements OnInit {
     
     if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
       this.selectedFile = null; 
-      this.snackBar.open('Only .xlsx and .xls files are allowed', 'Close', { 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
-      });
+      this.errorPopup('Only .xlsx and .xls files are allowed');
       return;
     }
 
@@ -96,67 +86,37 @@ export class MessMenuUploadComponent implements OnInit {
     
     if (fileSizeInMB > maxSizeInMB) {
       this.selectedFile = null; 
-      this.snackBar.open(`File size exceeds ${maxSizeInMB}MB limit`, 'Close', { 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
-      });
+      this.errorPopup(`File size exceeds ${maxSizeInMB}MB limit`);
       return;
     }
 
     this.selectedFile = file;
-    this.snackBar.open(`File selected: ${file.name}`, 'Close', { 
-      duration: 2000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: ['success-snackbar']
-    });
+    this.successPopup(`File selected: ${file.name}`);
   }
 
 
   onUpload(): void {
     // Check if hostel is selected
     if (!this.selectedHostel || this.selectedHostel === '') {
-      this.snackBar.open('Please select a hostel', 'Close', { 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
-      });
+      this.errorPopup('Please select a hostel');
       return;
     }
 
     // Check if upload type is selected
     if (!this.uploadType || this.uploadType === '') {
-      this.snackBar.open('Please select an upload type', 'Close', { 
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
-      });
+      this.errorPopup('Please select an upload type');
       return;
     }
 
     // Check Excel file
     if (this.uploadType === 'excel') {
       if (!this.selectedFile) {
-        this.snackBar.open('Please select an Excel file', 'Close', { 
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+        this.errorPopup('Please select an Excel file');
         return;
       }
     }else if (this.uploadType === 'google_sheet') {
       if (!this.sheetUrl || this.sheetUrl.trim() === '') {
-        this.snackBar.open('Please enter a Google Sheet URL', 'Close', { 
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+        this.errorPopup('Please enter a Google Sheet URL');
         return;
       }
     }
@@ -165,63 +125,37 @@ export class MessMenuUploadComponent implements OnInit {
     if (this.uploadType === 'excel' && this.selectedFile) {
       this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
         .then((res: any) => {
-          this.snackBar.open('Upload Successful. Processing will begin soon.', 'Close', { 
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar']
-          });
+          console.log(res);
+
+          this.successPopup('Upload Successful. Processing will begin soon.');
           this.resetForm();
         })
-        .catch((err: any) => {
-          let errorMessage = 'Unknown error';
-          
-          if (err.status === 401 || err.status === 403) { 
-            errorMessage = 'Unauthorized/Forbidden - Contact admin if you believe this is an error';
-          }else if (err.status === 400) {
-            errorMessage = err.error?.message || 'Missing required fields';
-          } else if (err.error?.message) {
-            errorMessage = err.error.message;
-          }
-          
-          this.snackBar.open('Upload failed: ' + errorMessage, 'Close', { 
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          });
-        });
+        .catch((err: any) => this.handleUploadError(err));
     } else if (this.uploadType === 'google_sheet') {
 
       this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
         .then((res: any) => {
-          this.snackBar.open('Upload Successful. Processing will begin soon.', 'Close', { 
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar']
-          });
+          console.log(res);
+
+          this.successPopup('Upload Successful. Processing will begin soon.');
           this.resetForm();
         })
-        .catch((err: any) => {
-          let errorMessage = 'Unknown error';
-          
-          if (err.status === 401 || err.status === 403) { 
-            errorMessage = 'Unauthorized/Forbidden - Contact admin if you believe this is an error';
-          }else if (err.status === 400) {
-            errorMessage = err.error?.message || 'Missing required fields';
-          } else if (err.error?.message) {
-            errorMessage = err.error.message;
-          }
-          
-          this.snackBar.open('Upload failed: ' + errorMessage, 'Close', { 
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          });
-      });
+        .catch((err: any) => this.handleUploadError(err));
     }
+  }
+
+  private handleUploadError(err: any): void {
+    let errorMessage = 'Unknown error';
+    
+    if (err.status === 401 || err.status === 403) { 
+      errorMessage = 'Unauthorized/Forbidden - Contact admin if you believe this is an error';
+    } else if (err.status === 400) {
+      errorMessage = err.error?.message || 'Missing required fields';
+    } else if (err.error?.message) {
+      errorMessage = err.error.message;
+    }
+    
+    this.errorPopup('Upload failed: ' + errorMessage);
   }
 
   resetForm(): void {
@@ -229,5 +163,23 @@ export class MessMenuUploadComponent implements OnInit {
     this.uploadType = '';
     this.selectedFile = null;
     this.sheetUrl = '';
+  }
+
+  successPopup(message: string): void {
+    this.snackBar.open(message, 'Close', { 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['success-snackbar']
+    });
+  }
+
+  errorPopup(message: string): void {
+    this.snackBar.open(message, 'Close', { 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
+    });
   }
 }

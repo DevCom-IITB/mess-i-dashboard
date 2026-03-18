@@ -9,6 +9,11 @@ import { environment } from './../environments/environment';
 export class MessmenuService {
   baseurl = environment.backendURL + "/api";
 
+  private isValidGoogleSheetLink(url: string): boolean {
+  const pattern = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[a-zA-Z0-9_-]+/;
+  return pattern.test(url);
+}
+
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   /**
@@ -44,15 +49,18 @@ export class MessmenuService {
    * @returns Promise with upload response
    */
   uploadMenuFromGoogleSheet(hostel: string, sheetUrl: string): Promise<any> {
+    if (!this.isValidGoogleSheetLink(sheetUrl)) {
+        return Promise.reject("Invalid Google Sheets URL");
+    }
+
     let url = this.baseurl.concat("/upload-mess-menu");
-    const payload = {
-      hostel: hostel,
-      type: 'google_sheet',
-      sheetUrl: sheetUrl
-    };
+    const formData = new FormData();
+    formData.append('hostel', hostel);
+    formData.append('sheetUrl', sheetUrl);
+    formData.append('type', 'google_sheet');
 
     return new Promise((resolve, reject) => {
-      this.http.post(url, payload, {
+      this.http.post(url, formData, {
         headers: {
           'x-access-token': this.auth.getToken()
         },
