@@ -24,6 +24,7 @@ export class MessMenuUploadComponent implements OnInit {
   sheetUrl: string = '';
   selectedFile: File | null = null;
   selectedHostel: string = '';
+  menu_id: string = '';
 
   constructor(
     public auth_service: AuthService,
@@ -96,13 +97,11 @@ export class MessMenuUploadComponent implements OnInit {
 
 
   onUpload(): void {
-    // Check if hostel is selected
     if (!this.selectedHostel || this.selectedHostel === '') {
       this.errorPopup('Please select a hostel');
       return;
     }
 
-    // Check if upload type is selected
     if (!this.uploadType || this.uploadType === '') {
       this.errorPopup('Please select an upload type');
       return;
@@ -126,25 +125,59 @@ export class MessMenuUploadComponent implements OnInit {
       this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
         .then((res: any) => {
           console.log(res);
+          this.menu_id = res.menu_id;
 
           this.successPopup('Upload Successful. Processing will begin soon.');
           this.resetForm();
         })
-        .catch((err: any) => this.handleUploadError(err));
+        .catch((err: any) => this.handleError(err, 'Upload'));
     } else if (this.uploadType === 'google_sheet') {
 
       this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
         .then((res: any) => {
           console.log(res);
+          this.menu_id = res.menu_id;
 
           this.successPopup('Upload Successful. Processing will begin soon.');
           this.resetForm();
         })
-        .catch((err: any) => this.handleUploadError(err));
+        .catch((err: any) => this.handleError(err, 'Upload'));
     }
   }
 
-  private handleUploadError(err: any): void {
+  onApproval(): void {
+    if (!this.menu_id) {
+      this.errorPopup('No menu to approve. Please upload a menu first.');
+      return;
+    }
+
+    this.messmenu_service.approveMenu(this.menu_id)
+      .then((res: any) => {
+        console.log(res);
+
+        this.successPopup('Approval Successful.');
+        this.resetForm();
+      })
+      .catch((err: any) => this.handleError(err, 'Approval'));
+  }
+
+  onRejection(): void {
+    if (!this.menu_id) {
+      this.errorPopup('No menu to reject. Please upload a menu first.');
+      return;
+    }
+
+    this.messmenu_service.rejectMenu(this.menu_id)
+      .then((res: any) => {
+        console.log(res);
+
+        this.successPopup('Rejection Successful.');
+        this.resetForm();
+      })
+      .catch((err: any) => this.handleError(err, 'Rejection'));
+  }
+
+  private handleError(err: any, action: string): void {
     let errorMessage = 'Unknown error';
     
     if (err.status === 401 || err.status === 403) { 
@@ -165,18 +198,18 @@ export class MessMenuUploadComponent implements OnInit {
     this.sheetUrl = '';
   }
 
-  successPopup(message: string): void {
+  successPopup(message: string, duration: number = 5000): void {
     this.snackBar.open(message, 'Close', { 
-      duration: 3000,
+      duration: duration,
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: ['success-snackbar']
     });
   }
 
-  errorPopup(message: string): void {
+  errorPopup(message: string, duration: number = 15000): void {
     this.snackBar.open(message, 'Close', { 
-      duration: 3000,
+      duration: duration,
       horizontalPosition: 'right',
       verticalPosition: 'top',
       panelClass: ['error-snackbar']

@@ -37,7 +37,18 @@
         />
       </div>
 
-      <button type="submit" class="btn-upload" (click)="onUpload() ">Upload Data</button>
+      <button type="submit" class="btn-upload" (click)="onUpload()">Upload Data</button>
+    </div>
+
+    <!-- Approve/Reject Buttons (visible after successful upload) -->
+    <div class="approval-row" *ngIf="menu_id">
+      <div class="approval-message">
+        <p>Menu uploaded successfully. Please review and approve or reject.</p>
+      </div>
+      <div class="approval-buttons">
+        <button type="button" class="btn-approve" (click)="onApproval()">Approve</button>
+        <button type="button" class="btn-reject" (click)="onRejection()">Reject</button>
+      </div>
     </div>
   </form>
 </div>

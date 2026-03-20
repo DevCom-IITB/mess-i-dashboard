@@ -23,7 +23,7 @@ export class MessmenuService {
    * @returns Promise with upload response
    */
   uploadMenuFromFile(hostel: string, file: File): Promise<any> {
-    let url = this.baseurl.concat("/upload-mess-menu");
+    let url = this.baseurl.concat("/upload-menu");
     const formData = new FormData();
     formData.append('hostel', hostel);
     formData.append('file', file);
@@ -53,7 +53,7 @@ export class MessmenuService {
         return Promise.reject("Invalid Google Sheets URL");
     }
 
-    let url = this.baseurl.concat("/upload-mess-menu");
+    let url = this.baseurl.concat("/upload-menu");
     const formData = new FormData();
     formData.append('hostel', hostel);
     formData.append('sheetUrl', sheetUrl);
@@ -72,6 +72,37 @@ export class MessmenuService {
     });
   }
 
+  approveMenu(menu_id: string): Promise<any> {
+    let url = this.baseurl.concat("/approve-menu/", menu_id);
+    
+    return new Promise((resolve, reject) => {
+      this.http.post(url, {}, {
+        headers: {
+          'x-access-token': this.auth.getToken()
+        },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
+  rejectMenu(menu_id: string): Promise<any> {
+    let url = this.baseurl.concat("/reject-menu/", menu_id);
+    
+    return new Promise((resolve, reject) => {
+      this.http.post(url, {}, {
+        headers: {
+          'x-access-token': this.auth.getToken()
+        },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
   /**
    * Get mess menu for a specific hostel and date
    * @param hostel Hostel name

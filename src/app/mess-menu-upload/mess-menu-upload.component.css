@@ -79,9 +79,89 @@ h1 {
   color: #28282B;
 }
 
+/* Approval Row Styling */
+.approval-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.approval-message {
+  text-align: center;
+  font-size: 16px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.approval-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-approve,
+.btn-reject {
+  border: none;
+  padding: 12px 40px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.btn-approve {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-reject {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #da190b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Snackbar Styling */
+.success-snackbar {
+  background-color: #4CAF50 !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
 /* Mobile: Stack the dropdowns only on small screens */
 @media (max-width: 600px) {
   .selectors-row {
     flex-direction: column;
+  }
+
+  .approval-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-approve,
+  .btn-reject {
+    width: 100%;
   }
 }
