@@ -5,6 +5,7 @@ import { StudentdataService } from '../studentdata.service';
 import { MessmenuService } from '../messmenu.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-mess-menu-upload',
@@ -13,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class MessMenuUploadComponent implements OnInit {
   app_bar_suffix: string = "Mess Menu Upload";
+  environment = environment;
   uploadForm: FormGroup;
   isManager: boolean = false;
   userHostel: string = '';
@@ -25,6 +27,7 @@ export class MessMenuUploadComponent implements OnInit {
   selectedFile: File | null = null;
   selectedHostel: string = '';
   menu_id: string = '';
+  testingLLMs: boolean = false;
 
   constructor(
     public auth_service: AuthService,
@@ -120,6 +123,23 @@ export class MessMenuUploadComponent implements OnInit {
       }
     }
 
+    if(this.testingLLMs){
+      if(this.selectedFile){
+        this.messmenu_service.uploadMenuFromFileMultipleLLMs(this.selectedHostel, this.selectedFile)
+          .then((res: any) => {
+            console.log(res);
+            this.menu_id = res.menu_id;
+  
+            this.successPopup('Upload Successful. Processing will finish soon.');
+            this.resetForm();
+          })
+          .catch((err: any) => this.handleError(err, 'Upload'));
+        }else{
+          this.errorPopup('Please select an Excel file');
+        }
+        return;
+    }
+
     // Proceeding with upload
     if (this.uploadType === 'excel' && this.selectedFile) {
       this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
@@ -127,21 +147,22 @@ export class MessMenuUploadComponent implements OnInit {
           console.log(res);
           this.menu_id = res.menu_id;
 
-          this.successPopup('Upload Successful. Processing will begin soon.');
+          this.successPopup('Upload Successful. Processing will finish soon.');
           this.resetForm();
         })
         .catch((err: any) => this.handleError(err, 'Upload'));
     } else if (this.uploadType === 'google_sheet') {
-
       this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
         .then((res: any) => {
           console.log(res);
           this.menu_id = res.menu_id;
 
-          this.successPopup('Upload Successful. Processing will begin soon.');
+          this.successPopup('Upload Successful. Processing will finish soon.');
           this.resetForm();
         })
         .catch((err: any) => this.handleError(err, 'Upload'));
+    }else{
+      this.errorPopup('Please select a valid upload type');
     }
   }
 

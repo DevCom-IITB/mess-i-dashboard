@@ -41,6 +41,34 @@ export class MessmenuService {
       );
     });
   }
+  
+
+
+  /**
+   * Upload mess menu from Excel file for testing to multiple LLMs
+   * @param hostel Hostel name (e.g., 'H1', 'H2', 'TANSA')
+   * @param file Excel file to upload
+   * @returns Promise with upload response
+   */
+  uploadMenuFromFileMultipleLLMs(hostel: string, file: File): Promise<any> {
+    let url = this.baseurl.concat("/upload-menu-llm-testing");
+    const formData = new FormData();
+    formData.append('hostel', hostel);
+    formData.append('file', file);
+    formData.append('type', 'excel_file');
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, formData, {
+        headers: {
+          'x-access-token': this.auth.getToken()
+        },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
 
   /**
    * Upload mess menu from Google Sheet link

@@ -1,18 +1,17 @@
 <div class="container">
   <h1>Upload Mess Menu</h1>
 
-  <!-- TODO: Add submit functionality -->
   <form #data="ngForm" class="mess-form">
     <div class="selectors-row">
-      <select *ngIf="hostel_selectable" class="form-select" name="hostel" [(ngModel)]="selectedHostel">
+      <select id="hostel-select" *ngIf="hostel_selectable" class="form-select" name="hostel" [(ngModel)]="selectedHostel" aria-label="Select Hostel">
         <option value="" disabled selected>Select Hostel</option>
-        <ng-container *ngFor="let hostel of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-          <option *ngIf="allowedHostels[hostel]" [value]="'H' + hostel">H{{ hostel }}</option>
+        <ng-container *ngFor="let allowed of allowedHostels; let i = index">
+          <option *ngIf="allowed && i !== 21" [value]="'H' + i">H{{ i }}</option>
+          <option *ngIf="allowed && i === 21" value="TANSA">TANSA</option>
         </ng-container>
-        <option *ngIf="allowedHostels[21]" value="TANSA">TANSA</option>
       </select>
 
-      <select class="form-select" name="upload" [(ngModel)]="uploadType">
+      <select class="form-select" name="upload" [(ngModel)]="uploadType" aria-label="Select Upload Type">
         <option value="" disabled selected>Select Upload Type</option>
         <option value="excel">Excel File Upload</option>
         <option value="google_sheet">Google Sheet Link</option>
@@ -21,12 +20,10 @@
 
     <div class="upload-row" *ngIf="uploadType">
       
-      <!-- Excel Upload -->
       <div *ngIf="uploadType === 'excel'" class="input-wrapper">
-        <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" />
+        <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" aria-label="Upload Excel File" />
       </div>
 
-      <!-- Google Sheet Link -->
       <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper">
         <input 
           type="text" 
@@ -34,16 +31,24 @@
           placeholder="Paste Google Sheet link"
           [(ngModel)]="sheetUrl"
           name="sheetUrl"
+          aria-label="Google Sheet Link"
         />
       </div>
 
       <button type="submit" class="btn-upload" (click)="onUpload()">Upload Data</button>
+
+      <div class="testing-option" *ngIf="environment.llmTesting">
+        <label>
+          <input type="checkbox" [(ngModel)]="testingLLMs" [value]="true" name="testingLLMs" aria-label="Test with Multiple LLMs" />
+          Test with Multiple LLMs
+        </label>
+      </div>
     </div>
 
     <!-- Approve/Reject Buttons (visible after successful upload) -->
     <div class="approval-row" *ngIf="menu_id">
       <div class="approval-message">
-        <p>Menu uploaded successfully. Please review and approve or reject.</p>
+        <p>Menu Preview will show up here</p>
       </div>
       <div class="approval-buttons">
         <button type="button" class="btn-approve" (click)="onApproval()">Approve</button>
