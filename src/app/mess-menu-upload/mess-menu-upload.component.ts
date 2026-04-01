@@ -28,7 +28,9 @@ export class MessMenuUploadComponent implements OnInit {
   selectedHostel: string = '';
   menuID: string = '';
   parsedMenuData: any; //TODO: Shouldnt be any
-  testingLLMs: boolean = false;
+  isApproving: boolean = false;
+  isRejecting: boolean = false;
+  isUploading: boolean = false;
 
   constructor(
     public auth_service: AuthService,
@@ -124,17 +126,21 @@ export class MessMenuUploadComponent implements OnInit {
       }
     }
 
-    if(this.testingLLMs){
+    if(this.environment.llmTesting){
       if(this.selectedFile){
+        this.isUploading = true;
         this.messmenu_service.uploadMenuFromFileMultipleLLMs(this.selectedHostel, this.selectedFile)
           .then((res: any) => {
             console.log(res);
             this.menuID = res.menuID;
-  
+            this.isUploading = false;
             this.successPopup('Upload Successful. Processing will finish soon.');
             this.resetForm();
           })
-          .catch((err: any) => this.handleError(err, 'Upload'));
+          .catch((err: any) => {
+            this.isUploading = false;
+            this.handleError(err, 'Upload');
+          });
         }else{
           this.errorPopup('Please select an Excel file');
         }
@@ -143,27 +149,35 @@ export class MessMenuUploadComponent implements OnInit {
 
     // Proceeding with upload
     if (this.uploadType === 'excel' && this.selectedFile) {
+      this.isUploading = true;
       this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
         .then((res: any) => {
           console.log(res);
           this.menuID = res.menuID;
           this.parsedMenuData = res.menu;
-
-          this.successPopup('Upload Successful. Processing will finish soon.');
+          this.isUploading = false;
+          this.successPopup('Upload Successful. Please verify before approval.');
           this.resetForm();
         })
-        .catch((err: any) => this.handleError(err, 'Upload'));
+        .catch((err: any) => {
+          this.isUploading = false;
+          this.handleError(err, 'Upload');
+        });
     } else if (this.uploadType === 'google_sheet') {
+      this.isUploading = true;
       this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
         .then((res: any) => {
           console.log(res);
           this.menuID = res.menuID;
           this.parsedMenuData = res.menu;
-
-          this.successPopup('Upload Successful. Processing will finish soon.');
+          this.isUploading = false;
+          this.successPopup('Upload Successful. Please verify before approval.');
           this.resetForm();
         })
-        .catch((err: any) => this.handleError(err, 'Upload'));
+        .catch((err: any) => {
+          this.isUploading = false;
+          this.handleError(err, 'Upload');
+        });
     }else{
       this.errorPopup('Please select a valid upload type');
     }
@@ -175,15 +189,19 @@ export class MessMenuUploadComponent implements OnInit {
       return;
     }
 
+    this.isApproving = true;
     this.messmenu_service.approveMenu(this.menuID)
       .then((res: any) => {
         console.log(res);
-
-        this.successPopup('Approval Successful.');
+        this.isApproving = false;
+        this.successPopup('Approval Successful. Changes will be reflected on instiapp soon.');
         this.resetForm();
         this.menuID = ''; // Clear menuID afterwardss
       })
-      .catch((err: any) => this.handleError(err, 'Approval'));
+      .catch((err: any) => {
+        this.isApproving = false;
+        this.handleError(err, 'Approval');
+      });
   }
 
   onRejection(): void {
@@ -192,15 +210,19 @@ export class MessMenuUploadComponent implements OnInit {
       return;
     }
 
+    this.isRejecting = true;
     this.messmenu_service.rejectMenu(this.menuID)
       .then((res: any) => {
         console.log(res);
-
+        this.isRejecting = false;
         this.successPopup('Rejection Successful.');
         this.resetForm();
         this.menuID = ''; 
       })
-      .catch((err: any) => this.handleError(err, 'Rejection'));
+      .catch((err: any) => {
+        this.isRejecting = false;
+        this.handleError(err, 'Rejection');
+      });
   }
 
   private handleError(err: any, action: string): void {

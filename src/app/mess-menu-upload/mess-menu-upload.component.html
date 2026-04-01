@@ -35,11 +35,17 @@
         />
       </div>
 
-      <button type="submit" class="btn-upload" (click)="onUpload()">Upload Data</button>
+      <button type="submit" class="btn-upload" (click)="onUpload()" [disabled]="isUploading">
+        <span *ngIf="!isUploading">Upload Data</span>
+        <span *ngIf="isUploading" class="button-loading">
+          <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+          Processing...
+        </span>
+      </button>
 
       <div class="testing-option" *ngIf="environment.llmTesting">
         <label>
-          <input type="checkbox" [(ngModel)]="testingLLMs" [value]="true" name="testingLLMs" aria-label="Test with Multiple LLMs" />
+          <input type="checkbox" [checked]="environment.llmTesting" aria-label="Test with Multiple LLMs" />
           Test with Multiple LLMs
         </label>
       </div>
@@ -51,8 +57,20 @@
     <!-- Approve/Reject Buttons (visible after successful upload) -->
     <div class="approval-row" *ngIf="menuID && !selectedHostel && !uploadType">
       <div class="approval-buttons">
-        <button type="button" class="btn-approve" (click)="onApproval()">Approve</button>
-        <button type="button" class="btn-reject" (click)="onRejection()">Reject</button>
+        <button type="button" class="btn-approve" (click)="onApproval()" [disabled]="isApproving || isRejecting">
+          <span *ngIf="!isApproving">Approve</span>
+          <span *ngIf="isApproving" class="button-loading">
+            <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+            Processing...
+          </span>
+        </button>
+        <button type="button" class="btn-reject" (click)="onRejection()" [disabled]="isApproving || isRejecting">
+          <span *ngIf="!isRejecting">Reject</span>
+          <span *ngIf="isRejecting" class="button-loading">
+            <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+            Processing...
+          </span>
+        </button>
       </div>
     </div>
   </form>

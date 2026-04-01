@@ -53,6 +53,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { GuestCardComponent } from './components/guest-card/guest-card.component';
 import { MealCalenderComponent } from './meal-calender/meal-calender.component';
@@ -127,7 +128,8 @@ export const MY_DATE_FORMATS = {
         MatIconModule,
         MatSlideToggleModule,
         MatTableModule,
-        MatSnackBarModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
+        MatSnackBarModule,
+        MatProgressSpinnerModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
             { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
             { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
         ] })
