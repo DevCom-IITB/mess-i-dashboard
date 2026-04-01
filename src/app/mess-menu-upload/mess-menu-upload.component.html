@@ -45,11 +45,11 @@
       </div>
     </div>
 
+    <!-- Menu Preview Table -->
+    <app-menu-preview *ngIf="menuID && parsedMenuData" [menuData]="parsedMenuData"></app-menu-preview>
+
     <!-- Approve/Reject Buttons (visible after successful upload) -->
-    <div class="approval-row" *ngIf="menu_id">
-      <div class="approval-message">
-        <p>Menu Preview will show up here</p>
-      </div>
+    <div class="approval-row" *ngIf="menuID && !selectedHostel && !uploadType">
       <div class="approval-buttons">
         <button type="button" class="btn-approve" (click)="onApproval()">Approve</button>
         <button type="button" class="btn-reject" (click)="onRejection()">Reject</button>

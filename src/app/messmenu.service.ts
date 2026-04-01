@@ -100,8 +100,8 @@ export class MessmenuService {
     });
   }
 
-  approveMenu(menu_id: string): Promise<any> {
-    let url = this.baseurl.concat("/approve-menu/", menu_id);
+  approveMenu(menuID: string): Promise<any> {
+    let url = this.baseurl.concat("/approve-menu/", menuID);
     
     return new Promise((resolve, reject) => {
       this.http.post(url, {}, {
@@ -116,8 +116,8 @@ export class MessmenuService {
     });
   }
 
-  rejectMenu(menu_id: string): Promise<any> {
-    let url = this.baseurl.concat("/reject-menu/", menu_id);
+  rejectMenu(menuID: string): Promise<any> {
+    let url = this.baseurl.concat("/reject-menu/", menuID);
     
     return new Promise((resolve, reject) => {
       this.http.post(url, {}, {

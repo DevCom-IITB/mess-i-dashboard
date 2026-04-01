@@ -26,7 +26,8 @@ export class MessMenuUploadComponent implements OnInit {
   sheetUrl: string = '';
   selectedFile: File | null = null;
   selectedHostel: string = '';
-  menu_id: string = '';
+  menuID: string = '';
+  parsedMenuData: any; //TODO: Shouldnt be any
   testingLLMs: boolean = false;
 
   constructor(
@@ -128,7 +129,7 @@ export class MessMenuUploadComponent implements OnInit {
         this.messmenu_service.uploadMenuFromFileMultipleLLMs(this.selectedHostel, this.selectedFile)
           .then((res: any) => {
             console.log(res);
-            this.menu_id = res.menu_id;
+            this.menuID = res.menuID;
   
             this.successPopup('Upload Successful. Processing will finish soon.');
             this.resetForm();
@@ -145,7 +146,8 @@ export class MessMenuUploadComponent implements OnInit {
       this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
         .then((res: any) => {
           console.log(res);
-          this.menu_id = res.menu_id;
+          this.menuID = res.menuID;
+          this.parsedMenuData = res.menu;
 
           this.successPopup('Upload Successful. Processing will finish soon.');
           this.resetForm();
@@ -155,7 +157,8 @@ export class MessMenuUploadComponent implements OnInit {
       this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
         .then((res: any) => {
           console.log(res);
-          this.menu_id = res.menu_id;
+          this.menuID = res.menuID;
+          this.parsedMenuData = res.menu;
 
           this.successPopup('Upload Successful. Processing will finish soon.');
           this.resetForm();
@@ -167,33 +170,35 @@ export class MessMenuUploadComponent implements OnInit {
   }
 
   onApproval(): void {
-    if (!this.menu_id) {
+    if (!this.menuID) {
       this.errorPopup('No menu to approve. Please upload a menu first.');
       return;
     }
 
-    this.messmenu_service.approveMenu(this.menu_id)
+    this.messmenu_service.approveMenu(this.menuID)
       .then((res: any) => {
         console.log(res);
 
         this.successPopup('Approval Successful.');
         this.resetForm();
+        this.menuID = ''; // Clear menuID afterwardss
       })
       .catch((err: any) => this.handleError(err, 'Approval'));
   }
 
   onRejection(): void {
-    if (!this.menu_id) {
+    if (!this.menuID) {
       this.errorPopup('No menu to reject. Please upload a menu first.');
       return;
     }
 
-    this.messmenu_service.rejectMenu(this.menu_id)
+    this.messmenu_service.rejectMenu(this.menuID)
       .then((res: any) => {
         console.log(res);
 
         this.successPopup('Rejection Successful.');
         this.resetForm();
+        this.menuID = ''; 
       })
       .catch((err: any) => this.handleError(err, 'Rejection'));
   }
