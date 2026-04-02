@@ -3,8 +3,17 @@
 
   <form #data="ngForm" class="mess-form">
     <div class="selectors-row">
-      <select id="hostel-select" *ngIf="hostel_selectable" class="form-select" name="hostel" [(ngModel)]="selectedHostel" aria-label="Select Hostel">
-        <option value="" disabled selected>Select Hostel</option>
+      <select
+        id="hostel-select"
+        class="form-select"
+        name="hostel"
+        [(ngModel)]="selectedHostel"
+        [disabled]="true"
+        aria-label="Selected Hostel"
+      >
+        <option *ngIf="selectedHostel" [value]="selectedHostel">{{ selectedHostel }}</option>
+        <option *ngIf="!selectedHostel" value="">Fetching hostel...</option>
+
         <ng-container *ngFor="let allowed of allowedHostels; let i = index">
           <option *ngIf="allowed && i !== 21" [value]="'H' + i">H{{ i }}</option>
           <option *ngIf="allowed && i === 21" value="TANSA">TANSA</option>
@@ -14,7 +23,7 @@
       <select class="form-select" name="upload" [(ngModel)]="uploadType" aria-label="Select Upload Type">
         <option value="" disabled selected>Select Upload Type</option>
         <option value="excel">Excel File Upload</option>
-        <option value="google_sheet">Google Sheet Link</option>
+        <!-- <option value="google_sheet">Google Sheet Link</option> -->
       </select>
     </div>
 
@@ -24,7 +33,7 @@
         <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" aria-label="Upload Excel File" />
       </div>
 
-      <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper">
+      <!-- <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper">
         <input 
           type="text" 
           class="form-control sheet-input" 
@@ -33,7 +42,7 @@
           name="sheetUrl"
           aria-label="Google Sheet Link"
         />
-      </div>
+      </div> -->
 
       <button type="submit" class="btn-upload" (click)="onUpload()" [disabled]="isUploading">
         <span *ngIf="!isUploading">Upload Data</span>
@@ -55,7 +64,7 @@
     <app-menu-preview *ngIf="menuID && parsedMenuData" [menuData]="parsedMenuData"></app-menu-preview>
 
     <!-- Approve/Reject Buttons (visible after successful upload) -->
-    <div class="approval-row" *ngIf="menuID && !selectedHostel && !uploadType">
+    <div class="approval-row" *ngIf="menuID && !uploadType">
       <div class="approval-buttons">
         <button type="button" class="btn-approve" (click)="onApproval()" [disabled]="isApproving || isRejecting">
           <span *ngIf="!isApproving">Approve</span>

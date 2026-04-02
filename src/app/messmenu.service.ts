@@ -131,6 +131,23 @@ export class MessmenuService {
       );
     });
   }
+
+  getHostelInfo(): Promise<any> {
+    const url = this.baseurl.concat('/get-hostel');
+
+    return new Promise((resolve, reject) => {
+      this.http.post(url, {}, {
+        headers: {
+          'x-access-token': this.auth.getToken()
+        },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
   /**
    * Get mess menu for a specific hostel and date
    * @param hostel Hostel name

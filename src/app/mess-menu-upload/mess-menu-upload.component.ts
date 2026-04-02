@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { StudentdataService } from '../studentdata.service';
 import { MessmenuService } from '../messmenu.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +17,6 @@ export class MessMenuUploadComponent implements OnInit {
   uploadForm: FormGroup;
   isManager: boolean = false;
   userHostel: string = '';
-  hostel_selectable: boolean = false;
   allowedHostels: boolean[] = new Array<boolean>(22);
   date = new Date();
   messHistory: any = { exists: true, loaded: false };
@@ -35,7 +33,6 @@ export class MessMenuUploadComponent implements OnInit {
   constructor(
     public auth_service: AuthService,
     public router: Router,
-    private data_service: StudentdataService,
     private messmenu_service: MessmenuService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar
@@ -48,24 +45,18 @@ export class MessMenuUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hostel_selectable = this.auth_service.isAdmin();
-    this.getAdminHostel();
+    this.getHostel();
   }
 
-  getAdminHostel() {
-    this.data_service.getAdminHostels().then((res: any) => {
-      for (let i = 1; i < this.allowedHostels.length; i++) {
-        this.allowedHostels[i] = false;
-        if (res.includes(`H${i}`)) {
-          this.allowedHostels[i] = true;
-        }
-        if (res.includes("TANSA")) {
-          this.allowedHostels[21] = true;
-        }
-      }
+  getHostel() {
+    this.messmenu_service.getHostelInfo().then((res: any) => {
+      const hostel = res?.hostel || '';
+      this.userHostel = hostel;
+      this.selectedHostel = hostel;
     }).catch((res) => {
       console.log(res);
       this.messHistory = { exists: false, loaded: true };
+      this.errorPopup('Unable to fetch your hostel. Please try again.');
     });
   }
 
@@ -119,11 +110,15 @@ export class MessMenuUploadComponent implements OnInit {
         this.errorPopup('Please select an Excel file');
         return;
       }
-    }else if (this.uploadType === 'google_sheet') {
-      if (!this.sheetUrl || this.sheetUrl.trim() === '') {
-        this.errorPopup('Please enter a Google Sheet URL');
-        return;
-      }
+    }
+    // else if (this.uploadType === 'google_sheet') {
+    //   if (!this.sheetUrl || this.sheetUrl.trim() === '') {
+    //     this.errorPopup('Please enter a Google Sheet URL');
+    //     return;
+    //   }
+    // }
+     else{
+      this.errorPopup('Invalid upload type selected');
     }
 
     if(this.environment.llmTesting){
@@ -163,21 +158,21 @@ export class MessMenuUploadComponent implements OnInit {
           this.isUploading = false;
           this.handleError(err, 'Upload');
         });
-    } else if (this.uploadType === 'google_sheet') {
-      this.isUploading = true;
-      this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
-        .then((res: any) => {
-          console.log(res);
-          this.menuID = res.menuID;
-          this.parsedMenuData = res.menu;
-          this.isUploading = false;
-          this.successPopup('Upload Successful. Please verify before approval.');
-          this.resetForm();
-        })
-        .catch((err: any) => {
-          this.isUploading = false;
-          this.handleError(err, 'Upload');
-        });
+    // } else if (this.uploadType === 'google_sheet') {
+    //   this.isUploading = true;
+    //   this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
+    //     .then((res: any) => {
+    //       console.log(res);
+    //       this.menuID = res.menuID;
+    //       this.parsedMenuData = res.menu;
+    //       this.isUploading = false;
+    //       this.successPopup('Upload Successful. Please verify before approval.');
+    //       this.resetForm();
+    //     })
+    //     .catch((err: any) => {
+    //       this.isUploading = false;
+    //       this.handleError(err, 'Upload');
+    //     });
     }else{
       this.errorPopup('Please select a valid upload type');
     }
@@ -240,7 +235,7 @@ export class MessMenuUploadComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.selectedHostel = '';
+    this.selectedHostel = this.userHostel;
     this.uploadType = '';
     this.selectedFile = null;
     this.sheetUrl = '';
