@@ -27,6 +27,14 @@ h1 {
   width: 100%;
 }
 
+.selectors-row > div {
+  flex: 1;
+}
+
+.selectors-row > div select.form-select {
+  width: 100%;
+}
+
 .selectors-row select.form-select {
   flex: 1; /* Makes both dropdowns take equal space on the same line */
   padding: 12px;
@@ -35,6 +43,15 @@ h1 {
   background-color: #FFF8E8;
   font-size: 16px;
   outline: none;
+}
+
+/* Hostel field is immutable: show faded/locked visual state */
+#hostel-select:disabled {
+  opacity: 0.7;
+  background-color: #fff8e8;
+  color: #8a6d1f;
+  border-color: #ffc42b;
+  cursor: not-allowed;
 }
 
 /* Row 2: The Upload Area */

@@ -20,7 +20,7 @@ export class MessMenuUploadComponent implements OnInit {
   allowedHostels: boolean[] = new Array<boolean>(22);
   date = new Date();
   messHistory: any = { exists: true, loaded: false };
-  uploadType: string = '';
+  uploadType: string = 'excel';
   sheetUrl: string = '';
   selectedFile: File | null = null;
   selectedHostel: string = '';
@@ -189,7 +189,7 @@ export class MessMenuUploadComponent implements OnInit {
       .then((res: any) => {
         console.log(res);
         this.isApproving = false;
-        this.successPopup('Approval Successful. Changes will be reflected on instiapp soon.');
+        this.successPopup('Approval Successful. Changes will be reflected on InstiApp soon.');
         this.resetForm();
         this.menuID = ''; // Clear menuID afterwardss
       })
@@ -236,7 +236,7 @@ export class MessMenuUploadComponent implements OnInit {
 
   resetForm(): void {
     this.selectedHostel = this.userHostel;
-    this.uploadType = '';
+    this.uploadType = 'excel';
     this.selectedFile = null;
     this.sheetUrl = '';
   }
