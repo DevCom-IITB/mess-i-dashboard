@@ -136,6 +136,10 @@ export class AuthService {
   isAdmin(){
     return this.is_admin;
   }
+
+  isMessCo(){
+    return this.is_staff;
+  }
   
   isStaff(){
     return (this.is_admin || this.is_rebate || this.is_staff);

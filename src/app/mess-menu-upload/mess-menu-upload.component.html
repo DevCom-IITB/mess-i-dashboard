@@ -32,6 +32,21 @@
       </select>
     </div>
 
+    <div 
+      class="external-link-container" 
+      *ngIf="sheetUrl"
+      matTooltip="Contact DevCom if you think this is not your hostel"
+      [matTooltipShowDelay]="800"
+      matTooltipPosition="above"
+    >
+      
+      <p class="info-text">
+        <a [href]="sheetUrl" target="_blank" class="direct-link">
+          {{selectedHostel}} Menu Sheet <mat-icon class="external-icon">open_in_new</mat-icon>
+        </a>
+      </p>
+    </div>
+
     <div class="upload-row" *ngIf="uploadType && !menuID">
       
       <div *ngIf="uploadType === 'excel'" class="input-wrapper">

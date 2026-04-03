@@ -45,14 +45,15 @@ export class MessMenuUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHostel();
+    this.getHostelandSheet();
   }
 
-  getHostel() {
+  getHostelandSheet() {
     this.messmenu_service.getHostelInfo().then((res: any) => {
       const hostel = res?.hostel || '';
       this.userHostel = hostel;
       this.selectedHostel = hostel;
+      this.sheetUrl = res.sheetUrl;
     }).catch((res) => {
       console.log(res);
       this.messHistory = { exists: false, loaded: true };
@@ -238,7 +239,6 @@ export class MessMenuUploadComponent implements OnInit {
     this.selectedHostel = this.userHostel;
     this.uploadType = 'excel';
     this.selectedFile = null;
-    this.sheetUrl = '';
   }
 
   successPopup(message: string, duration: number = 5000): void {

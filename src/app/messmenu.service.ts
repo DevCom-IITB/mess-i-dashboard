@@ -133,7 +133,7 @@ export class MessmenuService {
   }
 
   getHostelInfo(): Promise<any> {
-    const url = this.baseurl.concat('/get-hostel');
+    const url = this.baseurl.concat('/get-hostel-info');
 
     return new Promise((resolve, reject) => {
       this.http.post(url, {}, {
