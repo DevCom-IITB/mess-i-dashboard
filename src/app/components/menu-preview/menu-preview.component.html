@@ -1,4 +1,7 @@
-<div class="menu-preview-container" *ngIf="menuData">
+<div class="menu-preview-container" *ngIf="menuData"
+  matTooltip="For minor changes you can approve and change it in the Excel sheet itself. For major inaccuracies, please contact us."
+  [matTooltipShowDelay]="1000"
+  matTooltipPosition="above">
   <h2>Menu Preview</h2>
   <div class="table-wrapper">
     <table mat-table [dataSource]="days" class="menu-table">
