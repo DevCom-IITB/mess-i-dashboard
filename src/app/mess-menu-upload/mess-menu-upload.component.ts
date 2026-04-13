@@ -23,12 +23,15 @@ export class MessMenuUploadComponent implements OnInit {
   uploadType: string = 'excel';
   sheetUrl: string = '';
   selectedFile: File | null = null;
+  sheetNames: string[] = [];
+  selectedSheet: string = '';
   selectedHostel: string = '';
   menuID: string = '';
   parsedMenuData: any; //TODO: Shouldnt be any
   isApproving: boolean = false;
   isRejecting: boolean = false;
   isUploading: boolean = false;
+  isUserAdmin: boolean = false;
 
   constructor(
     public auth_service: AuthService,
@@ -40,6 +43,7 @@ export class MessMenuUploadComponent implements OnInit {
     if (!this.auth_service.isLoggedIn() || !this.auth_service.isStaff()) {
       this.router.navigate(['login']);
     }
+    this.isUserAdmin = this.auth_service.isAdmin();
 
     // TODO: Implement auto hostel fetching logic based on user role
   }
@@ -49,16 +53,26 @@ export class MessMenuUploadComponent implements OnInit {
   }
 
   getHostelandSheet() {
-    this.messmenu_service.getHostelInfo().then((res: any) => {
-      const hostel = res?.hostel || '';
-      this.userHostel = hostel;
-      this.selectedHostel = hostel;
-      this.sheetUrl = res.sheetUrl;
-    }).catch((res) => {
-      console.log(res);
-      this.messHistory = { exists: false, loaded: true };
-      this.errorPopup('Unable to fetch your hostel. Please try again.');
-    });
+    if (this.isUserAdmin) {
+      this.messmenu_service.getMessList().then((res: any) => {
+        this.allowedHostels = res;
+        this.selectedHostel = ''; // Default to empty for admin
+      }).catch((res) => {
+        console.log(res);
+        this.errorPopup('Unable to fetch mess list. Please try again.');
+      });
+    } else {
+      this.messmenu_service.getHostelInfo().then((res: any) => {
+        const hostel = res?.hostel || '';
+        this.userHostel = hostel;
+        this.selectedHostel = hostel;
+        this.sheetUrl = res.sheetUrl;
+      }).catch((res) => {
+        console.log(res);
+        this.messHistory = { exists: false, loaded: true };
+        this.errorPopup('Unable to fetch your hostel. Please try again.');
+      });
+    }
   }
 
   onFileSelect(event: any): void {
@@ -90,6 +104,9 @@ export class MessMenuUploadComponent implements OnInit {
     }
 
     this.selectedFile = file;
+    this.sheetNames = [];
+    this.selectedSheet = '';
+    this.parsedMenuData = null;
     this.successPopup(`File selected: ${file.name}`);
   }
 
@@ -109,6 +126,10 @@ export class MessMenuUploadComponent implements OnInit {
     if (this.uploadType === 'excel') {
       if (!this.selectedFile) {
         this.errorPopup('Please select an Excel file');
+        return;
+      }
+      if (this.sheetNames.length > 0 && !this.selectedSheet) {
+        this.errorPopup('Please select a sheet from the dropdown');
         return;
       }
     }
@@ -146,14 +167,20 @@ export class MessMenuUploadComponent implements OnInit {
     // Proceeding with upload
     if (this.uploadType === 'excel' && this.selectedFile) {
       this.isUploading = true;
-      this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile)
+      this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile, this.selectedSheet || undefined)
         .then((res: any) => {
           console.log(res);
+          if (res.multipleSheets) {
+            this.sheetNames = res.sheetNames;
+            this.isUploading = false;
+            this.successPopup('Multiple sheets found. Please select a sheet and upload again.', 6000);
+            return;
+          }
           this.menuID = res.menuID;
           this.parsedMenuData = res.menu;
           this.isUploading = false;
           this.successPopup('Upload Successful. Please verify before approval.');
-          this.resetForm();
+          // this.resetForm(); //Reseting form now only happens after approval
         })
         .catch((err: any) => {
           this.isUploading = false;
@@ -239,6 +266,9 @@ export class MessMenuUploadComponent implements OnInit {
     this.selectedHostel = this.userHostel;
     this.uploadType = 'excel';
     this.selectedFile = null;
+    this.sheetNames = [];
+    this.selectedSheet = '';
+    this.parsedMenuData = null;
   }
 
   successPopup(message: string, duration: number = 5000): void {

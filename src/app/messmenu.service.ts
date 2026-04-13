@@ -22,12 +22,15 @@ export class MessmenuService {
    * @param file Excel file to upload
    * @returns Promise with upload response
    */
-  uploadMenuFromFile(hostel: string, file: File): Promise<any> {
+  uploadMenuFromFile(hostel: string, file: File, sheetName?: string): Promise<any> {
     let url = this.baseurl.concat("/upload-menu");
     const formData = new FormData();
     formData.append('hostel', hostel);
     formData.append('file', file);
     formData.append('type', 'excel_file');
+    if (sheetName) {
+      formData.append('sheetName', sheetName);
+    }
 
     return new Promise((resolve, reject) => {
       this.http.post(url, formData, {
@@ -100,6 +103,11 @@ export class MessmenuService {
     });
   }
 
+  /**
+   * Approve a mess menu
+   * @param menuID ID of the menu to approve
+   * @returns Promise with approval response
+   */
   approveMenu(menuID: string): Promise<any> {
     let url = this.baseurl.concat("/approve-menu/", menuID);
     
@@ -116,6 +124,11 @@ export class MessmenuService {
     });
   }
 
+  /**
+   * Reject a mess menu
+   * @param menuID ID of the menu to reject
+   * @returns Promise with rejection response
+   */
   rejectMenu(menuID: string): Promise<any> {
     let url = this.baseurl.concat("/reject-menu/", menuID);
     
@@ -132,11 +145,15 @@ export class MessmenuService {
     });
   }
 
+  /**
+   * Get hostel info for the logged-in user
+   * @returns Promise with hostel info
+   */
   getHostelInfo(): Promise<any> {
     const url = this.baseurl.concat('/get-hostel-info');
 
     return new Promise((resolve, reject) => {
-      this.http.post(url, {}, {
+      this.http.get(url, {
         headers: {
           'x-access-token': this.auth.getToken()
         },
@@ -149,67 +166,21 @@ export class MessmenuService {
   }
 
   /**
-   * Get mess menu for a specific hostel and date
-   * @param hostel Hostel name
-   * @param date Date in format YYYY-MM-DD
-   * @returns Promise with mess menu data
+   * Get mess list for admin
+   * @returns Promise with mess list
    */
-//   getMessMenu(hostel: string, date: string): Promise<any> {
-//     let url = this.baseurl.concat("/get-mess-menu/", hostel, "/", date);
-
-//     return new Promise((resolve, reject) => {
-//       this.http.get(url, {
-//         headers: {
-//           'x-access-token': this.auth.getToken()
-//         },
-//         withCredentials: true
-//       }).subscribe(
-//         (res: any) => resolve(res),
-//         (err) => reject(err)
-//       );
-//     });
-//   }
-
-  /**
-   * Delete mess menu for a specific hostel and date
-   * @param hostel Hostel name
-   * @param date Date in format YYYY-MM-DD
-   * @returns Promise with delete response
-   */
-//   deleteMessMenu(hostel: string, date: string): Promise<any> {
-//     let url = this.baseurl.concat("/delete-mess-menu/", hostel, "/", date);
-
-//     return new Promise((resolve, reject) => {
-//       this.http.delete(url, {
-//         headers: {
-//           'x-access-token': this.auth.getToken()
-//         },
-//         withCredentials: true
-//       }).subscribe(
-//         (res: any) => resolve(res),
-//         (err) => reject(err)
-//       );
-//     });
-//   }
-
-  /**
-   * Get all mess menus for a hostel
-   * @param hostel Hostel name
-   * @returns Promise with array of mess menus
-   */
-//   getAllMessMenus(hostel: string): Promise<any> {
-//     let url = this.baseurl.concat("/get-all-mess-menus/", hostel);
-
-//     return new Promise((resolve, reject) => {
-//       this.http.get(url, {
-//         headers: {
-//           'x-access-token': this.auth.getToken()
-//         },
-//         withCredentials: true
-//       }).subscribe(
-//         (res: any) => resolve(res),
-//         (err) => reject(err)
-//       );
-    // });
-//   }
+  getMessList(): Promise<any> {
+    let url = this.baseurl.concat("/mess-list");
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: {
+          'x-access-token': this.auth.getToken()
+        },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
 }
