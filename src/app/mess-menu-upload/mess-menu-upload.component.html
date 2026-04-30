@@ -26,8 +26,11 @@
       </div>
 
       <select class="form-select" name="upload" [(ngModel)]="uploadType" aria-label="Select Upload Type">
-        <!-- <option value="" disabled>Select Upload Type</option> -->
-        <option value="excel">Upload Mess Menu Excel</option>
+        <option value="" disabled>Select Upload Type</option>
+        <option value="excel">Excel File</option>
+        <option value="google_sheet">Google Sheet</option>
+        <option value="pdf">PDF File</option>
+        <option value="image">Image File</option>
       </select>
     </div>
 
@@ -48,8 +51,14 @@
 
     <div class="upload-row" *ngIf="uploadType && !menuID">
       
-      <div *ngIf="uploadType === 'excel'" class="input-wrapper">
-        <input type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" aria-label="Upload Excel File" />
+      <div *ngIf="uploadType === 'excel' || uploadType === 'pdf' || uploadType === 'image'" class="input-wrapper">
+        <input *ngIf="uploadType === 'excel'" type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" aria-label="Upload Excel File" />
+        <input *ngIf="uploadType === 'pdf'" type="file" (change)="onFileSelect($event)" accept=".pdf" class="file-input" aria-label="Upload PDF File" />
+        <input *ngIf="uploadType === 'image'" type="file" (change)="onFileSelect($event)" accept="image/*" class="file-input" aria-label="Upload Image File" />
+      </div>
+
+      <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper sheet-input-wrapper">
+        <input type="text" [(ngModel)]="sheetUrl" name="sheetUrlInput" placeholder="Enter Google Sheet Link" class="sheet-input" aria-label="Google Sheet Link" />
       </div>
 
       <div *ngIf="sheetNames.length > 0" class="input-wrapper sheet-selector">

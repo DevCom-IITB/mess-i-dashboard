@@ -79,6 +79,12 @@ h1 {
   background-color: #FFF8E8;
 }
 
+.sheet-input-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 /* Button Styling */
 .btn-upload {
   background-color: #28282B;

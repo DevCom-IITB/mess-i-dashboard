@@ -22,12 +22,12 @@ export class MessmenuService {
    * @param file Excel file to upload
    * @returns Promise with upload response
    */
-  uploadMenuFromFile(hostel: string, file: File, sheetName?: string): Promise<any> {
+  uploadMenuFromFile(hostel: string, file: File, sheetName?: string, type: string = 'excel'): Promise<any> {
     let url = this.baseurl.concat("/upload-menu");
     const formData = new FormData();
     formData.append('hostel', hostel);
     formData.append('file', file);
-    formData.append('type', 'excel_file');
+    formData.append('type', type);
     if (sheetName) {
       formData.append('sheetName', sheetName);
     }
@@ -58,7 +58,7 @@ export class MessmenuService {
     const formData = new FormData();
     formData.append('hostel', hostel);
     formData.append('file', file);
-    formData.append('type', 'excel_file');
+    formData.append('type', 'excel');
 
     return new Promise((resolve, reject) => {
       this.http.post(url, formData, {
@@ -79,7 +79,7 @@ export class MessmenuService {
    * @param sheetUrl Google Sheet URL
    * @returns Promise with upload response
    */
-  uploadMenuFromGoogleSheet(hostel: string, sheetUrl: string): Promise<any> {
+  uploadMenuFromGoogleSheet(hostel: string, sheetUrl: string, sheetName?: string): Promise<any> {
     if (!this.isValidGoogleSheetLink(sheetUrl)) {
         return Promise.reject("Invalid Google Sheets URL");
     }
@@ -89,6 +89,10 @@ export class MessmenuService {
     formData.append('hostel', hostel);
     formData.append('sheetUrl', sheetUrl);
     formData.append('type', 'google_sheet');
+    
+    if (sheetName) {
+      formData.append('sheetName', sheetName);
+    }
 
     return new Promise((resolve, reject) => {
       this.http.post(url, formData, {

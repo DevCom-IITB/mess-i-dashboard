@@ -84,12 +84,20 @@ export class MessMenuUploadComponent implements OnInit {
     }
 
     // File type validation
-    const allowedExtensions = ['xlsx', 'xls'];
+    let allowedExtensions: string[] = [];
+    if (this.uploadType === 'excel') {
+      allowedExtensions = ['xlsx', 'xls'];
+    } else if (this.uploadType === 'pdf') {
+      allowedExtensions = ['pdf'];
+    } else if (this.uploadType === 'image') {
+      allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'heic'];
+    }
+
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
     
     if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
       this.selectedFile = null; 
-      this.errorPopup('Only .xlsx and .xls files are allowed');
+      this.errorPopup(`Invalid file type. Allowed extensions: ${allowedExtensions.join(', ')}`);
       return;
     }
 
@@ -122,10 +130,20 @@ export class MessMenuUploadComponent implements OnInit {
       return;
     }
 
-    // Check Excel file
-    if (this.uploadType === 'excel') {
+    // Check Excel file, PDF file or Image file
+    if (this.uploadType === 'excel' || this.uploadType === 'pdf' || this.uploadType === 'image') {
       if (!this.selectedFile) {
-        this.errorPopup('Please select an Excel file');
+        this.errorPopup('Please select a file');
+        return;
+      }
+      if (this.uploadType === 'excel' && this.sheetNames.length > 0 && !this.selectedSheet) {
+        this.errorPopup('Please select a sheet from the dropdown');
+        return;
+      }
+    }
+    else if (this.uploadType === 'google_sheet') {
+      if (!this.sheetUrl || this.sheetUrl.trim() === '') {
+        this.errorPopup('Please enter a Google Sheet URL');
         return;
       }
       if (this.sheetNames.length > 0 && !this.selectedSheet) {
@@ -133,41 +151,13 @@ export class MessMenuUploadComponent implements OnInit {
         return;
       }
     }
-    // else if (this.uploadType === 'google_sheet') {
-    //   if (!this.sheetUrl || this.sheetUrl.trim() === '') {
-    //     this.errorPopup('Please enter a Google Sheet URL');
-    //     return;
-    //   }
-    // }
      else{
       this.errorPopup('Invalid upload type selected');
     }
-
-    if(this.environment.llmTesting){
-      if(this.selectedFile){
-        this.isUploading = true;
-        this.messmenu_service.uploadMenuFromFileMultipleLLMs(this.selectedHostel, this.selectedFile)
-          .then((res: any) => {
-            console.log(res);
-            this.menuID = res.menuID;
-            this.isUploading = false;
-            this.successPopup('Upload Successful. Processing will finish soon.');
-            this.resetForm();
-          })
-          .catch((err: any) => {
-            this.isUploading = false;
-            this.handleError(err, 'Upload');
-          });
-        }else{
-          this.errorPopup('Please select an Excel file');
-        }
-        return;
-    }
-
     // Proceeding with upload
-    if (this.uploadType === 'excel' && this.selectedFile) {
+    if ((this.uploadType === 'excel' || this.uploadType === 'pdf' || this.uploadType === 'image') && this.selectedFile) {
       this.isUploading = true;
-      this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile, this.selectedSheet || undefined)
+      this.messmenu_service.uploadMenuFromFile(this.selectedHostel, this.selectedFile, this.selectedSheet || undefined, this.uploadType)
         .then((res: any) => {
           console.log(res);
           if (res.multipleSheets) {
@@ -186,21 +176,26 @@ export class MessMenuUploadComponent implements OnInit {
           this.isUploading = false;
           this.handleError(err, 'Upload');
         });
-    // } else if (this.uploadType === 'google_sheet') {
-    //   this.isUploading = true;
-    //   this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl)
-    //     .then((res: any) => {
-    //       console.log(res);
-    //       this.menuID = res.menuID;
-    //       this.parsedMenuData = res.menu;
-    //       this.isUploading = false;
-    //       this.successPopup('Upload Successful. Please verify before approval.');
-    //       this.resetForm();
-    //     })
-    //     .catch((err: any) => {
-    //       this.isUploading = false;
-    //       this.handleError(err, 'Upload');
-    //     });
+    } else if (this.uploadType === 'google_sheet') {
+      this.isUploading = true;
+      this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl, this.selectedSheet || undefined)
+        .then((res: any) => {
+          console.log(res);
+          if (res.multipleSheets) {
+            this.sheetNames = res.sheetNames;
+            this.isUploading = false;
+            this.successPopup('Multiple sheets found. Please select a sheet and upload again.', 6000);
+            return;
+          }
+          this.menuID = res.menuID;
+          this.parsedMenuData = res.menu;
+          this.isUploading = false;
+          this.successPopup('Upload Successful. Please verify before approval.');
+        })
+        .catch((err: any) => {
+          this.isUploading = false;
+          this.handleError(err, 'Upload');
+        });
     }else{
       this.errorPopup('Please select a valid upload type');
     }
