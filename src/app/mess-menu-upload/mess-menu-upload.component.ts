@@ -97,6 +97,7 @@ export class MessMenuUploadComponent implements OnInit {
     
     if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
       this.selectedFile = null; 
+      event.target.value = '';
       this.errorPopup(`Invalid file type. Allowed extensions: ${allowedExtensions.join(', ')}`);
       return;
     }
@@ -107,6 +108,7 @@ export class MessMenuUploadComponent implements OnInit {
     
     if (fileSizeInMB > maxSizeInMB) {
       this.selectedFile = null; 
+      event.target.value = '';
       this.errorPopup(`File size exceeds ${maxSizeInMB}MB limit`);
       return;
     }
@@ -213,7 +215,7 @@ export class MessMenuUploadComponent implements OnInit {
         console.log(res);
         this.isApproving = false;
         this.successPopup('Approval Successful. Changes will be reflected on InstiApp soon.');
-        this.resetForm();
+        // this.resetForm();
         this.menuID = ''; // Clear menuID afterwardss
       })
       .catch((err: any) => {
@@ -234,7 +236,7 @@ export class MessMenuUploadComponent implements OnInit {
         console.log(res);
         this.isRejecting = false;
         this.successPopup('Rejection Successful.');
-        this.resetForm();
+        // this.resetForm();
         this.menuID = ''; 
       })
       .catch((err: any) => {
