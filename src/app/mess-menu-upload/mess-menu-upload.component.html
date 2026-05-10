@@ -1,0 +1,107 @@
+<div class="container">
+  <h1>Upload Mess Menu</h1>
+  <form #data="ngForm" class="mess-form">
+    <div class="selectors-row">
+      <div
+        matTooltip="Contact DevCom if you think this is not your hostel"
+        [matTooltipShowDelay]="800"
+        matTooltipPosition="above"
+      >
+        <select
+          id="hostel-select"
+          class="form-select"
+          name="hostel"
+          [(ngModel)]="selectedHostel"
+          [disabled]="!isUserAdmin"
+          aria-label="Selected Hostel"
+        >
+          <option *ngIf="selectedHostel && !isUserAdmin" [value]="selectedHostel">{{ selectedHostel }}</option>
+          <option *ngIf="isUserAdmin" value="" disabled>Select a hostel</option>
+
+          <ng-container *ngIf="isUserAdmin">
+            <option *ngFor="let hostel of allowedHostels" [value]="hostel">{{ hostel }}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <select class="form-select" name="upload" [(ngModel)]="uploadType" aria-label="Select Upload Type">
+        <option value="" disabled>Select Upload Type</option>
+        <option value="excel">Excel File</option>
+        <option value="google_sheet">Google Sheet</option>
+        <option value="pdf">PDF File</option>
+        <option value="image">Image File</option>
+      </select>
+    </div>
+
+    <div 
+      class="external-link-container" 
+      *ngIf="sheetUrl && !isUserAdmin"
+      matTooltip="Contact DevCom if you think this is not your hostel"
+      [matTooltipShowDelay]="800"
+      matTooltipPosition="above"
+    >
+      
+      <p class="info-text">
+        <a [href]="sheetUrl" target="_blank" class="direct-link">
+          {{selectedHostel}} Menu Sheet <mat-icon class="external-icon">open_in_new</mat-icon>
+        </a>
+      </p>
+    </div>
+
+    <div class="upload-row" *ngIf="uploadType && !menuID">
+      
+      <div *ngIf="uploadType === 'excel' || uploadType === 'pdf' || uploadType === 'image'" class="input-wrapper">
+        <input *ngIf="uploadType === 'excel'" type="file" (change)="onFileSelect($event)" accept=".xlsx,.xls" class="file-input" aria-label="Upload Excel File" />
+        <input *ngIf="uploadType === 'pdf'" type="file" (change)="onFileSelect($event)" accept=".pdf" class="file-input" aria-label="Upload PDF File" />
+        <input *ngIf="uploadType === 'image'" type="file" (change)="onFileSelect($event)" accept="image/*" class="file-input" aria-label="Upload Image File" />
+      </div>
+
+      <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper sheet-input-wrapper">
+        <input type="text" [(ngModel)]="sheetUrl" name="sheetUrlInput" placeholder="Enter Google Sheet Link" class="sheet-input" aria-label="Google Sheet Link" />
+      </div>
+
+      <div *ngIf="sheetNames.length > 0" class="input-wrapper sheet-selector">
+        <select class="form-select" name="sheetName" [(ngModel)]="selectedSheet" aria-label="Select Sheet Name">
+          <option value="" disabled>Select a sheet</option>
+          <option *ngFor="let sheet of sheetNames" [value]="sheet">{{ sheet }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-upload" (click)="onUpload()" [disabled]="isUploading">
+        <span *ngIf="!isUploading">Upload Data</span>
+        <span *ngIf="isUploading" class="button-loading">
+          <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+          Processing...
+        </span>
+      </button>
+
+      <div class="testing-option" *ngIf="environment.llmTesting">
+        <label>
+          <input type="checkbox" [checked]="environment.llmTesting" aria-label="Test with Multiple LLMs" />
+          Test with Multiple LLMs
+        </label>
+      </div>
+    </div>
+
+    <app-menu-preview *ngIf="menuID && parsedMenuData" [menuData]="parsedMenuData"></app-menu-preview>
+
+    <div class="approval-row" *ngIf="menuID">
+      <div class="approval-buttons">
+        <button type="button" class="btn-approve" (click)="onApproval()" [disabled]="isApproving || isRejecting">
+          <span *ngIf="!isApproving">Approve</span>
+          <span *ngIf="isApproving" class="button-loading">
+            <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+            Processing...
+          </span>
+        </button>
+        <button type="button" class="btn-reject" (click)="onRejection()" [disabled]="isApproving || isRejecting">
+          <span *ngIf="!isRejecting">Reject</span>
+          <span *ngIf="isRejecting" class="button-loading">
+            <mat-spinner diameter="20" [strokeWidth]="2"></mat-spinner>
+            Processing...
+          </span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

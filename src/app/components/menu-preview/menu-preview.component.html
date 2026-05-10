@@ -1,0 +1,43 @@
+<div class="menu-preview-container" *ngIf="menuData"
+  matTooltip="For minor changes you can approve and change it in the Excel sheet itself. For major inaccuracies, please contact us."
+  [matTooltipShowDelay]="1000"
+  matTooltipPosition="above">
+  <h2>Menu Preview</h2>
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="days" class="menu-table">
+      
+      <!-- Day Column -->
+      <ng-container matColumnDef="day">
+        <th mat-header-cell *matHeaderCellDef>Day</th>
+        <td mat-cell *matCellDef="let day">{{ day }}</td>
+      </ng-container>
+
+      <!-- Breakfast Column -->
+      <ng-container matColumnDef="Breakfast">
+        <th mat-header-cell *matHeaderCellDef>Breakfast</th>
+        <td mat-cell *matCellDef="let day">{{ getMealData(day, 'Breakfast') }}</td>
+      </ng-container>
+
+      <!-- Lunch Column -->
+      <ng-container matColumnDef="Lunch">
+        <th mat-header-cell *matHeaderCellDef>Lunch</th>
+        <td mat-cell *matCellDef="let day">{{ getMealData(day, 'Lunch') }}</td>
+      </ng-container>
+
+      <!-- Snacks Column -->
+      <ng-container matColumnDef="Snacks">
+        <th mat-header-cell *matHeaderCellDef>Snacks</th>
+        <td mat-cell *matCellDef="let day">{{ getMealData(day, 'Snacks') }}</td>
+      </ng-container>
+
+      <!-- Dinner Column -->
+      <ng-container matColumnDef="Dinner">
+        <th mat-header-cell *matHeaderCellDef>Dinner</th>
+        <td mat-cell *matCellDef="let day">{{ getMealData(day, 'Dinner') }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

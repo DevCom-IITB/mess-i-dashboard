@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { StudentcardComponent } from './studentcard/studentcard.component';
 import { RebateFormComponent } from './rebate/rebate-form/rebate-form.component';
 import { RebateAdminComponent } from './rebate-admin/rebate-admin.component';
+import { MessMenuUploadComponent } from './mess-menu-upload/mess-menu-upload.component';
 import { MessBillComponent } from './mess-bill/mess-bill.component';
 import { DurationBoxComponent } from './utils/duration-box/duration-box.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -36,14 +37,15 @@ const routes: Routes = [
   {path: 'guest-entry',component:GuestEntryComponent},
   {path: 'guest-admin',component:GuestAdminComponent},
   {path: 'mess-manager' ,component:MessManagerloginComponent},
+  {path: 'mess-menu', component: MessMenuUploadComponent},
   {path: 'forget-password' , component:ForgetPasswordComponent },
   {path:'',redirectTo:'/landing',pathMatch:'full'},
   {path: "device-list",component:DeviceListComponent},
 ];
 
 @NgModule({
-   imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'top', 
+  imports:  [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top',
   })],
   exports: [RouterModule]
 })
