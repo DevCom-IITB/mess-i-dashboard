@@ -15,8 +15,6 @@ export class StudentdataService {
   baseurl = environment.backendURL+"/api";
   constructor(private http:HttpClient, private auth:AuthService ) { }
 
-  // TODO: Have tro add the view/edit/delete mess menu option here ig, or even create a new MessMenuService
-
   put_student_in_cache(student: Student){
     if (this.studentCache.size > 100) {
       this.studentCache.clear;

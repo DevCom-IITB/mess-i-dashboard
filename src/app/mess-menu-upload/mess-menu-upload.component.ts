@@ -44,8 +44,6 @@ export class MessMenuUploadComponent implements OnInit {
       this.router.navigate(['login']);
     }
     this.isUserAdmin = this.auth_service.isAdmin();
-
-    // TODO: Implement auto hostel fetching logic based on user role
   }
 
   ngOnInit(): void {
