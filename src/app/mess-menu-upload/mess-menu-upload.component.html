@@ -57,7 +57,7 @@
       </div>
 
       <div *ngIf="uploadType === 'google_sheet'" class="input-wrapper sheet-input-wrapper">
-        <input type="text" [(ngModel)]="sheetUrl" name="sheetUrlInput" placeholder="Enter Google Sheet Link" class="sheet-input" aria-label="Google Sheet Link" />
+        <input type="text" [(ngModel)]="inputSheetUrl" name="sheetUrlInput" placeholder="Enter Google Sheet Link" class="sheet-input" aria-label="Google Sheet Link" />
       </div>
 
       <div *ngIf="sheetNames.length > 0" class="input-wrapper sheet-selector">

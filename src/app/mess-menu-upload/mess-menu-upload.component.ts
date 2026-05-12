@@ -22,6 +22,7 @@ export class MessMenuUploadComponent implements OnInit {
   messHistory: any = { exists: true, loaded: false };
   uploadType: string = 'excel';
   sheetUrl: string = '';
+  inputSheetUrl: string = '';
   selectedFile: File | null = null;
   sheetNames: string[] = [];
   selectedSheet: string = '';
@@ -142,7 +143,7 @@ export class MessMenuUploadComponent implements OnInit {
       }
     }
     else if (this.uploadType === 'google_sheet') {
-      if (!this.sheetUrl || this.sheetUrl.trim() === '') {
+      if (!this.inputSheetUrl || this.inputSheetUrl.trim() === '') {
         this.errorPopup('Please enter a Google Sheet URL');
         return;
       }
@@ -178,7 +179,7 @@ export class MessMenuUploadComponent implements OnInit {
         });
     } else if (this.uploadType === 'google_sheet') {
       this.isUploading = true;
-      this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.sheetUrl, this.selectedSheet || undefined)
+      this.messmenu_service.uploadMenuFromGoogleSheet(this.selectedHostel, this.inputSheetUrl, this.selectedSheet || undefined)
         .then((res: any) => {
           console.log(res);
           if (res.multipleSheets) {
@@ -260,6 +261,7 @@ export class MessMenuUploadComponent implements OnInit {
   resetForm(): void {
     this.selectedHostel = this.userHostel;
     this.uploadType = 'excel';
+    this.inputSheetUrl = '';
     this.selectedFile = null;
     this.sheetNames = [];
     this.selectedSheet = '';
