@@ -136,6 +136,10 @@ export class AuthService {
   isAdmin(){
     return this.is_admin;
   }
+
+  isMessCo(){
+    return this.is_staff;
+  }
   
   isStaff(){
     return (this.is_admin || this.is_rebate || this.is_staff);
@@ -150,7 +154,7 @@ export class AuthService {
   }
 
   isDean(){
-    console.log("isDean called with username:", this.username);
+    // console.log("isDean called with username:", this.username);
     return (this.username === "dean.sa" || this.username === "adean.sa" || this.username === "23B0608" || this.username === "23b0608" );
   }
 

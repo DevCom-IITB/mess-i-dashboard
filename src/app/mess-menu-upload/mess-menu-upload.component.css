@@ -1,0 +1,241 @@
+.container {
+  padding: 40px;
+  background-color: #FFFCF4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  border-bottom: 3px solid #ffc42b;
+  padding-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.mess-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Space between the rows */
+}
+
+/* Row 1: The Selectors side-by-side */
+.selectors-row {
+  display: flex;
+  flex-direction: row; /* Forces horizontal */
+  gap: 15px;
+  width: 100%;
+}
+
+.selectors-row > div {
+  flex: 1;
+}
+
+.selectors-row > div select.form-select {
+  width: 100%;
+}
+
+.selectors-row select.form-select {
+  flex: 1; /* Makes both dropdowns take equal space on the same line */
+  padding: 12px;
+  border: 2px solid #FFC42B;
+  border-radius: 8px;
+  background-color: #FFF8E8;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Hostel field is immutable: show faded/locked visual state */
+#hostel-select:disabled {
+  opacity: 0.7;
+  background-color: #fff8e8;
+  color: #8a6d1f;
+  border-color: #ffc42b;
+  cursor: not-allowed;
+}
+
+/* Row 2: The Upload Area */
+.upload-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers input and button */
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 50px 20px;
+  border: 2px dashed #ffc42b;
+  border-radius: 12px;
+  background-color: #fffdf9;
+  margin-top: 10px;
+}
+
+/* Specific styling for the inputs in the bottom row */
+.sheet-input, .file-input {
+  width: 100%;
+  max-width: 500px; /* Limits width so it's not too long */
+  padding: 12px;
+  border: 2px solid #FFC42B;
+  border-radius: 8px;
+  background-color: #FFF8E8;
+}
+
+.sheet-input-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Button Styling */
+.btn-upload {
+  background-color: #28282B;
+  color: white;
+  border: none;
+  padding: 12px 60px; /* Wider button */
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-upload:hover {
+  background-color: #FFC42B;
+  color: #28282B;
+}
+
+/* Approval Row Styling */
+.approval-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.approval-message {
+  text-align: center;
+  font-size: 16px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.approval-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-approve,
+.btn-reject {
+  border: none;
+  padding: 12px 40px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.btn-approve {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-reject {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #da190b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Snackbar Styling */
+.success-snackbar {
+  background-color: #4CAF50 !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+/* Button Loading State */
+.button-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-approve:disabled,
+.btn-reject:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.external-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 1px 0;
+}
+
+.info-text {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+  display: flex;
+  /* align-items: center; This will vertically align the text and the link */
+}
+
+.direct-link {
+  color: #28282B;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5px;
+  transition: color 0.2s;
+}
+
+.direct-link:hover {
+  color: #ffc42b;
+  text-decoration: underline;
+}
+
+.external-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Mobile: Stack the dropdowns only on small screens */
+@media (max-width: 600px) {
+  .selectors-row {
+    flex-direction: column;
+  }
+
+  .approval-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-approve,
+  .btn-reject {
+    width: 100%;
+  }
+}

@@ -34,6 +34,7 @@ import { DurationBoxComponent } from './utils/duration-box/duration-box.componen
 import { CardStatusButtonComponent } from './components/card-status-button/card-status-button.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GuestEntryComponent } from './guest-entry/guest-entry.component';
+import { MessMenuUploadComponent } from './mess-menu-upload/mess-menu-upload.component';
 import { GuestStatusButtonComponent } from './components/guest-status-button/guest-status-button.component';
 import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { GuestEntryFormComponent } from './guest-entry/guest-entry-form/guest-entry-form.component';
@@ -50,9 +51,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { GuestCardComponent } from './components/guest-card/guest-card.component';
 import { MealCalenderComponent } from './meal-calender/meal-calender.component';
+import { MenuPreviewComponent } from './components/menu-preview/menu-preview.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -83,6 +89,7 @@ export const MY_DATE_FORMATS = {
         RebateCardComponent,
         StuRebCardComponent,
         RebateAdminComponent,
+        MessMenuUploadComponent,
         MessBillComponent,
         FormMessBillComponent,
         StuRebateDialogComponent,
@@ -105,6 +112,7 @@ export const MY_DATE_FORMATS = {
         DeviceListComponent,
         GuestCardComponent,
         MealCalenderComponent,
+        MenuPreviewComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
@@ -119,7 +127,11 @@ export const MY_DATE_FORMATS = {
         MatFormFieldModule,
         MatButtonModule,
         MatIconModule,
-        MatSlideToggleModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
+        MatSlideToggleModule,
+        MatTableModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule], providers: [DatePipe, provideHttpClient(withInterceptorsFromDi()),
             { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
             { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
         ] })
