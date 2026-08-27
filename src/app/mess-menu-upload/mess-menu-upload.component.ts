@@ -17,7 +17,7 @@ export class MessMenuUploadComponent implements OnInit {
   uploadForm: FormGroup;
   isManager: boolean = false;
   userHostel: string = '';
-  allowedHostels: boolean[] = new Array<boolean>(22);
+  allowedHostels: string[] = [];
   date = new Date();
   messHistory: any = { exists: true, loaded: false };
   uploadType: string = 'excel';
@@ -33,6 +33,8 @@ export class MessMenuUploadComponent implements OnInit {
   isRejecting: boolean = false;
   isUploading: boolean = false;
   isUserAdmin: boolean = false;
+  isMultiHostel: boolean = false;
+  hostelSheetUrls: { [hostel: string]: string } = {};
 
   constructor(
     public auth_service: AuthService,
@@ -62,16 +64,34 @@ export class MessMenuUploadComponent implements OnInit {
       });
     } else {
       this.messmenu_service.getHostelInfo().then((res: any) => {
-        const hostel = res?.hostel || '';
-        this.userHostel = hostel;
-        this.selectedHostel = hostel;
-        this.sheetUrl = res.sheetUrl;
+        // Multi-hostel users get an array of { hostel, sheetUrl } objects;
+        // single-hostel users get a single value.
+        const rawHostels = Array.isArray(res?.hostels) && res.hostels.length
+          ? res.hostels
+          : (res?.hostel ? [{ hostel: res.hostel, sheetUrl: res.sheetUrl }] : []);
+        const hostels: string[] = rawHostels.map((h: any) => h.hostel).filter(Boolean);
+        this.hostelSheetUrls = {};
+        rawHostels.forEach((h: any) => {
+          if (h.hostel && h.sheetUrl) {
+            this.hostelSheetUrls[h.hostel] = h.sheetUrl;
+          }
+        });
+        this.isMultiHostel = hostels.length > 1;
+        this.allowedHostels = hostels;
+        this.userHostel = hostels[0] || '';
+        // For multi-hostel users, force an explicit selection.
+        this.selectedHostel = this.isMultiHostel ? '' : (hostels[0] || '');
+        this.sheetUrl = this.hostelSheetUrls[this.selectedHostel] || '';
       }).catch((res) => {
         console.log(res);
         this.messHistory = { exists: false, loaded: true };
         this.errorPopup('Unable to fetch your hostel. Please try again.');
       });
     }
+  }
+
+  onHostelChange(): void {
+    this.sheetUrl = this.hostelSheetUrls[this.selectedHostel] || '';
   }
 
   onFileSelect(event: any): void {

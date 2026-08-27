@@ -12,13 +12,14 @@
           class="form-select"
           name="hostel"
           [(ngModel)]="selectedHostel"
-          [disabled]="!isUserAdmin"
+          (ngModelChange)="onHostelChange()"
+          [disabled]="!isUserAdmin && !isMultiHostel"
           aria-label="Selected Hostel"
         >
-          <option *ngIf="selectedHostel && !isUserAdmin" [value]="selectedHostel">{{ selectedHostel }}</option>
-          <option *ngIf="isUserAdmin" value="" disabled>Select a hostel</option>
+          <option *ngIf="selectedHostel && !isUserAdmin && !isMultiHostel" [value]="selectedHostel">{{ selectedHostel }}</option>
+          <option *ngIf="isUserAdmin || isMultiHostel" value="" disabled>Select a hostel</option>
 
-          <ng-container *ngIf="isUserAdmin">
+          <ng-container *ngIf="isUserAdmin || isMultiHostel">
             <option *ngFor="let hostel of allowedHostels" [value]="hostel">{{ hostel }}</option>
           </ng-container>
         </select>
@@ -35,7 +36,7 @@
 
     <div 
       class="external-link-container" 
-      *ngIf="sheetUrl && !isUserAdmin"
+      *ngIf="sheetUrl && (!isUserAdmin || isMultiHostel)"
       matTooltip="Contact DevCom if you think this is not your hostel"
       [matTooltipShowDelay]="800"
       matTooltipPosition="above"
