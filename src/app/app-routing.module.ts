@@ -20,6 +20,7 @@ import { GuestAdminComponent } from './guest-admin/guest-admin.component';
 import { MessManagerloginComponent } from './mess-managerlogin/mess-managerlogin.component';
 import { ForgetPasswordComponent } from './mess-managerlogin/forget-password/forget-password.component';
 import { DeviceListComponent } from './device-list/device-list.component';
+import { MenuStatsComponent } from './menu-stats/menu-stats.component';
 
 const routes: Routes = [
   {path:'landing',component:LandingComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
   {path: 'mess-menu', component: MessMenuUploadComponent},
   {path: 'forget-password' , component:ForgetPasswordComponent },
   {path:'',redirectTo:'/landing',pathMatch:'full'},
-  {path: "device-list",component:DeviceListComponent},
+  {path: 'device-list', component:DeviceListComponent},
+  {path: 'menu-stats', component: MenuStatsComponent},
 ];
 
 @NgModule({

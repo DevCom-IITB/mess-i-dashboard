@@ -59,6 +59,7 @@ import { DeviceListComponent } from './device-list/device-list.component';
 import { GuestCardComponent } from './components/guest-card/guest-card.component';
 import { MealCalenderComponent } from './meal-calender/meal-calender.component';
 import { MenuPreviewComponent } from './components/menu-preview/menu-preview.component';
+import { MenuStatsComponent } from './menu-stats/menu-stats.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -113,6 +114,7 @@ export const MY_DATE_FORMATS = {
         GuestCardComponent,
         MealCalenderComponent,
         MenuPreviewComponent,
+        MenuStatsComponent,
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

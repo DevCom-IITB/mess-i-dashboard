@@ -51,6 +51,12 @@ export class HomeComponent implements OnInit {
       description: 'List of connected devices',
       role: 'staff'
     },
+    {
+      title: 'Menu Upload Stats',
+      redirect: '/menu-stats',
+      description: 'Analytics for mess menu uploads',
+      role: 'admin'
+    },
   ]; 
   }
 
@@ -97,6 +103,7 @@ export class HomeComponent implements OnInit {
       case 'rebate': return this.auth_service.isRebate();
       case 'staff': return this.auth_service.isStaff();
       case 'studentOrStaff': return (this.auth_service.isStudent() || this.auth_service.isStaff()) ;
+      case 'admin': return this.auth_service.isAdmin();
       default: return false;
     }
   }

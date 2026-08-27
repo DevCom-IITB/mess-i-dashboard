@@ -1,0 +1,311 @@
+.container {
+  padding: 40px;
+  background-color: #FFFCF4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+h1 {
+  border-bottom: 3px solid #FFC42B;
+  padding-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #28282B;
+}
+
+/* ── KPI Strip ── */
+.kpi-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.kpi-card {
+  flex: 1 1 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid #FFC42B;
+  border-radius: 10px;
+  padding: 16px 12px;
+  min-width: 100px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #28282B;
+  line-height: 1;
+}
+
+.kpi-label {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kpi-pending  { border-color: #FFC42B; }
+.kpi-approved { border-color: #4CAF50; }
+.kpi-rejected { border-color: #f44336; }
+.kpi-pending  .kpi-value { color: #b38600; }
+.kpi-approved .kpi-value { color: #2e7d32; }
+.kpi-rejected .kpi-value { color: #c62828; }
+
+/* ── Charts Row ── */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 16px;
+  align-items: start;
+}
+
+.chart-box {
+  background: #fff;
+  border: 1.5px solid #e8e0cc;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.donut-box {
+  min-height: 300px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.chart-header h2 {
+  margin: 0;
+}
+
+/* ── Toggle buttons ── */
+.toggle-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.toggle-btns button,
+.toggle-btns button {
+  padding: 4px 10px;
+  border: 1.5px solid #FFC42B;
+  border-radius: 5px;
+  background: #fff;
+  color: #28282B;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toggle-btns button.active {
+  background: #FFC42B;
+  color: #28282B;
+}
+
+.toggle-btns button:hover:not(.active) {
+  background: #FFF8E8;
+}
+
+/* ── Hostel Table ── */
+.table-section {
+  background: #fff;
+  border: 1.5px solid #e8e0cc;
+  border-radius: 10px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.stats-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: #FFF8E8;
+  border-bottom: 2px solid #FFC42B;
+  font-weight: 600;
+  color: #28282B;
+  white-space: nowrap;
+}
+
+.stats-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0ead8;
+  color: #333;
+}
+
+.stats-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stats-table tbody tr:hover {
+  background: #FFFDF4;
+}
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 28px;
+  text-align: center;
+}
+
+.pill-approved { background: #e8f5e9; color: #2e7d32; }
+.pill-rejected { background: #fde8e8; color: #c62828; }
+.pill-pending  { background: #fff3cd; color: #856404; }
+
+.date-cell { font-size: 12px; color: #666; }
+
+/* ── Approval Time Chart ── */
+.chart-section {
+  background: #fff;
+  border: 1.5px solid #e8e0cc;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+/* ── Bottom Row ── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.panel {
+  background: #fff;
+  border: 1.5px solid #e8e0cc;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+/* ── Inactive list ── */
+.inactive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.inactive-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fff3cd;
+  border-left: 4px solid #FFC42B;
+  border-radius: 6px;
+}
+
+.inactive-hostel {
+  font-weight: 700;
+  font-size: 14px;
+  color: #28282B;
+}
+
+.inactive-date {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ── Failure KPIs ── */
+.failure-kpis {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.failure-kpis .kpi-card {
+  flex: 1 1 80px;
+  padding: 12px 8px;
+}
+
+.failure-kpis .kpi-value {
+  font-size: 22px;
+}
+
+/* ── State messages ── */
+.loading-text {
+  color: #888;
+  font-size: 13px;
+  padding: 12px 0;
+}
+
+.error-text {
+  color: #c62828;
+  font-size: 13px;
+  padding: 12px 0;
+}
+
+.no-data {
+  color: #888;
+  font-size: 13px;
+  padding: 12px 0;
+}
+
+.all-clear {
+  color: #2e7d32;
+  font-size: 13px;
+  padding: 12px 0;
+  font-weight: 500;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-strip {
+    gap: 8px;
+  }
+
+  .kpi-card {
+    flex: 1 1 80px;
+    padding: 10px 6px;
+  }
+
+  .kpi-value {
+    font-size: 22px;
+  }
+}

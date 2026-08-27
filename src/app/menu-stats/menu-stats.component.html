@@ -1,0 +1,145 @@
+<div class="container">
+  <app-app-bar class="mobile-view" [suffix]="app_bar_suffix"></app-app-bar> <!-- Only for mobile view -->
+  <h1>Menu Upload Stats</h1>
+
+  <!-- KPI Strip -->
+  <div *ngIf="overviewLoading" class="loading-text">Loading overview…</div>
+  <div *ngIf="overviewError" class="error-text">Failed to load overview.</div>
+  <section class="kpi-strip" *ngIf="!overviewLoading && overview">
+    <div class="kpi-card">
+      <span class="kpi-value">{{ overview.total_uploads }}</span>
+      <span class="kpi-label">Total Uploads</span>
+    </div>
+    <div class="kpi-card kpi-pending">
+      <span class="kpi-value">{{ overview.by_status.pending_approval }}</span>
+      <span class="kpi-label">Pending</span>
+    </div>
+    <div class="kpi-card kpi-approved">
+      <span class="kpi-value">{{ overview.by_status.approved }}</span>
+      <span class="kpi-label">Approved</span>
+    </div>
+    <div class="kpi-card kpi-rejected">
+      <span class="kpi-value">{{ overview.by_status.rejected }}</span>
+      <span class="kpi-label">Rejected</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-value">{{ overview.last_7_days }}</span>
+      <span class="kpi-label">Last 7 Days</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-value">{{ overview.last_30_days }}</span>
+      <span class="kpi-label">Last 30 Days</span>
+    </div>
+  </section>
+
+  <!-- Charts Row: Timeline + Status Donut -->
+  <section class="charts-row">
+    <div class="chart-box">
+      <div class="chart-header">
+        <h2>Upload Activity</h2>
+        <div class="toggle-btns">
+          <button [class.active]="timelineGranularity === 'day'"   (click)="onGranularityChange('day')">Day</button>
+          <button [class.active]="timelineGranularity === 'week'"  (click)="onGranularityChange('week')">Week</button>
+          <button [class.active]="timelineGranularity === 'month'" (click)="onGranularityChange('month')">Month</button>
+        </div>
+      </div>
+      <div *ngIf="timelineLoading" class="loading-text">Loading…</div>
+      <div *ngIf="timelineError"   class="error-text">Failed to load timeline.</div>
+      <div *ngIf="!timelineLoading && timelineEmpty && !timelineError" class="no-data">No upload data for this period.</div>
+      <div id="timeline-chart" *ngIf="!timelineLoading && !timelineError && !timelineEmpty"></div>
+    </div>
+
+    <div class="chart-box donut-box">
+      <h2>Status Split</h2>
+      <div *ngIf="overviewLoading" class="loading-text">Loading…</div>
+      <div *ngIf="overviewError"   class="error-text">Failed to load status.</div>
+      <div id="status-donut" *ngIf="!overviewLoading && !overviewError"></div>
+    </div>
+  </section>
+
+  <!-- Hostel Leaderboard Table -->
+  <section class="table-section">
+    <h2>Hostel Stats</h2>
+    <div *ngIf="byHostelLoading" class="loading-text">Loading…</div>
+    <div *ngIf="byHostelError"   class="error-text">Failed to load hostel data.</div>
+    <div *ngIf="!byHostelLoading && !byHostelError && byHostel.length === 0" class="no-data">No hostel data available.</div>
+    <div class="table-wrapper" *ngIf="!byHostelLoading && !byHostelError && byHostel.length > 0">
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Hostel</th>
+            <th>Total</th>
+            <th>Approved</th>
+            <th>Rejected</th>
+            <th>Pending</th>
+            <th>Last Upload</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of byHostel">
+            <td><strong>{{ row.hostel }}</strong></td>
+            <td>{{ row.total_uploads }}</td>
+            <td><span class="pill pill-approved">{{ row.approved }}</span></td>
+            <td><span class="pill pill-rejected">{{ row.rejected }}</span></td>
+            <td><span class="pill pill-pending">{{ row.pending }}</span></td>
+            <td class="date-cell">{{ formatDate(row.last_upload_at) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Bottom Row: Inactive Hostels + Failures -->
+  <section class="bottom-row">
+    <!-- Inactive Hostels -->
+    <div class="panel">
+      <div class="chart-header">
+        <h2>Inactive Hostels</h2>
+        <div class="toggle-btns">
+          <button [class.active]="inactiveDays === 7"  (click)="onInactiveDaysChange(7)">7d</button>
+          <button [class.active]="inactiveDays === 14" (click)="onInactiveDaysChange(14)">14d</button>
+          <button [class.active]="inactiveDays === 30" (click)="onInactiveDaysChange(30)">30d</button>
+        </div>
+      </div>
+      <div *ngIf="inactiveLoading" class="loading-text">Loading…</div>
+      <div *ngIf="inactiveError"   class="error-text">Failed to load inactive hostels.</div>
+      <div *ngIf="!inactiveLoading && !inactiveError">
+        <div *ngIf="inactiveHostels.length === 0" class="all-clear">
+          All hostels uploaded within {{ inactiveDays }} days 🎉
+        </div>
+        <ul class="inactive-list" *ngIf="inactiveHostels.length > 0">
+          <li *ngFor="let h of inactiveHostels" class="inactive-item">
+            <span class="inactive-hostel">{{ h.hostel }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Failures -->
+    <div class="panel">
+      <h2>Upload Failures</h2>
+      <div *ngIf="failuresLoading" class="loading-text">Loading…</div>
+      <div *ngIf="failuresError"   class="error-text">Failed to load failure data.</div>
+      <div *ngIf="!failuresLoading && !failuresError && failures">
+        <div class="failure-kpis">
+          <div class="kpi-card">
+            <span class="kpi-value">{{ failures.total_attempts }}</span>
+            <span class="kpi-label">Total Attempts</span>
+          </div>
+          <div class="kpi-card kpi-rejected">
+            <span class="kpi-value">{{ failures.total_failed }}</span>
+            <span class="kpi-label">Failed</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-value">{{ failureRate() }}</span>
+            <span class="kpi-label">Failure Rate</span>
+          </div>
+        </div>
+        <div *ngIf="failures.by_hostel && failures.by_hostel.length > 0">
+          <div id="failures-chart"></div>
+        </div>
+        <div *ngIf="!failures.by_hostel || failures.by_hostel.length === 0" class="no-data">No per-hostel failure data.</div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -16,7 +16,7 @@ export class AppComponent {
   nav_visible:boolean;
   navIdtoUrl = new Map();
   // navIds = ["nav_home","nav_student_list","nav_rebate","nav_rebate_admin","nav_overview","nav_mess_bill"]
-  navIds = ["nav_home","nav_student_list","nav_rebate","nav_rebate_admin","nav_overview","nav_statistics","nav_guest_entry","nav_guest_admin","nav_mess_menu"]
+  navIds = ["nav_home","nav_student_list","nav_rebate","nav_rebate_admin","nav_overview","nav_statistics","nav_guest_entry","nav_guest_admin","nav_mess_menu","nav_menu_stats"]
   currTab : any; 
   isStudent: boolean = false;
   ngOnInit(): void {
@@ -32,6 +32,7 @@ export class AppComponent {
     this.navIdtoUrl.set("nav_guest_entry","/guest-entry")
     this.navIdtoUrl.set("nav_guest_admin","/guest-admin")
     this.navIdtoUrl.set("nav_mess_menu","/mess-menu")
+    this.navIdtoUrl.set("nav_menu_stats","/menu-stats")
     // this.navIdtoUrl.set("nav_mess_bill","/mess-bill")
     this.isStudent = this.auth.isStudent();
     //console.log("is student: ",this.isStudent);

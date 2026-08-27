@@ -169,6 +169,74 @@ export class MessmenuService {
     });
   }
 
+  // ── Admin: Menu Stats ──
+
+  getMenuStatsOverview(): Promise<any> {
+    const url = this.baseurl.concat('/admin/menu-stats/overview');
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: { 'x-access-token': this.auth.getToken() },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
+  getMenuStatsByHostel(): Promise<any> {
+    const url = this.baseurl.concat('/admin/menu-stats/by-hostel');
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: { 'x-access-token': this.auth.getToken() },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
+  getMenuStatsTimeline(granularity: string = 'day', hostel?: string): Promise<any> {
+    let url = this.baseurl.concat('/admin/menu-stats/timeline?granularity=', granularity);
+    if (hostel) url += '&hostel=' + encodeURIComponent(hostel);
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: { 'x-access-token': this.auth.getToken() },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
+  getInactiveHostels(days: number = 14): Promise<any> {
+    const url = this.baseurl.concat('/admin/menu-stats/inactive-hostels?days=', String(days));
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: { 'x-access-token': this.auth.getToken() },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
+  getMenuStatsFailures(): Promise<any> {
+    const url = this.baseurl.concat('/admin/menu-stats/failures');
+    return new Promise((resolve, reject) => {
+      this.http.get(url, {
+        headers: { 'x-access-token': this.auth.getToken() },
+        withCredentials: true
+      }).subscribe(
+        (res: any) => resolve(res),
+        (err) => reject(err)
+      );
+    });
+  }
+
   /**
    * Get mess list for admin
    * @returns Promise with mess list
